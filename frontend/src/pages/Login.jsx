@@ -8,7 +8,7 @@ import {
   resetLogin,
 } from "../redux/reducers/loginReducer";
 import { loginUser } from "../api/loginApi";
-import { setError } from "../redux/reducers/applicant/registerReducer";
+import { setError } from "../redux/reducers/applicant/applicantRegisterReducer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

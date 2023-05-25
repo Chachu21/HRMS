@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from "../redux/reducers/applicant/registerReducer";
+import { setFormData } from "../redux/reducers/applicant/applicantRegisterReducer";
 import { registerUser } from "../api/registerApi";
 import {
   setError,
   setRegistrationStatus,
-} from "../redux/reducers/applicant/registerReducer";
+} from "../redux/reducers/applicant/applicantRegisterReducer";
 
 const Register = () => {
   const dispatch = useDispatch();

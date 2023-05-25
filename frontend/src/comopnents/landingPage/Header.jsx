@@ -22,7 +22,7 @@ const Header = () => {
             >
               <div className="flex justify-center items-center gap-5">
                 <img
-                  className="w-[100px] h-[60px] object-cover rounded-xl"
+                  className="w-[80px] h-[60px] object-cover rounded-xl p-2"
                   src={logo}
                   alt="equb_logo"
                 />

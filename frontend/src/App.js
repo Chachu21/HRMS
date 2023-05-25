@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import JobVacancyAnnouncement from './comopnents/vacancy/VacancyPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ForgotPassword from "./pages/ForgotPassword";
+ import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import Page404 from "./pages/404";
 import MainContent from "./comopnents/dashboard/MainContent";
@@ -21,12 +21,12 @@ function App() {
         <Route exact={true} path="/" element={<LandingPage />} />
         <Route exact={true} path="/signUp" element={<Register />} />
         <Route exact={true} path="/login" element={<Login />} />
-      
+
         <Route
           exact={true}
           path="/forgotPassword"
           element={<ForgotPassword />}
-        />
+        /> 
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="/dashboard/dailyEqub" element={<DailyEqub />} />
           <Route path="/dashboard/weeklyEqub" element={<WeeklyEqub />} />
@@ -37,12 +37,10 @@ function App() {
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
-
-      
-{/* for demo */}
-      <div>
-        <JobVacancyAnnouncement />
-      </div>
+<div>
+  <JobVacancyAnnouncement />
+</div>
+    
     </div>
   );
 }

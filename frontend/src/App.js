@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ContactPage from "./comopnents/contact/contactPage";
 import JobVacancyAnnouncement from './comopnents/vacancy/VacancyPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +40,7 @@ function App() {
       <ToastContainer />
 <div>
   <JobVacancyAnnouncement />
+  <ContactPage />
 </div>
     
     </div>

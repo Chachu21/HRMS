@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import JobVacancyAnnouncement from './comopnents/vacancy/VacancyPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -20,6 +21,7 @@ function App() {
         <Route exact={true} path="/" element={<LandingPage />} />
         <Route exact={true} path="/signUp" element={<Register />} />
         <Route exact={true} path="/login" element={<Login />} />
+      
         <Route
           exact={true}
           path="/forgotPassword"
@@ -29,12 +31,18 @@ function App() {
           <Route path="/dashboard/dailyEqub" element={<DailyEqub />} />
           <Route path="/dashboard/weeklyEqub" element={<WeeklyEqub />} />
           <Route path="/dashboard/monthlyEqub" element={<Monthly />} />
-          <Route path="/dashboard/customEqub" element ={<CustomEqub />}/>
+          <Route path="/dashboard/customEqub" element={<CustomEqub />} />
           <Route index element={<MainContent />} />
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
+
+      
+{/* for demo */}
+      <div>
+        <JobVacancyAnnouncement />
+      </div>
     </div>
   );
 }

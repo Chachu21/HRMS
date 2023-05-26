@@ -31,6 +31,7 @@ function App() {
           exact={true}
           path="/forgotPassword"
           element={<ForgotPassword />}
+
         /> */}
         <Route path="/dashboard" element={<AdminDashboard />}>
           <Route index element={<AdminMain />} />

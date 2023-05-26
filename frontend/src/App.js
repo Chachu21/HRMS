@@ -40,10 +40,10 @@ function App() {
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
-      <div>
+      {/* <div>
         <JobVacancyAnnouncement />
         <ContactPage />
-      </div>
+      </div> */}
     </div>
   );
 }

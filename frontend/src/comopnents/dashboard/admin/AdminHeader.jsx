@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.jpg";
-import profile from "../../assets/profile.jpg";
+import logo from "../../../assets/logo.jpg";
+import profile from "../../../assets/profile.jpg";
 
 const initialState = {
   searchQuery: "",
 };
 
-const DashHeader = () => {
+const AdminHeader = () => {
   const [formData, setFormData] = useState(initialState);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
@@ -63,7 +63,7 @@ const DashHeader = () => {
                   alt="logo "
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-black">
-                  Equb
+                  HR Management
                 </span>
               </Link>
             </div>
@@ -133,7 +133,7 @@ const DashHeader = () => {
                         className="text-sm font-medium text-gray-900 truncate dark:text-gray-700"
                         role="none"
                       >
-                        phone number
+                        Email
                       </p>
                     </div>
                     <hr className="h-1  bg-gray-300 w-full" />
@@ -173,7 +173,9 @@ const DashHeader = () => {
                       </ul>
                     </div>
                     <div className="text-center my-10 cursor-pointer">
-                      <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">Logout</span>
+                      <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">
+                        Logout
+                      </span>
                     </div>
                   </div>
                 )}
@@ -186,4 +188,4 @@ const DashHeader = () => {
   );
 };
 
-export default DashHeader;
+export default AdminHeader;

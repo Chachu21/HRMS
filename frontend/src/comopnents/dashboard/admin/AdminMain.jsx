@@ -1,6 +1,6 @@
 import React from "react";
 
-const MainContent = () => {
+const AdminMain = () => {
   return (
     <>
       <div className="p-2 lg:ml-[18%] mt-14">
@@ -56,4 +56,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default AdminMain;

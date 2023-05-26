@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setPhoneNumber,
+  setEmail,
   setPassword,
   setLoggedIn,
   resetLogin,
+  setRememberMe,
 } from "../redux/reducers/loginReducer";
 import { loginUser } from "../api/loginApi";
 import { setError } from "../redux/reducers/applicant/applicantRegisterReducer";
@@ -15,11 +16,11 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const phoneNumber = useSelector((state) => state.login.phoneNumber);
+  const email = useSelector((state) => state.login.email);
   const password = useSelector((state) => state.login.password);
   const loggedIn = useSelector((state) => state.login.loggedIn);
   const error = useSelector((state) => state.login.error);
-  const [rememberMe, setRememberMe] = useState(false); // Remember Me state
+ const rememberMe = useSelector((state) => state.login.rememberMe)
 
   useEffect(() => {
     if (error) {
@@ -32,18 +33,18 @@ const Login = () => {
     // Check if the Remember Me value exists in local storage
     const rememberMeValue = localStorage.getItem("rememberMe");
     if (rememberMeValue) {
-      setRememberMe(true); // Set the Remember Me state to true
+      dispatch(setRememberMe(setRememberMe(true))) // Set the Remember Me state to true
     }
   }, []);
 
   const handleChange = (e) => {
     const { name, value ,checked} = e.target;
-    if (name === "phone") {
-      dispatch(setPhoneNumber(value));
+    if (name === "email") {
+      dispatch(setEmail(value));
     } else if (name === "password") {
       dispatch(setPassword(value));
-    } else if (name === "rememberMe") {
-      setRememberMe(checked); // Update the Remember Me state based on the checkbox value
+    } else if (name === "rememberMe" && checked===true) {
+      dispatch(setRememberMe(setRememberMe(true))); // Update the Remember Me state based on the checkbox value
     }
   };
 
@@ -51,7 +52,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await loginUser(phoneNumber, password);
+      await loginUser(email, password);
       dispatch(setLoggedIn(true));
       if (loggedIn) {
         if (rememberMe) {
@@ -67,12 +68,12 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-[100vh]  flex flex-col items-center justify-center gap-3">
-      <div className="flex gap-5 flex-col">
+    <div className="bg-gray-100 h-[100vh]  flex flex-col items-center justify-center gap-5">
+      <div className="flex  flex-col">
         <span className="text-[#11d4bd] italic font-bold text-[24px]">
           HR Management System
         </span>
-        <div className="p-[2px]">
+        <div>
           <span className="text-black text-[24px] font-bold">
             Sign in to your account
           </span>
@@ -86,23 +87,24 @@ const Login = () => {
           className="flex justify-center flex-col items-center w-full gap-8 px-4"
         >
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
-            <label htmlFor="phone">Phone Number</label>
+            <label htmlFor="email">Email</label>
             <input
-              value={phoneNumber}
-              name="phone"
+              value={email}
+              name="email"
               onChange={handleChange}
-              type="tel"
-              placeholder="Enter your Phone Number"
+              type="email"
+              placeholder="Enter your email address"
               className="w-[350px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
             />
           </div>
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
-            <label htmlFor="phone">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               name="password"
               value={password}
               onChange={handleChange}
-              autoComplete={false}
+              autoComplete="false"
+              id="password"
               type="password"
               placeholder="Enter your password"
               className="w-[350px] h-8 pl-[10px] bg-white border-2 rounded-md border-gray-300 outline-none  "

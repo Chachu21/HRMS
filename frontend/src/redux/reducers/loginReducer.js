@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  phoneNumber: "",
+  email: "",
   password: "",
+  rememberMe:false,
   loggedIn: false,
   error: null,
 };
@@ -11,11 +12,14 @@ const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    setPhoneNumber: (state, action) => {
-      state.phoneNumber = action.payload;
+    setEmail: (state, action) => {
+      state.email = action.payload;
     },
     setPassword: (state, action) => {
       state.password = action.payload;
+    },
+    setRememberMe: (state, action) => {
+      state.rememberMe =action.payload
     },
     setLoggedIn: (state, action) => {
       state.loggedIn = action.payload;
@@ -24,7 +28,7 @@ const loginSlice = createSlice({
       state.error = action.payload;
     },
     resetLogin: (state) => {
-      state.phoneNumber = "";
+      state.email = "";
       state.password = "";
       state.loggedIn = false;
       state.error = null;
@@ -33,9 +37,10 @@ const loginSlice = createSlice({
 });
 
 export const {
-  setPhoneNumber,
+  setEmail,
   setPassword,
   setLoggedIn,
+  setRememberMe,
   setError,
   resetLogin,
 } = loginSlice.actions;

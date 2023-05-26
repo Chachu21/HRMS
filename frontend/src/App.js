@@ -29,7 +29,7 @@ function App() {
           <Route path="/dashboard/dailyEqub" element={<DailyEqub />} />
           <Route path="/dashboard/weeklyEqub" element={<WeeklyEqub />} />
           <Route path="/dashboard/monthlyEqub" element={<Monthly />} />
-          <Route path="/dashboard/customEqub" element ={<CustomEqub />}/>
+          <Route path="/dashboard/customEqub" element={<CustomEqub />} />
           <Route index element={<MainContent />} />
         </Route>
         <Route path="*" element={<Page404 />} />

@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 const Features = () => {
   return (
     <div>
-        <section>
+      <section>
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
@@ -26,7 +26,8 @@ const Features = () => {
                 repellat.
               </p>
 
-              <Link to="/signUp"
+              <Link
+                to="/signUp"
                 className="mt-8 inline-block text-center rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
               >
                 Get Started Today
@@ -161,10 +162,8 @@ const Features = () => {
           </div>
         </div>
       </div>
-
-    
     </div>
   );
-}
+};
 
-export default Features
+export default Features;

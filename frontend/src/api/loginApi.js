@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const loginUser = async (phoneNumber, password) => {
+export const loginUser = async (email, password) => {
   try {
-    const response = await axios.post("http://localhost:5000/api/v1/users/login", {
-      phoneNumber,
+    const response = await axios.post("http://localhost:5002/api/v1/login", {
+      email,
       password,
     });
     return response.data;

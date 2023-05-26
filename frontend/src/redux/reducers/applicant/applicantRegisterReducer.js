@@ -3,19 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   formData: {
     fname: "",
-    mname: "",
     lname: "",
     phone_number: "",
     password: "",
     email: "",
-    file: null,
+    cv: "",
   },
-  registrationStatus: null,
+  registrationStatus: false,
   error: null,
 };
 
 const registerSlice = createSlice({
-  name: "AplicantRegister",
+  name: "aplicantRegister",
   initialState,
   reducers: {
     setFormData: (state, action) => {

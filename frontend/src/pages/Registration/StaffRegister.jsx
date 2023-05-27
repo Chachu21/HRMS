@@ -1,27 +1,27 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setFormData,
   setError,
   setRegistrationStatus,
-} from "../../redux/reducers/applicant/applicantRegisterReducer";
-import { registerUser } from "../../api/registerApi";
+  resetRegistration,
+} from "../../redux/reducers/staff/staffRegisterReducer";
+import { staffRegister } from "../../api/staffApi";
 
-const ApplicantRegister = () => {
+const StaffRegister = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const formData = useSelector((state) => state.aplicantRegister.formData);
+  const formData = useSelector((state) => state.staffRegister.formData);
   const registrationStatus = useSelector(
     (state) => state.aplicantRegister.registrationStatus
   );
-  const error = useSelector((state) => state.aplicantRegister.error);
   const handleChange = (e) => {
     const { name, value } = e.target;
-   
-      dispatch(setFormData({ ...formData, [name]: value })); // Use the spread operator to update the specific field
-  };
 
+    // Check if the name is "role" and parse the value as a number
+    const parsedValue = name === "role" ? parseInt(value) : value;
+
+    dispatch(setFormData({ ...formData, [name]: parsedValue }));
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,17 +31,17 @@ const ApplicantRegister = () => {
     }
 
     console.log(Object.fromEntries(formDataToSend)); // Display form data on the console
-
+    console.log(formData.role_id);
     try {
-     await registerUser(formData);
+      const response = await staffRegister(formData);
+      console.log(response);
       dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
       // ... handle success case ...
       if (registrationStatus) {
-        navigate("/login");
+        dispatch(resetRegistration(formData));
       }
     } catch (error) {
       dispatch(setError(error.message)); // Dispatch action to update error in Redux store
-      // ... handle error case ...
     }
   };
 
@@ -49,17 +49,28 @@ const ApplicantRegister = () => {
     <div>
       <div className="flex flex-col justify-center items-center w-screen min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-100">
         <div className="shadow-xl">
-          <h3 className="text-xl font-bold text-blue-400">
-            Register for accessing provide service
-          </h3>
+          <h3 className="text-xl font-bold text-blue-400">Register staffs</h3>
         </div>
-        {/* {error && (
-          <div className="mt-5">
-            <p className="text-red-500">{error}</p>
-          </div>
-        )} */}
-        <div className="w-[100vw] flex flex-col px-6 py-4 mt-6 overflow-hidden bg-gray-100 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
+        <div className="w-[100vw] flex flex-col px-6 py-4 mt-5 overflow-hidden bg-gray-50 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
           <form className="" onSubmit={handleSubmit}>
+            <div className="mt-4">
+              <label
+                htmlFor="id"
+                className="block text-sm font-medium text-gray-700 undefined"
+              >
+                ID Of Staff
+              </label>
+              <div className="flex flex-col items-start">
+                <input
+                  value={formData.id}
+                  onChange={handleChange}
+                  id="id"
+                  type="text"
+                  name="id"
+                  className="block w-[350px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </div>
+            </div>
             <div className="mt-4">
               <label
                 htmlFor="fname"
@@ -74,7 +85,7 @@ const ApplicantRegister = () => {
                   id="fname"
                   type="text"
                   name="fname"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-[350px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
@@ -92,13 +103,30 @@ const ApplicantRegister = () => {
                   id="lname"
                   type="text"
                   name="lname"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-[350px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
+
+            <div className="flex justify-start items-left flex-col gap-[10px]">
+              <label htmlFor="role_id">Role</label>
+              <select
+                value={formData.role_id}
+                name="role_id"
+                id="role_id"
+                onChange={handleChange}
+                className="w-[350px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
+              >
+                <option value="">select role</option>
+                <option value={3}>Dep't Head</option>
+                <option value={4}>HR Officer</option>
+                <option value={5}>Employee</option>
+              </select>
+            </div>
+
             <div className="mt-4">
               <label
-                htmlFor="password_confirmation"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700 undefined"
               >
                 Eamil
@@ -108,13 +136,13 @@ const ApplicantRegister = () => {
                   value={formData.email}
                   onChange={handleChange}
                   type="email"
-                  required="true"
+                  required={true}
+                  id="email"
                   name="email"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-[350px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
-
             <div className="mt-4">
               <label
                 htmlFor="phone"
@@ -129,7 +157,7 @@ const ApplicantRegister = () => {
                   id="phone"
                   type="tel"
                   name="phone_number"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-[350px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
@@ -147,47 +175,27 @@ const ApplicantRegister = () => {
                   autoComplete="false"
                   type="password"
                   name="password"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-[350px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
-
-            <div>
-              <label
-                htmlFor="file"
-                className="block text-sm font-medium text-gray-700 undefined"
-              >
-                Add cv
-              </label>
-              <div className="flex flex-col items-start">
-                <input
-                  id="file"
-                  type="text"
-                  value={formData.cv}
-                  onChange={handleChange} // Add the onChange event handler
-                  name="cv"
-                  className="block w-full mt-1 border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center mt-4">
-              <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+            <div className="flex items-end justify-end  mt-4">
+              <button className="w-[120px] px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
                 Register
               </button>
             </div>
           </form>
-          <div className="mt-4 text-grey-600 mb-10">
+          {/* <div className="mt-4 text-grey-600 mb-10">
             Already have an account?{" "}
             <span>
               <Link to="/login" className="text-blue-400 hover:underline">
                 Login
               </Link>
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
   );
 };
-export default ApplicantRegister;
+export default StaffRegister;

@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import VaccancyCard from "../comopnents/card/VaccancyCard";
+import VacancyCard from "../comopnents/card/VaccancyCard";
 
 const initialState = {
   searchQuery: "",
 };
 
-const Vaccancy = () => {
+const Vacancy = () => {
+  const [formData, setFormData] = useState(initialState);
 
-   const [formData, setFormData] = useState(initialState);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("search is done");
   };
+
   return (
-    <div className="flex flex-col  items-center justify-center gap-10 py-5">
+    <div className="flex flex-col items-center justify-center gap-10 py-5">
       <div className="flex items-center rounded-[5px]">
         <form
           action=""
@@ -40,17 +41,17 @@ const Vaccancy = () => {
           </button>
         </form>
       </div>
-<div className="grid lg:grid-cols-3 gap-5 md:grid-cols-2 bg-gray-200 p-5">
-<VaccancyCard />
-<VaccancyCard />
-<VaccancyCard />
-<VaccancyCard />
-<VaccancyCard />
-<VaccancyCard />
-<VaccancyCard />
-</div>
+      <div className="grid lg:grid-cols-3 gap-5 md:grid-cols-2 bg-gray-200 p-5">
+        <VacancyCard />
+        <VacancyCard />
+        <VacancyCard />
+        <VacancyCard />
+        <VacancyCard />
+        <VacancyCard />
+        <VacancyCard />
+      </div>
     </div>
   );
 };
 
-export default Vaccancy;
+export default Vacancy;

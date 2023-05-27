@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const VaccancyCard = () => {
+const VacancyCard = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-5 rounded-md bg-gray-300">
       <div className="flex flex-col justify-left items-left gap-5">
@@ -42,4 +42,4 @@ const VaccancyCard = () => {
   );
 }
 
-export default VaccancyCard
+export default VacancyCard

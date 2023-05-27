@@ -28,7 +28,7 @@ function App() {
 
         <Route exact={true} path="/about" element={<About />} />
         <Route exact={true} path="/contact" element={<Vacancy />} />
-        <Route path="/applicant" element={<AdminDashboard />}>
+        <Route path="/dashboard" element={<AdminDashboard />}>
           <Route index element={<AdminMain />} />
           <Route
             path="/dashboard/manageaccount"

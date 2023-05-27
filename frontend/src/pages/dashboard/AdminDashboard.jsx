@@ -1,14 +1,14 @@
 import React from 'react'
-import AdminHeader from '../../comopnents/dashboard/admin/AdminHeader'
-import AdminSidebar from '../../comopnents/dashboard/admin/AdminSideBar'
-import AdminMain from '../../comopnents/dashboard/admin/AdminMain'
+import AdHeader from '../../comopnents/dashboard/admin/cards/AdHeader'
+import { Outlet } from 'react-router-dom'
 
 const AdminDashboard = () => {
   return (
     <div>
-      <AdminHeader />
-      <AdminSidebar />
-      <AdminMain />
+      <AdHeader />
+      <div className='mt-20'>
+        <Outlet />
+      </div>
     </div>
   )
 }

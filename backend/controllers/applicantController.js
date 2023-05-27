@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const bcrypt = require("bcrypt");
 const config = require("../config/configDb.js");
 const initModels = require("../models/init-models.js");
 
@@ -35,16 +36,19 @@ const createApplicant = async (req, res) => {
       return res.status(400).json({ error: "Applicant already exists" });
     }
 
-    // Create a new applicant
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new applicant with hashed password
     const newApplicant = await Applicant.create({
       fname,
       lname,
       email,
-      password,
+      password: hashedPassword,
       phone_number,
       cv,
       role_id,
     });
+
     res.status(201).json(newApplicant);
   } catch (error) {
     console.error("Error creating applicant:", error);

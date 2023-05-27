@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const bcrypt = require("bcrypt")
 const config = require("../config/configDb.js");
 const initModels = require("../models/init-models.js");
 
@@ -24,7 +25,7 @@ const Staff = models.staff;
 
 const createStaff = async (req, res) => {
   try {
-    const { fname, lname, email, password, phone_number, role_id } = req.body;
+    const {id, fname, lname, email, password, phone_number, role_id } = req.body;
 
     // Check if staff with the same email already exists
     const existingStaff = await Staff.findOne({ where: { email } });
@@ -33,12 +34,15 @@ const createStaff = async (req, res) => {
         .status(400)
         .json({ error: "Staff with the same email already exists" });
     }
+// hash password befor register
+const hashedPassword = await bcrypt.hash(password, 10)
 
     const newStaff = await Staff.create({
+      id,
       fname,
       lname,
       email,
-      password,
+      password: hashedPassword,
       phone_number,
       role_id,
     });
@@ -88,6 +92,7 @@ const updateStaff = async (req, res) => {
     }
 
     await staff.update({
+      id,
       fname,
       lname,
       email,

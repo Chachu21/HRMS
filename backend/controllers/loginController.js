@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { Sequelize } = require("sequelize");
 const config = require("../config/configDb.js");
 const initModels = require("../models/init-models.js");
@@ -28,16 +29,36 @@ const LoginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check if user exists with the given email and password
-    const user = await User.findOne({ where: { email, password } });
+    // Check if user exists with the given email
+    const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    // Generate JWT token
-    const token = jwt.sign({ email: user.email }, "secretkey");
+    // Compare the provided password with the hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
 
-    res.json({ token });
+    // Determine the redirect URL based on the user's role
+    let redirectUrl = "/";
+    if (user.role === "admin") {
+      redirectUrl = "/admin";
+    } else if (user.role === "applicant") {
+      redirectUrl = "/applicant";
+    } else if (user.role === "HR_officer") {
+      redirectUrl = "/HROfficer";
+    } else if (user.role === "DeptHead") {
+      redirectUrl = "/Deptheader";
+    } else if (user.role === "employee") {
+      redirectUrl = "/employee";
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ email: user.email, role: user.role }, "secretkey");
+
+    res.json({ token, redirectUrl });
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -60,6 +81,7 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
 const LogoutUser = (req, res) => {
   // Clear user session or perform any logout operations
   req.user = null; // Clear the user session

@@ -74,7 +74,7 @@ const AdminSidebar = () => {
                   ></path>
                 </svg>
               </button>
-              {isOpenSublink && (
+              {/* {isOpenSublink && (
                 <ul
                   id="dropdown-pages"
                   className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
@@ -104,7 +104,7 @@ const AdminSidebar = () => {
                     </Link>
                   </li>
                 </ul>
-              )}
+              )} */}
             </li>
             <li>
               <Link

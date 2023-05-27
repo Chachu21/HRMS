@@ -12,6 +12,7 @@ import { loginUser } from "../api/loginApi";
 import { setError } from "../redux/reducers/applicant/applicantRegisterReducer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { response } from "express";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,10 +53,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await loginUser(email, password);
+ const response= await loginUser(email, password);
+
       dispatch(setLoggedIn(true));
       if (loggedIn) {
         if (rememberMe) {
+
           localStorage.setItem("rememberMe", "true"); // Store Remember Me value in local storage
         } else {
           localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
@@ -136,7 +139,7 @@ const Login = () => {
           </div>
           <div>
             <span>Don't have an account?</span>
-            <Link to="/signup" className="text-blue-500">
+            <Link to="/signUpASapplicant" className="text-blue-500">
               Register
             </Link>
           </div>

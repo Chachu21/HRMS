@@ -29,9 +29,9 @@ const AdminHeader = () => {
   return (
     <div>
       <nav className="fixed top-0 z-50 w-full bg-white text-black border-gray-200 dark:bg-gray-100 dark:border-gray-200 shadow-xl">
-        <div className="px-3 py-3 lg:px-5 lg:pl-3">
+        <div className="px-3 py-[5px] lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center justify-center gap-2 ">
+            <div className="flex items-center justify-center gap-3 ">
               <button
                 onClick={handleSidebarToggle}
                 data-drawer-target="logo-sidebar"
@@ -56,10 +56,10 @@ const AdminHeader = () => {
                   ></path>
                 </svg>
               </button>
-              <Link to="/dashboard" className="flex ml-2 md:mr-24">
+              <Link to="/dashboard" className="flex items-center gap-5">
                 <img
                   src={logo}
-                  className="h-[30px] w-[80px] rounded-md mr-3"
+                  className="h-[60px] w-[80px] object-cover rounded-xl pl-2"
                   alt="logo "
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-black">

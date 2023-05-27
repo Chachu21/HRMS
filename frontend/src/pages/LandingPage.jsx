@@ -7,7 +7,7 @@ const LandingPage = () => {
   return (
     <div>
       <Header />
-      <main className="mt-[70px]">
+      <main className=" flex mt-[70px]">
         <Main />
       </main>
       <Footer />

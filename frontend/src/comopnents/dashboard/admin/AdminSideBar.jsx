@@ -4,22 +4,18 @@ import { Link } from "react-router-dom";
 const AdminSidebar = () => {
   const [isOpenSublink, setIsOpenSublink] = useState(false);
 
-  const handleToggle = () => {
-    setIsOpenSublink(!isOpenSublink);
-  };
-
   return (
     <div>
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-[18%] h-screen pt-20 transition-transform -translate-x-full  text-black bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-white dark:border-gray-200"
+        className="fixed top-0 left-0 z-45 w-[18%] h-screen pt-20 transition-transform -translate-x-full  text-black bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
           <ul className="space-y-5 font-medium text-blacks">
             <li>
               <Link
-                to="#"
+                to="/dashboard/manageaccount"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg
@@ -37,12 +33,9 @@ const AdminSidebar = () => {
             </li>
 
             <li>
-              <button
-                onClick={handleToggle}
-                type="button"
-                className="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-gray-700 dark:hover:bg-gray-200"
-                aria-controls="dropdown-pages"
-                data-collapse-toggle="dropdown-pages"
+              <Link
+                to="/dashboard/addstaff"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg
                   aria-hidden="true"
@@ -58,92 +51,34 @@ const AdminSidebar = () => {
                   ></path>
                 </svg>
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                 Add Staff
+                  Add Staff
                 </span>
-                <svg
-                  aria-hidden="true"
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              {isOpenSublink && (
-                <ul
-                  id="dropdown-pages"
-                  className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
-                >
-                  <li>
-                    <Link
-                      to="/dashboard/dailyEqub"
-                      className="flex items-center px-10 py-1.5 w-full text-base font-medium text-gray-700  transition duration-75  hover:bg-gray-200 rounded-lg dark:text-gray-700 dark:hover:bg-gray-200"
-                    >
-                      Employee
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="flex items-center px-10 py-1.5 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-gray-700 dark:hover:bg-gray-200"
-                    >
-                     Dep't Header
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="flex items-center px-10 py-1.5 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-gray-700 dark:hover:bg-gray-200"
-                    >
-                      HR Officer
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-            <li>
-              <Link
-                to="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
-              >
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                </svg>
-                <span className="flex-1 ml-3 whitespace-nowrap text-black">
-                Employee Requistion
-                </span>
+                {isOpenSublink && (
+                  <ul
+                    id="dropdown-pages"
+                    className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
+                  ></ul>
+                )}
               </Link>
             </li>
-
-            <li>
+            <li className="flex items-center">
               <Link
-                to="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
+                to="/dashboard/approverequest"
+                className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75`}
               >
-                <svg
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
-                  <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
-                </svg>
-                <span className="flex-1 ml-3 whitespace-nowrap text-black">
-                  Setting
-                </span>
+                <div className="relative inline-flex w-fit">
+                  <div className="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
+                    99+
+                  </div>
+                  <button
+                    type="button"
+                    className="inline-block rounded bg-blue-400 w-40 px-5 pb-1.5 pt-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                    data-te-ripple-init
+                    data-te-ripple-color="light"
+                  >
+                    approve
+                  </button>
+                </div>
               </Link>
             </li>
           </ul>

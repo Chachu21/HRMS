@@ -11,6 +11,9 @@ import AdminMain from "./comopnents/dashboard/admin/AdminMain";
 import About from "./pages/About";
 import Vaccancy from "./pages/Vaccancy";
 import ApplicantRegister from "./pages/Registration/ApplicantRegister";
+import ManageAccountInfo from "./comopnents/dashboard/admin/ManageAccountInfo";
+import AddStaff from "./comopnents/dashboard/admin/AddStaff";
+import ApproveRequest from "./comopnents/dashboard/admin/ApproveRequest";
 
 function App() {
   return (
@@ -35,6 +38,15 @@ function App() {
         /> */}
         <Route path="/dashboard" element={<AdminDashboard />}>
           <Route index element={<AdminMain />} />
+          <Route
+            path="/dashboard/manageaccount"
+            element={<ManageAccountInfo />}
+          />
+          <Route path="/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/dashboard/approverequest"
+            element={<ApproveRequest />}
+          />
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>

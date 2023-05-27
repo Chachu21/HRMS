@@ -104,7 +104,7 @@ const Header = () => {
                   to="/signUpASapplicant"
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"
                 >
-                  <button className="w-[100px] h-[40px] text-white bg-blue-500 items-center hover:bg-blue-300 hover:text-black">
+                  <button className="w-[100px] h-[35px] text-white bg-blue-500 items-center hover:bg-blue-300 hover:text-black">
                     SignUp
                   </button>
                 </NavLink>
@@ -114,7 +114,7 @@ const Header = () => {
                   to="/login"
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"
                 >
-                  <button className="w-[100px] h-[40px] text-white bg-blue-500 items-center hover:bg-blue-300 hover:text-black">
+                  <button className="w-[100px] h-[35px] text-white bg-blue-500 items-center hover:bg-blue-300 hover:text-black">
                     Login
                   </button>
                 </NavLink>

@@ -10,7 +10,6 @@ const LandingPage = () => {
       <main className="mt-[70px]">
         <Main />
       </main>
-      <Footer />
     </div>
   );
 };

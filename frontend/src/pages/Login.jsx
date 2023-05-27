@@ -42,12 +42,6 @@ const Login = () => {
     if (name === "email") {
       dispatch(setEmail(value));
     } else if (name === "password") {
-      // Password validation
-      const passwordRegex =
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,14}$/;
-      if (passwordRegex.test(value)) {
-        dispatch(setError("")); // Clear password error if it was previously set
-      }
       dispatch(setPassword(value));
     } else if (name === "rememberMe" && checked === true) {
       dispatch(setRememberMe(true)); // Update the Remember Me state based on the checkbox value
@@ -57,47 +51,22 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      dispatch(setError("Invalid email address"));
-      console.log(error);
-      return;
-    }
-
-    // Password validation
-    const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,14}$/;
-    if (!passwordRegex.test(password)) {
-      dispatch(
-        setError(
-          "Password must be between 6 and 14 characters and include at least one letter, one digit, and one special character"
-        )
-      );
-      console.log(
-        "Password must be between 6 and 14 characters and include at least one letter, one digit, and one special character"
-      );
-      return;
-    }
-
     try {
-      const response = await loginUser(email, password);
-
+      await loginUser(email, password);
       dispatch(setLoggedIn(true));
-      const { token, redirectUrl } = response.data;
-
-      // Assuming the response contains the token and redirectUrl
-
-      // Save the token in localStorage or sessionStorage
-      localStorage.setItem("token", token);
-
-      // Redirect the user to the specified URL
-      navigate(redirectUrl);
-      console.log(redirectUrl);
+      if (loggedIn) {
+        if (rememberMe) {
+          localStorage.setItem("rememberMe", "true"); // Store Remember Me value in local storage
+        } else {
+          localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
+        }
+        navigate("/applicant");
+      }
     } catch (error) {
       dispatch(setError(error.message));
     }
   };
+
   return (
     <div className="bg-gray-100 h-[100vh] flex flex-col items-center justify-center gap-5">
       <div className="flex flex-col">
@@ -167,7 +136,7 @@ const Login = () => {
           </div>
           <div>
             <span>Don't have an account?</span>
-            <Link to="/signUpASapplicant" className="text-blue-500">
+            <Link to="/signup" className="text-blue-500">
               Register
             </Link>
           </div>

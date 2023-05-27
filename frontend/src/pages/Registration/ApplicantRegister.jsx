@@ -33,7 +33,7 @@ const ApplicantRegister = () => {
     console.log(Object.fromEntries(formDataToSend)); // Display form data on the console
 
     try {
-       await registerUser(formData);
+     await registerUser(formData);
       dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
       // ... handle success case ...
       if (registrationStatus) {
@@ -53,11 +53,11 @@ const ApplicantRegister = () => {
             Register for accessing provide service
           </h3>
         </div>
-        {error && (
+        {/* {error && (
           <div className="mt-5">
             <p className="text-red-500">{error}</p>
           </div>
-        )}
+        )} */}
         <div className="w-[100vw] flex flex-col px-6 py-4 mt-6 overflow-hidden bg-gray-100 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
           <form className="" onSubmit={handleSubmit}>
             <div className="mt-4">

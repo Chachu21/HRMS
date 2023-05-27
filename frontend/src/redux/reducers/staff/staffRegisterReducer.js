@@ -4,18 +4,19 @@ const initialState = {
   formData: {
     id: "",
     fname: "",
-    mname: "",
     lname: "",
+    role: "",
+    email: "",
     phone_number: "",
     password: "",
-    email: "",
+    role_id: "",
   },
   registrationStatus: null,
   error: null,
 };
 
 const staffSlice = createSlice({
-  name: "AplicantRegister",
+  name: "staffRegister",
   initialState,
   reducers: {
     setFormData: (state, action) => {

@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const bcrypt = require("bcrypt");
 const config = require("../config/configDb.js");
 const initModels = require("../models/init-models.js");
 
@@ -34,17 +35,18 @@ const createApplicant = async (req, res) => {
     if (existingApplicant) {
       return res.status(400).json({ error: "Applicant already exists" });
     }
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new applicant
-    const newApplicant = await Applicant.create({
-      fname,
-      lname,
-      email,
-      password,
-      phone_number,
-      cv,
-      role_id,
-    });
+  // Create a new applicant with hashed password
+  const newApplicant = await Applicant.create({
+    fname,
+    lname,
+    email,
+    password: hashedPassword,
+    phone_number,
+    cv,
+    role_id,
+  });
     res.status(201).json(newApplicant);
   } catch (error) {
     console.error("Error creating applicant:", error);
@@ -86,14 +88,16 @@ const updateApplicant = async (req, res) => {
 
     const { fname, lname, email, password, phone_number, cv, role_id } =
       req.body;
-    applicant.fname = fname;
-    applicant.lname = lname;
-    applicant.email = email;
-    applicant.password = password;
-    applicant.phone_number = phone_number;
-    applicant.cv = cv;
-    applicant.role_id = role_id;
-    await applicant.save();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await applicant.update({
+      fname,
+      lname,
+      email,
+      password: hashedPassword,
+      phone_number,
+      cv,
+      role_id,
+    });
     res.json(applicant);
   } catch (error) {
     console.error("Error updating applicant:", error);

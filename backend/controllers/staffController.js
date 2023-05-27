@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const bcrypt = require("bcrypt")
 const config = require("../config/configDb.js");
 const initModels = require("../models/init-models.js");
 
@@ -33,12 +34,13 @@ const createStaff = async (req, res) => {
         .status(400)
         .json({ error: "Staff with the same email already exists" });
     }
+const hashedPassword = await bcrypt.hash(password, 10)
 
     const newStaff = await Staff.create({
       fname,
       lname,
       email,
-      password,
+      password:hashedPassword,
       phone_number,
       role_id,
     });
@@ -86,12 +88,12 @@ const updateStaff = async (req, res) => {
     if (!staff) {
       return res.status(404).json({ error: "Staff not found" });
     }
-
+const hashedPassword = await bcrypt.hash(password, 10)
     await staff.update({
       fname,
       lname,
       email,
-      password,
+      password:hashedPassword,
       phone_number,
       role_id,
     });

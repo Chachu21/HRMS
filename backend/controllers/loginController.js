@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const { Sequelize } = require("sequelize");
 const config = require("../config/configDb.js");
 const initModels = require("../models/init-models.js");
+const bcrypt = require("bcrypt");
 
 const db = config.development;
 const sequelize = new Sequelize(db.database, db.username, db.password, {
@@ -28,16 +29,46 @@ const LoginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check if user exists with the given email and password
-    const user = await User.findOne({ where: { email, password } });
+    console.log(email, password);
+    // Check if user exists with the given email
+    const user = await User.findOne({ where: { email } });
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    // Generate JWT token
-    const token = jwt.sign({ email: user.email }, "secretkey");
+    // Compare the provided password with the hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+    console.log(user.role_id);
+    // Determine the redirect URL based on the user's role
+    let redirectUrl = "/";
+    switch (user.role_id) {
+      case 1:
+        redirectUrl = "/admin";
+        break;
+      case 2:
+        redirectUrl = "/applicant";
+        break;
+      case 3:
+        redirectUrl = "/employee";
+        break;
+      case 4:
+        redirectUrl = "/HROfficer";
 
-    res.json({ token });
+        break;
+      case 5:
+        redirectUrl = "/Deptheader";
+        break;
+      default:
+        redirectUrl = "/";
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ email: user.email, role: user.role }, "secretkey");
+
+    res.json({ token, redirectUrl, user });
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -60,6 +91,7 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
 const LogoutUser = (req, res) => {
   // Clear user session or perform any logout operations
   req.user = null; // Clear the user session

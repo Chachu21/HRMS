@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,7 +20,7 @@ const Login = () => {
   const password = useSelector((state) => state.login.password);
   const loggedIn = useSelector((state) => state.login.loggedIn);
   const error = useSelector((state) => state.login.error);
- const rememberMe = useSelector((state) => state.login.rememberMe)
+  const rememberMe = useSelector((state) => state.login.rememberMe);
 
   useEffect(() => {
     if (error) {
@@ -33,18 +33,18 @@ const Login = () => {
     // Check if the Remember Me value exists in local storage
     const rememberMeValue = localStorage.getItem("rememberMe");
     if (rememberMeValue) {
-      dispatch(setRememberMe(setRememberMe(true))) // Set the Remember Me state to true
+      dispatch(setRememberMe(true)); // Set the Remember Me state to true
     }
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (e) => {
-    const { name, value ,checked} = e.target;
+    const { name, value, checked } = e.target;
     if (name === "email") {
       dispatch(setEmail(value));
     } else if (name === "password") {
       dispatch(setPassword(value));
-    } else if (name === "rememberMe" && checked===true) {
-      dispatch(setRememberMe(setRememberMe(true))); // Update the Remember Me state based on the checkbox value
+    } else if (name === "rememberMe" && checked === true) {
+      dispatch(setRememberMe(true)); // Update the Remember Me state based on the checkbox value
     }
   };
 
@@ -68,8 +68,8 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-[100vh]  flex flex-col items-center justify-center gap-5">
-      <div className="flex  flex-col">
+    <div className="bg-gray-100 h-[100vh] flex flex-col items-center justify-center gap-5">
+      <div className="flex flex-col">
         <span className="text-[#11d4bd] italic font-bold text-[24px]">
           HR Management System
         </span>
@@ -116,7 +116,6 @@ const Login = () => {
                 type="checkbox"
                 name="rememberMe"
                 checked={rememberMe}
-                value={rememberMe}
                 onChange={handleChange}
               />
               <span>Remember me</span>
@@ -136,7 +135,7 @@ const Login = () => {
             </button>
           </div>
           <div>
-            <span>Have't an account ? </span>
+            <span>Don't have an account?</span>
             <Link to="/signup" className="text-blue-500">
               Register
             </Link>

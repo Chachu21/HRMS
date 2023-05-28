@@ -38,6 +38,7 @@ function App() {
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
+      {/* demo */}
 <div>
   <JobVacancyAnnouncement />
   <ContactPage />

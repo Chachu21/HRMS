@@ -24,6 +24,10 @@ import DeptHeaderDashboard from "./pages/dashboard/DeptHeaderDashboard";
 import DeptMain from "./comopnents/dashboard/departmentHead/DeptMain";
 import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
 import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
+
+import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
+
+
 function App() {
   return (
     <div>
@@ -61,6 +65,7 @@ function App() {
             path="/admin/dashboard/manageaccount/update/:id"
             element={<UpdateStaff />}
           />
+
           <Route path="/admin/dashboard/addstaff" element={<AddStaff />} />
           <Route
             path="/admin/dashboard/approverequest"
@@ -69,6 +74,7 @@ function App() {
         </Route>
         <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
           <Route index element={<AdminMain />} />
+
           <Route
             path="/applicant/dashboard/manageaccount"
             element={<ManageAccountInfo />}
@@ -129,6 +135,7 @@ function App() {
           <Route path="/depthead/dashboard/addstaff" element={<AddStaff />} />
           <Route
             path="/depthead/dashboard/approverequest"
+
             element={<ApproveRequest />}
           />
         </Route>

@@ -39,7 +39,7 @@ const AddStaff = () => {
       await staffRegister(formData);
       dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
       toast.success("Staff registered successfully!");
-        navigate("/dashboard/manageaccount");
+      navigate("/dashboard/manageaccount");
     } catch (error) {
       dispatch(setError(error.message)); // Dispatch action to update error in Redux store
     }
@@ -47,13 +47,13 @@ const AddStaff = () => {
 
   return (
     <div>
-      <div className="flex flex-col overflow-hidden justify-center items-center w-full min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-100">
+      <div className="flex flex-col overflow-hidden justify-center items-center w-full h-[50%] pt-4 sm:justify-center sm:pt-0 bg-gray-100">
         <div className="shadow-xl">
           <h3 className="text-xl font-bold text-blue-400">Register staffs</h3>
         </div>
         <div className="w-[100%] flex flex-col px-2 py-4 mt-5 overflow-hidden bg-gray-50 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
           <form
-            className="flex justify-start items-start gap-6 flex-col px-3"
+            className="flex justify-start items-start gap-4 flex-col px-3"
             onSubmit={handleSubmit}
           >
             <div className="flex justify-center items-center gap-10">

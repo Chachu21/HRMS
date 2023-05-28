@@ -145,7 +145,6 @@ const ManageAccountInfo = () => {
               <th className="px-4 py-2">First Name</th>
               <th className="px-4 py-2">Last Name</th>
               <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Password</th>
               <th className="px-4 py-2">Phone Number</th>
               <th className="px-4 py-2">Role</th>
               <th className="px-4 py-2 w-auto">Action</th>
@@ -160,7 +159,6 @@ const ManageAccountInfo = () => {
                     <td className="border px-4 py-2">{datas.fname} </td>
                     <td className="border px-4 py-2">{datas.lname} </td>
                     <td className="border px-4 py-2">{datas.email}</td>
-                    <td className="border px-4 py-2">{datas.password}</td>
                     <td className="border px-4 py-2">{datas.phone_number}</td>
                     <td className="border px-4 py-2">{datas.role}</td>
                     <td className="w-auto flex justify-center items-center gap-2 py-2 px-4">

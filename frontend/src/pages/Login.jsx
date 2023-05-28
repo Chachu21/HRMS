@@ -54,10 +54,10 @@ const Login = () => {
 
     try {
       const response = await loginUser(email, password);
-      const { user, token } = response.data;
+      const { user, token } = response;
       localStorage.setItem("token", token);
       const role_id = user.role_id;
-      console.log(role_id)
+      console.log(role_id);
 
       switch (role_id) {
         case 1:

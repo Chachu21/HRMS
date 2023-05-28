@@ -20,6 +20,7 @@ import Help from "./pages/Help";
 import ApplicantDashboard from "./pages/dashboard/ApplicantDashboard";
 import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
 import EmployeeMain from "./comopnents/dashboard/employee/EmployeeMain";
+import ManagePermission from "./comopnents/dashboard/departmentHead/ManagePermission";
 import DeptHeaderDashboard from "./pages/dashboard/DeptHeaderDashboard";
 import DeptMain from "./comopnents/dashboard/departmentHead/DeptMain";
 import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
@@ -27,7 +28,8 @@ import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
 import StaffRegister from "./pages/Registration/StaffRegister";
-
+import EmployeeRequistion from "./comopnents/dashboard/departmentHead/EmployeeRequistion";
+import ManageJobRank from "./comopnents/dashboard/departmentHead/ManageJobRank";
 
 function App() {
   return (
@@ -69,14 +71,18 @@ function App() {
 
           <Route
             path="/admin/dashboard/addstaff"
-            element={<AddStaffCustomizedDialogs><StaffRegister /></AddStaffCustomizedDialogs>}
+            element={
+              <AddStaffCustomizedDialogs>
+                <StaffRegister />
+              </AddStaffCustomizedDialogs>
+            }
           />
           <Route
             path="/admin/dashboard/approverequest"
             element={<ApproveRequest />}
           />
         </Route>
-        {/* <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
+        <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
           <Route index element={<AdminMain />} />
 
           <Route
@@ -129,19 +135,22 @@ function App() {
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
           <Route index element={<DeptMain />} />
           <Route
-            path="/depthead/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
+            path="/depthead/dashboard/managepermission"
+            element={<ManagePermission />}
           />
           <Route
-            path="/depthead/dashboard/manageaccount/update/:id"
-            element={<UpdateStaff />}
+            path="/depthead/dashboard/employeerequistion"
+            element={<EmployeeRequistion />}
           />
-          <Route path="/depthead/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/depthead/dashboard/jobrank"
+            element={<ManageJobRank />}
+          />
           <Route
             path="/depthead/dashboard/approverequest"
             element={<ApproveRequest />}
           />
-        </Route> */}
+        </Route>
 
         <Route path="*" element={<Page404 />} />
       </Routes>

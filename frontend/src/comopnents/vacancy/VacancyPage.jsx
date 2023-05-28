@@ -7,8 +7,8 @@ function JobVacancyAnnouncement() {
   const [department, setDepartment] = useState("");
   const [term, setTerm] = useState("");
   const [qualification, setQualification] = useState("");
-  const [sexFile, setSexFile] = useState(null);
-  const [desinationFile, setDesinationFile] = useState(null);
+  const [sexFile, setSexFile] = useState("");
+  const [desinationFile, setDesinationFile] = useState("");
   const [cgpa, setCgpa] = useState("");
 
   const handleSubmit = (event) => {

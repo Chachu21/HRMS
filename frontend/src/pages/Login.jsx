@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setEmail,
   setPassword,
-  setLoggedIn,
   resetLogin,
   setRememberMe,
 } from "../redux/reducers/loginReducer";
@@ -50,8 +49,13 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  try {
+    const response = await loginUser(email, password);
+    const { user, token } =  response
+    if(token !=null ){
 
+<<<<<<< HEAD
     try {
 // <<<<<<< HEAD
 //       await loginUser(email, password);
@@ -94,8 +98,39 @@ const Login = () => {
      }
     } catch (error) {
       dispatch(setError(error.message));
+=======
+      localStorage.setItem("token", token);
+      const role_id = user.role_id;
+      switch (role_id) {
+        case 1:
+          navigate("/admin/dashboard");
+          break;
+        case 2:
+          navigate("/applicant/dashboard");
+          break;
+        case 3:
+          navigate("/employee/dashboard");
+          break;
+        case 4:
+          navigate("/hrofficer/dashboard");
+          break;
+        case 5:
+          navigate("/depthead/dashboard");
+          break;
+        default:
+          navigate("/");
+          break;
+
+      }
+    } else {
+      dispatch(setError(response.message));
+>>>>>>> 5bcb830b3a97554332c88a37f9c48a904f99895a
     }
-  };
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
+
   return (
     <div className="bg-gray-100 h-[40%] w-[500px] flex flex-col items-center justify-center gap-1">
       <div>

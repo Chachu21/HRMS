@@ -13,6 +13,8 @@ import ManageAccountInfo from "./comopnents/dashboard/admin/ManageAccountInfo";
 import AddStaff from "./comopnents/dashboard/admin/AddStaff";
 import ApproveRequest from "./comopnents/dashboard/admin/ApproveRequest";
 import StaffRegister from "./pages/Registration/StaffRegister";
+import CustomizedDialogs from "./comopnents/landingPage/BootstrapingDialog";
+import LoginCustomizedDialogs from "./comopnents/landingPage/LoginCustomizedDialogs";
 
 function App() {
   return (
@@ -22,9 +24,21 @@ function App() {
         <Route
           exact={true}
           path="/signUpASapplicant"
-          element={<ApplicantRegister />}
+          element={
+            <CustomizedDialogs>
+              <ApplicantRegister />
+            </CustomizedDialogs>
+          }
         />
-        <Route exact={true} path="/login" element={<Login />} />
+        <Route
+          exact={true}
+          path="/login"
+          element={
+            <LoginCustomizedDialogs>
+              <Login />
+            </LoginCustomizedDialogs>
+          }
+        />
 
         <Route exact={true} path="/about" element={<About />} />
         <Route exact={true} path="/contact" element={<Vacancy />} />

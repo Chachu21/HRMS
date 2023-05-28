@@ -18,8 +18,8 @@ const ApplicantRegister = () => {
   const error = useSelector((state) => state.aplicantRegister.error);
   const handleChange = (e) => {
     const { name, value } = e.target;
-   
-      dispatch(setFormData({ ...formData, [name]: value })); // Use the spread operator to update the specific field
+
+    dispatch(setFormData({ ...formData, [name]: value })); // Use the spread operator to update the specific field
   };
 
   const handleSubmit = async (e) => {
@@ -33,7 +33,7 @@ const ApplicantRegister = () => {
     console.log(Object.fromEntries(formDataToSend)); // Display form data on the console
 
     try {
-     await registerUser(formData);
+      await registerUser(formData);
       dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
       // ... handle success case ...
       if (registrationStatus) {
@@ -47,19 +47,20 @@ const ApplicantRegister = () => {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center w-screen min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-100">
-        <div className="shadow-xl">
-          <h3 className="text-xl font-bold text-blue-400">
-            Register for accessing provide service
-          </h3>
-        </div>
-        {/* {error && (
+      {/* <div className="flex flex-col justify-center items-center w-screen min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-100 "> */}
+      <div className="shadow-xl">
+        <h3 className="text-xl font-bold text-blue-400">
+          Register for accessing provide service
+        </h3>
+      </div>
+      {/* {error && (
           <div className="mt-5">
             <p className="text-red-500">{error}</p>
           </div>
         )} */}
-        <div className="w-[100vw] flex flex-col px-6 py-4 mt-6 overflow-hidden bg-gray-100 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
-          <form className="" onSubmit={handleSubmit}>
+      <div className="w-[100vw] flex flex-col px-3 py-4 mt-6 overflow-hidden bg-gray-100 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
+        <form className="" onSubmit={handleSubmit}>
+          <div className="flex justify-center items-center gap-5">
             <div className="mt-4">
               <label
                 htmlFor="fname"
@@ -96,9 +97,13 @@ const ApplicantRegister = () => {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="flex justify-center items-center gap-5">
+            {" "}
             <div className="mt-4">
               <label
-                htmlFor="password_confirmation"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700 undefined"
               >
                 Eamil
@@ -114,7 +119,6 @@ const ApplicantRegister = () => {
                 />
               </div>
             </div>
-
             <div className="mt-4">
               <label
                 htmlFor="phone"
@@ -133,6 +137,8 @@ const ApplicantRegister = () => {
                 />
               </div>
             </div>
+          </div>
+          <div className="flex justify-center items-center gap-5">
             <div className="mt-4">
               <label
                 htmlFor="password"
@@ -170,24 +176,25 @@ const ApplicantRegister = () => {
                 />
               </div>
             </div>
-
-            <div className="flex items-center mt-4">
-              <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
-                Register
-              </button>
-            </div>
-          </form>
-          <div className="mt-4 text-grey-600 mb-10">
-            Already have an account?{" "}
-            <span>
-              <Link to="/login" className="text-blue-400 hover:underline">
-                Login
-              </Link>
-            </span>
           </div>
+
+          <div className="flex justify-center items-center mt-12">
+            <button className="w-1/2 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+              Register
+            </button>
+          </div>
+        </form>
+        <div className="mt-4 text-grey-600 mb-10">
+          Already have an account?{" "}
+          <span>
+            <Link to="/login" className="text-blue-400 hover:underline">
+              Login
+            </Link>
+          </span>
         </div>
       </div>
     </div>
+    // </div>
   );
 };
 export default ApplicantRegister;

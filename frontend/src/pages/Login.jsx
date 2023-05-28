@@ -68,23 +68,16 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-[100vh] flex flex-col items-center justify-center gap-5">
-      <div className="flex flex-col">
-        <span className="text-[#11d4bd] italic font-bold text-[24px]">
-          HR Management System
-        </span>
-        <div>
-          <span className="text-black text-[24px] font-bold">
-            Sign in to your account
-          </span>
-        </div>
+    <div className="bg-gray-100 h-[50%] w-[500px] flex flex-col items-center justify-center gap-1">
+      <div>
+        <span className="text-black text-[24px]">Sign in to your account</span>
       </div>
 
       <div className="flex justify-center items-center bg-white rounded-lg text-black shadow-xl p-14">
         <form
           onSubmit={handleSubmit}
           action=""
-          className="flex justify-center flex-col items-center w-full gap-8 px-4"
+          className="flex justify-center flex-col items-center w-full gap-8 px-4 -mt-10"
         >
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
             <label htmlFor="email">Email</label>
@@ -110,18 +103,18 @@ const Login = () => {
               className="w-[350px] h-8 pl-[10px] bg-white border-2 rounded-md border-gray-300 outline-none  "
             />
           </div>
-          <div className="flex justify-between items-center gap-[90px]">
-            <div className="flex gap-3 items-center justify-start">
+          <div className="flex justify-between items-center gap-[120px]">
+            <div className="flex gap-1 items-center justify-start">
               <input
                 type="checkbox"
                 name="rememberMe"
                 checked={rememberMe}
                 onChange={handleChange}
               />
-              <span>Remember me</span>
+              <span className="text-sm">Remember me</span>
             </div>
             <div>
-              <Link to="/forgotPassword" className="text-blue-400">
+              <Link to="/forgotPassword" className="text-blue-400 text-sm">
                 Forgot password ?
               </Link>
             </div>

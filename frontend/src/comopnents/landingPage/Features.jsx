@@ -7,8 +7,8 @@ const Features = () => {
       <section>
         <div className="mx-auto max-w-screen-xl px-4 py-2 sm:py-12 sm:px-6 lg:py-1 lg:px-8">
           <div className="">
-            <div className="lg:py-24  h-full flex flex-col gap-32">
-              <h2 className="text-[32px] text-white text-center  font-bold sm:text-4xl bg-black">
+            <div className="lg:py-16  h-full flex flex-col gap-32">
+              <h2 className="text-[32px] text-white bg-green-500 text-center  font-bold sm:text-4xl ">
                 Bahir Dar Polytechnic Human Resource Management System
               </h2>
 
@@ -16,10 +16,9 @@ const Features = () => {
 
               <Link
                 to="/signUp"
-                className="mt-32 inline-block text-center rounded  px-52 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring focus:ring-yellow-400"
+                className="mt-32 inline-block text-center rounded sm:px-20 lg:px-52 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring focus:ring-yellow-400"
               >
-                <span className="bg-blue-500  rounded-md text-center px-10 py-3">
-                  {" "}
+                <span class="bg-blue-500 rounded-md text-center px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 lg:px-10 lg:py-3 xl:px-12 xl:py-4 2xl:px-16 2xl:py-5">
                   Join Us
                 </span>
               </Link>

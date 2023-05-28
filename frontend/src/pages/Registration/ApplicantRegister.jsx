@@ -7,6 +7,7 @@ import {
   setRegistrationStatus,
 } from "../../redux/reducers/applicant/applicantRegisterReducer";
 import { registerUser } from "../../api/registerApi";
+import LoginCustomizedDialogs from "../../comopnents/landingPage/LoginCustomizedDialogs";
 
 const ApplicantRegister = () => {
   const dispatch = useDispatch();
@@ -184,12 +185,13 @@ const ApplicantRegister = () => {
             </button>
           </div>
         </form>
-        <div className="mt-4 text-grey-600 mb-10">
+        <div className="flex gap-3 mt-4 text-grey-600 mb-10 justify-center items-center">
           Already have an account?{" "}
           <span>
-            <Link to="/login" className="text-blue-400 hover:underline">
+            {/* <Link to="/login" className="text-blue-400 hover:underline">
               Login
-            </Link>
+            </Link> */}
+            <LoginCustomizedDialogs />
           </span>
         </div>
       </div>

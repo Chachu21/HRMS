@@ -16,6 +16,7 @@ import StaffRegister from "./pages/Registration/StaffRegister";
 import CustomizedDialogs from "./comopnents/landingPage/BootstrapingDialog";
 import LoginCustomizedDialogs from "./comopnents/landingPage/LoginCustomizedDialogs";
 import UpdateStaff from "./comopnents/dashboard/admin/UPdateStaff";
+import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
 
 function App() {
   return (
@@ -53,7 +54,14 @@ function App() {
             path="/dashboard/manageaccount/update/:id"
             element={<UpdateStaff />}
           />
-          <Route path="/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/dashboard/addstaff"
+            element={
+              <AddStaffCustomizedDialogs>
+                <StaffRegister />
+              </AddStaffCustomizedDialogs>
+            }
+          />
           <Route
             path="/dashboard/approverequest"
             element={<ApproveRequest />}
@@ -61,10 +69,10 @@ function App() {
         </Route>
         <Route path="/admin" element={<AdminDashboard />}>
           <Route index element={<AdminMain />} />
-          <Route path="/admin/addStaff" element={<StaffRegister />} />
+          {/* <Route path="/admin/addStaff" /> */}
           <Route
             path="/admin/approveRequestEmployee"
-            element={<StaffRegister />}
+            element={<ApproveRequest />}
           />
         </Route>
 

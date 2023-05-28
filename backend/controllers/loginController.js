@@ -14,11 +14,31 @@ const LoginUser = async (req, res) => {
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
-
+// let reDirectUrl = '/'
+// switch (user.role_id) {
+//   case 1:
+//     reDirectUrl = "/admin/dashboard"
+//     break;
+//   case 2:
+//     reDirectUrl = "/applicant/dashboard"
+//     break;
+//   case 3:
+//     reDirectUrl = "/employee/dashboard"
+//     break;
+//   case 4:
+//     reDirectUrl = "/hrofficer/dashboard"
+//     break;
+//   case 5:
+//     reDirectUrl = "/depthead/dashboard"
+//     break;
+//   default:
+//     reDirectUrl ='/'
+//     break;
+// }
     // Generate JWT token
-    const token = jwt.sign({ email: user.email }, "secretkey");
+    const token = jwt.sign({ email: user.email, role_id: user.role_id }, "secretkey");
 
-    res.json({ token });
+    res.json({user, token });
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ error: "Internal Server Error" });

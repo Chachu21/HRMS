@@ -12,6 +12,7 @@ import { loginUser } from "../api/loginApi";
 import { setError } from "../redux/reducers/applicant/applicantRegisterReducer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CustomizedDialogs from "../comopnents/landingPage/BootstrapingDialog";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,23 +53,50 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await loginUser(email, password);
-      dispatch(setLoggedIn(true));
-      if (loggedIn) {
-        if (rememberMe) {
-          localStorage.setItem("rememberMe", "true"); // Store Remember Me value in local storage
-        } else {
-          localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
-        }
-        navigate("/admin");
+// <<<<<<< HEAD
+//       await loginUser(email, password);
+//       dispatch(setLoggedIn(true));
+//       if (loggedIn) {
+//         if (rememberMe) {
+//           localStorage.setItem("rememberMe", "true"); // Store Remember Me value in local storage
+//         } else {
+//           localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
+//         }
+//         navigate("/admin");
+// =======
+      const response = await loginUser(email, password);
+      const { user, token } = response.data;
+      localStorage.setItem("token", token);
+      const role_id = user.role_id;
+      console.log(role_id)
+
+      switch (role_id) {
+        case 1:
+          navigate("/admin/dashboard");
+          break;
+        case 2:
+          navigate("/applicant/dashboard");
+          break;
+        case 3:
+          navigate("/employee/dashboard");
+          break;
+        case 4:
+          navigate("/hrofficer/dashboard");
+          break;
+        case 5:
+          navigate("/depthead/dashboard");
+          break;
+        default:
+          navigate("/");
+          break;
+
       }
     } catch (error) {
       dispatch(setError(error.message));
     }
   };
-
   return (
-    <div className="bg-gray-100 h-[50%] w-[500px] flex flex-col items-center justify-center gap-1">
+    <div className="bg-gray-100 h-[40%] w-[500px] flex flex-col items-center justify-center gap-1">
       <div>
         <span className="text-black text-[24px]">Sign in to your account</span>
       </div>
@@ -77,7 +105,7 @@ const Login = () => {
         <form
           onSubmit={handleSubmit}
           action=""
-          className="flex justify-center flex-col items-center w-full gap-8 px-4 -mt-10"
+          className="flex justify-center flex-col items-center w-full gap-4 px-4 -mt-10"
         >
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
             <label htmlFor="email">Email</label>
@@ -87,7 +115,7 @@ const Login = () => {
               onChange={handleChange}
               type="email"
               placeholder="Enter your email address"
-              className="w-[350px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
+              className="w-[350px] h-8  bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
             />
           </div>
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
@@ -127,11 +155,12 @@ const Login = () => {
               Login
             </button>
           </div>
-          <div>
-            <span>Don't have an account?</span>
-            <Link to="/signup" className="text-blue-500">
+          <div className="flex gap-2 justify-center items-center">
+            <span className="text-md">Don't have an account?</span>
+            {/* <Link to="/signup" className="text-blue-500">
               Register
-            </Link>
+            </Link> */}
+            <CustomizedDialogs />
           </div>
         </form>
       </div>

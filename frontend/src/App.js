@@ -13,6 +13,7 @@ import ManageAccountInfo from "./comopnents/dashboard/admin/ManageAccountInfo";
 import AddStaff from "./comopnents/dashboard/admin/AddStaff";
 import ApproveRequest from "./comopnents/dashboard/admin/ApproveRequest";
 import StaffRegister from "./pages/Registration/StaffRegister";
+import UpdateStaff from "./comopnents/dashboard/admin/UPdateStaff";
 
 function App() {
   return (
@@ -32,8 +33,8 @@ function App() {
           <Route index element={<AdminMain />} />
           <Route
             path="/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
-          />
+            element={<ManageAccountInfo />}          />
+          <Route path="/dashboard/manageaccount/update/:id" element={<UpdateStaff />} />
           <Route path="/dashboard/addstaff" element={<AddStaff />} />
           <Route
             path="/dashboard/approverequest"

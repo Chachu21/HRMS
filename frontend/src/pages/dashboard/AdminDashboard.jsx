@@ -1,7 +1,6 @@
 import React from "react";
 import AdminHeader from "../../comopnents/dashboard/admin/AdminHeader";
 import AdminSidebar from "../../comopnents/dashboard/admin/AdminSideBar";
-import AdminMain from "../../comopnents/dashboard/admin/AdminMain";
 import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {

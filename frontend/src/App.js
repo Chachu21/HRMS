@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Page404 from "./pages/404";
+import Main from './comopnents/landingPage/Main'
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import AdminMain from "./comopnents/dashboard/admin/AdminMain";
 import About from "./pages/About";
@@ -28,14 +29,28 @@ import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
 import StaffRegister from "./pages/Registration/StaffRegister";
+<<<<<<< HEAD
 import EmployeeRequistion from "./comopnents/dashboard/departmentHead/EmployeeRequistion";
 import ManageJobRank from "./comopnents/dashboard/departmentHead/ManageJobRank";
+=======
+import Main from "./comopnents/landingPage/Main";
+import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
+import PostExamSchedule from "./posts/PostExamSchedule";
+>>>>>>> a0fd4e41ff4b7b162624c82553dd40557c65c370
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route exact={true} path="/" element={<LandingPage />} />
+        <Route exact={true} path="/" element={<LandingPage />}>
+          <Route index element={<Main />} />
+
+          <Route exact={true} path="/about" element={<About />} />
+          <Route path="/vacancy" element={<Vacancy />} />
+          <Route exact={true} path="/contact" element={<Contact />} />
+          <Route exact={true} path="/help" element={<Help />} />
+
+        </Route>
         <Route
           exact={true}
           path="/signUpASapplicant"
@@ -54,10 +69,7 @@ function App() {
             </LoginCustomizedDialogs>
           }
         />
-        <Route exact={true} path="/about" element={<About />} />
-        <Route exact={true} path="/vacancy" element={<Vacancy />} />
-        <Route exact={true} path="/contact" element={<Contact />} />
-        <Route exact={true} path="/help" element={<Help />} />
+
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<AdminMain />} />
           <Route
@@ -102,18 +114,10 @@ function App() {
         <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
           <Route index element={<HRofficerMain />} />
           <Route
-            path="/hrofficer/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
+            path="/hrofficer/dashboard/jobvacancy"
+            element={<JobVacancyAnnouncement />}
           />
-          <Route
-            path="/hrofficer/dashboard/manageaccount/update/:id"
-            element={<UpdateStaff />}
-          />
-          <Route path="/hrofficer/dashboard/addstaff" element={<AddStaff />} />
-          <Route
-            path="/hrofficer/dashboard/approverequest"
-            element={<ApproveRequest />}
-          />
+          <Route path="/hrofficer/dashboard/schedul" element ={<PostExamSchedule />} />
         </Route>
 
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>

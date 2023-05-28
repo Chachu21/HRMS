@@ -15,6 +15,7 @@ import ApproveRequest from "./comopnents/dashboard/admin/ApproveRequest";
 import StaffRegister from "./pages/Registration/StaffRegister";
 import CustomizedDialogs from "./comopnents/landingPage/BootstrapingDialog";
 import LoginCustomizedDialogs from "./comopnents/landingPage/LoginCustomizedDialogs";
+import UpdateStaff from "./comopnents/dashboard/admin/UPdateStaff";
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
           <Route
             path="/dashboard/manageaccount"
             element={<ManageAccountInfo />}
+          />
+          <Route
+            path="/dashboard/manageaccount/update/:id"
+            element={<UpdateStaff />}
           />
           <Route path="/dashboard/addstaff" element={<AddStaff />} />
           <Route

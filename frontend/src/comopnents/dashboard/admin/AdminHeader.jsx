@@ -48,11 +48,11 @@ const AdminHeader = () => {
               <Link to="/dashboard" className="flex ml-2 md:mr-24">
                 <img
                   src={logo}
-                  className="h-[30px] w-[80px] rounded-md mr-3"
+                  className="h-[50px] w-[50px] rounded-md mr-3"
                   alt="logo "
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-black">
-                  HR Management
+                  HRMS
                 </span>
               </Link>
             </div>
@@ -68,7 +68,7 @@ const AdminHeader = () => {
                     aria-controls="dropdown-user"
                   >
                     <img
-                      className="w-[80px] h-[50px] rounded-full"
+                      className="w-[50px] h-[50px] rounded-full"
                       src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                       alt="user"
                     />
@@ -76,7 +76,7 @@ const AdminHeader = () => {
                 </div>
                 {isUserMenuOpen && (
                   <div
-                    className="z-50 absolute right-0 mt-[380px] py-1 w-[200px]flex flex-col items-center justify-center gap-5 bg-gray-50  rounded shadow dark:bg-gray-100 "
+                    className="z-50 absolute right-0 mt-[350px] py-1 w-[200px]flex flex-col items-center justify-center gap-5 bg-gray-50  rounded shadow dark:bg-gray-100 "
                     id="dropdown-user"
                   >
                     <div
@@ -88,12 +88,6 @@ const AdminHeader = () => {
                         className="w-[80px] h-[80px] rounded-full"
                         alt=""
                       />
-                      <p
-                        className="text-sm text-gray-900 dark:text-gray-900 font-normal italic"
-                        role="none"
-                      >
-                        user Name
-                      </p>
                       <p
                         className="text-sm font-medium text-gray-900 truncate dark:text-gray-700"
                         role="none"
@@ -115,24 +109,6 @@ const AdminHeader = () => {
                             role="menuitem"
                           >
                             Password
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="#"
-                            className="block px-2  py-1 text-sm text-blue-500 hover:bg-gray-200 dark:text-blue-500 dark:hover:bg-gray-200 dark:hover:text-blue-700"
-                            role="menuitem"
-                          >
-                            Payment Method
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="#"
-                            className="block  py-1 px-2 text-sm text-blue-400 hover:bg-gray-200 dark:text-blue-500 dark:hover:bg-gray-200 dark:hover:text-blue-300"
-                            role="menuitem"
-                          >
-                            Address
                           </Link>
                         </li>
                       </ul>

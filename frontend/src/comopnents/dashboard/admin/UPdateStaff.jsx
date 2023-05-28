@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setFormData,
   setError,
-  setRegistrationStatus,
-  resetRegistration,
 } from "../../../redux/reducers/staff/staffRegisterReducer";
-import { staffRegister } from "../../../api/staffApi";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
 
-const AddStaff = () => {
+const UpdateStaff = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const formData = useSelector((state) => state.staffRegister.formData);
-  const registrationStatus = useSelector(
-    (state) => state.aplicantRegister.registrationStatus
-  );
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get(`http://localhost:5002/api/v1/staff/${id}`).then((res) => {
+      dispatch(setFormData(res.data)); // Update form data in the Redux store
+      console.log(res.data);
+    });
+  }, [dispatch, id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,15 +43,18 @@ const AddStaff = () => {
     console.log(formData.role_id);
 
     try {
-      await staffRegister(formData);
-      dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
-      toast.success("Staff registered successfully!");
-        navigate("/dashboard/manageaccount");
+      await axios.put(
+        `http://localhost:5002/api/v1/staff/update/${id}`,
+        formData
+      );
+      toast.success("Staff updated successfully!");
+      dispatch(setFormData({})); // Clear form data in the Redux store
+      navigate("/dashboard/manageaccount");
     } catch (error) {
       dispatch(setError(error.message)); // Dispatch action to update error in Redux store
+      toast.error(error.message);
     }
   };
-
   return (
     <div>
       <div className="flex flex-col overflow-hidden justify-center items-center w-full min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-100">
@@ -204,4 +210,4 @@ const AddStaff = () => {
     </div>
   );
 };
-export default AddStaff;
+export default UpdateStaff;

@@ -1,31 +1,12 @@
-const { Sequelize } = require("sequelize");
-const bcrypt = require("bcrypt")
-const config = require("../config/configDb.js");
+const sequelize = require("../config/database.js");
 const initModels = require("../models/init-models.js");
-
-const db = config.development;
-const sequelize = new Sequelize(db.database, db.username, db.password, {
-  host: db.host,
-  port: db.port,
-  dialect: db.dialect,
-  // Add any additional Sequelize options as needed
-});
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Connection has been established successfully.");
-  })
-  .catch((error) => {
-    console.error("Unable to connect to the database:", error);
-  });
-
 const models = initModels(sequelize);
 const Staff = models.staff;
 
 const createStaff = async (req, res) => {
   try {
-    const { fname, lname, email, password, phone_number, role_id } = req.body;
+    const { id, fname, lname, email, password, phone_number, role_id } =
+      req.body;
 
     // Check if staff with the same email already exists
     const existingStaff = await Staff.findOne({ where: { email } });
@@ -34,13 +15,15 @@ const createStaff = async (req, res) => {
         .status(400)
         .json({ error: "Staff with the same email already exists" });
     }
-const hashedPassword = await bcrypt.hash(password, 10)
+    // const hashedPassword = await bcrypt.hash(password, 10)
 
     const newStaff = await Staff.create({
+      id,
       fname,
       lname,
       email,
-      password:hashedPassword,
+      password,
+      // password:hashedPassword,
       phone_number,
       role_id,
     });
@@ -88,12 +71,14 @@ const updateStaff = async (req, res) => {
     if (!staff) {
       return res.status(404).json({ error: "Staff not found" });
     }
-const hashedPassword = await bcrypt.hash(password, 10)
+    // const hashedPassword = await bcrypt.hash(password, 10);
     await staff.update({
+      id,
       fname,
       lname,
       email,
-      password:hashedPassword,
+      password,
+      // password: hashedPassword,
       phone_number,
       role_id,
     });

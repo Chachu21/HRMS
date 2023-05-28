@@ -11,7 +11,7 @@ const initialState = {
     password: "",
     role_id: "",
   },
-  registrationStatus: null,
+  registrationStatus: false,
   error: null,
 };
 
@@ -30,7 +30,7 @@ const staffSlice = createSlice({
     },
     resetRegistration: (state) => {
       state.formData = initialState.formData;
-      state.registrationStatus = null;
+      state.registrationStatus = false;
       state.error = null;
     },
   },

@@ -65,32 +65,33 @@ const Login = () => {
 //         navigate("/admin");
 // =======
       const response = await loginUser(email, password);
-      const { user, token } = response.data;
+      const { user, token } = response
       localStorage.setItem("token", token);
       const role_id = user.role_id;
       console.log(role_id)
 
-      switch (role_id) {
-        case 1:
-          navigate("/admin/dashboard");
-          break;
-        case 2:
-          navigate("/applicant/dashboard");
-          break;
-        case 3:
-          navigate("/employee/dashboard");
-          break;
-        case 4:
-          navigate("/hrofficer/dashboard");
-          break;
-        case 5:
-          navigate("/depthead/dashboard");
-          break;
-        default:
-          navigate("/");
-          break;
-
-      }
+     if (user) {
+       switch (role_id) {
+         case 1:
+           navigate("/admin/dashboard");
+           break;
+         case 2:
+           navigate("/applicant/dashboard");
+           break;
+         case 3:
+           navigate("/employee/dashboard");
+           break;
+         case 4:
+           navigate("/hrofficer/dashboard");
+           break;
+         case 5:
+           navigate("/depthead/dashboard");
+           break;
+         default:
+           navigate("/");
+           break;
+       }
+     }
     } catch (error) {
       dispatch(setError(error.message));
     }

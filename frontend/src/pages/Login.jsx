@@ -60,7 +60,7 @@ const Login = () => {
         } else {
           localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
         }
-        navigate("/applicant");
+        navigate("/admin");
       }
     } catch (error) {
       dispatch(setError(error.message));

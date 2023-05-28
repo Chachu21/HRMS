@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddStaffCustomizedDialogs from "../../../pages/Registration/AddStaffCustomizedDiaogs";
 
 const AdminSidebar = () => {
+  const [isOpenSublink, setIsOpenSublink] = useState(false)
     return (
     <div>
       <aside
@@ -31,12 +32,7 @@ const AdminSidebar = () => {
               </Link>
             </li>
 
-            <li>
-              <Link
-                to="/admin/dashboard/addstaff"
-
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
-              > 
+            <li className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200 gap-2">
               <svg
                 aria-hidden="true"
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-100 dark:text-gray-500 dark:group-hover:text-gray-500"
@@ -51,13 +47,13 @@ const AdminSidebar = () => {
                 ></path>
               </svg>
               <AddStaffCustomizedDialogs />
-              {/* {isOpenSublink && (
+              {isOpenSublink && (
                 <ul
                   id="dropdown-pages"
                   className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
                 ></ul>
-              )} */}
-              </Link>
+              )}
+             
 
             </li>
             <li className="flex items-center">

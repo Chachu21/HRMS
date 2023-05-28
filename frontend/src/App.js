@@ -26,6 +26,7 @@ import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
 import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
+import StaffRegister from "./pages/Registration/StaffRegister";
 
 
 function App() {
@@ -66,13 +67,16 @@ function App() {
             element={<UpdateStaff />}
           />
 
-          <Route path="/admin/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/admin/dashboard/addstaff"
+            element={<AddStaffCustomizedDialogs><StaffRegister /></AddStaffCustomizedDialogs>}
+          />
           <Route
             path="/admin/dashboard/approverequest"
             element={<ApproveRequest />}
           />
         </Route>
-        <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
+        {/* <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
           <Route index element={<AdminMain />} />
 
           <Route
@@ -135,10 +139,9 @@ function App() {
           <Route path="/depthead/dashboard/addstaff" element={<AddStaff />} />
           <Route
             path="/depthead/dashboard/approverequest"
-
             element={<ApproveRequest />}
           />
-        </Route>
+        </Route> */}
 
         <Route path="*" element={<Page404 />} />
       </Routes>

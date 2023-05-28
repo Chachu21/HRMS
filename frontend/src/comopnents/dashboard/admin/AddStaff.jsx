@@ -15,10 +15,6 @@ const AddStaff = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const formData = useSelector((state) => state.staffRegister.formData);
-  const registrationStatus = useSelector(
-    (state) => state.aplicantRegister.registrationStatus
-  );
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 

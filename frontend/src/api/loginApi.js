@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const loginUser = async (email, password) => {
+console.log("sdfghjkhgfhjlogin");
   try {
     const response = await axios.post("http://localhost:5002/api/v1/login", {
       email,
@@ -8,6 +9,8 @@ export const loginUser = async (email, password) => {
     });
     return response.data;
   } catch (error) {
-    throw new Error(error.message);
+    console.log(error);
+    // throw new Error(error.message);
+    return error
   }
 };

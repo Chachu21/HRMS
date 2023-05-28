@@ -27,13 +27,20 @@ import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
 import StaffRegister from "./pages/Registration/StaffRegister";
-
+import Main from "./comopnents/landingPage/Main";
+import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route exact={true} path="/" element={<LandingPage />} />
+        <Route exact={true} path="/" element={<LandingPage />}>
+          <Route index element={<Main />} />
+          <Route exact={true} path="/about" element={<About />} />
+          <Route path="/vacancy" element={<Vacancy />} />
+          <Route exact={true} path="/contact" element={<Contact />} />
+          <Route exact={true} path="/help" element={<Help />} />
+        </Route>
         <Route
           exact={true}
           path="/signUpASapplicant"
@@ -52,10 +59,6 @@ function App() {
             </LoginCustomizedDialogs>
           }
         />
-        <Route exact={true} path="/about" element={<About />} />
-        <Route exact={true} path="/vacancy" element={<Vacancy />} />
-        <Route exact={true} path="/contact" element={<Contact />} />
-        <Route exact={true} path="/help" element={<Help />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<AdminMain />} />
           <Route
@@ -69,14 +72,18 @@ function App() {
 
           <Route
             path="/admin/dashboard/addstaff"
-            element={<AddStaffCustomizedDialogs><StaffRegister /></AddStaffCustomizedDialogs>}
+            element={
+              <AddStaffCustomizedDialogs>
+                <StaffRegister />
+              </AddStaffCustomizedDialogs>
+            }
           />
           <Route
             path="/admin/dashboard/approverequest"
             element={<ApproveRequest />}
           />
         </Route>
-        {/* <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
+        <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
           <Route index element={<AdminMain />} />
 
           <Route
@@ -96,8 +103,8 @@ function App() {
         <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
           <Route index element={<HRofficerMain />} />
           <Route
-            path="/hrofficer/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
+            path="/hrofficer/dashboard/jobvacancy"
+            element={<JobVacancyAnnouncement />}
           />
           <Route
             path="/hrofficer/dashboard/manageaccount/update/:id"
@@ -141,7 +148,7 @@ function App() {
             path="/depthead/dashboard/approverequest"
             element={<ApproveRequest />}
           />
-        </Route> */}
+        </Route>
 
         <Route path="*" element={<Page404 />} />
       </Routes>

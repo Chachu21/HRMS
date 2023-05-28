@@ -12,11 +12,18 @@ import ApplicantRegister from "./pages/Registration/ApplicantRegister";
 import ManageAccountInfo from "./comopnents/dashboard/admin/ManageAccountInfo";
 import AddStaff from "./comopnents/dashboard/admin/AddStaff";
 import ApproveRequest from "./comopnents/dashboard/admin/ApproveRequest";
-import StaffRegister from "./pages/Registration/StaffRegister";
 import CustomizedDialogs from "./comopnents/landingPage/BootstrapingDialog";
 import LoginCustomizedDialogs from "./comopnents/landingPage/LoginCustomizedDialogs";
 import UpdateStaff from "./comopnents/dashboard/admin/UPdateStaff";
-
+import Contact from "./pages/Contact";
+import Help from "./pages/Help";
+import ApplicantDashboard from "./pages/dashboard/ApplicantDashboard";
+import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
+import EmployeeMain from "./comopnents/dashboard/employee/EmployeeMain";
+import DeptHeaderDashboard from "./pages/dashboard/DeptHeaderDashboard";
+import DeptMain from "./comopnents/dashboard/departmentHead/DeptMain";
+import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
+import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 function App() {
   return (
     <div>
@@ -40,31 +47,89 @@ function App() {
             </LoginCustomizedDialogs>
           }
         />
-
         <Route exact={true} path="/about" element={<About />} />
-        <Route exact={true} path="/contact" element={<Vacancy />} />
-        <Route path="/dashboard" element={<AdminDashboard />}>
+        <Route exact={true} path="/vacancy" element={<Vacancy />} />
+        <Route exact={true} path="/contact" element={<Contact />} />
+        <Route exact={true} path="/help" element={<Help />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<AdminMain />} />
           <Route
-            path="/dashboard/manageaccount"
+            path="/admin/dashboard/manageaccount"
             element={<ManageAccountInfo />}
           />
           <Route
-            path="/dashboard/manageaccount/update/:id"
+            path="/admin/dashboard/manageaccount/update/:id"
             element={<UpdateStaff />}
           />
-          <Route path="/dashboard/addstaff" element={<AddStaff />} />
+          <Route path="/admin/dashboard/addstaff" element={<AddStaff />} />
           <Route
-            path="/dashboard/approverequest"
+            path="/admin/dashboard/approverequest"
             element={<ApproveRequest />}
           />
         </Route>
-        <Route path="/admin" element={<AdminDashboard />}>
+        <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
           <Route index element={<AdminMain />} />
-          <Route path="/admin/addStaff" element={<StaffRegister />} />
           <Route
-            path="/admin/approveRequestEmployee"
-            element={<StaffRegister />}
+            path="/applicant/dashboard/manageaccount"
+            element={<ManageAccountInfo />}
+          />
+          <Route
+            path="/applicant/dashboard/manageaccount/update/:id"
+            element={<UpdateStaff />}
+          />
+          <Route path="/applicant/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/applicant/dashboard/approverequest"
+            element={<ApproveRequest />}
+          />
+        </Route>
+        <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
+          <Route index element={<HRofficerMain />} />
+          <Route
+            path="/hrofficer/dashboard/manageaccount"
+            element={<ManageAccountInfo />}
+          />
+          <Route
+            path="/hrofficer/dashboard/manageaccount/update/:id"
+            element={<UpdateStaff />}
+          />
+          <Route path="/hrofficer/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/hrofficer/dashboard/approverequest"
+            element={<ApproveRequest />}
+          />
+        </Route>
+
+        <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
+          <Route index element={<EmployeeMain />} />
+          <Route
+            path="/employee/dashboard/manageaccount"
+            element={<ManageAccountInfo />}
+          />
+          <Route
+            path="/employee/dashboard/manageaccount/update/:id"
+            element={<UpdateStaff />}
+          />
+          <Route path="/employee/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/employee/dashboard/approverequest"
+            element={<ApproveRequest />}
+          />
+        </Route>
+        <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
+          <Route index element={<DeptMain />} />
+          <Route
+            path="/depthead/dashboard/manageaccount"
+            element={<ManageAccountInfo />}
+          />
+          <Route
+            path="/depthead/dashboard/manageaccount/update/:id"
+            element={<UpdateStaff />}
+          />
+          <Route path="/depthead/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/depthead/dashboard/approverequest"
+            element={<ApproveRequest />}
           />
         </Route>
 

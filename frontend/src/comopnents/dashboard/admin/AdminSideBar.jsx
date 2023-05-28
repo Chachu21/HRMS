@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
-  const [isOpenSublink, setIsOpenSublink] = useState(false);
-
-  return (
+    return (
     <div>
       <aside
         id="logo-sidebar"
@@ -15,7 +13,7 @@ const AdminSidebar = () => {
           <ul className="space-y-5 font-medium text-blacks">
             <li>
               <Link
-                to="/dashboard/manageaccount"
+                to="/admin/dashboard/manageaccount"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg
@@ -34,7 +32,7 @@ const AdminSidebar = () => {
 
             <li>
               <Link
-                to="/dashboard/addstaff"
+                to="/admin/dashboard/addstaff"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg
@@ -53,17 +51,11 @@ const AdminSidebar = () => {
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
                   Add Staff
                 </span>
-                {isOpenSublink && (
-                  <ul
-                    id="dropdown-pages"
-                    className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
-                  ></ul>
-                )}
               </Link>
             </li>
             <li className="flex items-center">
               <Link
-                to="/dashboard/approverequest"
+                to="/admin/dashboard/approverequest"
                 className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75`}
               >
                 <div className="relative inline-flex w-fit">

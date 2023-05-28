@@ -52,21 +52,36 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await loginUser(email, password);
-      dispatch(setLoggedIn(true));
-      if (loggedIn) {
-        if (rememberMe) {
-          localStorage.setItem("rememberMe", "true"); // Store Remember Me value in local storage
-        } else {
-          localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
-        }
-        navigate("/applicant");
+      const response = await loginUser(email, password);
+      const { user, token } = response.data;
+      localStorage.setItem("token", token);
+      const role_id = user.role_id;
+      console.log(role_id)
+
+      switch (role_id) {
+        case 1:
+          navigate("/admin/dashboard");
+          break;
+        case 2:
+          navigate("/applicant/dashboard");
+          break;
+        case 3:
+          navigate("/employee/dashboard");
+          break;
+        case 4:
+          navigate("/hrofficer/dashboard");
+          break;
+        case 5:
+          navigate("/depthead/dashboard");
+          break;
+        default:
+          navigate("/");
+          break;
       }
     } catch (error) {
       dispatch(setError(error.message));
     }
   };
-
   return (
     <div className="bg-gray-100 h-[50%] w-[500px] flex flex-col items-center justify-center gap-1">
       <div>

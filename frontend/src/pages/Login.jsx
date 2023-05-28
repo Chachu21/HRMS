@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setPhoneNumber,
+  setEmail,
   setPassword,
   setLoggedIn,
   resetLogin,
+  setRememberMe,
 } from "../redux/reducers/loginReducer";
 import { loginUser } from "../api/loginApi";
 import { setError } from "../redux/reducers/applicant/applicantRegisterReducer";
@@ -15,11 +16,11 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const phoneNumber = useSelector((state) => state.login.phoneNumber);
+  const email = useSelector((state) => state.login.email);
   const password = useSelector((state) => state.login.password);
   const loggedIn = useSelector((state) => state.login.loggedIn);
   const error = useSelector((state) => state.login.error);
-  const [rememberMe, setRememberMe] = useState(false); // Remember Me state
+  const rememberMe = useSelector((state) => state.login.rememberMe);
 
   useEffect(() => {
     if (error) {
@@ -32,18 +33,18 @@ const Login = () => {
     // Check if the Remember Me value exists in local storage
     const rememberMeValue = localStorage.getItem("rememberMe");
     if (rememberMeValue) {
-      setRememberMe(true); // Set the Remember Me state to true
+      dispatch(setRememberMe(true)); // Set the Remember Me state to true
     }
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (e) => {
-    const { name, value ,checked} = e.target;
-    if (name === "phone") {
-      dispatch(setPhoneNumber(value));
+    const { name, value, checked } = e.target;
+    if (name === "email") {
+      dispatch(setEmail(value));
     } else if (name === "password") {
       dispatch(setPassword(value));
-    } else if (name === "rememberMe") {
-      setRememberMe(checked); // Update the Remember Me state based on the checkbox value
+    } else if (name === "rememberMe" && checked === true) {
+      dispatch(setRememberMe(true)); // Update the Remember Me state based on the checkbox value
     }
   };
 
@@ -51,7 +52,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await loginUser(phoneNumber, password);
+      await loginUser(email, password);
       dispatch(setLoggedIn(true));
       if (loggedIn) {
         if (rememberMe) {
@@ -59,7 +60,7 @@ const Login = () => {
         } else {
           localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
         }
-        navigate("/dashboard");
+        navigate("/applicant");
       }
     } catch (error) {
       dispatch(setError(error.message));
@@ -67,60 +68,53 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-[100vh]  flex flex-col items-center justify-center gap-3">
-      <div className="flex gap-5 flex-col">
-        <span className="text-[#11d4bd] italic font-bold text-[24px]">
-          HR Management System
-        </span>
-        <div className="p-[2px]">
-          <span className="text-black text-[24px] font-bold">
-            Sign in to your account
-          </span>
-        </div>
+    <div className="bg-gray-100 h-[50%] w-[500px] flex flex-col items-center justify-center gap-1">
+      <div>
+        <span className="text-black text-[24px]">Sign in to your account</span>
       </div>
 
       <div className="flex justify-center items-center bg-white rounded-lg text-black shadow-xl p-14">
         <form
           onSubmit={handleSubmit}
           action=""
-          className="flex justify-center flex-col items-center w-full gap-8 px-4"
+          className="flex justify-center flex-col items-center w-full gap-8 px-4 -mt-10"
         >
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
-            <label htmlFor="phone">Phone Number</label>
+            <label htmlFor="email">Email</label>
             <input
-              value={phoneNumber}
-              name="phone"
+              value={email}
+              name="email"
               onChange={handleChange}
-              type="tel"
-              placeholder="Enter your Phone Number"
+              type="email"
+              placeholder="Enter your email address"
               className="w-[350px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
             />
           </div>
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
-            <label htmlFor="phone">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               name="password"
               value={password}
               onChange={handleChange}
-              autoComplete={false}
+              autoComplete="false"
+              id="password"
               type="password"
               placeholder="Enter your password"
               className="w-[350px] h-8 pl-[10px] bg-white border-2 rounded-md border-gray-300 outline-none  "
             />
           </div>
-          <div className="flex justify-between items-center gap-[90px]">
-            <div className="flex gap-3 items-center justify-start">
+          <div className="flex justify-between items-center gap-[120px]">
+            <div className="flex gap-1 items-center justify-start">
               <input
                 type="checkbox"
                 name="rememberMe"
                 checked={rememberMe}
-                value={rememberMe}
                 onChange={handleChange}
               />
-              <span>Remember me</span>
+              <span className="text-sm">Remember me</span>
             </div>
             <div>
-              <Link to="/forgotPassword" className="text-blue-400">
+              <Link to="/forgotPassword" className="text-blue-400 text-sm">
                 Forgot password ?
               </Link>
             </div>
@@ -134,7 +128,7 @@ const Login = () => {
             </button>
           </div>
           <div>
-            <span>Have't an account ? </span>
+            <span>Don't have an account?</span>
             <Link to="/signup" className="text-blue-500">
               Register
             </Link>

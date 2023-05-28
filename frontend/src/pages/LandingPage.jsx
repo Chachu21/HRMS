@@ -1,18 +1,15 @@
-import React from 'react'
-import Header from '../comopnents/landingPage/Header'
-import Footer from '../comopnents/landingPage/Footer'
-import Main from '../comopnents/landingPage/Main'
-
+import React from "react";
+import Header from "../comopnents/landingPage/Header";
+import Main from "../comopnents/landingPage/Main";
 const LandingPage = () => {
   return (
     <div>
       <Header />
-      <main className='mt-[70px]'>
+      <main className="mt-[70px]">
         <Main />
       </main>
-      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;

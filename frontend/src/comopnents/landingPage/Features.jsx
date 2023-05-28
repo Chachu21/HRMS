@@ -1,35 +1,26 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
+import backgroundImage from "../../assets/background.jpg";
 const Features = () => {
   return (
     <div>
-        <section>
-        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-            <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-              <img
-                alt="Party"
-                src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                className="absolute inset-0 h-full w-full object-cover overflow-y-auto"
-              />
-            </div>
-
-            <div className="lg:py-24">
-              <h2 className="text-3xl font-bold sm:text-4xl">
-                Grow your audience
+      <section>
+        <div className="mx-auto max-w-screen-xl px-4 py-2 sm:py-12 sm:px-6 lg:py-1 lg:px-8">
+          <div className="">
+            <div className="lg:py-16  h-full flex flex-col gap-32">
+              <h2 className="text-[32px] text-white bg-green-500 text-center  font-bold sm:text-4xl ">
+                Bahir Dar Polytechnic Human Resource Management System
               </h2>
 
-              <p className="mt-4 text-gray-600">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
-                qui hic atque tenetur quis eius quos ea neque sunt, accusantium
-                soluta minus veniam tempora deserunt? Molestiae eius quidem quam
-                repellat.
-              </p>
+              <p className="mt-4 text-3xl text-white"></p>
 
-              <Link to="/signUp"
-                className="mt-8 inline-block text-center rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
+              <Link
+                to="/signUp"
+                className="mt-32 inline-block text-center rounded sm:px-20 lg:px-52 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring focus:ring-yellow-400"
               >
-                Get Started Today
+                <span class="bg-blue-500 rounded-md text-center px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 lg:px-10 lg:py-3 xl:px-12 xl:py-4 2xl:px-16 2xl:py-5">
+                  Join Us
+                </span>
               </Link>
             </div>
           </div>
@@ -161,10 +152,8 @@ const Features = () => {
           </div>
         </div>
       </div>
-
-    
     </div>
   );
-}
+};
 
-export default Features
+export default Features;

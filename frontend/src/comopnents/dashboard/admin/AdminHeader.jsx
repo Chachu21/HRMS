@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.jpg";
-import profile from "../../assets/profile.jpg";
+import logo from "../../../assets/logo.jpg";
+import profile from "../../../assets/profile.jpg";
 
-const initialState = {
-  searchQuery: "",
-};
-
-const DashHeader = () => {
-  const [formData, setFormData] = useState(initialState);
+const AdminHeader = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -19,11 +13,6 @@ const DashHeader = () => {
 
   const handleSidebarToggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("search is done");
   };
 
   return (
@@ -59,39 +48,15 @@ const DashHeader = () => {
               <Link to="/dashboard" className="flex ml-2 md:mr-24">
                 <img
                   src={logo}
-                  className="h-[30px] w-[80px] rounded-md mr-3"
+                  className="h-[50px] w-[50px] rounded-md mr-3"
                   alt="logo "
                 />
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-black">
-                  Equb
+                  HRMS
                 </span>
               </Link>
             </div>
-            <div className="flex items-center rounded-[5px]">
-              <form
-                action=""
-                onSubmit={handleSubmit}
-                className="flex items-center justify-center"
-              >
-                <input
-                  id="search"
-                  name="search"
-                  value={formData.searchQuery}
-                  onChange={(e) => {
-                    setFormData({ ...formData, searchQuery: e.target.value });
-                  }}
-                  type="text"
-                  className="bg-gray-100 w-[250px] outline-none border-2 border-gray-300 pl-3 lg:w-[350px] h-10 rounded-[5px] placeholder:text-[18px] leading-4 font-normal"
-                  placeholder="search here...."
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-400 h-10 flex px-[14px] justify-center items-center rounded-tr-[5px] rounded-br-[5px] cursor-pointer"
-                >
-                  <FaSearch color="white" />
-                </button>
-              </form>
-            </div>
+
             <div className="flex items-center">
               <div className="flex items-center ml-3">
                 <div>
@@ -103,7 +68,7 @@ const DashHeader = () => {
                     aria-controls="dropdown-user"
                   >
                     <img
-                      className="w-10 h-10 rounded-full"
+                      className="w-[50px] h-[50px] rounded-full"
                       src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                       alt="user"
                     />
@@ -111,7 +76,7 @@ const DashHeader = () => {
                 </div>
                 {isUserMenuOpen && (
                   <div
-                    className="z-50 absolute right-0 mt-[380px] py-1 w-[200px]flex flex-col items-center justify-center gap-5 bg-gray-50  rounded shadow dark:bg-gray-100 "
+                    className="z-50 absolute right-0 mt-[350px] py-1 w-[200px]flex flex-col items-center justify-center gap-5 bg-gray-50  rounded shadow dark:bg-gray-100 "
                     id="dropdown-user"
                   >
                     <div
@@ -124,16 +89,10 @@ const DashHeader = () => {
                         alt=""
                       />
                       <p
-                        className="text-sm text-gray-900 dark:text-gray-900 font-normal italic"
-                        role="none"
-                      >
-                        user Name
-                      </p>
-                      <p
                         className="text-sm font-medium text-gray-900 truncate dark:text-gray-700"
                         role="none"
                       >
-                        phone number
+                        Email
                       </p>
                     </div>
                     <hr className="h-1  bg-gray-300 w-full" />
@@ -152,28 +111,12 @@ const DashHeader = () => {
                             Password
                           </Link>
                         </li>
-                        <li>
-                          <Link
-                            to="#"
-                            className="block px-2  py-1 text-sm text-blue-500 hover:bg-gray-200 dark:text-blue-500 dark:hover:bg-gray-200 dark:hover:text-blue-700"
-                            role="menuitem"
-                          >
-                            Payment Method
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="#"
-                            className="block  py-1 px-2 text-sm text-blue-400 hover:bg-gray-200 dark:text-blue-500 dark:hover:bg-gray-200 dark:hover:text-blue-300"
-                            role="menuitem"
-                          >
-                            Address
-                          </Link>
-                        </li>
                       </ul>
                     </div>
                     <div className="text-center my-10 cursor-pointer">
-                      <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">Logout</span>
+                      <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">
+                        Logout
+                      </span>
                     </div>
                   </div>
                 )}
@@ -186,4 +129,4 @@ const DashHeader = () => {
   );
 };
 
-export default DashHeader;
+export default AdminHeader;

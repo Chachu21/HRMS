@@ -49,15 +49,12 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("jnhjhnjnk")
   e.preventDefault();
-    console.log("jnhjhnjnk");
-
-console.log();
   try {
     const response = await loginUser(email, password);
     const { user, token } =  response
     if(token !=null ){
+
       localStorage.setItem("token", token);
       const role_id = user.role_id;
       switch (role_id) {
@@ -79,6 +76,7 @@ console.log();
         default:
           navigate("/");
           break;
+
       }
     } else {
       dispatch(setError(response.message));

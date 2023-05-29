@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Page404 from "./pages/404";
-import Main from './comopnents/landingPage/Main'
+import LeaveRequest from "./posts/leaveRequest";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import AdminMain from "./comopnents/dashboard/admin/AdminMain";
 import About from "./pages/About";
@@ -30,6 +30,9 @@ import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDi
 import StaffRegister from "./pages/Registration/StaffRegister";
 import Main from "./comopnents/landingPage/Main";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
+import RequestPermission from "./posts/RequestPermission";
+import RequestJobRank from "./posts/RequestJobRank";
+
 
 function App() {
   return (
@@ -42,7 +45,6 @@ function App() {
           <Route path="/vacancy" element={<Vacancy />} />
           <Route exact={true} path="/contact" element={<Contact />} />
           <Route exact={true} path="/help" element={<Help />} />
-
         </Route>
         <Route
           exact={true}
@@ -121,22 +123,35 @@ function App() {
           />
         </Route>
 
+
+
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
-          <Route index element={<EmployeeMain />} />
+          <Route index 
+          element={<EmployeeMain />} 
+          />
           <Route
             path="/employee/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
+            element={<LeaveRequest />}
+          />
+          <Route />
+          <Route
+           index
+            path="/employee/dashboard/RequestPermission"
+            element={<RequestPermission />}
           />
           <Route
-            path="/employee/dashboard/manageaccount/update/:id"
-            element={<UpdateStaff />}
+            path="/employee/dashboard/RequestJobRank"
+            element={<RequestJobRank />}
           />
-          <Route path="/employee/dashboard/addstaff" element={<AddStaff />} />
-          <Route
+
+          {/* <Route
             path="/employee/dashboard/approverequest"
             element={<ApproveRequest />}
-          />
+          /> */}
         </Route>
+
+
+
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
           <Route index element={<DeptMain />} />
           <Route
@@ -161,4 +176,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

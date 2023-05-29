@@ -4,36 +4,39 @@ const models = initModels(sequelize);
 const Permission = models.permission;
 
 // Create a new permission
-const createPermission = async (
-  name,
-  type,
-  reason,
-  startDate,
-  returnDate,
-  status,
-  staffId
-) => {
+// const createPermission = async (req,res) => {
+//   const { name, type, reason, startDate, returnDate,status ,staffId} = req.body;
+//  ;
+//   try {
+//     const permission = await Permission.create({
+//       name: name,
+//       type: type,
+//       reason: reason,
+//       start_date: startDate,
+//       return_date: returnDate,
+//       status: status,
+//       staff_id: staffId,
+
+//     });
+//    res.status(201).json(permission);
+//   } catch (error) {
+//     throw new Error("Failed to create permission: " + error.message);
+//   }
+// };
+const createPermission = async (req, res) => {
   try {
-    const permission = await Permission.create({
-      name: name,
-      type: type,
-      reason: reason,
-      start_date: startDate,
-      "return date": returnDate,
-      status: status,
-      staff_id: staffId,
-    });
-    return permission;
+    const permission = await Permission.create(req.body);
+    res.status(200).json(permission);
   } catch (error) {
-    throw new Error("Failed to create permission: " + error.message);
+    res.status(500).json({ error: "cannot create permission" });
   }
 };
 
 // Read all permissions
-const getAllPermissions = async () => {
+const getAllPermissions = async (req, res) => {
   try {
     const permissions = await Permission.findAll();
-    return permissions;
+    res.status(200).json(permissions)
   } catch (error) {
     throw new Error("Failed to retrieve permissions: " + error.message);
   }

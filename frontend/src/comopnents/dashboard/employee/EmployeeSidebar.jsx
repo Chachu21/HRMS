@@ -19,7 +19,7 @@ const EmployeeSideBar = () => {
           <ul className="space-y-5 font-medium text-blacks">
             <li>
               <Link
-                to="#"
+                to="/employee/dashboard/manageaccount"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg
@@ -32,11 +32,11 @@ const EmployeeSideBar = () => {
                   <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                   <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                 </svg>
-                <span className="ml-3 text-black">Manage Account</span>
+                <span className="ml-3 text-black">RequestToLeave</span>
               </Link>
             </li>
 
-            <li>
+            {/* <li>
               <button
                 onClick={handleToggle}
                 type="button"
@@ -58,7 +58,7 @@ const EmployeeSideBar = () => {
                   ></path>
                 </svg>
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                  Employee Requisition
+                  RequiestPermission
                 </span>
                 <svg
                   aria-hidden="true"
@@ -74,10 +74,10 @@ const EmployeeSideBar = () => {
                   ></path>
                 </svg>
               </button>
-            </li>
+            </li> */}
             <li>
               <Link
-                to="#"
+                to="/employee/dashboard/RequestPermission"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg
@@ -90,14 +90,14 @@ const EmployeeSideBar = () => {
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
                 <span className="flex-1 ml-3 whitespace-nowrap text-black">
-                  Manage Account
+                  RequiestPermission
                 </span>
               </Link>
             </li>
 
             <li>
               <Link
-                to="#"
+                to="/employee/dashboard/RequestJobRank"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg

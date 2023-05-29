@@ -1,6 +1,12 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('permission', {
+    id:{
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      primaryKey:true,
+      autoIncrement:true
+    },
     name: {
       type: DataTypes.STRING(255),
       allowNull: false
@@ -17,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    'return date': {
+    return_date: {
       type: DataTypes.DATEONLY,
       allowNull: false
     },

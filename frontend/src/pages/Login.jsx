@@ -79,12 +79,12 @@ const Login = () => {
       }
     } else {
       dispatch(setError(response.message));
-    }
-  } catch (error) {
-    dispatch(setError(error.message));
-  }
-};
 
+    }
+  } catch(error){
+    console.log(error)
+  };
+  }
   return (
     <div className="bg-gray-100 h-[40%] w-[500px] flex flex-col items-center justify-center gap-1">
       <div>

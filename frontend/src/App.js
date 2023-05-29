@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Page404 from "./pages/404";
-import Main from './comopnents/landingPage/Main'
+import Main from "./comopnents/landingPage/Main";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import AdminMain from "./comopnents/dashboard/admin/AdminMain";
 import About from "./pages/About";
@@ -21,6 +21,7 @@ import Help from "./pages/Help";
 import ApplicantDashboard from "./pages/dashboard/ApplicantDashboard";
 import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
 import EmployeeMain from "./comopnents/dashboard/employee/EmployeeMain";
+import ManagePermission from "./comopnents/dashboard/departmentHead/ManagePermission";
 import DeptHeaderDashboard from "./pages/dashboard/DeptHeaderDashboard";
 import DeptMain from "./comopnents/dashboard/departmentHead/DeptMain";
 import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
@@ -28,6 +29,8 @@ import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
 import StaffRegister from "./pages/Registration/StaffRegister";
+import EmployeeRequistion from "./comopnents/dashboard/departmentHead/EmployeeRequistion";
+import ManageJobRank from "./comopnents/dashboard/departmentHead/ManageJobRank";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 
@@ -42,7 +45,6 @@ function App() {
           <Route path="/vacancy" element={<Vacancy />} />
           <Route exact={true} path="/contact" element={<Contact />} />
           <Route exact={true} path="/help" element={<Help />} />
-
         </Route>
         <Route
           exact={true}
@@ -110,7 +112,10 @@ function App() {
             path="/hrofficer/dashboard/jobvacancy"
             element={<JobVacancyAnnouncement />}
           />
-          <Route path="/hrofficer/dashboard/schedul" element ={<PostExamSchedule />} />
+          <Route
+            path="/hrofficer/dashboard/schedul"
+            element={<PostExamSchedule />}
+          />
         </Route>
 
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
@@ -132,14 +137,17 @@ function App() {
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
           <Route index element={<DeptMain />} />
           <Route
-            path="/depthead/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
+            path="/depthead/dashboard/managepermission"
+            element={<ManagePermission />}
           />
           <Route
-            path="/depthead/dashboard/manageaccount/update/:id"
-            element={<UpdateStaff />}
+            path="/depthead/dashboard/employeerequistion"
+            element={<EmployeeRequistion />}
           />
-          <Route path="/depthead/dashboard/addstaff" element={<AddStaff />} />
+          <Route
+            path="/depthead/dashboard/jobrank"
+            element={<ManageJobRank />}
+          />
           <Route
             path="/depthead/dashboard/approverequest"
             element={<ApproveRequest />}

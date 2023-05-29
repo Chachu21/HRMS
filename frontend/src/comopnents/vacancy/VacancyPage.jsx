@@ -1,14 +1,16 @@
+import axios from "axios";
 import React, { useState } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const JobVacancyAnnouncement = () => {
   const [formData, setFormData] = useState({
     title: "",
     quantity: null,
     department: "",
-    term: "",
-    qualification: "",
+    terms: "",
+    qualification: null,
     sex: "",
-    designation: "",
+    desgination: "",
     cgpa: null,
   });
   const handleChange = (e) => {
@@ -18,21 +20,33 @@ const JobVacancyAnnouncement = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // TODO:handle the logic
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log("first");
+    try {
+    const  response= await axios.post("http://localhost:5002/api/v1/vacancy", formData);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    toast.info("Announcement data is added successfuly");
+    console.log("first");
   };
 
-// const handleClear = () => {
-//      title= " ",
-//     quantity= null,
-//     department= " ",
-//     term= " ",
-//     qualification=" ",
-//     sex=" ",
-//     designation=" ",
-//     cgpa=null,
-//  }
+  const handleClear = () => {
+    setFormData({
+      title: "",
+      quantity: "",
+      department: "",
+      terms: "",
+      qualification: "",
+      sex: "",
+      desgination: "",
+      cgpa: "",
+    });
+    toast.warning(" data is cleared successfuly");
+  };
 
   return (
     <div className="max-w-md mx-auto">
@@ -90,8 +104,8 @@ const JobVacancyAnnouncement = () => {
             <input
               id="term"
               type="text"
-              name="term"
-              value={formData.term}
+              name="terms"
+              value={formData.terms}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -139,8 +153,8 @@ const JobVacancyAnnouncement = () => {
             <input
               id="desinationFile"
               type="text"
-              name="designation"
-              value={formData.designation}
+              name="desgination"
+              value={formData.desgination}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -167,6 +181,7 @@ const JobVacancyAnnouncement = () => {
             Submit
           </button>
           <button
+            onClick={handleClear}
             type="button"
             className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
@@ -174,6 +189,7 @@ const JobVacancyAnnouncement = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

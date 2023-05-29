@@ -5,7 +5,9 @@ const Vacancy = models.vacancy;
 
 // Create a vacancy
 const createVacancy = async (req, res) => {
+  
   try {
+    console.log(req.body)
     const vacancy = await Vacancy.create(req.body);
     res.status(201).json(vacancy);
   } catch (error) {

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
+
   return sequelize.define('permission', {
     id:{
       type:DataTypes.INTEGER,
@@ -39,18 +40,19 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     }
-  }, {
-    sequelize,
-    tableName: 'permission',
-    timestamps: false,
-    indexes: [
-      {
-        name: "staff_id",
-        using: "BTREE",
-        fields: [
-          { name: "staff_id" },
-        ]
-      },
-    ]
-  });
+  }, 
+ 
+    {
+      sequelize,
+      tableName: "permission",
+      timestamps: false,
+      indexes: [
+        {
+          name: "staff_id",
+          using: "BTREE",
+          fields: [{ name: "staff_id" }],
+        },
+      ],
+    }
+  );
 };

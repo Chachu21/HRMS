@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+import  axios from 'axios'
 const PostExamSchedule = () => {
   const [formData, setFormData] = useState(
     {
@@ -18,10 +18,16 @@ const handleChange = (e) => {
   }));
 
 }
-   
+  
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+try {
+  await axios.post("http://localhost:5002/api/v1/schedule", formData);
+} catch (error) {
+  console.log(error)
+}
+
   };
 
   return (

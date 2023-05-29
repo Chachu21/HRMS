@@ -55,6 +55,50 @@ const Login = () => {
     const { user, token } =  response
     if(token !=null ){
 
+<<<<<<< HEAD
+    try {
+// <<<<<<< HEAD
+//       await loginUser(email, password);
+//       dispatch(setLoggedIn(true));
+//       if (loggedIn) {
+//         if (rememberMe) {
+//           localStorage.setItem("rememberMe", "true"); // Store Remember Me value in local storage
+//         } else {
+//           localStorage.removeItem("rememberMe"); // Remove Remember Me value from local storage
+//         }
+//         navigate("/admin");
+// =======
+      const response = await loginUser(email, password);
+      const { user, token } = response
+      localStorage.setItem("token", token);
+      const role_id = user.role_id;
+      console.log(role_id)
+
+     if (user) {
+       switch (role_id) {
+         case 1:
+           navigate("/admin/dashboard");
+           break;
+         case 2:
+           navigate("/applicant/dashboard");
+           break;
+         case 3:
+           navigate("/employee/dashboard");
+           break;
+         case 4:
+           navigate("/hrofficer/dashboard");
+           break;
+         case 5:
+           navigate("/depthead/dashboard");
+           break;
+         default:
+           navigate("/");
+           break;
+       }
+     }
+    } catch (error) {
+      dispatch(setError(error.message));
+=======
       localStorage.setItem("token", token);
       const role_id = user.role_id;
       switch (role_id) {
@@ -80,6 +124,7 @@ const Login = () => {
       }
     } else {
       dispatch(setError(response.message));
+>>>>>>> 5bcb830b3a97554332c88a37f9c48a904f99895a
     }
   } catch (error) {
     dispatch(setError(error.message));

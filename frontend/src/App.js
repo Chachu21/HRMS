@@ -28,7 +28,6 @@ import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
 import StaffRegister from "./pages/Registration/StaffRegister";
-import Main from "./comopnents/landingPage/Main";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 

@@ -18,7 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
   const email = useSelector((state) => state.login.email);
   const password = useSelector((state) => state.login.password);
-  const loggedIn = useSelector((state) => state.login.loggedIn);
+  // const loggedIn = useSelector((state) => state.login.loggedIn);
   const error = useSelector((state) => state.login.error);
   const rememberMe = useSelector((state) => state.login.rememberMe);
 
@@ -54,36 +54,40 @@ const Login = () => {
       const response = await loginUser(email, password);
       const { user, token } = response;
       if (token != null) {
+        const response = await loginUser(email, password);
+
+        const { user, token } = response;
         localStorage.setItem("token", token);
         const role_id = user.role_id;
-        switch (role_id) {
-          case 1:
-            navigate("/admin/dashboard");
-            break;
-          case 2:
-            navigate("/applicant/dashboard");
-            break;
-          case 3:
-            navigate("/employee/dashboard");
-            break;
-          case 4:
-            navigate("/hrofficer/dashboard");
-            break;
-          case 5:
-            navigate("/depthead/dashboard");
-            break;
-          default:
-            navigate("/");
-            break;
+        console.log(role_id);
+
+        if (user) {
+          switch (role_id) {
+            case 1:
+              navigate("/admin/dashboard");
+              break;
+            case 2:
+              navigate("/applicant/dashboard");
+              break;
+            case 3:
+              navigate("/employee/dashboard");
+              break;
+            case 4:
+              navigate("/hrofficer/dashboard");
+              break;
+            case 5:
+              navigate("/depthead/dashboard");
+              break;
+            default:
+              navigate("/");
+              break;
+          }
         }
-      } else {
-        dispatch(setError(response.message));
       }
     } catch (error) {
       dispatch(setError(error.message));
     }
   };
-
 
   return (
     <div className="bg-gray-100 h-[40%] w-[500px] flex flex-col items-center justify-center gap-1">

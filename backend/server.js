@@ -7,6 +7,7 @@ const { loginRouter } = require("./routes/loginRoute");
 const roleRouter = require("./routes/roleRoute");
 const permissonRouter = require("./routes/permissionRoute");
 const vacancyRouter = require("./routes/vacancyRoute");
+const scheduleRouter = require("./routes/scheduleRoute");
 const app = express();
 const port = process.env.PORT || 5002;
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use("/api/v1", loginRouter);
 app.use("/api/v1", roleRouter);
 app.use('/permission', permissonRouter)
 app.use('/vacancy', vacancyRouter)
+app.use('/schedule', scheduleRouter)
 
 app.listen(port, () => {
   console.log("server is running on port 5002");

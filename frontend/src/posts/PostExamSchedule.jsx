@@ -2,26 +2,23 @@ import React from "react";
 import { useState } from "react";
 
 const PostExamSchedule = () => {
-  const [enteredJobTtle, setEnteredJobTitle] = useState("");
-  const [enteredExamDate, setEnteredExamDate] = useState("");
-  const [enteredPlace, setEnteredPlace] = useState("");
-  const [enteredExamTime, setEnteredExamTime] = useState("");
+  const [formData, setFormData] = useState(
+    {
+      title:"",
+      exam_date :"",
+      exam_time:"",
+      place:"",
+    }
+  );
 
-  const handleJobTitleChange = (e) => {
-    setEnteredJobTitle(e.target.value);
-  };
+const handleChange = (e) => {
+  const {name, value} = e.target;
+  setFormData((prevState) => ({
+    ...prevState, [name]:value
+  }));
 
-  const handleExamDateChange = (e) => {
-    setEnteredExamDate(e.target.value);
-  };
-
-  const handlePlaceChange = (e) => {
-    setEnteredPlace(e.target.value);
-  };
-
-  const handleExamTimeChange = (e) => {
-    setEnteredExamTime(e.target.value);
-  };
+}
+   
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +26,7 @@ const PostExamSchedule = () => {
 
   return (
     <div>
-      <section className="bg-gray-50">
+      <section className="bg-gray-100 overflow-hidden">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-white dark:border-gray-700 sm:p-8">
             <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-700">
@@ -37,7 +34,6 @@ const PostExamSchedule = () => {
             </h2>
             <form
               className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
-              action="#"
               onSubmit={handleFormSubmit}
             >
               <div>
@@ -49,10 +45,10 @@ const PostExamSchedule = () => {
                 </label>
                 <input
                   type="text"
-                  name="jobTitle"
+                  name="title"
                   id="jobTitle"
-                  value={enteredJobTtle}
-                  onChange={handleJobTitleChange}
+                  value={formData.title}
+                  onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-none focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="enter job title"
                   required={true}
@@ -67,10 +63,10 @@ const PostExamSchedule = () => {
                 </label>
                 <input
                   type="date"
-                  name="examDate"
+                  name="exam_date"
                   id="examDate"
-                  value={enteredExamDate}
-                  onChange={handleExamDateChange}
+                  value={formData.exam_date}
+                  onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-none focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-500 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required={true}
                 />
@@ -86,8 +82,8 @@ const PostExamSchedule = () => {
                   type="text"
                   name="place"
                   id="place"
-                  value={enteredPlace}
-                  onChange={handlePlaceChange}
+                  value={formData.place}
+                  onChange={handleChange}
                   placeholder="enter place"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-none focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required={true}
@@ -102,10 +98,11 @@ const PostExamSchedule = () => {
                 </label>
                 <input
                   type="time"
-                  name="examtime"
+                  name="exam_time"
                   id="examtime"
-                  value={enteredExamTime}
-                  onChange={handleExamTimeChange}
+                  placeholder="exam time"
+                  value={formData.exam_time}
+                  onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-none focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required={true}
                 />

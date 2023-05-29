@@ -29,6 +29,7 @@ import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDi
 import StaffRegister from "./pages/Registration/StaffRegister";
 import Main from "./comopnents/landingPage/Main";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
+import PostExamSchedule from "./posts/PostExamSchedule";
 
 function App() {
   return (
@@ -106,15 +107,7 @@ function App() {
             path="/hrofficer/dashboard/jobvacancy"
             element={<JobVacancyAnnouncement />}
           />
-          <Route
-            path="/hrofficer/dashboard/manageaccount/update/:id"
-            element={<UpdateStaff />}
-          />
-          <Route path="/hrofficer/dashboard/addstaff" element={<AddStaff />} />
-          <Route
-            path="/hrofficer/dashboard/approverequest"
-            element={<ApproveRequest />}
-          />
+          <Route path="/hrofficer/dashboard/schedul" element ={<PostExamSchedule />} />
         </Route>
 
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
@@ -153,9 +146,6 @@ function App() {
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
-
-     
-
     </div>
   );
 }

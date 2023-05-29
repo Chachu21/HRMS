@@ -18,7 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
   const email = useSelector((state) => state.login.email);
   const password = useSelector((state) => state.login.password);
-  const loggedIn = useSelector((state) => state.login.loggedIn);
+  // const loggedIn = useSelector((state) => state.login.loggedIn);
   const error = useSelector((state) => state.login.error);
   const rememberMe = useSelector((state) => state.login.rememberMe);
 

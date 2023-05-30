@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Page404 from "./pages/404";
+import LeaveRequest from "./posts/leaveRequest";
 import Main from "./comopnents/landingPage/Main";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import AdminMain from "./comopnents/dashboard/admin/AdminMain";
@@ -33,6 +34,8 @@ import EmployeeRequistion from "./comopnents/dashboard/departmentHead/EmployeeRe
 import ManageJobRank from "./comopnents/dashboard/departmentHead/ManageJobRank";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
+import RequestPermission from "./posts/RequestPermission";
+import RequestJobRank from './posts/RequestJobRank'
 
 function App() {
   return (
@@ -118,22 +121,35 @@ function App() {
           />
         </Route>
 
+
+
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
-          <Route index element={<EmployeeMain />} />
+          <Route index 
+          element={<EmployeeMain />} 
+          />
           <Route
             path="/employee/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
+            element={<LeaveRequest />}
+          />
+          <Route />
+          <Route
+           index
+            path="/employee/dashboard/RequestPermission"
+            element={<RequestPermission />}
           />
           <Route
-            path="/employee/dashboard/manageaccount/update/:id"
-            element={<UpdateStaff />}
+            path="/employee/dashboard/RequestJobRank"
+            element={<RequestJobRank />}
           />
-          <Route path="/employee/dashboard/addstaff" element={<AddStaff />} />
-          <Route
+
+          {/* <Route
             path="/employee/dashboard/approverequest"
             element={<ApproveRequest />}
-          />
+          /> */}
         </Route>
+
+
+
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
           <Route index element={<DeptMain />} />
           <Route
@@ -161,4 +177,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

@@ -55,8 +55,8 @@ const Login = () => {
       const { user, token } = response;
       if (token != null) {
         localStorage.setItem("token", token);
-
-        switch (user.role_id) {
+        const role_id = user.role_id;
+        switch (role_id) {
           case 1:
             navigate("/admin/dashboard");
             break;
@@ -76,12 +76,13 @@ const Login = () => {
             navigate("/");
             break;
         }
+      } else {
+        dispatch(setError(response.message));
       }
     } catch (error) {
-      dispatch(setError(error.message));
+      console.log(error);
     }
   };
-
   return (
     <div className="bg-gray-100 h-[40%] w-[500px] flex flex-col items-center justify-center gap-1">
       <div>

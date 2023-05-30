@@ -24,11 +24,21 @@ const createJobRank = async (req, res) =>{
 
    const deleteJobRank = async (req, res) =>{
    const id = req.params.id
-const deleteJob = await JobRank.findOne({where:{staff_id:`${id}`}})
+try {
+  const deleteJob = await JobRank.findOne({ where: { staff_id: `${id}` } });
 
-if (!deleteJob) {
-  res.status(500).json({error:"job_rank is not found for deleting"})
+  if (!deleteJob) {
+    res.status(500).json({ error: "job_rank is not found for deleting" });
+  }
+  await JobRank.destroy();
+  res.status(200).json({ message: "jobRank is successfuly deleted" });
+} catch (error) {
+  res.status(500).json(error)
 }
-await JobRank.destroy()
-res.status(200).json({message:"jobRank is successfuly deleted"})
+    }
+
+    module.exports = {
+      createJobRank,
+      GetAllJobRank,
+      deleteJobRank,
     }

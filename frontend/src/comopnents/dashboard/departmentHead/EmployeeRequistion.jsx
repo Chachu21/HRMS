@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const EmployeeRequistion = () => {
   const [leaveRequestData, setLeaveRequestData] = useState([]);
-  const navigate = useNavigate();
-
-  const handleForward = (id) => {
-    navigate(`/leave-request/${id}`); // Replace with your desired route
-  };
 
   useEffect(() => {
     axios
-      .get("http://localhost:5002/api/v1/leaverequest")
+      .get("http://localhost:5002/api/v1/leave")
       .then((response) => {
+        console.log(response.data);
         setLeaveRequestData(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
-
-  //   const handleForward = (id) => {
-  //     history.push(`/leave-request/${id}`); // Replace with your desired route
-  //   };
 
   return (
     <div className="flex flex-col ml-[20%] mr-[1%]">
@@ -44,10 +35,7 @@ const EmployeeRequistion = () => {
               <td className="px-4 py-2">{request.reason}</td>
               <td className="px-4 py-2">{request.clearance}</td>
               <td className="px-4 py-2">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleForward(request.id)}
-                >
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   Forward
                 </button>
               </td>

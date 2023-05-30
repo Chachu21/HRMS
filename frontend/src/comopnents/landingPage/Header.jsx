@@ -28,7 +28,7 @@ const Header = () => {
                   src={logo}
                   alt="equb_logo"
                 />
-                HR Management
+                HRMS
               </div>
             </NavLink>
             <button
@@ -65,7 +65,7 @@ const Header = () => {
                 <NavLink
                   to="/vacancy"
                   className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
-                    location.pathname === "/services" ? "text-gray-400" : ""
+                    location.pathname === "/vacancy" ? "text-gray-400" : ""
                   }`}
                 >
                   Vaccancy

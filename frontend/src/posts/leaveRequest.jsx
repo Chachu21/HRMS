@@ -5,7 +5,8 @@ import React,{useState} from "react";
 
 const LeaveRequest = () => {
   const [state, setstate] = useState({
-    staff_id: "",
+    // id:null,
+    staff_id:null,
     reason: "",
     clearance: ""
   });
@@ -18,9 +19,10 @@ const LeaveRequest = () => {
 
   const handleSubmit =async (event) => {
     event.preventDefault();
-    console.log('am inside handleSubmit');
+    
+   
     try{
-const response = await axios.post("http://localhost:5002/api/v1/leave", state);
+      const response = await axios.post("http://localhost:5002/api/v1/leave", state);
     }
     catch(err){
       console.log(err.message);
@@ -38,6 +40,34 @@ const response = await axios.post("http://localhost:5002/api/v1/leave", state);
           <p className="mb-4">
             Before you request leave, please finish clearance!
           </p>
+          {/* <div className="flex items-center w-full mb-4">
+            <label for="requestreview" className="w-1/4 mr-2">
+              id
+            </label>
+            <input
+              onChange={handleChande}
+              name="id"
+              id="id"
+              value={state.id}
+              // cols="30"
+              // rows="60"
+              className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
+            ></input>
+          </div> */}
+          <div className="flex items-center w-full mb-4">
+            <label for="requestreview" className="w-1/4 mr-2">
+              staff_id
+            </label>
+            <input
+              onChange={handleChande}
+              name="staff_id"
+              id="staff_id"
+              value={state.staff_id}
+              // cols="30"
+              // rows="60"
+              className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
+            ></input>
+          </div>
           <div className="flex items-center w-full mb-4">
             <label for="requestreview" className="w-1/4 mr-2">
               Reason
@@ -58,11 +88,11 @@ const response = await axios.post("http://localhost:5002/api/v1/leave", state);
             </label>
             <input
               onChange={handleChande}
-              type="file"
+              type="text"
               value={state.clearance}
               name="clearance"
               id="clearance"
-              accept="image/png, image/jpeg, image/jpg"
+              // accept=".png, .jpeg, .jpg"
               className="w-3/4"
             />
           </div>

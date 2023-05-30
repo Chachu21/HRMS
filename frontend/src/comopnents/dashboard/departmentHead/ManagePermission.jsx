@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ManagePermission = () => {
   const [permissionData, setPermissionData] = useState([]);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("http://localhost:5002/permission")
+      .get("http://localhost:5002/api/v1/permission")
       .then((response) => {
         setPermissionData(response.data);
       })
@@ -17,9 +17,9 @@ const ManagePermission = () => {
       });
   }, []);
 
-  const handleForward = (id) => {
-    navigate(`/leave-request/${id}`); // Replace with your desired route
-  };
+  // const handleForward = (id) => {
+  //   navigate(`/leave-request/${id}`); // Replace with your desired route
+  // };
 
   return (
     <div className="flex flex-col ml-[20%] mr-[1%]">
@@ -46,12 +46,12 @@ const ManagePermission = () => {
               <td className="px-4 py-2">{permission.return_date}</td>
               <td className="px-4 py-2">{permission.status}</td>
               <td className="px-4 py-2">
-                <button
+                {/* <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   onClick={() => handleForward(permission.id)}
                 >
                   Forward
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}

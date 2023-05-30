@@ -55,11 +55,11 @@ const Login = () => {
     try {
       const response = await loginUser(email, password);
       const { user, token } = response;
+      if(token != null){
       localStorage.setItem("token", token);
-      const role_id = user.role_id;
-      console.log(role_id);
+    
 
-      switch (role_id) {
+      switch (user.role_id) {
         case 1:
           navigate("/admin/dashboard");
           break;
@@ -79,6 +79,8 @@ const Login = () => {
           navigate("/");
           break;
       }
+
+    }
     } catch (error) {
       dispatch(setError(error.message));
     }

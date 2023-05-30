@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import AddStaffCustomizedDialogs from "../../../pages/Registration/AddStaffCustomizedDiaogs";
 
 const AdminSidebar = () => {
-  const [isOpenSublink, setIsOpenSublink] = useState(false)
-    return (
+  const [isOpenSublink, setIsOpenSublink] = useState(false);
+  return (
     <div>
       <aside
         id="logo-sidebar"
@@ -47,14 +47,7 @@ const AdminSidebar = () => {
                 ></path>
               </svg>
               <AddStaffCustomizedDialogs />
-              {isOpenSublink && (
-                <ul
-                  id="dropdown-pages"
-                  className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
-                ></ul>
-              )}
-             
-
+              
             </li>
             <li className="flex items-center">
               <Link
@@ -84,3 +77,11 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar;
+
+
+// {isOpenSublink && (
+//                 <ul
+//                   id="dropdown-pages"
+//                   className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
+//                 ></ul>
+//               )}

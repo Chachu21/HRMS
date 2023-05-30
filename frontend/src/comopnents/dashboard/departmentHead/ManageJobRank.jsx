@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-//import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ManageJobRank = () => {
   const [jobRankData, setJobRankData] = useState([]);
-  //const history = useHistory();
+  const navigate = useNavigate();
+
+  const handleForward = (id) => {
+    navigate(`/leave-request/${id}`); // Replace with your desired route
+  };
 
   useEffect(() => {
     axios
@@ -17,12 +21,8 @@ const ManageJobRank = () => {
       });
   }, []);
 
-  //   const handleForward = (id) => {
-  //     history.push(`/job-rank/${id}`); // Replace with your desired route
-  //   };
-
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ml-[20%] mr-[1%]">
       <h1 className="text-2xl font-bold mb-4">Job Rank Table</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
@@ -40,9 +40,9 @@ const ManageJobRank = () => {
               <td className="px-4 py-2">{rank.level}</td>
               <td className="px-4 py-2">{rank.cv}</td>
               <td className="px-4 py-2">
-                <button
+              <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  //   onClick={() => handleForward(rank.id)}
+                  onClick={() => handleForward(rank.id)}
                 >
                   Forward
                 </button>

@@ -7,6 +7,9 @@ const { loginRouter } = require("./routes/loginRoute");
 const roleRouter = require("./routes/roleRoute");
 const permissonRouter = require("./routes/permissionRoute");
 const vacancyRouter = require("./routes/vacancyRoute");
+
+const leaveRouter = require("./routes/leaveRoute");
+
 const scheduleRouter = require("./routes/scheduleRoute");
 const jobRankRouter = require("./routes/jobRankRoute");
 const app = express();
@@ -24,5 +27,5 @@ app.use('/api/v1/schedule', scheduleRouter)
 app.use('/api/v1/jobRank', jobRankRouter)
 
 app.listen(port, () => {
-  console.log("server is running on port 5002");
+  console.log(`server is running on port ${port}`);
 });

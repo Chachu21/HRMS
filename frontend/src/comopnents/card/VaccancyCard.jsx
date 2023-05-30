@@ -1,42 +1,44 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import ApplyCustomizedDialogs from './ApplyCustomizedDialogs';
 
-const VacancyCard = () => {
+const VacancyCard = ({title, quantity, department, term, sex, designation, cgpa}) => {
   return (
     <div className="flex flex-col justify-center items-center gap-5 rounded-md bg-gray-300">
       <div className="flex flex-col justify-left items-left gap-5">
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">Title</span> :
-          Lecturer
+          {title}
         </p>
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">quantity</span> :
-          10
+          {quantity}
         </p>
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">Department</span> :
-          software Engineering
+          {department}
         </p>
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">
             Term Of Employment
           </span>{" "}
-          : full time
+          {term}
         </p>
         <p className="text-lg">
-          <span className="text-lg font-bold text-gray-700">Sex</span> : female
+          <span className="text-lg font-bold text-gray-700">Sex</span> {sex}
         </p>
         <p className="text-lg">
-          <span className="text-lg font-bold text-gray-700">Designation</span>{" "}
-          : Degree
+          <span className="text-lg font-bold text-gray-700">Designation</span> :
+          {designation}
         </p>
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">min-CGPA</span> :
-          3.5
+          {cgpa}
         </p>
       </div>
       <div className=" text-center text-white bg-blue-500 w-[120px] p-2 rounded-md mb-3">
-        <Link >Apply</Link>
+        <button>
+          <ApplyCustomizedDialogs/>
+        </button>
       </div>
     </div>
   );

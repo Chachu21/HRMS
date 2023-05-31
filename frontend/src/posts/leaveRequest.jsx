@@ -11,7 +11,6 @@ const LeaveRequest = () => {
     clearance: ""
   });
 
-
   const handleChande = (event) => {
     const { name,value } = event.target;
     setstate((prev) => ({ ...prev,[name]:value }));
@@ -19,15 +18,15 @@ const LeaveRequest = () => {
 
   const handleSubmit =async (event) => {
     event.preventDefault();
-    
-   
     try{
-      const response = await axios.post("http://localhost:5002/api/v1/leave", state);
+       await axios.post("http://localhost:5002/api/v1/leave", state);
     }
     catch(err){
       console.log(err.message);
     }
   };
+
+
   return (
     <div>
       <div className="flex flex-col justify-center items-center mx-auto my-10 bg-gray-100 h-[100vh]">
@@ -40,20 +39,6 @@ const LeaveRequest = () => {
           <p className="mb-4">
             Before you request leave, please finish clearance!
           </p>
-          {/* <div className="flex items-center w-full mb-4">
-            <label for="requestreview" className="w-1/4 mr-2">
-              id
-            </label>
-            <input
-              onChange={handleChande}
-              name="id"
-              id="id"
-              value={state.id}
-              // cols="30"
-              // rows="60"
-              className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
-            ></input>
-          </div> */}
           <div className="flex items-center w-full mb-4">
             <label for="requestreview" className="w-1/4 mr-2">
               staff_id
@@ -63,8 +48,6 @@ const LeaveRequest = () => {
               name="staff_id"
               id="staff_id"
               value={state.staff_id}
-              // cols="30"
-              // rows="60"
               className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
             ></input>
           </div>

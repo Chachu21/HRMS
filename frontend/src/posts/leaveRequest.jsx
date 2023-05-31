@@ -1,30 +1,28 @@
 import axios from "axios";
-import React,{useState} from "react";
-
-
+import React, { useState } from "react";
 
 const LeaveRequest = () => {
   const [state, setstate] = useState({
     // id:null,
-    staff_id:null,
+    staff_id: null,
     reason: "",
-    clearance: ""
+    clearance: "",
   });
 
-
   const handleChande = (event) => {
-    const { name,value } = event.target;
-    setstate((prev) => ({ ...prev,[name]:value }));
+    const { name, value } = event.target;
+    setstate((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit =async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
-   
-    try{
-      const response = await axios.post("http://localhost:5002/api/v1/leave", state);
-    }
-    catch(err){
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5002/api/v1/leave",
+        state
+      );
+    } catch (err) {
       console.log(err.message);
     }
   };
@@ -35,7 +33,7 @@ const LeaveRequest = () => {
         <form
           onSubmit={handleSubmit}
           action=""
-          className="flex flex-col items-center"
+          className="flex flex-col items-center bg-white p-5"
         >
           <p className="mb-4">
             Before you request leave, please finish clearance!
@@ -55,7 +53,7 @@ const LeaveRequest = () => {
             ></input>
           </div> */}
           <div className="flex items-center w-full mb-4">
-            <label for="requestreview" className="w-1/4 mr-2">
+            <label htmlfor="staff_id" className="w-1/4 mr-2">
               staff_id
             </label>
             <input
@@ -65,11 +63,11 @@ const LeaveRequest = () => {
               value={state.staff_id}
               // cols="30"
               // rows="60"
-              className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
+              className="w-3/4 border border-gray-300 outline-none pl-5 rounded"
             ></input>
           </div>
           <div className="flex items-center w-full mb-4">
-            <label for="requestreview" className="w-1/4 mr-2">
+            <label for="reason" className="w-1/4 mr-2">
               Reason
             </label>
             <textarea
@@ -78,12 +76,12 @@ const LeaveRequest = () => {
               id="reason"
               value={state.reason}
               cols="60"
-              rows="10"
+              rows="7"
               className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
             ></textarea>
           </div>
           <div className="flex items-center w-full mb-4">
-            <label for="clearancefile" className="w-1/2 mr-2">
+            <label for="clearance" className="w-1/4 mr-2">
               Upload your clearance
             </label>
             <input
@@ -93,7 +91,7 @@ const LeaveRequest = () => {
               name="clearance"
               id="clearance"
               // accept=".png, .jpeg, .jpg"
-              className="w-3/4"
+              className="w-3/4 border border-gray-300 outline-none pl-5 rounded"
             />
           </div>
           <div className="flex justify-center w-full gap-5 mt-10">

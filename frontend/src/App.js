@@ -35,7 +35,11 @@ import ManageJobRank from "./comopnents/dashboard/departmentHead/ManageJobRank";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 import RequestPermission from "./posts/RequestPermission";
-import RequestJobRank from './posts/RequestJobRank'
+import RequestJobRank from "./posts/RequestJobRank";
+import JobRankDetails from "./comopnents/dashboard/hrOfficer/JobRankDetails";
+import { Provider } from "react-redux";
+import store from "./comopnents/dashboard/departmentHead/store";
+import PostVaccancy from "./posts/PostVaccancy";
 
 function App() {
   return (
@@ -113,7 +117,11 @@ function App() {
           <Route index element={<HRofficerMain />} />
           <Route
             path="/hrofficer/dashboard/jobvacancy"
-            element={<JobVacancyAnnouncement />}
+            element={<PostVaccancy />}
+          />
+          <Route
+            path="/hrofficer/dashboard/jobrankdeatils"
+            element={<JobRankDetails />}
           />
           <Route
             path="/hrofficer/dashboard/schedul"
@@ -121,19 +129,15 @@ function App() {
           />
         </Route>
 
-
-
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
-          <Route index 
-          element={<EmployeeMain />} 
-          />
+          <Route index element={<EmployeeMain />} />
           <Route
             path="/employee/dashboard/manageaccount"
             element={<LeaveRequest />}
           />
           <Route />
           <Route
-           index
+            index
             path="/employee/dashboard/RequestPermission"
             element={<RequestPermission />}
           />
@@ -148,8 +152,6 @@ function App() {
           /> */}
         </Route>
 
-
-
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
           <Route index element={<DeptMain />} />
           <Route
@@ -162,7 +164,11 @@ function App() {
           />
           <Route
             path="/depthead/dashboard/jobrank"
-            element={<ManageJobRank />}
+            element={
+              <Provider store={store}>
+                <ManageJobRank />
+              </Provider>
+            }
           />
           <Route
             path="/depthead/dashboard/approverequest"
@@ -177,4 +183,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

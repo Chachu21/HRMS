@@ -46,12 +46,12 @@ const ManagePermission = () => {
               <td className="px-4 py-2">{permission.return_date}</td>
               <td className="px-4 py-2">{permission.status}</td>
               <td className="px-4 py-2">
-                {/* <button
+                <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleForward(permission.id)}
+                  // onClick={() => handleForward(permission.id)}
                 >
                   Forward
-                </button> */}
+                </button>
               </td>
             </tr>
           ))}

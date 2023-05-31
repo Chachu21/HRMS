@@ -1,12 +1,29 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
+import { NavLink, useLocation } from "react-router-dom";
 
 const DeptSideBar = () => {
   const [isOpenSublink, setIsOpenSublink] = useState(false);
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const location = useLocation();
 
   const handleToggle = () => {
     setIsOpenSublink(!isOpenSublink);
   };
+
+  <button
+    className="text-black cursor-pointer absolute top-[0px] right-[0px] text-3xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent lg:hidden outline-none focus:outline-none h-full flex justify-center items-center"
+    type="button"
+    onClick={() => setNavbarOpen(!navbarOpen)}
+  >
+    {navbarOpen ? (
+      <AiOutlineClose className="closeIcon" />
+    ) : (
+      <GiHamburgerMenu className="menuBar" />
+    )}
+  </button>;
 
   return (
     <div>

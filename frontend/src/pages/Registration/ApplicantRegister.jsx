@@ -16,7 +16,7 @@ const ApplicantRegister = () => {
   const registrationStatus = useSelector(
     (state) => state.aplicantRegister.registrationStatus
   );
-  const error = useSelector((state) => state.aplicantRegister.error);
+  // const error = useSelector((state) => state.aplicantRegister.error);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -191,7 +191,7 @@ const ApplicantRegister = () => {
             {/* <Link to="/login" className="text-blue-400 hover:underline">
               Login
             </Link> */}
-            <LoginCustomizedDialogs />
+            <LoginCustomizedDialogs  />
           </span>
         </div>
       </div>

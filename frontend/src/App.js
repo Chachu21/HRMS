@@ -41,14 +41,17 @@ function App() {
   return (
     <div>
       <Routes>
+
+        {/* homepage  route*/}
         <Route exact={true} path="/" element={<LandingPage />}>
           <Route index element={<Main />} />
-
           <Route exact={true} path="/about" element={<About />} />
           <Route path="/vacancy" element={<Vacancy />} />
           <Route exact={true} path="/contact" element={<Contact />} />
           <Route exact={true} path="/help" element={<Help />} />
         </Route>
+
+
         <Route
           exact={true}
           path="/signUpASapplicant"
@@ -58,6 +61,7 @@ function App() {
             </CustomizedDialogs>
           }
         />
+        
         <Route
           exact={true}
           path="/login"

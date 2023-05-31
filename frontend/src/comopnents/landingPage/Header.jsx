@@ -9,6 +9,9 @@ import LoginCustomizedDialogs from "./LoginCustomizedDialogs";
 const Header = () => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const location = useLocation();
+  const handleopenClose= () => { 
+    setNavbarOpen(!navbarOpen)
+   }
 
   return (
     <>
@@ -52,6 +55,7 @@ const Header = () => {
             <ul className="flex text-black flex-col lg:flex-row list-none lg:ml-auto items-center">
               <li className="flex items-center">
                 <NavLink
+                  onClick={handleopenClose}
                   exact
                   to="/"
                   className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
@@ -63,6 +67,7 @@ const Header = () => {
               </li>
               <li className="flex items-center">
                 <NavLink
+                  onClick={handleopenClose}
                   to="/vacancy"
                   className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
                     location.pathname === "/vacancy" ? "text-gray-400" : ""
@@ -73,6 +78,7 @@ const Header = () => {
               </li>
               <li className="flex items-center">
                 <NavLink
+                  onClick={handleopenClose}
                   to="/about"
                   className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
                     location.pathname === "/about" ? "text-gray-400" : ""
@@ -83,6 +89,7 @@ const Header = () => {
               </li>
               <li className="flex items-center">
                 <NavLink
+                  onClick={handleopenClose}
                   to="/contact"
                   className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
                     location.pathname === "/contact" ? "text-gray-400" : ""
@@ -93,6 +100,7 @@ const Header = () => {
               </li>
               <li className="flex items-center">
                 <NavLink
+                  onClick={handleopenClose}
                   to="/help"
                   className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
                     location.pathname === "/help" ? "text-gray-400" : ""

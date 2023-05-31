@@ -4,7 +4,6 @@ const models = initModels(sequelize);
 const Permission = models.permission;
 
 // Create a new permission
-<<<<<<< HEAD
 // const createPermission = async (req,res) => {
 //   const { name, type, reason, startDate, returnDate,status ,staffId} = req.body;
 //  ;
@@ -30,14 +29,7 @@ const createPermission = async (req, res) => {
     res.status(200).json(permission);
   } catch (error) {
     res.status(500).json({ error: "cannot create permission" });
-=======
-const createPermission = async (req, res) => {
-  try {
-    const permission = await Permission.create(req.body);
-   res.status(200).json(permission)
-  } catch (error) {
-    res.status(500).json({error:"cannot create permission"})
->>>>>>> d8ec4276507c3316e7cff1408a86ea7927d72f1e
+
   }
 };
 

@@ -8,7 +8,7 @@ var _leave_request = require("./leave_request/leave_request");
 var _permission = require("./permission/permission");
 var _schedule = require("./schedule/schedule");
 var _vacancy = require("./vacancy/vacancy");
-var _applicant_list = require("./applicant_list");
+var _applicant_list = require("./applicant_list/applicant_list.js");
 
 function initModels(sequelize) {
   var role = _role(sequelize, DataTypes); // Move role model definition to the top

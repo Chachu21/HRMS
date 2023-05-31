@@ -39,13 +39,11 @@ import RequestJobRank from "./posts/RequestJobRank";
 import JobRankDetails from "./comopnents/dashboard/hrOfficer/JobRankDetails";
 import { Provider } from "react-redux";
 import store from "./comopnents/dashboard/departmentHead/store";
-import PostVaccancy from "./posts/PostVaccancy";
 
 function App() {
   return (
     <div>
       <Routes>
-
         {/* homepage  route*/}
         <Route exact={true} path="/" element={<LandingPage />}>
           <Route index element={<Main />} />
@@ -54,7 +52,6 @@ function App() {
           <Route exact={true} path="/contact" element={<Contact />} />
           <Route exact={true} path="/help" element={<Help />} />
         </Route>
-
 
         <Route
           exact={true}
@@ -65,7 +62,7 @@ function App() {
             </CustomizedDialogs>
           }
         />
-        
+
         <Route
           exact={true}
           path="/login"
@@ -119,10 +116,6 @@ function App() {
         </Route>
         <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
           <Route index element={<HRofficerMain />} />
-          <Route
-            path="/hrofficer/dashboard/jobvacancy"
-            element={<PostVaccancy />}
-          />
           <Route
             path="/hrofficer/dashboard/jobrankdeatils"
             element={<JobRankDetails />}

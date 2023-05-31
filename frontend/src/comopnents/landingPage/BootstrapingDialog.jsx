@@ -10,6 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 //import Typography from "@mui/material/Typography";
 import ApplicantRegister from "../../pages/Registration/ApplicantRegister";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsClose, setIsOpen } from "../../redux/reducers/loginReducer";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -59,24 +61,29 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs({ children }) {
-  const [open, setOpen] = React.useState(false);
+  const isOpen = useSelector((state) => state.login.isOpen);
+  const dispatch = useDispatch();
 
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatch(setIsOpen());
   };
   const handleClose = () => {
-    setOpen(false);
+    dispatch(setIsClose());
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <div
+        className="w-[80px] h-[35px] flex justify-center items-center bg-blue-500  mx-2 rounded-md text-white"
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
         Sign Up
-      </Button>
+      </div>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={isOpen}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"

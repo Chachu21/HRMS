@@ -1,10 +1,9 @@
 import React from 'react'
-import ApplyCustomizedDialogs from './ApplyCustomizedDialogs';
-
+import LoginCustomizedDialogs from '../landingPage/LoginCustomizedDialogs';
 const VacancyCard = ({title, quantity, department, term, sex, designation, cgpa}) => {
   return (
-    <div className="flex flex-col justify-center items-center gap-5 rounded-md bg-gray-300">
-      <div className="flex flex-col justify-left items-left gap-5">
+    <div className="flex flex-col justify-center items-center gap-5 rounded-lg bg-[#f7f7f7]">
+      <div className="flex flex-col justify-left items-left gap-5 py-5">
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">Title</span> :
           {title}
@@ -19,12 +18,12 @@ const VacancyCard = ({title, quantity, department, term, sex, designation, cgpa}
         </p>
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">
-            Term Of Employment
+            Term Of Employment :
           </span>{" "}
           {term}
         </p>
         <p className="text-lg">
-          <span className="text-lg font-bold text-gray-700">Sex</span> {sex}
+          <span className="text-lg font-bold text-gray-700">Sex</span> : {sex}
         </p>
         <p className="text-lg">
           <span className="text-lg font-bold text-gray-700">Designation</span> :
@@ -37,7 +36,7 @@ const VacancyCard = ({title, quantity, department, term, sex, designation, cgpa}
       </div>
       <div className=" text-center text-white bg-blue-500 w-[120px] p-2 rounded-md mb-3">
         <button>
-          <ApplyCustomizedDialogs/>
+          <LoginCustomizedDialogs />
         </button>
       </div>
     </div>

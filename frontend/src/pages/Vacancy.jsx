@@ -39,12 +39,12 @@ const Vacancy = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-10 py-5 h-full">
+    <div className="flex flex-col items-center justify-center gap-10 h-full">
       <div className="flex items-center justify-center rounded-[5px]">
         <form
           action=""
           onSubmit={handleSubmit}
-          className="flex items-center fixed justify-center lg:mr-52 ml-48  lg:ml-0  -mt-[107px]  z-20 "
+          className="flex items-center fixed justify-center lg:mr-52 ml-48  lg:ml-0  -mt-[70px]  z-20 "
         >
           <input
             id="search"
@@ -63,7 +63,7 @@ const Vacancy = () => {
           </button>
         </form>
       </div>
-      <div className="grid lg:grid-cols-3 gap-5 md:grid-cols-2 bg-gray-200 p-5  max-h-96 w-full ">
+      <div className="grid lg:grid-cols-3 gap-5 md:grid-cols-2 px-5 lg:gap-10  max-h-96 w-full ">
         {(filteredData.length > 0 ? filteredData : vacancyType).map(
           (vacacny) => {
             return (

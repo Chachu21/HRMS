@@ -8,7 +8,7 @@ const ManagePermission = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5002/permission")
+      .get("http://localhost:5002/api/v1/permission")
       .then((response) => {
         setPermissionData(response.data);
       })
@@ -22,7 +22,7 @@ const ManagePermission = () => {
   // };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ml-[20%] mr-[1%]">
       <h1 className="text-2xl font-bold mb-4">Permission requests</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>

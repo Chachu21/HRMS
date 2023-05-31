@@ -23,7 +23,6 @@ const handleChande=(event)=>{
 
   const handleSubmit = async(event) => {
     event.preventDefault();
-    console.log("am in handlesumbit muller");
     try{
        
        const response = await axios.post(

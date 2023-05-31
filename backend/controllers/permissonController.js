@@ -29,7 +29,6 @@ const createPermission = async (req, res) => {
     res.status(200).json(permission);
   } catch (error) {
     res.status(500).json({ error: "cannot create permission" });
-
   }
 };
 

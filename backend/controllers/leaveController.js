@@ -3,13 +3,13 @@ const sequelize = require("../config/database.js");
 const models = initModels(sequelize);
 const LeaveRequest = models.leave_request;
 
-// Create a leave request
+
 const createLeaveRequest = async (req, res) => {
   try {
-    const leaveRequest = await LeaveRequest.create(req.body);
-    return res.status(201).json(leaveRequest);
+    const leaveRequest = await  LeaveRequest.create(req.body);
+    res.status(200).json(leaveRequest);
   } catch (error) {
-    return res.status(500).json({ error: "Failed to create leave request" });
+    res.status(500).json({ error: "cannot create leave" });
   }
 };
 

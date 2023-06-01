@@ -19,7 +19,7 @@ app.use("/api/v1/applicant", applicantRouter);
 app.use("/api/v1/staff", staffRouter);
 app.use("/api/v1", loginRouter);
 app.use("/api/v1", roleRouter);
-app.use("/api/v1/leave", leaveRouter);
+app.use("/api/v1/leave_request", leaveRouter);
 app.use("/api/v1/permission", permissonRouter);
 app.use("/api/v1/vacancy", vacancyRouter);
 app.use("/api/v1/schedule", scheduleRouter);

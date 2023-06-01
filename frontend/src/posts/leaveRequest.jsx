@@ -19,7 +19,7 @@ const LeaveRequest = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5002/api/v1/leave",
+        "http://localhost:5002/api/v1/leave_request",
         state
       );
     } catch (err) {

@@ -39,6 +39,8 @@ import RequestJobRank from "./posts/RequestJobRank";
 import JobRankDetails from "./comopnents/dashboard/hrOfficer/JobRankDetails";
 import { Provider } from "react-redux";
 import store from "./comopnents/dashboard/departmentHead/store";
+import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
+import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
 
 function App() {
   return (
@@ -119,6 +121,18 @@ function App() {
           <Route
             path="/hrofficer/dashboard/jobrankdeatils"
             element={<JobRankDetails />}
+          />
+          <Route
+            path="/hrofficer/dashboard/jobvacancy"
+            element={<JobVacancyAnnouncement />}
+          />
+          <Route
+            path="/hrofficer/dashboard/leaverequest"
+            element={<LeaveRequests />}
+          />
+          <Route
+            path="/hrofficer/dashboard/viewemployeerequistion"
+            element={<ViewEmployeeRequistion />}
           />
           <Route
             path="/hrofficer/dashboard/schedul"

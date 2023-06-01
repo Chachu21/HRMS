@@ -25,7 +25,10 @@ const JobVacancyAnnouncement = () => {
 
     console.log("first");
     try {
-    const  response= await axios.post("http://localhost:5002/api/v1/vacancy", formData);
+      const response = await axios.post(
+        "http://localhost:5002/api/v1/vacancy",
+        formData
+      );
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -180,13 +183,13 @@ const JobVacancyAnnouncement = () => {
           >
             Submit
           </button>
-          <button
+          {/* <button
             onClick={handleClear}
             type="button"
             className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Clear
-          </button>
+          </button> */}
         </div>
       </form>
       <ToastContainer />

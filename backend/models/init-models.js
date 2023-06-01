@@ -9,6 +9,7 @@ var _permission = require("./permission/permission");
 var _schedule = require("./schedule/schedule");
 var _vacancy = require("./vacancy/vacancy");
 var _applicant_list = require("./applicant_list/applicant_list.js");
+var _employee_requisition = require("./employee_requisition/employee_requisition.js");
 
 function initModels(sequelize) {
   var role = _role(sequelize, DataTypes); // Move role model definition to the top
@@ -21,6 +22,7 @@ function initModels(sequelize) {
   var schedule = _schedule(sequelize, DataTypes);
   var vacancy = _vacancy(sequelize, DataTypes);
   var applicant_list = _applicant_list(sequelize, DataTypes);
+  var employee_requisition = _employee_requisition(sequelize, DataTypes);
 
   // Define associations
   staff.belongsTo(role, { as: "role", foreignKey: "role_id" });
@@ -63,6 +65,15 @@ function initModels(sequelize) {
     foreignKey: "vacancy_id",
   });
 
+  employee_requisition.belongsTo(staff, {
+    as: "staff",
+    foreignKey: "staff_id",
+  });
+  staff.hasMany(employee_requisition, {
+    as: "employee_requisitions",
+    foreignKey: "staff_id",
+  });
+
   return {
     applicant,
     staff,
@@ -74,6 +85,7 @@ function initModels(sequelize) {
     schedule,
     vacancy,
     applicant_list,
+    employee_requisition,
   };
 }
 

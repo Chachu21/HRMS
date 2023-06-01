@@ -70,9 +70,13 @@ export default function CustomizedDialogs({ children }) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <div
+        className="w-[80px] cursor-pointer h-[35px] flex justify-center items-center bg-blue-500  mx-2 rounded-md text-white"
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
         Sign Up
-      </Button>
+      </div>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

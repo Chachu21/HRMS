@@ -41,22 +41,24 @@ import { Provider } from "react-redux";
 import store from "./comopnents/dashboard/departmentHead/store";
 import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
 import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
+import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
+import ApproveJobRank from "./comopnents/dashboard/hrOfficer/ApproveJobRank";
 
 function App() {
   return (
     <div>
       <Routes>
         {/* homepage  route*/}
-        <Route exact={true} path="/" element={<LandingPage />}>
+        <Route exact path="/" element={<LandingPage />}>
           <Route index element={<Main />} />
-          <Route exact={true} path="/about" element={<About />} />
+          <Route exact path="/about" element={<About />} />
           <Route path="/vacancy" element={<Vacancy />} />
-          <Route exact={true} path="/contact" element={<Contact />} />
-          <Route exact={true} path="/help" element={<Help />} />
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/help" element={<Help />} />
         </Route>
 
         <Route
-          exact={true}
+          exact
           path="/signUpASapplicant"
           element={
             <CustomizedDialogs>
@@ -66,7 +68,7 @@ function App() {
         />
 
         <Route
-          exact={true}
+          exact
           path="/login"
           element={
             <LoginCustomizedDialogs>
@@ -76,7 +78,7 @@ function App() {
         />
 
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
-          <Route index element={<AdminMain />} />
+          <Route index element={<ManageAccountInfo />} />
           <Route
             path="/admin/dashboard/manageaccount"
             element={<ManageAccountInfo />}
@@ -116,6 +118,7 @@ function App() {
             element={<ApproveRequest />}
           />
         </Route>
+
         <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
           <Route index element={<HRofficerMain />} />
           <Route
@@ -133,6 +136,14 @@ function App() {
           <Route
             path="/hrofficer/dashboard/viewemployeerequistion"
             element={<ViewEmployeeRequistion />}
+          />
+          <Route
+            path="/hrofficer/dashboard/approveLeave"
+            element={<ApproveLeave />}
+          />
+          <Route
+            path="/hrofficer/dashboard/approveJobRank"
+            element={<ApproveJobRank />}
           />
           <Route
             path="/hrofficer/dashboard/schedul"

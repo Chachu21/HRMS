@@ -1,88 +1,95 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import {
-  setEmail,
-  setPassword,
-  resetLogin,
-  setRememberMe,
+  loginSuccess,
+  loginFailure,
+  loginStart,
 } from "../redux/reducers/loginReducer";
-import { loginUser } from "../api/loginApi";
-import { setError } from "../redux/reducers/applicant/applicantRegisterReducer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomizedDialogs from "../comopnents/landingPage/BootstrapingDialog";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const { email, password } = formData;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const email = useSelector((state) => state.login.email);
-  const password = useSelector((state) => state.login.password);
-  // const loggedIn = useSelector((state) => state.login.loggedIn);
-  const error = useSelector((state) => state.login.error);
-  const rememberMe = useSelector((state) => state.login.rememberMe);
+  const location = useLocation();
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(resetLogin()); // Clear login form after displaying the error
+    if (isLogin && user) {
+      // localStorage.setItem("token", user.token);
+      const role_id = user.role_id;
+      switch (role_id) {
+        case 1:
+          navigate("/admin/dashboard");
+          break;
+        case 2:
+          navigate("/applicant/dashboard");
+          break;
+        case 3:
+          navigate("/employee/dashboard");
+          break;
+        case 4:
+          navigate("/hrofficer/dashboard");
+          break;
+        case 5:
+          navigate("/depthead/dashboard");
+          break;
+        default:
+          navigate("/");
+          break;
+      }
     }
-  }, [error, dispatch]);
-
-  useEffect(() => {
-    // Check if the Remember Me value exists in local storage
-    const rememberMeValue = localStorage.getItem("rememberMe");
-    if (rememberMeValue) {
-      dispatch(setRememberMe(true)); // Set the Remember Me state to true
-    }
-  }, [dispatch]);
+  }, [isLogin, user, navigate]);
 
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
-    if (name === "email") {
-      dispatch(setEmail(value));
-    } else if (name === "password") {
-      dispatch(setPassword(value));
-    } else if (name === "rememberMe" && checked === true) {
-      dispatch(setRememberMe(true)); // Update the Remember Me state based on the checkbox value
-    }
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser(email, password);
-      const { user, token } = response;
-      if (token != null) {
-        localStorage.setItem("token", token);
-        const role_id = user.role_id;
-        switch (role_id) {
-          case 1:
-            navigate("/admin/dashboard");
-            break;
-          case 2:
-            navigate("/applicant/dashboard");
-            break;
-          case 3:
-            navigate("/employee/dashboard");
-            break;
-          case 4:
-            navigate("/hrofficer/dashboard");
-            break;
-          case 5:
-            navigate("/depthead/dashboard");
-            break;
-          default:
-            navigate("/");
-            break;
-        }
+      const response = await axios.post(
+        "http://localhost:5002/api/v1/login",
+        formData
+      );
+
+      dispatch(loginStart());
+      dispatch(loginSuccess(response.data));
+      toast.success("Login successful!");
+
+      // Check if there is state data indicating the user came from the Vacancy page
+      if (location.state && location.state.from === "/vacancy") {
+        const vacancyId = location.state.vacancyId;
+        const vacancyTitle = location.state.vacancyTitle;
+
+        // Redirect the user back to the Vacancy page with the user info
+        navigate(`/vacancy/${vacancyId}`, {
+          state: { userInfo: response.data, vacancyTitle },
+        });
       } else {
-        dispatch(setError(response.message));
+        // Redirect the user to the appropriate page
+        // ...
       }
     } catch (error) {
-      console.log(error);
+      dispatch(loginFailure(error.message));
+      toast.error("Invalid credentials!");
     }
   };
+
   return (
     <div className="bg-gray-100 h-[40%] w-[500px] flex flex-col items-center justify-center gap-1">
       <div>
@@ -124,7 +131,7 @@ const Login = () => {
               <input
                 type="checkbox"
                 name="rememberMe"
-                checked={rememberMe}
+                value="false"
                 onChange={handleChange}
               />
               <span className="text-sm">Remember me</span>

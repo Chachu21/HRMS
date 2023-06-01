@@ -1,58 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  email: "",
-  password: "",
-  rememberMe:false,
-  loggedIn: false,
+  user: null,
   error: null,
-  isOpen:false
+  isLoading: false,
+  isLogin: false,
 };
 
-const loginSlice = createSlice({
-  name: "login",
+const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
-    setEmail: (state, action) => {
-      state.email = action.payload;
-    },
-    setPassword: (state, action) => {
-      state.password = action.payload;
-    },
-    setRememberMe: (state, action) => {
-      state.rememberMe =action.payload
-    },
-    setLoggedIn: (state, action) => {
-      state.loggedIn = action.payload;
-    },
-    setIsOpen: (state) => {
-      state.isOpen = true;
-    },
-    setIsClose: (state) => {
-      state.isOpen = false;
-    },
-    setError: (state, action) => {
-      state.error = action.payload;
-    },
-    resetLogin: (state) => {
-      state.email = "";
-      state.password = "";
-      state.loggedIn = false;
+    loginStart: (state) => {
+      state.isLoading = true;
       state.error = null;
-      state.isOpen= false
+    },
+    loginSuccess: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+      state.error = null;
+      state.isLogin = true;
+    },
+    loginFailure: (state, action) => {
+      state.isLoading = false;
+      state.user = null;
+      state.error = action.payload;
+      state.isLogin = false;
+    },
+    logout: (state) => {
+      state.isLoading = false;
+      state.user = null;
+      state.error = null;
+      state.isLogin = false;
     },
   },
 });
 
-export const {
-  setEmail,
-  setPassword,
-  setLoggedIn,
-  setRememberMe,
-  setError,
-  resetLogin,
-  setIsOpen,
-  setIsClose,
-} = loginSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout } =
+  authSlice.actions;
 
-export default loginSlice.reducer;
+export default authSlice.reducer;

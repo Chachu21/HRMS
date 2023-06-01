@@ -18,11 +18,11 @@ module.exports = function(sequelize, DataTypes) {
         },
       },
       reason: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
       clearance: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(255),
         allowNull: false,
       },
     },

@@ -35,7 +35,6 @@ const Sidebar = () => {
                 <span className="ml-3 text-black">vacancy</span>
               </Link>
             </li>
-
             <li>
               <Link
                 to="/hrofficer/dashboard/leaverequest"

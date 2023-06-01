@@ -6,7 +6,9 @@ const initialState = {
   rememberMe:false,
   loggedIn: false,
   error: null,
-  isOpen:false
+  isOpen:false,
+  isClicked:false
+  
 };
 
 const loginSlice = createSlice({
@@ -41,6 +43,9 @@ const loginSlice = createSlice({
       state.error = null;
       state.isOpen= false
     },
+    humbergerClicked:(state)=>{
+      state.isClicked=!state.isClicked;
+    }
   },
 });
 
@@ -53,6 +58,7 @@ export const {
   resetLogin,
   setIsOpen,
   setIsClose,
+  humbergerClicked,
 } = loginSlice.actions;
 
 export default loginSlice.reducer;

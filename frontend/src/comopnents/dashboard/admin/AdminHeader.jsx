@@ -1,18 +1,24 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
+import { humbergerClicked } from "../../../redux/reducers/loginReducer";
 
 const AdminHeader = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const isClicked = useSelector((state) => state.login.isClicked);
+  
+  const dispatch=useDispatch()
 
   function toggleUserMenu() {
     setUserMenuOpen((prevState) => !prevState);
   }
 
   const handleSidebarToggle = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    dispatch(humbergerClicked())
+   
   };
 
   return (
@@ -26,9 +32,10 @@ const AdminHeader = () => {
                 data-drawer-target="logo-sidebar"
                 data-drawer-toggle="logo-sidebar"
                 aria-controls="logo-sidebar"
-                aria-expanded={isSidebarOpen}
+                aria-expanded={isClicked}
                 type="button"
-                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                
+                class="inline-flex items-center sm:hidden p-2 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               >
                 <span class="sr-only">Open sidebar</span>
                 <svg

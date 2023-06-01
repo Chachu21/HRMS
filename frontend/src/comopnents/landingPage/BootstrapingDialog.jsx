@@ -61,14 +61,15 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs({ children }) {
-  const isOpen = useSelector((state) => state.login.isOpen);
-  const dispatch = useDispatch();
+  const [open, setOpen] = React.useState(false);
+  // const isOpen = useSelector((state) => state.login.isOpen);
+  // const dispatch = useDispatch();
 
   const handleClickOpen = () => {
-    dispatch(setIsOpen());
+    setOpen(true);
   };
   const handleClose = () => {
-    dispatch(setIsClose());
+    setOpen(false);
   };
 
   return (
@@ -83,7 +84,7 @@ export default function CustomizedDialogs({ children }) {
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={isOpen}
+        open={open}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"

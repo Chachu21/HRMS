@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(14),
         allowNull: false,
       },
-      desgination: {
+      designation: {
         type: DataTypes.STRING(100),
         allowNull: false,
       },

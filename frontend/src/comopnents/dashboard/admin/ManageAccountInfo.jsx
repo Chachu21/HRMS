@@ -163,7 +163,7 @@ const ManageAccountInfo = () => {
                     <td className="border px-4 py-2">{datas.role}</td>
                     <td className="w-auto flex justify-center items-center gap-2 py-2 px-4">
                       <Link
-                        to={`/dashboard/manageaccount/update/${datas.id}`}
+                        to={`/admin/dashboard/manageaccount/update/${datas.id}`}
                         className="px-2 bg-blue-700 rounded-sm"
                       >
                         Edit

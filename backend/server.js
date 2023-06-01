@@ -13,6 +13,7 @@ const leaveRouter = require("./routes/leaveRoute");
 
 const scheduleRouter = require("./routes/scheduleRoute");
 const jobRankRouter = require("./routes/jobRankRoute");
+const applicantListRouter = require("./routes/applicantListRoute");
 const app = express();
 const port = process.env.PORT || 5002;
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use("/api/v1/leave", leaveRouter);
 app.use('/api/v1/vacancy', vacancyRouter)
 app.use('/api/v1/schedule', scheduleRouter)
 app.use('/api/v1/jobRank', jobRankRouter)
+app.use('/api/v1/lists', applicantListRouter)
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);

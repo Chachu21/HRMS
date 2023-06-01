@@ -1,6 +1,5 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -70,9 +69,13 @@ export default function AddStaffCustomizedDialogs({ children }) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <div
+        className="w-[80px] h-[35px] flex cursor-pointer justify-center items-center  mx-2 rounded-md text-black"
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
         Add Satff
-      </Button>
+      </div>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

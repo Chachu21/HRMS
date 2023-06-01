@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
+import Button from "@mui/material/Button";//#endregion
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -10,6 +10,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 //import Typography from "@mui/material/Typography";
 import ApplicantRegister from "../../pages/Registration/ApplicantRegister";
+import Login from "../../pages/Login";
+import LoginCustomizedDialogs from "../landingPage/LoginCustomizedDialogs";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -70,12 +72,8 @@ export default function ApplyCustomizedDialogs({ children }) {
 
   return (
     <div>
-      <div
-        className="text-white"
-        variant="outlined"
-        onClick={handleClickOpen}
-      >
-        <span className="text-white"> Apply</span>
+      <div className="text-white flex items-center justify-center" variant="outlined" onClick={handleClickOpen}>
+        <span className="text-white text-lg text-center"> Apply</span>
       </div>
       <BootstrapDialog
         onClose={handleClose}
@@ -86,7 +84,7 @@ export default function ApplyCustomizedDialogs({ children }) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          <ApplicantRegister />
+          <LoginCustomizedDialogs />
         </BootstrapDialogTitle>
         <DialogContent dividers>{children}</DialogContent>
       </BootstrapDialog>

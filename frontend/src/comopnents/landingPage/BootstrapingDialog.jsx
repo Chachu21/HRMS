@@ -11,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 //import Typography from "@mui/material/Typography";
 import ApplicantRegister from "../../pages/Registration/ApplicantRegister";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsClose, setIsOpen } from "../../redux/reducers/loginReducer";
+import { setIsClose, setopen } from "../../redux/reducers/loginReducer";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -61,21 +61,19 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs({ children }) {
-  const [open, setOpen] = React.useState(false);
-  // const isOpen = useSelector((state) => state.login.isOpen);
-  // const dispatch = useDispatch();
+const [open, setOpen] =React.useState(false)
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(true)
   };
   const handleClose = () => {
-    setOpen(false);
+   setOpen(false);
   };
 
   return (
     <div>
       <div
-        className="w-[80px] h-[35px] flex justify-center items-center bg-blue-500  mx-2 rounded-md text-white"
+        className="w-[80px] cursor-pointer h-[35px] flex justify-center items-center bg-blue-500  mx-2 rounded-md text-white"
         variant="outlined"
         onClick={handleClickOpen}
       >

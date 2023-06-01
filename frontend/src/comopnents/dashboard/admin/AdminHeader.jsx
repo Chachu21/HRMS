@@ -1,16 +1,24 @@
 import React, { useState } from "react";
+
+import { humbergerClicked } from "../../../redux/reducers/loginReducer";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
-import { humbergerClicked } from "../../../redux/reducers/loginReducer";
+import { logout } from "../../../redux/reducers/loginReducer";
+
 
 const AdminHeader = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+ 
+
   const isClicked = useSelector((state) => state.login.isClicked);
   
   const dispatch=useDispatch()
+
+
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   function toggleUserMenu() {
     setUserMenuOpen((prevState) => !prevState);
@@ -20,9 +28,14 @@ const AdminHeader = () => {
     dispatch(humbergerClicked())
    
   };
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
-    <div>
+    <>
+{ isLogin && (<div>
       <nav className="fixed top-0 z-50 w-full bg-white text-black border-gray-200 dark:bg-gray-100 dark:border-gray-200 shadow-xl">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
@@ -34,12 +47,14 @@ const AdminHeader = () => {
                 aria-controls="logo-sidebar"
                 aria-expanded={isClicked}
                 type="button"
+
                 
                 class="inline-flex items-center sm:hidden p-2 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              
               >
-                <span class="sr-only">Open sidebar</span>
+                <span className="sr-only">Open sidebar</span>
                 <svg
-                  class="w-6 h-6"
+                  className="w-6 h-6"
                   aria-hidden="true"
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -99,7 +114,7 @@ const AdminHeader = () => {
                         className="text-sm font-medium text-gray-900 truncate dark:text-gray-700"
                         role="none"
                       >
-                        Email
+                        {user && user.email}
                       </p>
                     </div>
                     <hr className="h-1  bg-gray-300 w-full" />
@@ -120,7 +135,10 @@ const AdminHeader = () => {
                         </li>
                       </ul>
                     </div>
-                    <div className="text-center my-10 cursor-pointer">
+                    <div
+                      onClick={handleLogout}
+                      className="text-center my-10 cursor-pointer"
+                    >
                       <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">
                         Logout
                       </span>
@@ -132,7 +150,10 @@ const AdminHeader = () => {
           </div>
         </div>
       </nav>
-    </div>
+    </div>)
+}
+
+    </>
   );
 };
 

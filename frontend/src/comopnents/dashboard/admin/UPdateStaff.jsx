@@ -33,15 +33,6 @@ const UpdateStaff = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-
-    console.log(Object.fromEntries(formDataToSend)); // Display form data on the console
-    console.log(formData.role_id);
-
     try {
       await axios.put(
         `http://localhost:5002/api/v1/staff/update/${id}`,
@@ -49,7 +40,7 @@ const UpdateStaff = () => {
       );
       toast.success("Staff updated successfully!");
       dispatch(setFormData({})); // Clear form data in the Redux store
-      navigate("/dashboard/manageaccount");
+      navigate("/admin/dashboard/manageaccount");
     } catch (error) {
       dispatch(setError(error.message)); // Dispatch action to update error in Redux store
       toast.error(error.message);

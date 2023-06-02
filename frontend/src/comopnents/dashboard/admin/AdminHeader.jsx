@@ -9,37 +9,18 @@ import { logout, humergerMenu } from "../../../redux/reducers/loginReducer";
 
 
 const AdminHeader = () => {
-<<<<<<< HEAD
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const isClicked =useSelector((state)=>state.auth.isClicked)
-=======
- 
-
-  const isClicked = useSelector((state) => state.login.isClicked);
-  
-  const dispatch=useDispatch()
-
-
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
-  const isLogin = useSelector((state) => state.auth.isLogin);
-
->>>>>>> 37bc916e90f709af0c6938161175e25f220f0345
   function toggleUserMenu() {
     setUserMenuOpen((prevState) => !prevState);
   }
 
   const handleSidebarToggle = () => {
-<<<<<<< HEAD
     dispatch(humergerMenu());
-=======
-    dispatch(humbergerClicked())
-   
->>>>>>> 37bc916e90f709af0c6938161175e25f220f0345
   };
   const handleLogout = () => {
     dispatch(logout());

@@ -1,13 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LeaveRequest = () => {
   const [state, setstate] = useState({
-    // id:null,
-    staff_id: null,
     reason: "",
     clearance: "",
   });
+
+  const navigete = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const staff_id = user.staff_id;
 
   const handleChande = (event) => {
     const { name, value } = event.target;
@@ -20,8 +24,10 @@ const LeaveRequest = () => {
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/leave_request",
-        state
+        { ...state, staff_id }
       );
+
+      navigete('/')
     } catch (err) {
       console.log(err.message);
     }
@@ -39,18 +45,6 @@ const LeaveRequest = () => {
           <p className="mb-4">
             Before you request leave, please finish clearance!
           </p>
-          <div className="flex items-center w-full mb-4">
-            <label htmlfor="staff_id" className="w-1/4 mr-2">
-              staff_id
-            </label>
-            <input
-              onChange={handleChande}
-              name="staff_id"
-              id="staff_id"
-              value={state.staff_id}
-              className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
-            ></input>
-          </div>
           <div className="flex items-center w-full mb-4">
             <label for="reason" className="w-1/4 mr-2">
               Reason

@@ -118,7 +118,7 @@ const AdminHeader = () => {
                         className="flex justify-center items-center gap-5 px-3"
                         role="none"
                       >
-                        <li>
+                        {/* <li>
                           <Link
                             to="#"
                             className="block px-[10px] py-1 text-sm text-blue-500 text-center hover:bg-gray-100 dark:text-blue-500 dark:hover:bg-gray-200 dark:hover:text-blue-500"
@@ -126,7 +126,7 @@ const AdminHeader = () => {
                           >
                             Password
                           </Link>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                     <div

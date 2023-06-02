@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const RequestPermission = () => {
   const [state, setstate] = useState({
@@ -9,10 +11,13 @@ const RequestPermission = () => {
     start_date: "",
     return_date: "",
     status: "",
-    staff_id: null,
   });
+const navigete = useNavigate()
+  const user = useSelector((state) =>state.auth.user)
+ const  staff_id =user.staff_id
 
-  const handleChande = (event) => {
+
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setstate((prev) => ({ ...prev, [name]: value }));
   };
@@ -22,8 +27,10 @@ const RequestPermission = () => {
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/permission",
-        state
+        {...state, staff_id}
       );
+
+navigete('/')
     } catch (err) {
       console.log(err.message);
     }
@@ -44,7 +51,7 @@ const RequestPermission = () => {
           id="name"
           name="name"
           value={state.name}
-          onChange={handleChande}
+          onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           required
         />
@@ -58,7 +65,7 @@ const RequestPermission = () => {
           id="type"
           name="type"
           value={state.type}
-          onChange={handleChande}
+          onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           required
         >
@@ -76,7 +83,7 @@ const RequestPermission = () => {
           id="reason"
           name="reason"
           value={state.reason}
-          onChange={handleChande}
+          onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           required
         />
@@ -90,7 +97,7 @@ const RequestPermission = () => {
           id="startDate"
           name="start_date"
           value={state.start_date}
-          onChange={handleChande}
+          onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           required
         />
@@ -107,7 +114,7 @@ const RequestPermission = () => {
           name="return_date"
           id="returnDate"
           value={state.return_date}
-          onChange={handleChande}
+          onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           required
         />
@@ -121,21 +128,7 @@ const RequestPermission = () => {
           id="status"
           name="status"
           value={state.status}
-          onChange={handleChande}
-          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          required
-        />
-      </div>
-      <div className="flex flex-col mb-4">
-        <label htmlFor="name" className="mb-1 font-semibold text-gray-600">
-          staffId
-        </label>
-        <input
-          type="number"
-          id="staffId"
-          name="staff_id"
-          value={state.staff_id}
-          onChange={handleChande}
+          onChange={handleChange}
           className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           required
         />

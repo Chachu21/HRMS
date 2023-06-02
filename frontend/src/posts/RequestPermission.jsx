@@ -2,38 +2,31 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const RequestPermission = () => {
- const [state, setstate] = useState({
-   name: "",
-   type: "",
-   reason: "",
-   start_date: "",
-   return_date: "",
-   status: "",
-   staff_id: null,
- });
+  const [state, setstate] = useState({
+    name: "",
+    type: "",
+    reason: "",
+    start_date: "",
+    return_date: "",
+    status: "",
+    staff_id: null,
+  });
 
-  
+  const handleChande = (event) => {
+    const { name, value } = event.target;
+    setstate((prev) => ({ ...prev, [name]: value }));
+  };
 
-const handleChande=(event)=>{
-  const {name,value}=event.target;
-  setstate((prev)=>({...prev,[name]:value})
-
-  )
-}
-
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    try{
-       
-       const response = await axios.post(
-         "http://localhost:5002/api/v1/permission",
+    try {
+      const response = await axios.post(
+        "http://localhost:5002/api/v1/permission",
         state
-       );
-    }catch(err){
+      );
+    } catch (err) {
       console.log(err.message);
     }
-   
-   
   };
 
   return (
@@ -158,4 +151,3 @@ const handleChande=(event)=>{
 };
 
 export default RequestPermission;
-

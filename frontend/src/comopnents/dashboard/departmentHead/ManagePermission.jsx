@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-//import { useHistory } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ManagePermission = () => {
   const [permissionData, setPermissionData] = useState([]);
-  //const history = useHistory();
+  //const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -18,7 +18,7 @@ const ManagePermission = () => {
   }, []);
 
   // const handleForward = (id) => {
-  //   history.push(`/another-component/${id}`); // Replace with your desired route
+  //   navigate(`/leave-request/${id}`); // Replace with your desired route
   // };
 
   return (
@@ -31,7 +31,7 @@ const ManagePermission = () => {
             <th className="px-4 py-2 text-left">Type</th>
             <th className="px-4 py-2 text-left">Reason</th>
             <th className="px-4 py-2 text-left">Start Date</th>
-            <th className="px-4 py2 text-left">Return Date</th>
+            <th className="px-4 py-2 text-left">Return Date</th>
             <th className="px-4 py-2 text-left">Status</th>
             <th className="px-4 py-2 text-left">Action</th>
           </tr>

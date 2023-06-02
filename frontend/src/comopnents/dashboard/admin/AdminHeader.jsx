@@ -5,27 +5,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
-import { humbergerClicked, logout } from "../../../redux/reducers/loginReducer";
+import { logout, humergerMenu } from "../../../redux/reducers/loginReducer";
 
 
 const AdminHeader = () => {
- const [isUserMenuOpen, setUserMenuOpen] = useState(false);
-const isClicked=useSelector((state)=>state.auth.isClicked);
- 
-  
-  const dispatch=useDispatch()
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const isLogin = useSelector((state) => state.auth.isLogin);
-
+  const isClicked =useSelector((state)=>state.auth.isClicked)
   function toggleUserMenu() {
 
     setUserMenuOpen((prevState) => !prevState);
   }
 
   const handleSidebarToggle = () => {
-    dispatch(humbergerClicked())
-   
+    dispatch(humergerMenu());
   };
   const handleLogout = () => {
     dispatch(logout());

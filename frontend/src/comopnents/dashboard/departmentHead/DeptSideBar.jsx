@@ -1,14 +1,31 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
+import { NavLink, useLocation } from "react-router-dom";
 
 const DeptSideBar = () => {
    const isClicked = useSelector((state) => state.auth.isClicked);
   const [isOpenSublink, setIsOpenSublink] = useState(false);
+  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const location = useLocation();
 
   const handleToggle = () => {
     setIsOpenSublink(!isOpenSublink);
   };
+
+  <button
+    className="text-black cursor-pointer absolute top-[0px] right-[0px] text-3xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent lg:hidden outline-none focus:outline-none h-full flex justify-center items-center"
+    type="button"
+    onClick={() => setNavbarOpen(!navbarOpen)}
+  >
+    {navbarOpen ? (
+      <AiOutlineClose className="closeIcon" />
+    ) : (
+      <GiHamburgerMenu className="menuBar" />
+    )}
+  </button>;
 
   return (
     <div
@@ -23,6 +40,24 @@ const DeptSideBar = () => {
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
           <ul className="space-y-5 font-medium text-blacks">
+            <li>
+              <Link
+                to="/depthead/dashboard/manageApplicant"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                  <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                </svg>
+                <span className="ml-3 text-black">Manage Applicant</span>
+              </Link>
+            </li>
             <li>
               <Link
                 to="/depthead/dashboard/managepermission"
@@ -101,7 +136,7 @@ const DeptSideBar = () => {
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
                 <span className="flex-1 ml-3 whitespace-nowrap text-black">
-                  Manage Account
+                  Leave Request
                 </span>
               </Link>
             </li> */}

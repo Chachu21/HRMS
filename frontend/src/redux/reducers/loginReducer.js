@@ -3,11 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   error: null,
-  isOpen:false,
-  isClicked:false,
+  isOpen: false,
+  isClicked: false,
   isLoading: false,
   isLogin: false,
-
+  isApproved: false,
+  isRejecte: false,
+  approvedId: null,
+  approvedItems: [],
+  rejectedItems: [],
 };
 
 const authSlice = createSlice({
@@ -31,20 +35,54 @@ const authSlice = createSlice({
       state.isLogin = false;
     },
     logout: (state) => {
-      state.isLoading = false;
       state.user = null;
       state.error = null;
+      state.isOpen = false;
+      state.isClicked = false;
+      state.isLoading = false;
       state.isLogin = false;
+      state.isApproved = false;
+      state.isRejecte = false;
+      state.approvedId = null;
+      state.approvedItems = [];
+      state.rejectedItems = [];
     },
-    humbergerClicked:(state)=>{
-      state.isClicked=!state.isClicked
-    }
+    humergerMenu: (state) => {
+      state.isClicked = !state.isClicked;
+    },
+    approved: (state, action) => {
+      const itemId = action.payload;
+      const index = state.approvedItems.indexOf(itemId);
+      if (index === -1) {
+        // If the item ID is not in the approvedItems array, add it
+        state.approvedItems.push(itemId);
+      } else {
+        // If the item ID is already in the approvedItems array, remove it
+        state.approvedItems.splice(index, 1);
+      }
+    },
+    rejected: (state, action) => {
+      const itemId = action.payload;
+      const index = state.rejectedItems.indexOf(itemId);
+      if (index === -1) {
+        // If the item ID is not in the approvedItems array, add it
+        state.rejectedItems.push(itemId);
+      } else {
+        // If the item ID is already in the approvedItems array, remove it
+        state.rejectedItems.splice(index, 1);
+      }
+    },
   },
 });
 
-
-
-export const { loginStart, loginSuccess, loginFailure, logout, humbergerClicked } =
-  authSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logout,
+  humergerMenu,
+  approved,
+  rejected,
+} = authSlice.actions;
 
 export default authSlice.reducer;

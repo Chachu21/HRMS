@@ -34,11 +34,17 @@ import ManageJobRank from "./comopnents/dashboard/departmentHead/ManageJobRank";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 import RequestPermission from "./posts/RequestPermission";
-import RequestJobRank from './posts/RequestJobRank'
+import RequestJobRank from "./posts/RequestJobRank";
+import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
+import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
 import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
 import ApproveJobRank from "./comopnents/dashboard/hrOfficer/ApproveJobRank";
+
 import ApplicantInfo from "./comopnents/dashboard/applicant/ApplicantInfo";
 import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
+
+import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
+
 
 function App() {
   return (
@@ -52,7 +58,7 @@ function App() {
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/help" element={<Help />} />
         </Route>
-
+        {/* applicant page */}
         <Route
           exact
           path="/signUpASapplicant"
@@ -62,7 +68,7 @@ function App() {
             </CustomizedDialogs>
           }
         />
-
+        {/* login page */}
         <Route
           exact
           path="/login"
@@ -72,7 +78,7 @@ function App() {
             </LoginCustomizedDialogs>
           }
         />
-
+        {/* admin dashboard */}
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<ManageAccountInfo />} />
           <Route
@@ -97,6 +103,8 @@ function App() {
             element={<ApproveRequest />}
           />
         </Route>
+
+        {/* applicant dashboard */}
         <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
           <Route index element={<ApplicantMain />} />
 
@@ -105,7 +113,7 @@ function App() {
             element={<ApplicantInfo />}
           />
         </Route>
-
+        {/* HR officer page */}
         <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
           <Route index element={<HRofficerMain />} />
           <Route
@@ -113,11 +121,19 @@ function App() {
             element={<JobVacancyAnnouncement />}
           />
           <Route
+            path="/hrofficer/dashboard/leaverequest"
+            element={<LeaveRequests />}
+          />
+          <Route
+            path="/hrofficer/dashboard/viewemployeerequistion"
+            element={<ViewEmployeeRequistion />}
+          />
+          <Route
             path="/hrofficer/dashboard/approveLeave"
             element={<ApproveLeave />}
           />
           <Route
-            path="/hrofficer/dashboard/approveJobRank"
+            path="/hrofficer/dashboard/approvejobrank"
             element={<ApproveJobRank />}
           />
           <Route
@@ -125,7 +141,7 @@ function App() {
             element={<PostExamSchedule />}
           />
         </Route>
-
+        {/* employee dashboard */}
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
           <Route index element={<EmployeeMain />} />
           <Route
@@ -143,7 +159,7 @@ function App() {
             element={<RequestJobRank />}
           />
         </Route>
-
+        {/* department head dashboard */}
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
           <Route index element={<DeptMain />} />
           <Route
@@ -159,11 +175,15 @@ function App() {
             element={<ManageJobRank />}
           />
           <Route
+            path="/depthead/dashboard/manageApplicant"
+            element={<ManageApplicant />}
+          />
+          <Route
             path="/depthead/dashboard/approverequest"
             element={<ApproveRequest />}
           />
         </Route>
-
+        {/* error page */}
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
@@ -171,4 +191,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

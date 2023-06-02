@@ -7,21 +7,29 @@ import "react-toastify/dist/ReactToastify.css";
 import ApplyCustomizedDialogs from "../comopnents/card/ApplyCustomizedDialogs";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { loginSuccess } from "../redux/reducers/loginReducer";
 
 const Vacancy = () => {
   const dispatch = useDispatch();
-  const naviget = useNavigate()
+  const navigate = useNavigate();
   const vacancyType = useSelector((state) => state.vacancy.vacancyType);
   const loading = useSelector((state) => state.vacancy.loading);
   const error = useSelector((state) => state.vacancy.error);
   const [queries, setQueries] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const user = useSelector((state) => state.auth.user);
-  
 
   useEffect(() => {
     dispatch(fetchVacancyType());
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("user");
+  //   if (storedUser) {
+  //     const parsedUser = JSON.parse(storedUser);
+  //     dispatch(loginSuccess(parsedUser));
+  //   }
+  // }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,24 +44,60 @@ const Vacancy = () => {
     setFilteredData(filteredData);
   };
 
- const handleApply = async (id, title) => {
- if (!user) {
-   naviget('/login')
- } else{
-   // Modify the function signature
-   try {
-     const response = await axios.post("http://localhost:5002/api/v1/lists", {
-       applicant_id : user.applicant_id,
-       applicant_email :user.email,
-       vacancy_title: title,
-       vacancy_id : id,
-     });
-     console.log(response.data);
-   } catch (error) {
-     console.log(error);
-   }
- };
- }
+  const handleApply = async (id, title) => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      try {
+        // Check if the user has already applied for the job
+        const response = await axios.get(
+          `http://localhost:5002/api/v1/lists?applicant_id=${user.applicant_id}&vacancy_id=${id}`
+        );
+        const existingApplications = response.data;
+        console.log(existingApplications);
+
+        if (existingApplications.length > 0) {
+          // Check if the existing applications contain the current job
+          const hasExistingApplication = existingApplications.some(
+            (application) => application.vacancy_id === id
+          );
+
+          if (hasExistingApplication) {
+            // Display an error message or handle the duplicate application
+            toast.error("You have already applied for this job");
+          } else {
+            // Insert the application into the table
+            const response = await axios.post(
+              "http://localhost:5002/api/v1/lists",
+              {
+                applicant_id: user.applicant_id,
+                applicant_email: user.email,
+                vacancy_title: title,
+                vacancy_id: id,
+              }
+            );
+            console.log(response.data);
+          }
+        } else {
+          // Insert the application into the table
+          const response = await axios.post(
+            "http://localhost:5002/api/v1/lists",
+            {
+              applicant_id: user.applicant_id,
+              applicant_email: user.email,
+              vacancy_title: title,
+              vacancy_id: id,
+            }
+          );
+          console.log(response.data);
+        }
+      } catch (error) {
+        // Display an error message if the request fails
+        toast.error("Error applying for the job");
+        console.log(error);
+      }
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -94,7 +138,7 @@ const Vacancy = () => {
             return (
               <div
                 key={vacacny.id}
-                className="flex flex-col justify-center items-center gap-5 rounded-lg bg-[#f7f7f7]"
+                className="flex flex-col justify-center items-center gap-5 hover:scale-105  transition duration-300 ease-in-out rounded-lg bg-[#f7f7f7]"
               >
                 <div className="flex flex-col justify-left items-left gap-5 py-5">
                   <p className="text-lg">
@@ -143,7 +187,7 @@ const Vacancy = () => {
                     <button
                       onClick={() => handleApply(vacacny.id, vacacny.title)}
                     >
-                      <ApplyCustomizedDialogs />
+                      Apply
                     </button>
                   </div>
                 ) : (

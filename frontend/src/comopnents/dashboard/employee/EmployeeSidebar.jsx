@@ -41,7 +41,10 @@ const EmployeeSideBar = () => {
                 <span className="ml-3 text-black">RequestToLeave</span>
               </Link>
             </li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
             <li>
               <Link
                 to="/employee/dashboard/RequestPermission"

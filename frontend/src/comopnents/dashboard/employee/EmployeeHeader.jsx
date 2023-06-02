@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/reducers/loginReducer";
 
 const EmployeeHeader = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const dispatch = useDispatch()
+  const naviget = useNavigate()
+const user = useSelector((state)=>state.auth.user)
+const handleLogout =() => { 
+  dispatch(logout());
+  naviget('/')
+
+ }
 
   function toggleUserMenu() {
     setUserMenuOpen((prevState) => !prevState);
@@ -92,7 +102,9 @@ const EmployeeHeader = () => {
                         className="text-sm font-medium text-gray-900 truncate dark:text-gray-700"
                         role="none"
                       >
-                        Email
+                        {
+                          user && user.email
+                        }
                       </p>
                     </div>
                     <hr className="h-1  bg-gray-300 w-full" />
@@ -113,7 +125,7 @@ const EmployeeHeader = () => {
                         </li>
                       </ul>
                     </div>
-                    <div className="text-center my-10 cursor-pointer">
+                    <div onClick={handleLogout} className="text-center my-10 cursor-pointer">
                       <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">
                         Logout
                       </span>

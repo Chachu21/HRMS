@@ -8,12 +8,15 @@ const User = models.user;
 const LoginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+if (!email || !password) {
+  return res.status(400).json({ message: "Invalid credentials" });
+}
     // Check if user exists with the given email and password
     const user = await User.findOne({ where: { email, password } });
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
+    console.log(user)
 // let reDirectUrl = '/'
 // switch (user.role_id) {
 //   case 1:
@@ -36,9 +39,9 @@ const LoginUser = async (req, res) => {
 //     break;
 // }
     // Generate JWT token
-    const token = jwt.sign({ email: user.email, role_id: user.role_id }, "secretkey");
+    const token = jwt.sign({ email: user.email, role_id: user.role_id , staff_id:user.staff_id}, "chachu");
 
-    res.json({user, token });
+    res.json({ email: user.email, role_id: user.role_id, staff_id :user.staff_id, applicant_id :user.applicant_id, token });
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -53,7 +56,7 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ error: "Access denied. Token missing" });
   }
 
-  jwt.verify(token, "secretkey", (err, user) => {
+  jwt.verify(token, "chachu", (err, user) => {
     if (err) {
       return res.status(403).json({ error: "Invalid token" });
     }

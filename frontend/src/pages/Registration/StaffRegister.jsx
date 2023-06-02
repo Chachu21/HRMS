@@ -7,14 +7,11 @@ import {
   resetRegistration,
 } from "../../redux/reducers/staff/staffRegisterReducer";
 import { staffRegister } from "../../api/staffApi";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const StaffRegister = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.staffRegister.formData);
-  const registrationStatus = useSelector(
-    (state) => state.aplicantRegister.registrationStatus
-  );
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -25,22 +22,13 @@ const StaffRegister = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-
-    console.log(Object.fromEntries(formDataToSend)); // Display form data on the console
-    console.log(formData.role_id);
     try {
-      const response = await staffRegister(formData);
-      console.log(response);
+     await staffRegister(formData);
       dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
       // ... handle success case ...
-      if (registrationStatus) {
+      toast.success("successfuly register staff")
         dispatch(resetRegistration(formData));
-      }
+
     } catch (error) {
       dispatch(setError(error.message)); // Dispatch action to update error in Redux store
     }

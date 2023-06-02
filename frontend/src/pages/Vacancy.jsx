@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import VacancyCard from "../comopnents/card/VaccancyCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchVacancyType } from "../redux/reducers/post/vacancyReducer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ApplyCustomizedDialogs from "../comopnents/card/ApplyCustomizedDialogs";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Vacancy = () => {
   const dispatch = useDispatch();
+  const naviget = useNavigate()
   const vacancyType = useSelector((state) => state.vacancy.vacancyType);
   const loading = useSelector((state) => state.vacancy.loading);
   const error = useSelector((state) => state.vacancy.error);
   const [queries, setQueries] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const user = useSelector((state) => state.auth.user);
+  
 
   useEffect(() => {
     dispatch(fetchVacancyType());
@@ -30,6 +35,26 @@ const Vacancy = () => {
 
     setFilteredData(filteredData);
   };
+
+ const handleApply = async (id, title) => {
+ if (!user) {
+   naviget('/login')
+ } else{
+   // Modify the function signature
+   try {
+     const response = await axios.post("http://localhost:5002/api/v1/lists", {
+       applicant_id : user.applicant_id,
+       applicant_email :user.email,
+       vacancy_title: title,
+       vacancy_id : id,
+     });
+     console.log(response.data);
+   } catch (error) {
+     console.log(error);
+   }
+ };
+ }
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -44,7 +69,7 @@ const Vacancy = () => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="flex items-center fixed justify-center lg:mr-52 ml-48  lg:ml-0  -mt-[70px]  z-20 "
+          className="flex items-center fixed justify-center lg:mr-60 ml-36   lg:ml-0  -mt-[65px]  z-20 "
         >
           <input
             id="search"
@@ -52,12 +77,12 @@ const Vacancy = () => {
             value={queries}
             onChange={(e) => setQueries(e.target.value)}
             type="text"
-            className="bg-gray-100 w- outline-none border-2 border-gray-300 pl-3 lg:w-[350px] h-10 rounded-tl-[10px] rounded-bl-[10px] placeholder:text-[18px] leading-4 font-normal "
+            className="bg-gray-100 w- outline-none border-2 border-gray-300 pl-3 lg:w-[350px] h-8 lg:h-10 rounded-tl-[10px] rounded-bl-[10px] placeholder:text-[18px] leading-4 font-normal "
             placeholder="search here...."
           />
           <button
             type="submit"
-            className="bg-blue-400 h-10 flex px-[14px] justify-center items-center rounded-tr-[10px] rounded-br-[10px] cursor-pointer"
+            className="bg-blue-400 h-8 lg:h-10 flex px-[14px] justify-center items-center rounded-tr-[10px] rounded-br-[10px] cursor-pointer"
           >
             <FaSearch color="white" />
           </button>
@@ -67,16 +92,66 @@ const Vacancy = () => {
         {(filteredData.length > 0 ? filteredData : vacancyType).map(
           (vacacny) => {
             return (
-              <VacancyCard
+              <div
                 key={vacacny.id}
-                title={vacacny.title}
-                quantity={vacacny.quantity}
-                department={vacacny.department}
-                term={vacacny.terms}
-                sex={vacacny.sex}
-                designation={vacacny.designation}
-                cgpa={vacacny.cgpa}
-              />
+                className="flex flex-col justify-center items-center gap-5 rounded-lg bg-[#f7f7f7]"
+              >
+                <div className="flex flex-col justify-left items-left gap-5 py-5">
+                  <p className="text-lg">
+                    <span className="text-lg font-bold text-gray-700">
+                      Title
+                    </span>{" "}
+                    :{vacacny.title}
+                  </p>
+                  <p className="text-lg">
+                    <span className="text-lg font-bold text-gray-700">
+                      quantity
+                    </span>{" "}
+                    :{vacacny.quantity}
+                  </p>
+                  <p className="text-lg">
+                    <span className="text-lg font-bold text-gray-700">
+                      Department
+                    </span>{" "}
+                    :{vacacny.department}
+                  </p>
+                  <p className="text-lg">
+                    <span className="text-lg font-bold text-gray-700">
+                      Term Of Employment :
+                    </span>{" "}
+                    {vacacny.terms}
+                  </p>
+                  <p className="text-lg">
+                    <span className="text-lg font-bold text-gray-700">Sex</span>{" "}
+                    : {vacacny.sex}
+                  </p>
+                  <p className="text-lg">
+                    <span className="text-lg font-bold text-gray-700">
+                      Designation
+                    </span>{" "}
+                    :{vacacny.designation}
+                  </p>
+                  <p className="text-lg">
+                    <span className="text-lg font-bold text-gray-700">
+                      min-CGPA
+                    </span>{" "}
+                    :{vacacny.cgpa}
+                  </p>
+                </div>
+                {user ? (
+                  <div className="text-center text-white bg-blue-500 w-[120px] p-2 rounded-md mb-3">
+                    <button
+                      onClick={() => handleApply(vacacny.id, vacacny.title)}
+                    >
+                      <ApplyCustomizedDialogs />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="text-center text-white bg-blue-500 w-[120px] p-2 rounded-md mb-3 opacity-50 cursor-not-allowed">
+                    <ApplyCustomizedDialogs />
+                  </div>
+                )}
+              </div>
             );
           }
         )}

@@ -32,20 +32,23 @@ const getApplicantListById = async (req, res) => {
 
 // Create a new applicant_list record
 const createApplicantList = async (req, res) => {
-  const { applicant_id, applicant_email, vacancy_title, vacancy_id } = req.body;
+  console.log(req.body)
   try {
-    const newApplicantList = await ApplicantList.create({
-      applicant_id,
-      applicant_email,
-      vacancy_title,
-      vacancy_id,
+    const applicantList = await ApplicantList.create({
+      // Remove the 'id' field from the data object
+      applicant_id: req.body.applicant_id,
+      applicant_email: req.body.applicant_email,
+      vacancy_title: req.body.vacancy_title,
+      vacancy_id: req.body.vacancy_id,
     });
-    res.json(newApplicantList);
+
+    res.json(applicantList);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 // Update an existing applicant_list record
 const updateApplicantList = async (req, res) => {

@@ -28,7 +28,7 @@ const LeaveRequest = () => {
   };
 
   return (
-    <div>
+    <div className="flex ml-[2%] flex-col mt-[10px]">
       <div className="flex flex-col justify-center items-center mx-auto my-10 bg-gray-100 h-[100vh]">
         <h1 className="text-3xl mb-4">Request For Leave</h1>
         <form

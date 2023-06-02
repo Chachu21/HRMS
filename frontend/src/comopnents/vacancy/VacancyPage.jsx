@@ -52,7 +52,7 @@ const JobVacancyAnnouncement = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md  flex ml-[18%] flex-col mt-20">
       <h2 className="text-2xl font-bold mb-4">Job Vacancy Announcement</h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="flex gap-5">

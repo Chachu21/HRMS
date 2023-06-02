@@ -32,7 +32,7 @@ const RequestPermission = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-100 rounded-lg p-4 mt-8 w-[500px] h-1/2 ml-96 overflow-y-scroll"
+      className="bg-gray-100 rounded-lg p-4 h-1/2 ml-[18%] overflow-y-scroll"
     >
       <h2 className="text-lg font-semibold mb-2">Request Permission</h2>
       <div className="flex flex-col mb-4">
@@ -49,7 +49,6 @@ const RequestPermission = () => {
           required
         />
       </div>
-
       <div className="flex flex-col mb-4">
         <label htmlFor="type" className="mb-1 font-semibold text-gray-600">
           Type

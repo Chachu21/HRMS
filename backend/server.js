@@ -30,7 +30,7 @@ app.use("/api/v1/permission", permissonRouter);
 app.use("/api/v1/vacancy", vacancyRouter);
 app.use("/api/v1/schedule", scheduleRouter);
 app.use("/api/v1/job_rank", jobRankRouter);
-app.use("/api/v1/lists", applicantRouter);
+app.use("/api/v1/lists", applicantListRouter);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);

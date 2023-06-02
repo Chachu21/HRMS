@@ -5,16 +5,31 @@ const LeaveRequests = () => {
   const [leaveRequestData, setLeaveRequestData] = useState([]);
 
   useEffect(() => {
+    fetchLeaveRequests();
+  }, []);
+
+  const fetchLeaveRequests = () => {
     axios
       .get("http://localhost:5002/api/v1/leave_request")
       .then((response) => {
-        console.log(response.data);
         setLeaveRequestData(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
+
+  const handleApprove = (id) => {
+    axios
+      .delete(`http://localhost:5002/api/v1/leave_request/delete/${id}`)
+      .then((response) => {
+        console.log("Employee removed successfully");
+        fetchLeaveRequests(); // Fetch updated leave requests after removal
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <div className="flex flex-col ml-[20%] mr-[1%]">
@@ -35,7 +50,10 @@ const LeaveRequests = () => {
               <td className="px-4 py-2">{request.reason}</td>
               <td className="px-4 py-2">{request.clearance}</td>
               <td className="px-4 py-2">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => handleApprove(request.id)}
+                >
                   Approve
                 </button>
               </td>

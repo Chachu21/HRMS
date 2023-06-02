@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { NavLink, useLocation } from "react-router-dom";
+import { humergerMenu } from "../../../redux/reducers/loginReducer";
 
 const DeptSideBar = () => {
+   const isClicked = useSelector((state) => state.auth.isClicked);
   const [isOpenSublink, setIsOpenSublink] = useState(false);
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const location = useLocation();
@@ -12,7 +15,10 @@ const DeptSideBar = () => {
   const handleToggle = () => {
     setIsOpenSublink(!isOpenSublink);
   };
-
+ const dispatch = useDispatch();
+ const handleClick = () => {
+   dispatch(humergerMenu());
+ };
   <button
     className="text-black cursor-pointer absolute top-[0px] right-[0px] text-3xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent lg:hidden outline-none focus:outline-none h-full flex justify-center items-center"
     type="button"
@@ -26,15 +32,19 @@ const DeptSideBar = () => {
   </button>;
 
   return (
-    <div>
+    <div
+      className={`flex sm:block transition-transform ${
+        isClicked ? "block" : "hidden"
+      } `}
+    >
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-[18%] h-screen pt-20 transition-transform -translate-x-full  text-black bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-white dark:border-gray-200"
+        className=" fixed top-1 left-0 z-40 lg:w-[18%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-0  dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
           <ul className="space-y-5 font-medium text-blacks">
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/depthead/dashboard/manageApplicant"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
@@ -52,7 +62,7 @@ const DeptSideBar = () => {
                 <span className="ml-3 text-black">Manage Applicant</span>
               </Link>
             </li>
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/depthead/dashboard/managepermission"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
@@ -71,7 +81,7 @@ const DeptSideBar = () => {
               </Link>
             </li>
 
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/depthead/dashboard/employeerequistion"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
@@ -115,7 +125,7 @@ const DeptSideBar = () => {
               </Link>
             </li> */}
 
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/depthead/dashboard/jobrank"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"

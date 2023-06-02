@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/reducers/loginReducer";
+import { humergerMenu, logout } from "../../../redux/reducers/loginReducer";
 
 const HrOfficerHeader = () => {
+  const isClicked=useSelector((state)=>state.auth.isClicked);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const HrOfficerHeader = () => {
   }
 
   const handleSidebarToggle = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    dispatch(humergerMenu());
   };
 
   return (
@@ -115,15 +116,7 @@ const HrOfficerHeader = () => {
                             className="flex justify-center items-center gap-5 px-3"
                             role="none"
                           >
-                            <li>
-                              <Link
-                                to="#"
-                                className="block px-[10px] py-1 text-sm text-blue-500 text-center hover:bg-gray-100 dark:text-blue-500 dark:hover:bg-gray-200 dark:hover:text-blue-500"
-                                role="menuitem"
-                              >
-                                Password
-                              </Link>
-                            </li>
+                           
                           </ul>
                         </div>
                         <div

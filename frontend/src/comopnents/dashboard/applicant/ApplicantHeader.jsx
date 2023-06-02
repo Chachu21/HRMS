@@ -1,30 +1,30 @@
 import React, { useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
-import { useDispatch, useSelector } from "react-redux";
 import { humergerMenu, logout } from "../../../redux/reducers/loginReducer";
 
-const DeptHeader = () => {
-  const isClicked = useSelector((state) => state.auth.isClicked);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const ApplicantHeader = () => {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
-   const dispatch = useDispatch();
-   const naviget = useNavigate();
-   const user = useSelector((state) => state.auth.user);
-   const isLogin = useSelector((state) => state.auth.isLogin);
+  const isClicked = useSelector((state) => state.auth.isClicked);
 
-   const handleLogout = () => {
-     dispatch(logout());
-     naviget("/");
-   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   function toggleUserMenu() {
     setUserMenuOpen((prevState) => !prevState);
   }
 
   const handleSidebarToggle = () => {
-   dispatch(humergerMenu());
+    dispatch(humergerMenu());
+  };
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -42,11 +42,11 @@ const DeptHeader = () => {
                     aria-controls="logo-sidebar"
                     aria-expanded={isClicked}
                     type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    class="inline-flex items-center sm:hidden p-2 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                   >
-                    <span class="sr-only">Open sidebar</span>
+                    <span className="sr-only">Open sidebar</span>
                     <svg
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -116,7 +116,7 @@ const DeptHeader = () => {
                             className="flex justify-center items-center gap-5 px-3"
                             role="none"
                           >
-                          
+                           
                           </ul>
                         </div>
                         <div
@@ -140,4 +140,4 @@ const DeptHeader = () => {
   );
 };
 
-export default DeptHeader;
+export default ApplicantHeader;

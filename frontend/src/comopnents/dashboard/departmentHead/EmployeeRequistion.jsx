@@ -37,7 +37,7 @@ const EmployeeRequistion = () => {
   };
 
   return (
-    <div>
+    <div className="flex w-full lg:ml-[18%] flex-col mt-20">
       <section className="bg-gray-100 overflow-hidden">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-white dark:border-gray-700 sm:p-8">

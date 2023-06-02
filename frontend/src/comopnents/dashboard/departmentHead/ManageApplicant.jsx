@@ -60,7 +60,7 @@ const ManageApplicant = () => {
   }, []);
 
   return (
-    <div className="flex flex-col ml-[20%] mr-[1%]">
+    <div className="flex w-full lg:ml-[18%] flex-col mt-20">
       <h1 className="text-2xl font-bold mb-4">Applicant list</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
@@ -80,7 +80,6 @@ const ManageApplicant = () => {
               <td className="px-4 py-2">{applicant.email}</td>
               <td className="px-4 py-2">{applicant.vacancyId}</td>
               <td className="px-4 py-2">{applicant.vacancyTitle}</td>
-             
             </tr>
           ))}
         </tbody>

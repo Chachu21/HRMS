@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AddStaffCustomizedDialogs from "../../../pages/Registration/AddStaffCustomizedDiaogs";
 
 const AdminSidebar = () => {
-  const [isOpenSublink, setIsOpenSublink] = useState(false);
+  // const [isOpenSublink, setIsOpenSublink] = useState(false)
+  const isClicked = useSelector((state) => state.auth.isClicked);
   return (
-    <div>
+    <div
+      className={`flex sm:flex transition-transform ${
+        isClicked ? "flex z-[1]" : "hidden"
+      } `}
+    >
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-45 w-[18%] h-screen pt-20 transition-transform -translate-x-full  text-black bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-white dark:border-gray-200"
+        // transition-transform -translate-x-full
+        className=" fixed top-16 left-0 z-40 lg:w-[18%] w-[25%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
@@ -47,7 +54,12 @@ const AdminSidebar = () => {
                 ></path>
               </svg>
               <AddStaffCustomizedDialogs />
-              
+              {/* {isOpenSublink && (
+                <ul
+                  id="dropdown-pages"
+                  className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
+                ></ul>
+              )} */}
             </li>
             <li className="flex items-center">
               <Link
@@ -55,12 +67,12 @@ const AdminSidebar = () => {
                 className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75`}
               >
                 <div className="relative inline-flex w-fit">
-                  <div className="absolute bottom-auto left-auto right-0 top-0 z-10 inline-block -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
+                  <div className="absolute bottom-auto left-auto right-0 top-0 z-10 inline-flex -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
                     99+
                   </div>
                   <button
                     type="button"
-                    className="inline-block rounded bg-blue-400 w-40 px-5 pb-1.5 pt-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                    className="inline-flex rounded bg-blue-400 w-40 px-5 pb-1.5 pt-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                     data-te-ripple-init
                     data-te-ripple-color="light"
                   >
@@ -77,7 +89,6 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar;
-
 
 // {isOpenSublink && (
 //                 <ul

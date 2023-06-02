@@ -3,8 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   error: null,
+  isOpen:false,
+  isClicked:false,
   isLoading: false,
   isLogin: false,
+
 };
 
 const authSlice = createSlice({
@@ -33,10 +36,13 @@ const authSlice = createSlice({
       state.error = null;
       state.isLogin = false;
     },
+    humergerMenu: (state) =>{
+       state.isClicked = !state.isClicked
+      }
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, logout, humergerMenu } =
   authSlice.actions;
 
 export default authSlice.reducer;

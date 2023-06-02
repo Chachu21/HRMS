@@ -9,7 +9,9 @@ const { loginRouter } = require("./routes/loginRoute");
 const roleRouter = require("./routes/roleRoute");
 const permissonRouter = require("./routes/permissionRoute");
 const vacancyRouter = require("./routes/vacancyRoute");
+
 const leaveRouter = require("./routes/leaveRoute");
+
 const scheduleRouter = require("./routes/scheduleRoute");
 const jobRankRouter = require("./routes/jobRankRoute");
 const applicantListRouter = require("./routes/applicantListRoute");

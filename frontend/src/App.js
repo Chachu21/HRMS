@@ -36,9 +36,7 @@ import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 import RequestPermission from "./posts/RequestPermission";
 import RequestJobRank from "./posts/RequestJobRank";
-import JobRankDetails from "./comopnents/dashboard/hrOfficer/JobRankDetails";
 import { Provider } from "react-redux";
-import store from "./comopnents/dashboard/departmentHead/store";
 import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
 import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
 import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
@@ -122,10 +120,6 @@ function App() {
         <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
           <Route index element={<HRofficerMain />} />
           <Route
-            path="/hrofficer/dashboard/jobrankdeatils"
-            element={<JobRankDetails />}
-          />
-          <Route
             path="/hrofficer/dashboard/jobvacancy"
             element={<JobVacancyAnnouncement />}
           />
@@ -142,7 +136,7 @@ function App() {
             element={<ApproveLeave />}
           />
           <Route
-            path="/hrofficer/dashboard/approveJobRank"
+            path="/hrofficer/dashboard/approvejobrank"
             element={<ApproveJobRank />}
           />
           <Route
@@ -186,11 +180,7 @@ function App() {
           />
           <Route
             path="/depthead/dashboard/jobrank"
-            element={
-              <Provider store={store}>
-                <ManageJobRank />
-              </Provider>
-            }
+            element={<ManageJobRank />}
           />
           <Route
             path="/depthead/dashboard/approverequest"

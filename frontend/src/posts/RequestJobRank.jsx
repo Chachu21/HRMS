@@ -24,7 +24,7 @@ const RequestJobRank = () => {
     event.preventDefault();
 
     try {
-      await axios.post("http://localhost:5002/api/v1/jobRank", state);
+      await axios.post("http://localhost:5002/api/v1/job_rank", state);
     } catch (err) {
       console.log(err.message);
     }
@@ -40,7 +40,7 @@ const RequestJobRank = () => {
           className="flex flex-col items-center bg-white m-3 p-10 pt-10 gap-5"
         >
           <div className="flex items-center w-full mb-4">
-            <label for="requestreview" className="w-1/4 mr-2">
+            <label for="staff_id" className="w-1/4 mr-2">
               staff_id
             </label>
             <input
@@ -68,14 +68,14 @@ const RequestJobRank = () => {
             </select>
           </div>
           <div className="flex items-center w-full mb-4 gap-3">
-            <label for="clearance" className="w-1/4 mr-2">
+            <label htmlfor="clearance" className="w-1/4 mr-2">
               Attachment(CV)
             </label>
             <input
               onChange={handleChande}
               type="file"
-              name="cv"
-              id="cv"
+              name="clearance"
+              id="clearance"
               value={state.cv}
               accept="image/png, image/jpeg, image/jpg"
               className="w-3/4"
@@ -89,7 +89,7 @@ const RequestJobRank = () => {
               Submit
             </button>
             <button
-            onClick={handleClick}
+              onClick={handleClick}
               type="button"
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >

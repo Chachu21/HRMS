@@ -3,10 +3,11 @@ import { useState } from "react";
 import axios from "axios";
 const EmployeeRequistion = () => {
   const [formData, setFormData] = useState({
+    staff_id: null,
     job_title: "",
-    quantity: "",
-    qualification: "",
-    cgpa: "",
+    quantity: null,
+    qualification: false,
+    cgpa: null,
   });
 
   const handleChange = (e) => {
@@ -41,6 +42,24 @@ const EmployeeRequistion = () => {
               className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
               onSubmit={handleFormSubmit}
             >
+              <div>
+                <label
+                  htmlFor="staff_id"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
+                >
+                  Staff Id
+                </label>
+                <input
+                  type="text"
+                  name="staff_id"
+                  id="staff_id"
+                  value={formData.staff_id}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg outline-none focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="enter staff id"
+                  required={true}
+                />
+              </div>
               <div>
                 <label
                   htmlFor="jobTitle"

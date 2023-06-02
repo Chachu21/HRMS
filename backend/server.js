@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const employeeRequisitionRouter = require("./routes/employeeRequistionRoute");
 const applicantRouter = require("./routes/applicantRoute");
 const { staffRouter } = require("./routes/staffRoute");
 const applicant_list = require("./models/applicant_list/applicant_list");
@@ -22,10 +23,11 @@ app.use("/api/v1/staff", staffRouter);
 app.use("/api/v1", loginRouter);
 app.use("/api/v1", roleRouter);
 app.use("/api/v1/leave_request", leaveRouter);
+app.use("/api/v1/employee_requistion", employeeRequisitionRouter);
 app.use("/api/v1/permission", permissonRouter);
 app.use("/api/v1/vacancy", vacancyRouter);
 app.use("/api/v1/schedule", scheduleRouter);
-app.use("/api/v1/jobRank", jobRankRouter);
+app.use("/api/v1/job_rank", jobRankRouter);
 app.use("/api/v1/lists", applicantRouter);
 
 app.listen(port, () => {

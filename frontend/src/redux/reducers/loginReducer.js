@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   isLoading: false,
   isLogin: false,
+  isClicked :false,
 };
 
 const authSlice = createSlice({
@@ -33,10 +34,13 @@ const authSlice = createSlice({
       state.error = null;
       state.isLogin = false;
     },
+    humergerMenu: (state) =>{
+       state.isClicked = !state.isClicked
+      }
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, logout, humergerMenu } =
   authSlice.actions;
 
 export default authSlice.reducer;

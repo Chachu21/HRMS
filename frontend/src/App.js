@@ -35,9 +35,10 @@ import ManageJobRank from "./comopnents/dashboard/departmentHead/ManageJobRank";
 import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 import RequestPermission from "./posts/RequestPermission";
-import RequestJobRank from './posts/RequestJobRank'
+import RequestJobRank from "./posts/RequestJobRank";
 import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
 import ApproveJobRank from "./comopnents/dashboard/hrOfficer/ApproveJobRank";
+import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
 
 function App() {
   return (
@@ -51,7 +52,7 @@ function App() {
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/help" element={<Help />} />
         </Route>
-
+        {/* applicant page */}
         <Route
           exact
           path="/signUpASapplicant"
@@ -61,7 +62,7 @@ function App() {
             </CustomizedDialogs>
           }
         />
-
+        {/* login page */}
         <Route
           exact
           path="/login"
@@ -71,7 +72,7 @@ function App() {
             </LoginCustomizedDialogs>
           }
         />
-
+        {/* admin dashboard */}
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<ManageAccountInfo />} />
           <Route
@@ -96,6 +97,8 @@ function App() {
             element={<ApproveRequest />}
           />
         </Route>
+
+        {/* applicant dashboard */}
         <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
           <Route index element={<AdminMain />} />
 
@@ -113,7 +116,7 @@ function App() {
             element={<ApproveRequest />}
           />
         </Route>
-
+        {/* HR officer page */}
         <Route path="/hrofficer/dashboard" element={<HRofficerDashboard />}>
           <Route index element={<HRofficerMain />} />
           <Route
@@ -133,7 +136,7 @@ function App() {
             element={<PostExamSchedule />}
           />
         </Route>
-
+        {/* employee dashboard */}
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
           <Route index element={<EmployeeMain />} />
           <Route
@@ -156,7 +159,7 @@ function App() {
             element={<ApproveRequest />}
           /> */}
         </Route>
-
+        {/* department head dashboard */}
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
           <Route index element={<DeptMain />} />
           <Route
@@ -172,11 +175,15 @@ function App() {
             element={<ManageJobRank />}
           />
           <Route
+            path="/depthead/dashboard/manageApplicant"
+            element={<ManageApplicant />}
+          />
+          <Route
             path="/depthead/dashboard/approverequest"
             element={<ApproveRequest />}
           />
         </Route>
-
+        {/* error page */}
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
@@ -184,4 +191,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

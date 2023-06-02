@@ -4,7 +4,6 @@ const cors = require("cors");
 const employeeRequisitionRouter = require("./routes/employeeRequistionRoute");
 const applicantRouter = require("./routes/applicantRoute");
 const { staffRouter } = require("./routes/staffRoute");
-const applicant_list = require("./models/applicant_list/applicant_list");
 const { loginRouter } = require("./routes/loginRoute");
 const roleRouter = require("./routes/roleRoute");
 const permissonRouter = require("./routes/permissionRoute");
@@ -30,7 +29,7 @@ app.use("/api/v1/permission", permissonRouter);
 app.use("/api/v1/vacancy", vacancyRouter);
 app.use("/api/v1/schedule", scheduleRouter);
 app.use("/api/v1/job_rank", jobRankRouter);
-app.use("/api/v1/lists", applicantRouter);
+app.use("/api/v1/lists", applicantListRouter);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);

@@ -1,23 +1,45 @@
 import React, { useState } from "react";
+
+import { humbergerClicked } from "../../../redux/reducers/loginReducer";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
 import { logout, humergerMenu } from "../../../redux/reducers/loginReducer";
 
+
 const AdminHeader = () => {
+<<<<<<< HEAD
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const isClicked =useSelector((state)=>state.auth.isClicked)
+=======
+ 
+
+  const isClicked = useSelector((state) => state.login.isClicked);
+  
+  const dispatch=useDispatch()
+
+
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const isLogin = useSelector((state) => state.auth.isLogin);
+
+>>>>>>> 37bc916e90f709af0c6938161175e25f220f0345
   function toggleUserMenu() {
     setUserMenuOpen((prevState) => !prevState);
   }
 
   const handleSidebarToggle = () => {
+<<<<<<< HEAD
     dispatch(humergerMenu());
+=======
+    dispatch(humbergerClicked())
+   
+>>>>>>> 37bc916e90f709af0c6938161175e25f220f0345
   };
   const handleLogout = () => {
     dispatch(logout());
@@ -38,7 +60,10 @@ const AdminHeader = () => {
                 aria-controls="logo-sidebar"
                 aria-expanded={isClicked}
                 type="button"
-                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+
+                
+                class="inline-flex items-center sm:hidden p-2 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg

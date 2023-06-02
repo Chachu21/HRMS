@@ -7,11 +7,7 @@ const initialState = {
   isClicked:false,
   isLoading: false,
   isLogin: false,
-<<<<<<< HEAD
-  isClicked :false,
-=======
 
->>>>>>> 37bc916e90f709af0c6938161175e25f220f0345
 };
 
 const authSlice = createSlice({
@@ -40,7 +36,6 @@ const authSlice = createSlice({
       state.error = null;
       state.isLogin = false;
     },
-<<<<<<< HEAD
     humergerMenu: (state) =>{
        state.isClicked = !state.isClicked
       }
@@ -48,28 +43,6 @@ const authSlice = createSlice({
 });
 
 export const { loginStart, loginSuccess, loginFailure, logout, humergerMenu } =
-=======
-    humbergerClicked:(state)=>{
-      state.isClicked=!state.isClicked;
-    }
-  },
-});
-
-
-export const {
-  setEmail,
-  setPassword,
-  setLoggedIn,
-  setRememberMe,
-  setError,
-  resetLogin,
-  setIsOpen,
-  setIsClose,
-  humbergerClicked,
-} = loginSlice.actions;
-
-export const { loginStart, loginSuccess, loginFailure, logout } =
->>>>>>> 37bc916e90f709af0c6938161175e25f220f0345
   authSlice.actions;
 
 export default authSlice.reducer;

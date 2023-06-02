@@ -3,11 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/reducers/loginReducer";
+import { humbergerClicked, logout } from "../../../redux/reducers/loginReducer";
 
 const EmployeeHeader = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const isClicked = useSelector((state) => state.auth.isClicked);
   const dispatch = useDispatch()
   const naviget = useNavigate()
 const user = useSelector((state)=>state.auth.user)
@@ -22,7 +23,7 @@ const handleLogout =() => {
   }
 
   const handleSidebarToggle = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    dispatch(humbergerClicked());
   };
 
   return (

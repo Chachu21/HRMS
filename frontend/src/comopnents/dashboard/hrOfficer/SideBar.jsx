@@ -1,18 +1,24 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [isOpenSublink, setIsOpenSublink] = useState(false);
+  const isClicked = useSelector((state) => state.auth.isClicked);
 
   const handleToggle = () => {
     setIsOpenSublink(!isOpenSublink);
   };
 
   return (
-    <div>
+    <div
+      className={`flex sm:block transition-transform ${
+        isClicked ? "block" : "hidden"
+      } `}
+    >
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-[18%] h-screen pt-20 transition-transform -translate-x-full  text-black bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-white dark:border-gray-200"
+        className=" fixed top-4 z-40 lg:w-[25%] sm:w-[25%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">

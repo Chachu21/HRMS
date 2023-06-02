@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../redux/reducers/loginReducer";
+import { humbergerClicked, logout } from "../../../redux/reducers/loginReducer";
 
 const DeptHeader = () => {
+  const isClicked = useSelector((state) => state.auth.isClicked);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
    const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const DeptHeader = () => {
   }
 
   const handleSidebarToggle = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+   dispatch(humbergerClicked());
   };
 
   return (
@@ -39,7 +40,7 @@ const DeptHeader = () => {
                     data-drawer-target="logo-sidebar"
                     data-drawer-toggle="logo-sidebar"
                     aria-controls="logo-sidebar"
-                    aria-expanded={isSidebarOpen}
+                    aria-expanded={isClicked}
                     type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                   >
@@ -77,7 +78,7 @@ const DeptHeader = () => {
                         type="button"
                         onClick={toggleUserMenu}
                         className="flex text-sm bg-gray-100 rounded-full dark:bg-white focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                        aria-expanded={isUserMenuOpen}
+                        aria-expanded={isClicked}
                         aria-controls="dropdown-user"
                       >
                         <img
@@ -105,9 +106,7 @@ const DeptHeader = () => {
                             className="text-sm font-medium text-gray-900 truncate dark:text-gray-700"
                             role="none"
                           >
-                            {
-                              user&&user.email
-                            }
+                            {user && user.email}
                           </p>
                         </div>
                         <hr className="h-1  bg-gray-300 w-full" />
@@ -128,7 +127,10 @@ const DeptHeader = () => {
                             </li>
                           </ul>
                         </div>
-                        <div onClick={handleLogout} className="text-center my-10 cursor-pointer">
+                        <div
+                          onClick={handleLogout}
+                          className="text-center my-10 cursor-pointer"
+                        >
                           <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">
                             Logout
                           </span>

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const DeptSideBar = () => {
+   const isClicked = useSelector((state) => state.auth.isClicked);
   const [isOpenSublink, setIsOpenSublink] = useState(false);
 
   const handleToggle = () => {
@@ -9,10 +11,14 @@ const DeptSideBar = () => {
   };
 
   return (
-    <div>
+    <div
+      className={`flex sm:block transition-transform ${
+        isClicked ? "block" : "hidden"
+      } `}
+    >
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-[18%] h-screen pt-20 transition-transform -translate-x-full  text-black bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-white dark:border-gray-200"
+        className=" fixed top-16 left-0 z-40 lg:w-[17%] sm:w-[25%]  h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
@@ -64,7 +70,7 @@ const DeptSideBar = () => {
                   <span className="flex-1 ml-3 text-left whitespace-nowrap">
                     Employee Requisition
                   </span>
-                  <svg
+                  {/* <svg
                     aria-hidden="true"
                     className="w-6 h-6"
                     fill="currentColor"
@@ -76,7 +82,7 @@ const DeptSideBar = () => {
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                       clip-rule="evenodd"
                     ></path>
-                  </svg>
+                  </svg> */}
                 </button>
               </Link>
             </li>

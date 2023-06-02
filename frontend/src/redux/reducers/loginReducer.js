@@ -37,25 +37,14 @@ const authSlice = createSlice({
       state.isLogin = false;
     },
     humbergerClicked:(state)=>{
-      state.isClicked=!state.isClicked;
+      state.isClicked=!state.isClicked
     }
   },
 });
 
 
-export const {
-  setEmail,
-  setPassword,
-  setLoggedIn,
-  setRememberMe,
-  setError,
-  resetLogin,
-  setIsOpen,
-  setIsClose,
-  humbergerClicked,
-} = loginSlice.actions;
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, logout, humbergerClicked } =
   authSlice.actions;
 
 export default authSlice.reducer;

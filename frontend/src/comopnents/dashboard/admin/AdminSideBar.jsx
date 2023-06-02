@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 import AddStaffCustomizedDialogs from "../../../pages/Registration/AddStaffCustomizedDiaogs";
 
 const AdminSidebar = () => {
-  const isClicked = useSelector((state) => state.login.isClicked);
-  const [isOpenSublink, setIsOpenSublink] = useState(false)
+  const isClicked = useSelector((state) => state.auth.isClicked);
+
     return (
       <div
-        className={`block sm:block transition-transform ${
+        className={`flex sm:block transition-transform ${
           isClicked ? "block" : "hidden"
         } `}
       >
         <aside
           id="logo-sidebar"
           // transition-transform -translate-x-full
-          className=" fixed top-16 left-0 z-40 lg:w-[18%] w-[25%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
+          className=" fixed top-16 left-0 z-40 lg:w-[25%] sm:w-[25%]  h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
           aria-label="Sidebar"
         >
           <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
@@ -54,12 +54,12 @@ const AdminSidebar = () => {
                   ></path>
                 </svg>
                 <AddStaffCustomizedDialogs />
-                {isOpenSublink && (
+                {/* {isClicked && (
                   <ul
                     id="dropdown-pages"
                     className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
                   ></ul>
-                )}
+                )} */}
               </li>
               <li className="flex items-center">
                 <Link

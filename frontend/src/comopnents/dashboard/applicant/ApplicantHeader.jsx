@@ -1,31 +1,26 @@
 import React, { useState } from "react";
 
-
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
 import { humbergerClicked, logout } from "../../../redux/reducers/loginReducer";
 
+const ApplicantHeader = () => {
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const isClicked = useSelector((state) => state.auth.isClicked);
 
-const AdminHeader = () => {
- const [isUserMenuOpen, setUserMenuOpen] = useState(false);
-const isClicked=useSelector((state)=>state.auth.isClicked);
- 
-  
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const isLogin = useSelector((state) => state.auth.isLogin);
 
   function toggleUserMenu() {
-
     setUserMenuOpen((prevState) => !prevState);
   }
 
   const handleSidebarToggle = () => {
-    dispatch(humbergerClicked())
-   
+    dispatch(humbergerClicked());
   };
   const handleLogout = () => {
     dispatch(logout());
@@ -153,4 +148,4 @@ const isClicked=useSelector((state)=>state.auth.isClicked);
   );
 };
 
-export default AdminHeader;
+export default ApplicantHeader;

@@ -1,5 +1,5 @@
 const sequelize = require("../config/database.js");
-const initModels = require("../models/init-models.js");
+const initModels = require("../models/init-models");
 const models = initModels(sequelize);
 const Applicant = models.applicant;
 

@@ -3,6 +3,7 @@ const {createApplicant, getAllApplicants, getSingleApplicant, updateApplicant, d
 const applicantRouter = express.Router()
 applicantRouter.post('/register', createApplicant)
 applicantRouter.get('/', getAllApplicants)
+
 applicantRouter.get("/:id", getSingleApplicant);
 applicantRouter.put('/update/:id', updateApplicant)
 applicantRouter.delete('/delete/:id', deleteApplicant)

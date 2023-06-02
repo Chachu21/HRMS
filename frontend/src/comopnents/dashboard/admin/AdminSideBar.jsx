@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import AddStaffCustomizedDialogs from "../../../pages/Registration/AddStaffCustomizedDiaogs"
+import AddStaffCustomizedDialogs from "../../../pages/Registration/AddStaffCustomizedDiaogs";
 
 const AdminSidebar = () => {
   // const [isOpenSublink, setIsOpenSublink] = useState(false)
@@ -12,12 +12,7 @@ const AdminSidebar = () => {
         isClicked ? "flex z-[1]" : "hidden"
       } `}
     >
-        <aside
-          id="logo-sidebar"
-          // transition-transform -translate-x-full
-          className=" fixed top-1 left-0 z-40 lg:w-[18%] w-[25%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
-          aria-label="Sidebar"
-        >
+      
           <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
             <ul className="space-y-5 font-medium text-blacks">
               <li>
@@ -86,6 +81,13 @@ const AdminSidebar = () => {
       </aside>
     </div>
   );
-}
+};
 
 export default AdminSidebar;
+
+// {isOpenSublink && (
+//                 <ul
+//                   id="dropdown-pages"
+//                   className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
+//                 ></ul>
+//               )}

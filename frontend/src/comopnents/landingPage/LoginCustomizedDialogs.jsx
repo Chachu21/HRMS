@@ -1,4 +1,4 @@
-import  React from "react";
+import React from "react";
 import PropTypes from "prop-types";
 // import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -60,10 +60,10 @@ BootstrapDialogTitle.propTypes = {
 export default function LoginCustomizedDialogs({ children }) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
-    setOpen(true)
+    setOpen(true);
   };
   const handleClose = () => {
-     setOpen(false);
+    setOpen(false);
   };
 
   return (

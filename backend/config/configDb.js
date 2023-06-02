@@ -4,7 +4,7 @@ module.exports = {
     password: "", // Your MySQL password
     database: "hrms", // Your database name
     host: "localhost", // MySQL server hostname
-    port: process.env.DB_PORT, // MySQL server port
+    port: 3307, // MySQL server port
     dialect: "mysql", // Database dialect (e.g., mysql, postgres, etc.)
   },
   production: {

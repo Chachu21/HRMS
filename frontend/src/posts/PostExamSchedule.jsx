@@ -1,33 +1,32 @@
 import React from "react";
 import { useState } from "react";
-import  axios from 'axios'
+import axios from "axios";
 const PostExamSchedule = () => {
-  const [formData, setFormData] = useState(
-    {
-      title:"",
-      exam_date :"",
-      exam_time:"",
-      place:"",
-    }
-  );
+  const [formData, setFormData] = useState({
+    title: "",
+    exam_date: "",
+    exam_time: "",
+    place: "",
+  });
 
-const handleChange = (e) => {
-  const {name, value} = e.target;
-  setFormData((prevState) => ({
-    ...prevState, [name]:value
-  }));
-
-}
-  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-try {
-  await axios.post("http://localhost:5002/api/v1/schedule", formData);
-} catch (error) {
-  console.log(error)
-}
-
+    try {
+      const response = await axios.post(
+        "http://localhost:5002/api/v1/schedule",
+        formData
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

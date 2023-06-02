@@ -36,6 +36,9 @@ import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 import RequestPermission from "./posts/RequestPermission";
 import RequestJobRank from "./posts/RequestJobRank";
+import { Provider } from "react-redux";
+import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
+import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
 import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
 import ApproveJobRank from "./comopnents/dashboard/hrOfficer/ApproveJobRank";
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
@@ -124,11 +127,19 @@ function App() {
             element={<JobVacancyAnnouncement />}
           />
           <Route
+            path="/hrofficer/dashboard/leaverequest"
+            element={<LeaveRequests />}
+          />
+          <Route
+            path="/hrofficer/dashboard/viewemployeerequistion"
+            element={<ViewEmployeeRequistion />}
+          />
+          <Route
             path="/hrofficer/dashboard/approveLeave"
             element={<ApproveLeave />}
           />
           <Route
-            path="/hrofficer/dashboard/approveJobRank"
+            path="/hrofficer/dashboard/approvejobrank"
             element={<ApproveJobRank />}
           />
           <Route

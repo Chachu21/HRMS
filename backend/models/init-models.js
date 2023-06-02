@@ -20,9 +20,9 @@ function initModels(sequelize) {
   var leave_request = _leave_request(sequelize, DataTypes);
   var permission = _permission(sequelize, DataTypes);
   var schedule = _schedule(sequelize, DataTypes);
-   var vacancy = _vacancy(sequelize, DataTypes);
-   var applicant_list = _applicant_list(sequelize, DataTypes);
-    var employee_requisition = _employee_requisition(sequelize, DataTypes);
+  var vacancy = _vacancy(sequelize, DataTypes);
+  var applicant_list = _applicant_list(sequelize, DataTypes);
+  var employee_requisition = _employee_requisition(sequelize, DataTypes);
 
   // Define associations
   staff.belongsTo(role, { as: "role", foreignKey: "role_id" });
@@ -39,14 +39,14 @@ function initModels(sequelize) {
   job_rank.belongsTo(staff, { as: "staff", foreignKey: "staff_id" });
   staff.hasMany(job_rank, { as: "job_ranks", foreignKey: "staff_id" });
 
-   leave_request.belongsTo(staff, { as: "staff", foreignKey: "staff_id" });
-   staff.hasMany(leave_request, {
-     as: "leave_requests",
-     foreignKey: "staff_id",
-   });
+  leave_request.belongsTo(staff, { as: "staff", foreignKey: "staff_id" });
+  staff.hasMany(leave_request, {
+    as: "leave_requests",
+    foreignKey: "staff_id",
+  });
 
-    permission.belongsTo(staff, { as: "staff", foreignKey: "staff_id" });
-    staff.hasMany(permission, { as: "permissions", foreignKey: "staff_id" });
+  permission.belongsTo(staff, { as: "staff", foreignKey: "staff_id" });
+  staff.hasMany(permission, { as: "permissions", foreignKey: "staff_id" });
 
   applicant_list.belongsTo(applicant, {
     as: "applicant",
@@ -65,14 +65,14 @@ function initModels(sequelize) {
     foreignKey: "vacancy_id",
   });
 
-   employee_requisition.belongsTo(staff, {
-     as: "staff",
-     foreignKey: "staff_id",
-   });
-   staff.hasMany(employee_requisition, {
-     as: "employee_requisitions",
-     foreignKey: "staff_id",
-   });
+  employee_requisition.belongsTo(staff, {
+    as: "staff",
+    foreignKey: "staff_id",
+  });
+  staff.hasMany(employee_requisition, {
+    as: "employee_requisitions",
+    foreignKey: "staff_id",
+  });
 
   return {
     applicant,

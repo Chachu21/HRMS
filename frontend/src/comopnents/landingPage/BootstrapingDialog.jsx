@@ -10,8 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 //import Typography from "@mui/material/Typography";
 import ApplicantRegister from "../../pages/Registration/ApplicantRegister";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsClose, setopen } from "../../redux/reducers/loginReducer";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -61,13 +59,13 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function CustomizedDialogs({ children }) {
-const [open, setOpen] =React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true)
+    setOpen(true);
   };
   const handleClose = () => {
-   setOpen(false);
+    setOpen(false);
   };
 
   return (

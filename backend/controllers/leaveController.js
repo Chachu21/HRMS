@@ -3,10 +3,9 @@ const sequelize = require("../config/database.js");
 const models = initModels(sequelize);
 const LeaveRequest = models.leave_request;
 
-
 const createLeaveRequest = async (req, res) => {
   try {
-    const leaveRequest = await  LeaveRequest.create(req.body);
+    const leaveRequest = await LeaveRequest.create(req.body);
     res.status(200).json(leaveRequest);
   } catch (error) {
     res.status(500).json({ error: "cannot create leave" });
@@ -17,6 +16,7 @@ const createLeaveRequest = async (req, res) => {
 const getAllLeaveRequests = async (req, res) => {
   try {
     const leaveRequests = await LeaveRequest.findAll();
+    console.log(leaveRequests);
     return res.json(leaveRequests);
   } catch (error) {
     return res.status(500).json({ error: "Failed to retrieve leave requests" });

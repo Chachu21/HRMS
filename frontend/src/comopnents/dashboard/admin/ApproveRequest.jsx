@@ -72,8 +72,8 @@ const handleReject = (id) => {
   };
 
   return (
-    <div className="flex ml-[18%] flex-col mt-20">
-      <div className="flex justify-center items-center rounded-[5px] mx-4 my-10 ">
+    <div className="flex flex-col mt-20">
+      <div className="flex justify-center items-center rounded-[5px] mx-4 my-10">
         <form
           action=""
           onSubmit={handleSubmit}
@@ -87,8 +87,8 @@ const handleReject = (id) => {
               setFormData({ ...formData, searchQuery: e.target.value });
             }}
             type="text"
-            className="bg-gray-100 w-[250px] outline-none border-2 border-gray-300 pl-3 lg:w-[350px] h-10 rounded-[5px] placeholder:text-[18px] leading-4 font-normal"
-            placeholder="search here..."
+            className="bg-gray-100 w-[250px] lg:w-[350px] outline-none border-2 border-gray-300 pl-3 h-10 rounded-[5px] placeholder:text-[18px] leading-4 font-normal"
+            placeholder="Search here..."
           />
           <button
             type="submit"
@@ -98,11 +98,11 @@ const handleReject = (id) => {
           </button>
         </form>
       </div>
-      <div className="flex justify-center items-center px-5">
+      <div className="flex justify-center items-center px-5 overflow-x-auto">
         <table className="table-auto w-full">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-4 py-2">approved</th>
+              <th className="px-4 py-2">Approved</th>
               <th className="px-4 py-2">First Name</th>
               <th className="px-4 py-2">Last Name</th>
               <th className="px-4 py-2">Email</th>

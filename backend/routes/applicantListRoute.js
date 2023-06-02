@@ -6,6 +6,6 @@ applicantListRouter.post("/", createApplicantList)
 applicantListRouter.get("/", getAllApplicantList)
 applicantListRouter.get('/:id', getApplicantListById)
 applicantListRouter.put('/update', updateApplicantList)
-applicantListRouter.delete('/', deleteApplicantList)
+applicantListRouter.delete('/delete', deleteApplicantList)
 
 module.exports= applicantListRouter

@@ -140,7 +140,7 @@ const Vacancy = () => {
             return (
               <div
                 key={vacacny.id}
-                className="flex flex-col justify-center items-center gap-5 rounded-lg bg-[#f7f7f7]"
+                className="flex flex-col justify-center items-center gap-5 hover:scale-105  transition duration-300 ease-in-out rounded-lg bg-[#f7f7f7]"
               >
                 <div className="flex flex-col justify-left items-left gap-5 py-5">
                   <p className="text-lg">

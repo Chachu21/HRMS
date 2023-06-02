@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaCheck, FaSearch, FaTimes } from "react-icons/fa";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { approved, rejected } from "../../../redux/reducers/loginReducer";
 
 const initialState = {
   searchQuery: "",
@@ -19,37 +20,52 @@ const ApproveRequest = () => {
       phone_number: "1234567890",
       role: "admin",
     },
+    {
+      id: 4,
+      fname: "John",
+      lname: "Doe",
+      email: "johndoe@example.com",
+      password: "password123",
+      phone_number: "1234567890",
+      role: "admin",
+    },
+    {
+      id: 3,
+      fname: "John",
+      lname: "Doe",
+      email: "johndoe@example.com",
+      password: "password123",
+      phone_number: "1234567890",
+      role: "admin",
+    },
+    {
+      id: 2,
+      fname: "John",
+      lname: "Doe",
+      email: "johndoe@example.com",
+      password: "password123",
+      phone_number: "1234567890",
+      role: "admin",
+    },
   ];
 
   const [accountData, setAccountData] = useState([]);
   const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
+  const approvedItems = useSelector((state) => state.auth.approvedItems);
+  const rejectedItems = useSelector((state) => state.auth.rejectedItems);
 
-  const handleDelete = (id) => {
-    // axios
-    //   .delete(`http://localhost:5002/api/v1/staff/delete/${id}`)
-    //   .then((response) => {
-    //     setAccountData(accountData.filter((item) => item.id !== id));
-    //     console.log(`deleted user id :${id}`);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    console.log("deleted successfully");
-  };
-  //   useEffect(() => {
-  //     axios
-  //       .get("http://localhost:5002/api/v1/staff")
-  //       .then((response) => {
-  //         setAccountData(response.data);
-  //         console.log(accountData);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }, [accountData]);
+const handleApprove = (id) => {
+  if (!approvedItems.includes(id)) {
+    dispatch(approved(id)); // Dispatch the approved action with the item's ID
+  }
+};
 
-  const handleDeactive = (id) => {};
-
+const handleReject = (id) => {
+  if (!rejectedItems.includes(id)) {
+    dispatch(rejected(id)); // Dispatch the rejected action with the item's ID
+  }
+};
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("search is done");
@@ -95,21 +111,45 @@ const ApproveRequest = () => {
           </thead>
           <tbody>
             {mockData.map((datas) => {
+              const isApproved = approvedItems.includes(datas.id);
+              const isRejecte = rejectedItems.includes(datas.id);
               return (
                 <tr key={datas.id} className="bg-gray-100/{0-4}">
                   <td className="border px-4 py-2">
-                    <input type="checkbox" />
+                    {isApproved ? (
+                      <FaCheck color="green" />
+                    ) : isRejecte ? (
+                      <FaTimes color="red" />
+                    ) : null}
                   </td>
                   <td className="border px-4 py-2">{datas.fname} </td>
                   <td className="border px-4 py-2">{datas.lname} </td>
                   <td className="border px-4 py-2">{datas.email}</td>
-                  <td className="w-auto flex justify-center items-center gap-2 border py-2 px-4">
+                  <td className="w-auto flex justify-center items-center gap-2 border py-2">
                     <button
-                      className="bg-red-400 rounded-sm"
-                      onClick={() => handleDelete(datas.id)}
+                      className={`${
+                        isApproved ? "bg-gray-400" : "bg-green-500"
+                      } rounded-sm px-1`}
+                      onClick={() => {
+                        handleApprove(datas.id);
+                      }}
                     >
-                      Approve
+                      {isApproved ? (
+                        <span>Approved</span>
+                      ) : (
+                        <span>Approve</span>
+                      )}
                     </button>
+                    {!isApproved && !isRejecte && (
+                      <button
+                        className="bg-red-400 rounded-sm px-1"
+                        onClick={() => {
+                          handleReject(datas.id);
+                        }}
+                      >
+                        <span>Reject</span>
+                      </button>
+                    )}
                   </td>
                 </tr>
               );

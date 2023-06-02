@@ -1,16 +1,20 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const RequestJobRank = () => {
   const [state, setstate] = useState({
-    staff_id: null,
     level: "",
     cv: "",
   });
 
+  const navigete = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const staff_id = user.staff_id;
+
   const handleClick = () => {
     setstate({
-      staff_id: null,
       level: "",
       cv: "",
     });
@@ -24,7 +28,12 @@ const RequestJobRank = () => {
     event.preventDefault();
 
     try {
-      await axios.post("http://localhost:5002/api/v1/job_rank", state);
+      await axios.post("http://localhost:5002/api/v1/job_rank", {
+        ...state,
+        staff_id,
+      });
+
+      navigete('/')
     } catch (err) {
       console.log(err.message);
     }
@@ -39,18 +48,6 @@ const RequestJobRank = () => {
           action=""
           className="flex flex-col items-center bg-white m-3 p-10 pt-10 gap-5"
         >
-          <div className="flex items-center w-full mb-4">
-            <label for="staff_id" className="w-1/4 mr-2">
-              staff_id
-            </label>
-            <input
-              onChange={handleChande}
-              name="staff_id"
-              id="staff_id"
-              value={state.staff_id}
-              className="w-3/4 border border-gray-300 outline-none rounded pl-5"
-            ></input>
-          </div>
           <div className="flex items-center w-full mb-4">
             <label htmlFor="level" className="w-1/4 mr-4">
               level
@@ -69,16 +66,17 @@ const RequestJobRank = () => {
           </div>
           <div className="flex items-center w-full mb-4 gap-3">
             <label htmlfor="clearance" className="w-1/4 mr-2">
-              Attachment(CV)
+              Attachment cv
             </label>
             <input
               onChange={handleChande}
-              type="file"
-              name="clearance"
+              type="text"
+              name="cv"
               id="clearance"
               value={state.cv}
-              accept="image/png, image/jpeg, image/jpg"
-              className="w-3/4"
+              // accept="image/png, image/jpeg, image/jpg"
+              className="w-3/4 rounded outline-none bg-gray-100"
+
             />
           </div>
           <div className="flex justify-center w-full gap-7 mt-10 mb-10">

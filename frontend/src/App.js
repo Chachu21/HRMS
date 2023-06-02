@@ -27,7 +27,6 @@ import DeptHeaderDashboard from "./pages/dashboard/DeptHeaderDashboard";
 import DeptMain from "./comopnents/dashboard/departmentHead/DeptMain";
 import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
 import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
-
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
 import StaffRegister from "./pages/Registration/StaffRegister";
 import EmployeeRequistion from "./comopnents/dashboard/departmentHead/EmployeeRequistion";
@@ -36,12 +35,16 @@ import JobVacancyAnnouncement from "./comopnents/vacancy/VacancyPage";
 import PostExamSchedule from "./posts/PostExamSchedule";
 import RequestPermission from "./posts/RequestPermission";
 import RequestJobRank from "./posts/RequestJobRank";
-import { Provider } from "react-redux";
 import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
 import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
 import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
 import ApproveJobRank from "./comopnents/dashboard/hrOfficer/ApproveJobRank";
+
+import ApplicantInfo from "./comopnents/dashboard/applicant/ApplicantInfo";
+import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
+
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
+
 
 function App() {
   return (
@@ -103,20 +106,11 @@ function App() {
 
         {/* applicant dashboard */}
         <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
-          <Route index element={<AdminMain />} />
+          <Route index element={<ApplicantMain />} />
 
           <Route
             path="/applicant/dashboard/manageaccount"
-            element={<ManageAccountInfo />}
-          />
-          <Route
-            path="/applicant/dashboard/manageaccount/update/:id"
-            element={<UpdateStaff />}
-          />
-          <Route path="/applicant/dashboard/addstaff" element={<AddStaff />} />
-          <Route
-            path="/applicant/dashboard/approverequest"
-            element={<ApproveRequest />}
+            element={<ApplicantInfo />}
           />
         </Route>
         {/* HR officer page */}
@@ -151,7 +145,7 @@ function App() {
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
           <Route index element={<EmployeeMain />} />
           <Route
-            path="/employee/dashboard/manageaccount"
+            path="/employee/dashboard/leaveRequest"
             element={<LeaveRequest />}
           />
           <Route />
@@ -164,11 +158,6 @@ function App() {
             path="/employee/dashboard/RequestJobRank"
             element={<RequestJobRank />}
           />
-
-          {/* <Route
-            path="/employee/dashboard/approverequest"
-            element={<ApproveRequest />}
-          /> */}
         </Route>
         {/* department head dashboard */}
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>

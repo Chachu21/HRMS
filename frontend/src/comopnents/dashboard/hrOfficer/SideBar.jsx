@@ -1,23 +1,33 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { humergerMenu } from "../../../redux/reducers/loginReducer";
 
 const Sidebar = () => {
   const [isOpenSublink, setIsOpenSublink] = useState(false);
+  const isClicked = useSelector((state) => state.auth.isClicked);
 
   const handleToggle = () => {
     setIsOpenSublink(!isOpenSublink);
   };
-
+const dispatch = useDispatch();
+const handleClick = () => {
+  dispatch(humergerMenu());
+};
   return (
-    <div>
+    <div
+      className={`flex sm:block transition-transform ${
+        isClicked ? "block" : "hidden"
+      } `}
+    >
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-[18%] h-screen pt-20 transition-transform -translate-x-full  text-black bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-white dark:border-gray-200"
+        className=" fixed top-1 left-0 z-40 lg:w-[18%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-0  dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
           <ul className="space-y-5 font-medium text-blacks">
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/hrofficer/dashboard/jobvacancy"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
@@ -35,18 +45,12 @@ const Sidebar = () => {
                 <span className="ml-3 text-black">vacancy</span>
               </Link>
             </li>
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/hrofficer/dashboard/leaverequest"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
-                <button
-                  onClick={handleToggle}
-                  type="button"
-                  className="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-gray-700 dark:hover:bg-gray-200"
-                  aria-controls="dropdown-pages"
-                  data-collapse-toggle="dropdown-pages"
-                >
+                
                   <svg
                     aria-hidden="true"
                     className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-100 dark:text-gray-500 dark:group-hover:text-gray-500"
@@ -63,34 +67,13 @@ const Sidebar = () => {
                   <span className="flex-1 ml-3 text-left whitespace-nowrap">
                     approve leave request
                   </span>
-                  {/* <svg
-                  aria-hidden="true"
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg> */}
-                </button>
               </Link>
             </li>
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/hrofficer/dashboard/viewemployeerequistion"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
-                <button
-                  onClick={handleToggle}
-                  type="button"
-                  className="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-gray-700 dark:hover:bg-gray-200"
-                  aria-controls="dropdown-pages"
-                  data-collapse-toggle="dropdown-pages"
-                >
                   <svg
                     aria-hidden="true"
                     className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-100 dark:text-gray-500 dark:group-hover:text-gray-500"
@@ -120,10 +103,9 @@ const Sidebar = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                </button>
               </Link>
             </li>
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/hrofficer/dashboard/schedul"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
@@ -143,7 +125,7 @@ const Sidebar = () => {
               </Link>
             </li>
 
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/hrofficer/dashboard/approvejobrank"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
@@ -159,7 +141,7 @@ const Sidebar = () => {
                   <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
                 </svg>
                 <span className="flex-1 ml-3 whitespace-nowrap text-black">
-                  Approvr Job Rank
+                  Approve Job Rank
                 </span>
               </Link>
             </li>

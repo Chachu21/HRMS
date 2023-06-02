@@ -4,7 +4,6 @@ const cors = require("cors");
 const employeeRequisitionRouter = require("./routes/employeeRequistionRoute");
 const applicantRouter = require("./routes/applicantRoute");
 const { staffRouter } = require("./routes/staffRoute");
-const applicant_list = require("./models/applicant_list/applicant_list");
 const { loginRouter } = require("./routes/loginRoute");
 const roleRouter = require("./routes/roleRoute");
 const permissonRouter = require("./routes/permissionRoute");

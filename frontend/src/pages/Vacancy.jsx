@@ -113,7 +113,7 @@ const Vacancy = () => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="flex items-center fixed justify-center lg:mr-60 ml-36   lg:ml-0  -mt-[65px]  z-20 "
+          className="flex items-center fixed justify-center lg:mr-60 ml-28   lg:-ml-20  -mt-[65px]  z-20 "
         >
           <input
             id="search"
@@ -138,7 +138,7 @@ const Vacancy = () => {
             return (
               <div
                 key={vacacny.id}
-                className="flex flex-col justify-center items-center gap-5 rounded-lg bg-[#f7f7f7]"
+                className="flex flex-col justify-center items-center gap-5 hover:scale-105  transition duration-300 ease-in-out rounded-lg bg-[#f7f7f7]"
               >
                 <div className="flex flex-col justify-left items-left gap-5 py-5">
                   <p className="text-lg">

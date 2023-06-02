@@ -1,62 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaCheck, FaSearch, FaTimes } from "react-icons/fa";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { approved, rejected } from "../../../redux/reducers/loginReducer";
 
 const initialState = {
   searchQuery: "",
 };
 
 const ApproveRequest = () => {
-  // mockData.js
-  const mockData = [
-    {
-      id: 1,
-      fname: "John",
-      lname: "Doe",
-      email: "johndoe@example.com",
-      password: "password123",
-      phone_number: "1234567890",
-      role: "admin",
-    },
-  ];
 
   const [accountData, setAccountData] = useState([]);
   const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
+  const approvedItems = useSelector((state) => state.auth.approvedItems);
+  const rejectedItems = useSelector((state) => state.auth.rejectedItems);
 
-  const handleDelete = (id) => {
-    // axios
-    //   .delete(`http://localhost:5002/api/v1/staff/delete/${id}`)
-    //   .then((response) => {
-    //     setAccountData(accountData.filter((item) => item.id !== id));
-    //     console.log(`deleted user id :${id}`);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    console.log("deleted successfully");
-  };
-  //   useEffect(() => {
-  //     axios
-  //       .get("http://localhost:5002/api/v1/staff")
-  //       .then((response) => {
-  //         setAccountData(response.data);
-  //         console.log(accountData);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }, [accountData]);
+ useEffect(() => {
+   const fetchData = async () => {
+     try {
+       const response = await axios.get(
+         "http://localhost:5002/api/v1/employee_requistion"
+       );
+       setAccountData(response.data);
+       console.log(response.data);
+     } catch (error) {
+       // Handle error if the API request fails
+       console.error("Error fetching data:", error);
+     }
+   };
 
-  const handleDeactive = (id) => {};
+   fetchData();
+ }, []);
+  
 
+const handleApprove = (id) => {
+  if (!approvedItems.includes(id)) {
+    dispatch(approved(id)); // Dispatch the approved action with the item's ID
+  }
+};
+
+const handleReject = (id) => {
+  if (!rejectedItems.includes(id)) {
+    dispatch(rejected(id)); // Dispatch the rejected action with the item's ID
+  }
+};
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("search is done");
   };
 
   return (
-    <div className="flex flex-col mt-20">
+    <div className="flex w-full lg:ml-[18%] flex-col mt-20">
       <div className="flex justify-center items-center rounded-[5px] mx-4 my-10">
         <form
           action=""
@@ -87,33 +82,69 @@ const ApproveRequest = () => {
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2">Approved</th>
-              <th className="px-4 py-2">First Name</th>
-              <th className="px-4 py-2">Last Name</th>
-              <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">staff ID</th>
+              <th className="px-4 py-2">job Title</th>
+              <th className="px-4 py-2">Quantity</th>
+              <th className="px-4 py-2">CGPA</th>
+              <th className="px-4 py-2">Qualification</th>
               <th className="px-4 py-2 w-auto">Action</th>
             </tr>
           </thead>
           <tbody>
-            {mockData.map((datas) => {
-              return (
-                <tr key={datas.id} className="bg-gray-100/{0-4}">
-                  <td className="border px-4 py-2">
-                    <input type="checkbox" />
-                  </td>
-                  <td className="border px-4 py-2">{datas.fname} </td>
-                  <td className="border px-4 py-2">{datas.lname} </td>
-                  <td className="border px-4 py-2">{datas.email}</td>
-                  <td className="w-auto flex justify-center items-center gap-2 border py-2 px-4">
-                    <button
-                      className="bg-red-400 rounded-sm"
-                      onClick={() => handleDelete(datas.id)}
-                    >
-                      Approve
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {accountData.map(
+              (
+                { staff_id, job_title, quantity, cgpa, qualification },
+                index
+              ) => {
+                const isApproved = approvedItems.includes(index);
+                const isRejected = rejectedItems.includes(index);
+                return (
+                  <tr key={index} className="bg-gray-100/{0-4}">
+                    <td className="border px-4 py-2">
+                      {isApproved ? (
+                        <FaCheck color="green" />
+                      ) : isRejected ? (
+                        <FaTimes color="red" />
+                      ) : null}
+                    </td>
+                    <td className="border px-4 py-2">{staff_id}</td>
+                    <td className="border px-4 py-2">{job_title}</td>
+                    <td className="border px-4 py-2">{quantity}</td>
+                    <td className="border px-4 py-2">{cgpa}</td>
+                    <td className="border px-4 py-2">
+                      
+                      {qualification ? "Qualified" : "Not Qualified"}
+                    </td>
+                    <td className="w-auto flex justify-center items-center gap-2 border py-2">
+                      <button
+                        className={`${
+                          isApproved ? "bg-gray-400" : "bg-green-500"
+                        } rounded-sm px-1`}
+                        onClick={() => {
+                          handleApprove(index);
+                        }}
+                      >
+                        {isApproved ? (
+                          <span>Approved</span>
+                        ) : (
+                          <span>Approve</span>
+                        )}
+                      </button>
+                      {!isApproved && !isRejected && (
+                        <button
+                          className="bg-red-400 rounded-sm px-1"
+                          onClick={() => {
+                            handleReject(index);
+                          }}
+                        >
+                          <span>Reject</span>
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              }
+            )}
           </tbody>
         </table>
       </div>

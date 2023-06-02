@@ -120,7 +120,7 @@ const Header = () => {
                 </NavLink> */}
                 <CustomizedDialogs />
               </li>
-              <li className="flex items-center">
+              <li className="flex items-center m-[10px]">
                 {/* <NavLink
                   to="/login"
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"

@@ -1,26 +1,32 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AddStaffCustomizedDialogs from "../../../pages/Registration/AddStaffCustomizedDiaogs";
+import { humergerMenu } from "../../../redux/reducers/loginReducer";
 
 const AdminSidebar = () => {
   // const [isOpenSublink, setIsOpenSublink] = useState(false)
   const isClicked = useSelector((state) => state.auth.isClicked);
+  const dispatch =useDispatch()
+  const handleClick =() => { 
+    dispatch(humergerMenu())
+   }
   return (
     <div
       className={`flex sm:flex transition-transform ${
         isClicked ? "flex z-[1]" : "hidden"
       } `}
     >
+      
       <aside
         id="logo-sidebar"
         // transition-transform -translate-x-full
-        className=" fixed top-16 left-0 z-40 lg:w-[18%] w-[25%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
+        className=" fixed top-1 left-0 z-40 lg:w-[18%] h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-0  dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto  bg-white dark:bg-white">
           <ul className="space-y-5 font-medium text-blacks">
-            <li>
+            <li onClick={handleClick}>
               <Link
                 to="/admin/dashboard/manageaccount"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
@@ -39,7 +45,10 @@ const AdminSidebar = () => {
               </Link>
             </li>
 
-            <li className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200 gap-2">
+            <li
+              onClick={handleClick}
+              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200 gap-2"
+            >
               <svg
                 aria-hidden="true"
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-100 dark:text-gray-500 dark:group-hover:text-gray-500"
@@ -54,14 +63,8 @@ const AdminSidebar = () => {
                 ></path>
               </svg>
               <AddStaffCustomizedDialogs />
-              {/* {isOpenSublink && (
-                <ul
-                  id="dropdown-pages"
-                  className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
-                ></ul>
-              )} */}
             </li>
-            <li className="flex items-center">
+            <li onClick={handleClick} className="flex items-center">
               <Link
                 to="/admin/dashboard/approverequest"
                 className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75`}
@@ -89,10 +92,3 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar;
-
-// {isOpenSublink && (
-//                 <ul
-//                   id="dropdown-pages"
-//                   className="flex flex-col bg-gray-50 justify-center items-center py-2 space-y-2"
-//                 ></ul>
-//               )}

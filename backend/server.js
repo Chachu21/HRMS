@@ -17,6 +17,7 @@ const applicantListRouter = require("./routes/applicantListRoute");
 const app = express();
 const port = process.env.PORT || 5002;
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 //route
 app.use("/api/v1/applicant", applicantRouter);

@@ -26,13 +26,6 @@ const ApplicantRegister = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-
-    console.log(Object.fromEntries(formDataToSend)); // Display form data on the console
-
     try {
       await registerUser(formData);
       dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
@@ -191,7 +184,7 @@ const ApplicantRegister = () => {
             {/* <Link to="/login" className="text-blue-400 hover:underline">
               Login
             </Link> */}
-            <LoginCustomizedDialogs  />
+            <LoginCustomizedDialogs />
           </span>
         </div>
       </div>

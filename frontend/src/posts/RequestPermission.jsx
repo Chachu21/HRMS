@@ -12,10 +12,9 @@ const RequestPermission = () => {
     return_date: "",
     status: "",
   });
-const navigete = useNavigate()
-  const user = useSelector((state) =>state.auth.user)
- const  staff_id =user.staff_id
-
+  const navigete = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const staff_id = user.staff_id;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,10 +26,10 @@ const navigete = useNavigate()
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/permission",
-        {...state, staff_id}
+        { ...state, staff_id }
       );
 
-navigete('/')
+      navigete("/");
     } catch (err) {
       console.log(err.message);
     }
@@ -39,7 +38,7 @@ navigete('/')
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-100 rounded-lg p-4 h-1/2 ml-[18%] overflow-y-scroll"
+      className="bg-gray-100 rounded-lg p-4 h-1/2 mx-[34%]  overflow-y-scroll"
     >
       <h2 className="text-lg font-semibold mb-2">Request Permission</h2>
       <div className="flex flex-col mb-4">

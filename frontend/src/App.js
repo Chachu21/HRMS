@@ -45,7 +45,6 @@ import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
 
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
 
-
 function App() {
   return (
     <div>
@@ -144,6 +143,10 @@ function App() {
         {/* employee dashboard */}
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
           <Route index element={<EmployeeMain />} />
+          <Route
+            path="/employee/dashboard/manageaccount"
+            element={<LeaveRequest />}
+          />
           <Route
             path="/employee/dashboard/leaveRequest"
             element={<LeaveRequest />}

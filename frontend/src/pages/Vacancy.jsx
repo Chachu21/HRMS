@@ -113,7 +113,7 @@ const Vacancy = () => {
         <form
           action=""
           onSubmit={handleSubmit}
-          className="flex items-center fixed justify-center lg:mr-60 ml-28   lg:-ml-20  -mt-[65px]  z-20 "
+          className="flex items-center fixed justify-center lg:mr-60 ml-28 lg:-ml-20 -mt-[65px] z-20 "
         >
           <input
             id="search"

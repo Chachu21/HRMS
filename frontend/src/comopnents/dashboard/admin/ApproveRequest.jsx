@@ -9,49 +9,47 @@ const initialState = {
 };
 
 const ApproveRequest = () => {
-
   const [accountData, setAccountData] = useState([]);
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
   const approvedItems = useSelector((state) => state.auth.approvedItems);
   const rejectedItems = useSelector((state) => state.auth.rejectedItems);
 
- useEffect(() => {
-   const fetchData = async () => {
-     try {
-       const response = await axios.get(
-         "http://localhost:5002/api/v1/employee_requistion"
-       );
-       setAccountData(response.data);
-       console.log(response.data);
-     } catch (error) {
-       // Handle error if the API request fails
-       console.error("Error fetching data:", error);
-     }
-   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5002/api/v1/employee_requistion"
+        );
+        setAccountData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        // Handle error if the API request fails
+        console.error("Error fetching data:", error);
+      }
+    };
 
-   fetchData();
- }, []);
-  
+    fetchData();
+  }, []);
 
-const handleApprove = (id) => {
-  if (!approvedItems.includes(id)) {
-    dispatch(approved(id)); // Dispatch the approved action with the item's ID
-  }
-};
+  const handleApprove = (id) => {
+    if (!approvedItems.includes(id)) {
+      dispatch(approved(id)); // Dispatch the approved action with the item's ID
+    }
+  };
 
-const handleReject = (id) => {
-  if (!rejectedItems.includes(id)) {
-    dispatch(rejected(id)); // Dispatch the rejected action with the item's ID
-  }
-};
+  const handleReject = (id) => {
+    if (!rejectedItems.includes(id)) {
+      dispatch(rejected(id)); // Dispatch the rejected action with the item's ID
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("search is done");
   };
 
   return (
-    <div className="flex w-full lg:ml-[18%] flex-col mt-20">
+    <div className="flex ml-[18%] mr-[1%] flex-col mt-20">
       <div className="flex justify-center items-center rounded-[5px] mx-4 my-10">
         <form
           action=""
@@ -112,7 +110,6 @@ const handleReject = (id) => {
                     <td className="border px-4 py-2">{quantity}</td>
                     <td className="border px-4 py-2">{cgpa}</td>
                     <td className="border px-4 py-2">
-                      
                       {qualification ? "Qualified" : "Not Qualified"}
                     </td>
                     <td className="w-auto flex justify-center items-center gap-2 border py-2">

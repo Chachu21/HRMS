@@ -36,7 +36,7 @@ const ManageApplicant = () => {
             `http://localhost:5002/api/v1/vacancy?vacancy_id=${vacancyId}`
           );
           const vacancy = vacancyResponse.data;
-          console.log(vacancy.title)
+          console.log(vacancy.title);
 
           for (const applicant of applicants) {
             combinedData.push({
@@ -60,7 +60,7 @@ const ManageApplicant = () => {
   }, []);
 
   return (
-    <div className="flex w-full lg:ml-[18%] flex-col mt-20">
+    <div className="flex ml-[20%] mr-[1%] flex-col mt-20">
       <h1 className="text-2xl font-bold mb-4">Applicant list</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>

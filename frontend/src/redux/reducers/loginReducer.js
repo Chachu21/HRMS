@@ -56,6 +56,7 @@ const authSlice = createSlice({
       if (index === -1) {
         // If the item ID is not in the approvedItems array, add it
         state.approvedItems.push(itemId);
+        state.isApproved = !state.isApproved;
       } else {
         // If the item ID is already in the approvedItems array, remove it
         state.approvedItems.splice(index, 1);

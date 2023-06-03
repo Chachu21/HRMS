@@ -32,7 +32,7 @@ const LeaveRequests = () => {
   };
 
   return (
-    <div className="flex flex-col ml-[3%] mr-[1%]">
+    <div className="flex flex-col ml-[20%] mr-[1%]">
       <h1 className="text-2xl font-bold mb-4">Leave Request</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>

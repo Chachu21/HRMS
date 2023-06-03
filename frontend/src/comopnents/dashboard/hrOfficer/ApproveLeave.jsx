@@ -34,14 +34,10 @@ const ApproveLeave = () => {
               <td className="px-4 py-2">{leave.reason}</td>
               <td className="px-4 py-2">{leave.clearance}</td>
               <td className="px-4 py-2">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   approve
                 </button>
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                   reject
                 </button>
               </td>

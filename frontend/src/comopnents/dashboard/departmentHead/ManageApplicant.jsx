@@ -10,47 +10,35 @@ const ManageApplicant = () => {
         const response = await axios.get("http://localhost:5002/api/v1/lists");
         const applicantList = response.data;
 
-        // Group applicant IDs by vacancy ID
-        const groupedApplicants = applicantList.reduce((acc, item) => {
-          if (!acc[item.vacancy_id]) {
-            acc[item.vacancy_id] = [];
-          }
-          acc[item.vacancy_id].push(item.applicant_id);
-          return acc;
-        }, {});
+        const applicantIds = applicantList.map((item) => item.applicant_id);
 
-        // Fetch the applicants and vacancy information based on the grouped vacancy IDs
-        const combinedData = [];
+        const applicantsResponse = await axios.get(
+          `http://localhost:5002/api/v1/applicant?applicant_ids=${applicantIds.join(
+            ","
+          )}`
+        );
 
-        for (const vacancyId in groupedApplicants) {
-          const applicantIds = groupedApplicants[vacancyId];
+        const applicants = applicantsResponse.data;
 
-          const applicantsResponse = await axios.get(
-            `http://localhost:5002/api/v1/applicant?applicant_ids=${applicantIds.join(
-              ","
-            )}`
+        const formattedData = applicantList.map((item) => {
+          const applicant = applicants.find(
+            (app) => app.id === item.applicant_id
           );
-          const applicants = applicantsResponse.data;
 
-          const vacancyResponse = await axios.get(
-            `http://localhost:5002/api/v1/vacancy?vacancy_id=${vacancyId}`
-          );
-          const vacancy = vacancyResponse.data;
-          console.log(vacancy.title)
-
-          for (const applicant of applicants) {
-            combinedData.push({
+          if (applicant) {
+            return {
               id: applicant.id,
               fname: applicant.fname,
               lname: applicant.lname,
               email: applicant.email,
-              vacancyId: vacancyId,
-              vacancyTitle: vacancy ? vacancy.title : "", // Display vacancy title if available
-            });
+              cv: applicant.cv,
+              vacancyId: item.vacancy_id,
+              vacancyTitle: item.vacancy_title,
+            };
           }
-        }
+        });
 
-        setApplicantData(combinedData);
+        setApplicantData(formattedData);
       } catch (error) {
         console.error(error);
       }
@@ -58,6 +46,16 @@ const ManageApplicant = () => {
 
     fetchData();
   }, []);
+
+  const handleDownload = (cv) => {
+    const downloadLink = `http://localhost:5002/uploads/${cv}`;
+    const link = document.createElement("a");
+    link.href = downloadLink;
+    link.download = cv;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="flex w-full lg:ml-[18%] flex-col mt-20">
@@ -68,6 +66,7 @@ const ManageApplicant = () => {
             <th className="px-4 py-2 text-left">First Name</th>
             <th className="px-4 py-2 text-left">Last Name</th>
             <th className="px-4 py-2 text-left">Email</th>
+            <th className="px-4 py-2 text-left">CV File</th>
             <th className="px-4 py-2 text-left">Vacancy ID</th>
             <th className="px-4 py-2 text-left">Vacancy Title</th>
           </tr>
@@ -78,6 +77,36 @@ const ManageApplicant = () => {
               <td className="px-4 py-2">{applicant.fname}</td>
               <td className="px-4 py-2">{applicant.lname}</td>
               <td className="px-4 py-2">{applicant.email}</td>
+              <td className="px-4 py-2">
+                {applicant.cv && applicant.cv.endsWith(".pdf") ? (
+                  <a
+                    href={`http://localhost:5002/uploads/${applicant.cv}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    Download PDF
+                  </a>
+                ) : (
+                  applicant.cv && (
+                    <div>
+                      <a
+                        href={`http://localhost:5002/uploads/${applicant.cv}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View Image
+                      </a>
+                      <button
+                        className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => handleDownload(applicant.cv)}
+                      >
+                        Download
+                      </button>
+                    </div>
+                  )
+                )}
+              </td>
               <td className="px-4 py-2">{applicant.vacancyId}</td>
               <td className="px-4 py-2">{applicant.vacancyTitle}</td>
             </tr>

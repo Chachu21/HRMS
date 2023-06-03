@@ -1,3 +1,4 @@
+const multer = require("multer");
 const sequelize = require("../config/database.js");
 const initModels = require("../models/init-models");
 const models = initModels(sequelize);
@@ -6,7 +7,8 @@ const Applicant = models.applicant;
 const createApplicant = async (req, res) => {
   const role_id = 2;
   try {
-    const { fname, lname, email, password, phone_number, cv } = req.body;
+    const { fname, lname, email, password, phone_number } = req.body;
+    const cv = req.file; // Access the uploaded CV file from req.file
 
     // Check if the applicant already exists
     const existingApplicant = await Applicant.findOne({ where: { email } });
@@ -21,16 +23,16 @@ const createApplicant = async (req, res) => {
       email,
       password,
       phone_number,
-      cv,
+      cv: cv ? cv.filename : null, // Store the filename in the database
       role_id,
     });
+
     res.status(201).json(newApplicant);
   } catch (error) {
     console.error("Error creating applicant:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 const getAllApplicants = async (req, res) => {
   try {
     const applicants = await Applicant.findAll();
@@ -63,14 +65,12 @@ const updateApplicant = async (req, res) => {
       return res.status(404).json({ error: "Applicant not found" });
     }
 
-    const { fname, lname, email, password, phone_number, cv, role_id } =
-      req.body;
+    const { fname, lname, email, password, phone_number, role_id } = req.body;
     applicant.fname = fname;
     applicant.lname = lname;
     applicant.email = email;
     applicant.password = password;
     applicant.phone_number = phone_number;
-    applicant.cv = cv;
     applicant.role_id = role_id;
     await applicant.save();
     res.json(applicant);
@@ -96,10 +96,42 @@ const deleteApplicant = async (req, res) => {
   }
 };
 
+// img storage config
+const imgConfig = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+    const ext = file.originalname.split(".").pop();
+    callback(null, `cv-${Date.now()}.${ext}`);
+  },
+});
+
+// img filter
+const isImage = (req, file, callback) => {
+  const allowedMimeTypes = [
+    "application/pdf",
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+  ];
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    callback(null, true);
+  } else {
+    callback(new Error("Only PDF, JPEG, and PNG files are allowed"));
+  }
+};
+
+const upload = multer({
+  storage: imgConfig,
+  fileFilter: isImage,
+});
+
 module.exports = {
   createApplicant,
   getAllApplicants,
   getSingleApplicant,
   updateApplicant,
   deleteApplicant,
+  upload,
 };

@@ -1,64 +1,67 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setFormData,
-  setError,
-  setRegistrationStatus,
-} from "../../redux/reducers/applicant/applicantRegisterReducer";
-import { registerUser } from "../../api/registerApi";
-import LoginCustomizedDialogs from "../../comopnents/landingPage/LoginCustomizedDialogs";
+import React, { useState } from "react";
+import axios from "axios";
 
 const ApplicantRegister = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const formData = useSelector((state) => state.aplicantRegister.formData);
-  const registrationStatus = useSelector(
-    (state) => state.aplicantRegister.registrationStatus
-  );
-  // const error = useSelector((state) => state.aplicantRegister.error);
+  const [formData, setFormData] = useState({
+    fname: "",
+    lname: "",
+    phone_number: "",
+    password: "",
+    email: "",
+  });
+
+  const [cv, setCv] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    dispatch(setFormData({ ...formData, [name]: value })); // Use the spread operator to update the specific field
+  const handleCvChange = (e) => {
+    setCv(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const newFormData = new FormData();
+    newFormData.append("fname", formData.fname);
+    newFormData.append("lname", formData.lname);
+    newFormData.append("phone_number", formData.phone_number);
+    newFormData.append("password", formData.password);
+    newFormData.append("email", formData.email);
+    if (cv) {
+      newFormData.append("cv", cv);
+    }
     try {
-      await registerUser(formData);
-      dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
-      // ... handle success case ...
-      if (registrationStatus) {
-        navigate("/login");
-      }
+      const response = await axios.post(
+        "http://localhost:5002/api/v1/applicant/register",
+        newFormData
+      );
+      console.log(response);
+      // Handle success case...
     } catch (error) {
-      dispatch(setError(error.message)); // Dispatch action to update error in Redux store
-      // ... handle error case ...
+      console.log(error);
+      // Handle error case...
     }
   };
 
   return (
     <div>
-      {/* <div className="flex flex-col justify-center items-center w-screen min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-100 "> */}
       <div className="shadow-xl">
         <h3 className="text-xl font-bold text-blue-400">
-          Register for accessing provide service
+          Register for accessing provided service
         </h3>
       </div>
-      {/* {error && (
-          <div className="mt-5">
-            <p className="text-red-500">{error}</p>
-          </div>
-        )} */}
       <div className="w-[100vw] flex flex-col px-3 py-4 mt-6 overflow-hidden bg-gray-100 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
         <form className="" onSubmit={handleSubmit}>
           <div className="flex justify-center items-center gap-5">
             <div className="mt-4">
               <label
                 htmlFor="fname"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-medium text-gray-700"
               >
                 First Name
               </label>
@@ -76,7 +79,7 @@ const ApplicantRegister = () => {
             <div className="mt-4">
               <label
                 htmlFor="lname"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-medium text-gray-700"
               >
                 Last Name
               </label>
@@ -94,20 +97,19 @@ const ApplicantRegister = () => {
           </div>
 
           <div className="flex justify-center items-center gap-5">
-            {" "}
             <div className="mt-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-medium text-gray-700"
               >
-                Eamil
+                Email
               </label>
               <div className="flex flex-col items-start">
                 <input
                   value={formData.email}
                   onChange={handleChange}
                   type="email"
-                  required="true"
+                  required={true}
                   name="email"
                   className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
@@ -116,9 +118,9 @@ const ApplicantRegister = () => {
             <div className="mt-4">
               <label
                 htmlFor="phone"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-medium text-gray-700"
               >
-                Phone_number
+                Phone Number
               </label>
               <div className="flex flex-col items-start">
                 <input
@@ -132,11 +134,12 @@ const ApplicantRegister = () => {
               </div>
             </div>
           </div>
+
           <div className="flex justify-center items-center gap-5">
             <div className="mt-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-medium text-gray-700"
               >
                 Password
               </label>
@@ -155,16 +158,15 @@ const ApplicantRegister = () => {
             <div>
               <label
                 htmlFor="file"
-                className="block text-sm font-medium text-gray-700 undefined"
+                className="block text-sm font-medium text-gray-700"
               >
-                Add cv
+                Add CV
               </label>
               <div className="flex flex-col items-start">
                 <input
                   id="file"
-                  type="text"
-                  value={formData.cv}
-                  onChange={handleChange} // Add the onChange event handler
+                  type="file"
+                  onChange={handleCvChange}
                   name="cv"
                   className="block w-full mt-1 border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
@@ -178,18 +180,9 @@ const ApplicantRegister = () => {
             </button>
           </div>
         </form>
-        <div className="flex gap-3 mt-4 text-grey-600 mb-10 justify-center items-center">
-          Already have an account?{" "}
-          <span>
-            {/* <Link to="/login" className="text-blue-400 hover:underline">
-              Login
-            </Link> */}
-            <LoginCustomizedDialogs />
-          </span>
-        </div>
       </div>
     </div>
-    // </div>
   );
 };
+
 export default ApplicantRegister;

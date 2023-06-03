@@ -8,6 +8,8 @@ const initialState = {
     password: "",
     email: "",
     cv: "",
+    isApproved:false,
+    isRejected:false,
   },
   registrationStatus: false,
   error: null,
@@ -31,6 +33,12 @@ const registerSlice = createSlice({
       state.registrationStatus = null;
       state.error = null;
     },
+    approvedApplicant: (state) => {
+      state.isApproved = true;
+    },
+    rejectApplicant: (state) => {
+      state.isRejected = true;
+    },
   },
 });
 
@@ -39,6 +47,8 @@ export const {
   setRegistrationStatus,
   setError,
   resetRegistration,
+  approvedApplicant,
+  rejectApplicant,
 } = registerSlice.actions;
 
 export default registerSlice.reducer;

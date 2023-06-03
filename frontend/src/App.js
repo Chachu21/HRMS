@@ -44,6 +44,7 @@ import ApplicantInfo from "./comopnents/dashboard/applicant/ApplicantInfo";
 import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
 
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
+import ApplicantSchedule from "./comopnents/dashboard/applicant/ApplicantSchedule";
 
 
 function App() {
@@ -109,8 +110,12 @@ function App() {
           <Route index element={<ApplicantMain />} />
 
           <Route
-            path="/applicant/dashboard/manageaccount"
+            path="/applicant/dashboard/result"
             element={<ApplicantInfo />}
+          />
+          <Route
+            path="/applicant/dashboard/schedule"
+            element={<ApplicantSchedule />}
           />
         </Route>
         {/* HR officer page */}

@@ -168,21 +168,14 @@ const ManageAccountInfo = () => {
                       >
                         Edit
                       </Link>
-                      {/* <Link
-                        to={`/view/${datas.id}`}
-                        className="px-2 bg-gray-300 rounded-sm"
-                      >
-                        <button>View</button>
-                      </Link> */}
+                     
                       <button
                         className="bg-red-400 rounded-sm"
                         onClick={() => handleDelete(datas.id)}
                       >
                         Delete
                       </button>
-                      <button className="bg-gray-400 rounded-sm">
-                        Deactivate
-                      </button>
+                     
                     </td>
                   </tr>
                 );

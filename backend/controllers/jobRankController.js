@@ -6,35 +6,12 @@ const models = initModels(sequelize);
 const JobRank = models.job_rank;
 const createJobRank = async (req, res) => {
   try {
-    // Check user role and perform actions accordingly
-    const userRole = req.user.role; // Assuming the user role is stored in req.user.role
-    const jobRankData = req.body;
-
-    // Employee can only create new job ranks with pending status
-    if (userRole === "employee") {
-      jobRankData.status = "pending";
-    }
-    // Department head can only forward job ranks from pending to forwarded status
-    else if (
-      userRole === "department_head" &&
-      jobRankData.status === "pending"
-    ) {
-      jobRankData.status = "forwarded";
-    }
-    // HR officer can approve job ranks that are in the forwarded status
-    else if (userRole === "hr_officer" && jobRankData.status === "forwarded") {
-      jobRankData.status = "approved";
-    } else {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
-
-    const jobRank = await JobRank.create(jobRankData);
+    const jobRank = await JobRank.create(req.body);
     res.status(200).json(jobRank);
   } catch (error) {
     res.status(500).json(error);
   }
 };
-
 const GetAllJobRank = async (req, res) => {
   try {
     const allJobRank = await JobRank.findAll();
@@ -42,6 +19,75 @@ const GetAllJobRank = async (req, res) => {
     res.status(200).json(allJobRank);
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+
+const getJobRankById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const jobRank = await JobRank.findByPk(id);
+    if (!jobRank) {
+      res.status(404).json({ error: "Job rank not found" });
+      return;
+    }
+    res.status(200).json(jobRank);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching job rank by ID" });
+  }
+};
+
+const updateJobRank = async (req, res) => {
+  const id = req.params.id;
+  const { buttonType } = req.body;
+  const jobRank = await JobRank.findByPk(id);
+  let status;
+  console.log("job ranks list");
+  // Determine the status based on the button type
+
+  if (
+    buttonType === "forward" &&
+    jobRank.status === "Pending" &&
+    jobRank.status !== "Approved" &&
+    jobRank.status !== "Rejected"
+  ) {
+    status = "Forwarded";
+  } else if (
+    buttonType === "approve" &&
+    jobRank.status === "Forwarded" &&
+    jobRank.status !== "Pending"
+  ) {
+    status = "Approved";
+  } else if (
+    buttonType === "reject" &&
+    jobRank.status === "Forwarded" &&
+    jobRank.status !== "Pending"
+  ) {
+    status = "Rejected";
+  } else {
+    res.status(400).json({ error: "Invalid button type" });
+    return;
+  }
+
+  try {
+    const jobRank = await JobRank.findOne({ where: { id } });
+
+    if (!jobRank) {
+      res.status(404).json({ error: "Job rank not found" });
+      return;
+    }
+
+    jobRank.status = status;
+    await jobRank.save();
+
+    res
+      .status(200)
+      .json({ message: "Job rank status is successfully updated" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating job rank status" });
   }
 };
 
@@ -63,5 +109,7 @@ const deleteJobRank = async (req, res) => {
 module.exports = {
   createJobRank,
   GetAllJobRank,
+  getJobRankById,
+  updateJobRank,
   deleteJobRank,
 };

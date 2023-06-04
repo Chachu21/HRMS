@@ -58,8 +58,8 @@ const ManageApplicant = () => {
   };
 
   return (
-    <div className="flex ml-[20%] mr-[1%] flex-col mt-20">
-      <h1 className="text-2xl font-bold mb-4">Applicant list</h1>
+    <div className="flex lg:ml-[20%] mr-[1%] flex-col mt-20">
+      <h1 className="text-2xl font-bold mb-4 ml-[30%]">Applicant list</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
           <tr className="bg-gray-200">
@@ -98,7 +98,7 @@ const ManageApplicant = () => {
                         View Image
                       </a>
                       <button
-                        className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
                         onClick={() => handleDownload(applicant.cv)}
                       >
                         Download

@@ -38,9 +38,9 @@ const RequestPermission = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-100 rounded-lg p-4 h-1/2 mx-[34%]  overflow-y-scroll"
+      className="bg-gray-100 rounded-lg p-4 h-1/2 ml-[28%] overflow-y-scroll w-[40%] mt-[7%] "
     >
-      <h2 className="text-lg font-semibold mb-2">Request Permission</h2>
+      <h2 className=" font-semibold mb-4 ml-28 text-xl">Request Permission</h2>
       <div className="flex flex-col mb-4">
         <label htmlFor="name" className="mb-1 font-semibold text-gray-600">
           Name
@@ -51,9 +51,12 @@ const RequestPermission = () => {
           name="name"
           value={state.name}
           onChange={handleChange}
-          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="px-3 h-12 py-2 
+          rounded-md border border-gray-300 focus:outline-none "
           required
         />
+        {/* border border-gray-300 focus:outline-none
+        focus:ring-2 focus:border-transparent */}
       </div>
       <div className="flex flex-col mb-4">
         <label htmlFor="type" className="mb-1 font-semibold text-gray-600">
@@ -64,7 +67,7 @@ const RequestPermission = () => {
           name="type"
           value={state.type}
           onChange={handleChange}
-          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
           required
         >
           <option value="">Select a type...</option>
@@ -82,12 +85,15 @@ const RequestPermission = () => {
           name="reason"
           value={state.reason}
           onChange={handleChange}
-          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="px-3 h-12 py-2 focus:ring-2 focus:border-transparent focus:ring-blue-300  rounded-md border border-gray-300 focus:outline-none "
           required
         />
       </div>
       <div className="flex flex-col mb-4">
-        <label htmlFor="startDate" className="mb-1 font-semibold text-gray-600">
+        <label
+          htmlFor="startDate"
+          className="px-3 h-12 py-2  rounded-md border border-gray-300 focus:outline-none "
+        >
           Start Date
         </label>
         <input
@@ -96,7 +102,7 @@ const RequestPermission = () => {
           name="start_date"
           value={state.start_date}
           onChange={handleChange}
-          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="px-3 h-12 py-2 focus:ring-2 focus:border-transparent focus:ring-blue-300  rounded-md border border-gray-300 focus:outline-none "
           required
         />
       </div>
@@ -113,7 +119,7 @@ const RequestPermission = () => {
           id="returnDate"
           value={state.return_date}
           onChange={handleChange}
-          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="px-3 h-12 py-2 focus:ring-2 focus:border-transparent focus:ring-blue-300  rounded-md border border-gray-300 focus:outline-none "
           required
         />
       </div>
@@ -127,13 +133,13 @@ const RequestPermission = () => {
           name="status"
           value={state.status}
           onChange={handleChange}
-          className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="px-3 h-12 py-2 focus:ring-2 focus:border-transparent focus:ring-blue-300  rounded-md border border-gray-300 focus:outline-none "
           required
         />
       </div>
       <button
         type="submit"
-        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
+        className="bg-blue-500 mt-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
       >
         Request
       </button>

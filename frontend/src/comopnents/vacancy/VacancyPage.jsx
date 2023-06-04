@@ -52,10 +52,10 @@ const JobVacancyAnnouncement = () => {
   };
 
   return (
-    <div className="max-w-md  flex ml-[30%] flex-col mt-20">
+    <div className="max-w-md  flex lg:ml-[35%]  flex-col container px-4 sm:px-6 sm:m-4 lg:px-8 mt-20 lg:mt-24 ">
       <h2 className="text-2xl font-bold mb-4">Job Vacancy Announcement</h2>
       <form onSubmit={handleSubmit} className="space-y-5">
-        <div className="flex gap-5">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="flex flex-col">
             <label htmlFor="jobTitle" className="text-gray-700 font-bold mb-2">
               Job Title:
@@ -66,7 +66,7 @@ const JobVacancyAnnouncement = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
@@ -79,11 +79,11 @@ const JobVacancyAnnouncement = () => {
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
-        <div className="flex gap-5">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="flex flex-col">
             <label
               htmlFor="department"
@@ -97,7 +97,7 @@ const JobVacancyAnnouncement = () => {
               name="department"
               value={formData.department}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
@@ -110,11 +110,11 @@ const JobVacancyAnnouncement = () => {
               name="terms"
               value={formData.terms}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
-        <div className="flex gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="flex flex-col">
             <label
               htmlFor="qualification"
@@ -128,7 +128,7 @@ const JobVacancyAnnouncement = () => {
               name="qualification"
               value={formData.qualification}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
@@ -141,11 +141,11 @@ const JobVacancyAnnouncement = () => {
               name="sex"
               value={formData.sex}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
-        <div className="flex gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="flex flex-col">
             <label
               htmlFor="desinationFile"
@@ -159,7 +159,7 @@ const JobVacancyAnnouncement = () => {
               name="desgination"
               value={formData.desgination}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
@@ -172,7 +172,7 @@ const JobVacancyAnnouncement = () => {
               name="cgpa"
               value={formData.cgpa}
               onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
@@ -198,3 +198,163 @@ const JobVacancyAnnouncement = () => {
 };
 
 export default JobVacancyAnnouncement;
+
+//   return (
+//     <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+//       <h2 className="text-2xl font-bold mb-4 text-center">
+//         Job Vacancy Announcement
+//       </h2>
+
+//       <form onSubmit={handleSubmit} className="space-y-5">
+//         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+//           <div className="flex flex-col">
+//             <label htmlFor="jobTitle" className="text-gray-700 font-bold mb-2">
+//               Job Title:
+//             </label>
+//             <input
+//               id="jobTitle"
+//               type="text"
+//               name="title"
+//               value={formData.title}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+
+//           <div className="flex flex-col">
+//             <label htmlFor="quantity" className="text-gray-700 font-bold mb-2">
+//               Quantity:
+//             </label>
+//             <input
+//               id="quantity"
+//               type="number"
+//               name="quantity"
+//               value={formData.quantity}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+//         </div>
+
+//         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+//           <div className="flex flex-col">
+//             <label
+//               htmlFor="department"
+//               className="text-gray-700 font-bold mb-2"
+//             >
+//               Department:
+//             </label>
+//             <input
+//               id="department"
+//               type="text"
+//               name="department"
+//               value={formData.department}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+
+//           <div className="flex flex-col">
+//             <label htmlFor="term" className="text-gray-700 font-bold mb-2">
+//               Term of Employment:
+//             </label>
+//             <input
+//               id="term"
+//               type="text"
+//               name="terms"
+//               value={formData.terms}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+//         </div>
+
+//         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+//           <div className="flex flex-col">
+//             <label
+//               htmlFor="qualification"
+//               className="text-gray-700 font-bold mb-2"
+//             >
+//               Qualification:
+//             </label>
+//             <input
+//               id="qualification"
+//               type="text"
+//               name="qualification"
+//               value={formData.qualification}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+
+//           <div className="flex flex-col">
+//             <label htmlFor="sexFile" className="text-gray-700 font-bold mb-2">
+//               Sex:
+//             </label>
+//             <input
+//               id="sexFile"
+//               type="text"
+//               name="sex"
+//               value={formData.sex}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+//         </div>
+
+//         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+//           <div className="flex flex-col">
+//             <label
+//               htmlFor="desinationFile"
+//               className="text-gray-700 font-bold mb-2"
+//             >
+//               Designation:
+//             </label>
+//             <input
+//               id="desinationFile"
+//               type="text"
+//               name="desgination"
+//               value={formData.desgination}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+
+//           <div className="flex flex-col">
+//             <label htmlFor="cgpa" className="text-gray-700 font-bold mb-2">
+//               Minimum CGPA:
+//             </label>
+//             <input
+//               id="cgpa"
+//               type="number"
+//               name="cgpa"
+//               value={formData.cgpa}
+//               onChange={handleChange}
+//               className="form-input"
+//             />
+//           </div>
+//         </div>
+
+//         <div className="flex justify-center">
+//           <button
+//             type="submit"
+//             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+//           >
+//             Submit
+//           </button>
+//           <button
+//             type="button"
+//             onClick={handleClear}
+//             className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+//           >
+//             Clear
+//           </button>
+//         </div>
+//       </form>
+
+//       <ToastContainer />
+//     </div>
+//   );
+// };
+
+// export default JobVacancyAnnouncement;

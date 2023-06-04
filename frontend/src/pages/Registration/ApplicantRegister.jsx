@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 
 const ApplicantRegister = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const ApplicantRegister = () => {
     password: "",
     email: "",
   });
-
+const navigate=useNavigate();
   const [cv, setCv] = useState(null);
 
   const handleChange = (e) => {
@@ -41,7 +42,7 @@ const ApplicantRegister = () => {
         newFormData
       );
       console.log(response);
-      // Handle success case...
+      navigate("/login");
     } catch (error) {
       console.log(error);
       // Handle error case...

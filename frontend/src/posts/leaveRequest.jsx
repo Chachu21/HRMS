@@ -4,34 +4,59 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LeaveRequest = () => {
-  const [state, setstate] = useState({
-    reason: "",
-    clearance: "",
-  });
+  const [reason, setstate] = useState("");
+  const [clearance, setClearance] = useState("");
 
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
-  const staff_id = user.staff_id;
 
   const handleChande = (event) => {
-    const { name, value } = event.target;
-    setstate((prev) => ({ ...prev, [name]: value }));
+    setstate(event.target.value);
   };
+  const handleClearanceChange = (e) => {
+    setClearance(e.target.files[0]);
+  };
+  console.log(clearance);
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const newFormData = new FormData();
+  //   newFormData.append("reason", reason);
+  //   if (clearance) {
+  //     newFormData.append("clearance", clearance);
+  //   }
 
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:5002/api/v1/leave_request",
+  //       newFormData 
+  //     );
+
+  //     navigete("/");
+  //   } catch (err) {
+  //     console.log(err.message);
+  //   }
+  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const newFormData = new FormData();
+    newFormData.append("staff_id", user.id); // Add the staff_id
+    newFormData.append("reason", reason);
+    if (clearance) {
+      newFormData.append("clearance", clearance);
+    }
+  
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/leave_request",
-        { ...state, staff_id }
+        newFormData
       );
-
-      navigete('/')
+  
+      navigete("/");
     } catch (err) {
       console.log(err.message);
     }
   };
+  
 
   return (
     <div className="flex ml-[2%] flex-col mt-[10px]">
@@ -53,22 +78,21 @@ const LeaveRequest = () => {
               onChange={handleChande}
               name="reason"
               id="reason"
-              value={state.reason}
+              value={reason}
               cols="60"
               rows="7"
               className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
             ></textarea>
           </div>
           <div className="flex items-center w-full mb-4">
-            <label for="clearance" className="w-1/4 mr-2">
+            <label for="file" className="w-1/4 mr-2">
               Upload your clearance
             </label>
             <input
-              onChange={handleChande}
-              type="text"
-              value={state.clearance}
+              onChange={handleClearanceChange}
+              type="file"
               name="clearance"
-              id="clearance"
+              id="file"
               // accept=".png, .jpeg, .jpg"
               className="w-3/4 border border-gray-300 outline-none pl-5 rounded"
             />

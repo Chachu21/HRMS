@@ -1,83 +1,91 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ApproveJobRank = () => {
-  const [rankData, setRankData] = useState([]);
+  const [jobRankRequests, setJobRankRequests] = useState([]);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5002/api/v1/job_rank")
-      .then((response) => {
-        setRankData(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchJobRankRequests();
   }, []);
 
-  const handleApprove = (index) => {
-    const updatedData = [...rankData];
-    updatedData[index].status = "Approved";
-    setRankData(updatedData);
+  const fetchJobRankRequests = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5002/api/v1/department/${user.departmentId}/job_rank_requests`
+      );
+      setJobRankRequests(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  const handleReject = (index) => {
-    const updatedData = [...rankData];
-    updatedData[index].status = "Rejected";
-    setRankData(updatedData);
+  const handleApprove = async (requestId) => {
+    try {
+      await axios.put(
+        `http://localhost:5002/api/v1/job_rank_requests/${requestId}/approve`
+      );
+      fetchJobRankRequests();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleReject = async (requestId) => {
+    try {
+      await axios.put(
+        `http://localhost:5002/api/v1/job_rank_requests/${requestId}/reject`
+      );
+      fetchJobRankRequests();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
-    <div className="flex flex-col ml-[18%]">
-      <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
-      <div className="flex justify-center items-center px-5">
-        <table className="table-auto w-full">
-          <thead className="bg-gray-100">
+    <div className="flex ml-[2%] flex-col mt-[10px]">
+      <div className="flex flex-col justify-center items-center mx-auto my-10 bg-gray-100 h-[100vh]">
+        <h1 className="text-3xl mb-4">Approve Job Rank Requests</h1>
+        <table className="table-fixed">
+          <thead>
             <tr>
-              <th className="px-4 py-2">StaffId</th>
-              <th className="px-4 py-2">Level</th>
-              <th className="px-4 py-2">Cv</th>
-              <th className="px-4 py-2 w-auto">Action</th>
+              <th className="w-1/3">Employee ID</th>
+              <th className="w-1/3">Current Job Rank</th>
+              <th className="w-1/3">Action</th>
             </tr>
           </thead>
-          <tbody className="overflow-x-hidden">
-            {rankData.map((rank, index) => {
-              return (
-                <tr key={index} className="bg-gray-100/{0-4}">
-                  <td className="border px-4 py-2">{rank.staff_id}</td>
-                  <td className="border px-4 py-2">{rank.level}</td>
-                  <td className="border px-4 py-2">{rank.cv}</td>
-
-                  <td className="w-auto flex justify-center items-center gap-2 py-2 px-4">
-                    {rank.status !== "Approved" && rank.status !== "Rejected" && (
+          <tbody>
+            {jobRankRequests.map((request) => (
+              <tr key={request.id}>
+                <td>{request.employeeId}</td>
+                <td>{request.currentJobRank}</td>
+                <td>
+                  {request.status === "Pending" && (
+                    <>
                       <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
-                        onClick={() => handleApprove(index)}
+                        onClick={() => handleApprove(request.id)}
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
                       >
                         Approve
                       </button>
-                    )}
-
-                    {rank.status !== "Approved" && rank.status !== "Rejected" && (
                       <button
-                        className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded"
-                        onClick={() => handleReject(index)}
+                        onClick={() => handleReject(request.id)}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                       >
                         Reject
                       </button>
-                    )}
-
-                    {rank.status === "Approved" && (
-                      <span className="text-green-500">Approved</span>
-                    )}
-                    {rank.status === "Rejected" && (
-                      <span className="text-red-500">Rejected</span>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+                    </>
+                  )}
+                  {request.status === "Approved" && (
+                    <span className="text-green-500">Approved</span>
+                  )}
+                  {request.status === "Rejected" && (
+                    <span className="text-red-500">Rejected</span>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

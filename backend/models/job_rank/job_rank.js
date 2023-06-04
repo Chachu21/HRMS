@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+const Sequelize = require("sequelize");
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
     "job_rank",
     {
@@ -24,6 +24,11 @@ module.exports = function(sequelize, DataTypes) {
       cv: {
         type: DataTypes.STRING(255),
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM("pending", "forwarded", "approved"),
+        allowNull: false,
+        defaultValue: "pending",
       },
     },
     {

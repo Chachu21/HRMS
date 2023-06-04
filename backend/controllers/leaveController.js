@@ -1,15 +1,55 @@
+const multer = require("multer");
 const initModels = require("../models/init-models.js");
 const sequelize = require("../config/database.js");
 const models = initModels(sequelize);
 const LeaveRequest = models.leave_request;
 
 const createLeaveRequest = async (req, res) => {
-  try {
-    const leaveRequest = await LeaveRequest.create(req.body);
-    res.status(200).json(leaveRequest);
-  } catch (error) {
-    res.status(500).json({ error: "cannot create leave" });
-  }
+  const createLeaveRequest = async (req, res) => {
+    const role_id = 3;
+    try {
+      const { staff_id, reason } = req.body;
+      const clearance = req.file;
+      console.log("clearance:", clearance);
+      console.log("reason:", reason);
+
+      if (!staff_id || !reason) {
+        return res
+          .status(400)
+          .json({ error: "staff_id and reason are required" });
+      }
+
+      const leaveRequest = await LeaveRequest.create({
+        staff_id,
+        reason,
+        clearance: clearance ? clearance.filename : null,
+        role_id,
+      });
+      res.status(200).json(leaveRequest);
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({ error: "cannot create leave" });
+    }
+  };
+
+  // const role_id = 3;
+  // try {
+  //   const { reason } = req.body;
+  //   const clearance = req.file;
+  //   console.log('clearacve');
+  //   console.log(clearance);
+  //   console.log(reason);
+
+  //   const leaveRequest = await LeaveRequest.create({
+  //     reason,
+  //     clearance: clearance ? clearance.filename : null,
+  //     role_id,
+  //   });
+  //   res.status(200).json(leaveRequest);
+  // } catch (error) {
+  //   console.log(error.message);
+  //   res.status(500).json({ error: "cannot create leave" });
+  // }
 };
 
 // Read all leave requests
@@ -81,10 +121,41 @@ const deleteLeaveRequestById = async (req, res) => {
   }
 };
 
+const imgConfig = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+    const ext = file.originalname.split(".").pop();
+    callback(null, `clearance-${Date.now()}.${ext}`);
+  },
+});
+
+// img filter
+const isImage = (req, file, callback) => {
+  const allowedMimeTypes = [
+    "application/pdf",
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+  ];
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    callback(null, true);
+  } else {
+    callback(new Error("Only PDF, JPEG, and PNG files are allowed"));
+  }
+};
+
+const upload = multer({
+  storage: imgConfig,
+  fileFilter: isImage,
+});
+
 module.exports = {
   createLeaveRequest,
   getAllLeaveRequests,
   getLeaveRequestById,
   updateLeaveRequestById,
   deleteLeaveRequestById,
+  upload,
 };

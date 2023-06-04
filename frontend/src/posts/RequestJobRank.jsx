@@ -46,9 +46,9 @@ const RequestJobRank = () => {
         <form
           onSubmit={handleSubmit}
           action=""
-          className="flex flex-col items-center bg-white m-3 p-10 pt-10 gap-5"
+          className="flex flex-col items-center bg-white m-3 p-10 pt-10 gap-5 "
         >
-          <div className="flex items-center w-full mb-4">
+          <div className="flex items-center w-full mb-4 ">
             <label htmlFor="level" className="w-1/4 mr-4">
               level
             </label>
@@ -57,7 +57,7 @@ const RequestJobRank = () => {
               name="level"
               value={state.level}
               id="level"
-              className="w-3/4 rounded outline-none"
+              className="w-3/4 rounded outline-none h-8 focus:ring-2 focus:border-transparent focus:ring-blue-300"
             >
               <option value="rank 0"> rank 0</option>
               <option value="rank 1"> rank 1</option>
@@ -70,13 +70,12 @@ const RequestJobRank = () => {
             </label>
             <input
               onChange={handleChande}
-              type="text"
+              type="file"
               name="cv"
               id="clearance"
               value={state.cv}
               // accept="image/png, image/jpeg, image/jpg"
-              className="w-3/4 rounded outline-none bg-gray-100"
-
+              className="w-3/4 rounded outline-none h-8 bg-gray-100 focus:ring-2 focus:border-transparent focus:ring-blue-300"
             />
           </div>
           <div className="flex justify-center w-full gap-7 mt-10 mb-10">

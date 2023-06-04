@@ -16,6 +16,45 @@ const ApproveJobRank = () => {
       });
   }, []);
 
+  const handleApprove = (index) => {
+    const updatedData = [...rankData];
+    if (updatedData[index].status === "Forwarded") {
+      updatedData[index].status = "Approved";
+    } 
+    setRankData(updatedData);
+    const id = rankData[index].id;
+    const buttonType = "approve"; // Set the buttonType to "approve"
+
+    axios
+      .put(`http://localhost:5002/api/v1/job_rank/${id}`, { buttonType })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };	
+
+  const handleReject = (index) => {
+    const updatedData = [...rankData];
+     if (updatedData[index].status === "Forwarded") {
+       updatedData[index].status = "Rejected";
+     } 
+    setRankData(updatedData);
+
+    const id = rankData[index].id;
+    const buttonType = "reject"; // Set the buttonType to "reject"
+
+    axios
+      .put(`http://localhost:5002/api/v1/job_rank/${id}`, { buttonType })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="flex flex-col ml-[18%]">
       <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
@@ -34,16 +73,36 @@ const ApproveJobRank = () => {
               return (
                 <tr key={index} className="bg-gray-100/{0-4}">
                   <td className="border px-4 py-2">{rank.staff_id}</td>
-                  <td className="border px-4 py-2">{rank.level} </td>
-                  <td className="border px-4 py-2">{rank.cv} </td>
+                  <td className="border px-4 py-2">{rank.level}</td>
+                  <td className="border px-4 py-2">{rank.cv}</td>
 
                   <td className="w-auto flex justify-center items-center gap-2 py-2 px-4">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
-                      Approve
-                    </button>
-                    <button className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">
-                      Reject
-                    </button>
+                    {rank.status !== "Approved" &&
+                      rank.status !== "Rejected" && (
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
+                          onClick={() => handleApprove(index)}
+                        >
+                          Approve
+                        </button>
+                      )}
+
+                    {rank.status !== "Approved" &&
+                      rank.status !== "Rejected" && (
+                        <button
+                          className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded"
+                          onClick={() => handleReject(index)}
+                        >
+                          Reject
+                        </button>
+                      )}
+
+                    {rank.status === "Approved" && (
+                      <span className="text-green-500">Approved</span>
+                    )}
+                    {rank.status === "Rejected" && (
+                      <span className="text-red-500">Rejected</span>
+                    )}
                   </td>
                 </tr>
               );
@@ -51,37 +110,6 @@ const ApproveJobRank = () => {
           </tbody>
         </table>
       </div>
-
-      {/* <table className="table-auto border-collapse border border-gray-400">
-        <thead>
-          <tr className="bg-gray-200 flex justify-between items-center">
-            <th className="px-4 py-2 text-left">StaffId</th>
-            <th className="px-4 py-2 text-left">Level</th>
-            <th className="px-4 py-2 text-left">Cv</th>
-            <th className="px-4 py-2 text-left">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rankData.map((rank) => (
-            <tr
-              key={rank.id}
-              className="border border-gray-400 flex justify-between"
-            >
-              <td className="px-4 py-2">{rank.staff_id}</td>
-              <td className="px-4 py-2">{rank.level}</td>
-              <td className="px-4 py-2">{rank.cv}</td>
-              <td className="px-4 py-2">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
-                  Approve
-                </button>
-                <button className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">
-                  Reject
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
     </div>
   );
 };

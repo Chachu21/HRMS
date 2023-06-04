@@ -51,7 +51,7 @@ const handleReject = (id) => {
   };
 
   return (
-    <div className="flex w-full lg:ml-[18%] flex-col mt-20">
+    <div className="fixed flex w-full lg:ml-[1%] lg:mr-[1%] flex-col mt-12">
       <div className="flex justify-center items-center rounded-[5px] mx-4 my-10">
         <form
           action=""
@@ -77,7 +77,13 @@ const handleReject = (id) => {
           </button>
         </form>
       </div>
-      <div className="flex justify-center items-center px-5 overflow-x-auto">
+      <div
+        className="flex ml-[20%] justify-center items-center px-5 overflow-x-auto"
+        style={{
+          overflowX: "auto",
+          "@media (min-width: 1024px)": { overflowX: "hidden" },
+        }}
+      >
         <table className="table-auto w-full">
           <thead className="bg-gray-100">
             <tr>
@@ -112,7 +118,6 @@ const handleReject = (id) => {
                     <td className="border px-4 py-2">{quantity}</td>
                     <td className="border px-4 py-2">{cgpa}</td>
                     <td className="border px-4 py-2">
-                      
                       {qualification ? "Qualified" : "Not Qualified"}
                     </td>
                     <td className="w-auto flex justify-center items-center gap-2 border py-2">

@@ -22,8 +22,8 @@ const ViewEmployeeRequistion = () => {
   // };
 
   return (
-    <div className="flex flex-col ml-[3%] mr-[1%]">
-      <h1 className="text-2xl font-bold mb-4">Employee Requistion</h1>
+    <div className="flex flex-col lg:ml-[20%] mr-[1%] mt-[7%] ml-2 ">
+      <h1 className="text-2xl font-bold mb-4 ml-[30%]">Employee Requistion</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
           <tr className="bg-gray-200">

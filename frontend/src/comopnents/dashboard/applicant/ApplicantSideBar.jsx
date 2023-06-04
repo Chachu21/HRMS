@@ -14,7 +14,6 @@ const ApplicantSidebar = () => {
     >
       <aside
         id="logo-sidebar"
-        // transition-transform -translate-x-full
         className=" fixed top-1 left-0 z-40 lg:w-[18%] sm:w-[25%]  h-screen pt-20   text-black bg-white border-r border-gray-200 sm:translate-x-3  dark:bg-white dark:border-gray-200"
         aria-label="Sidebar"
       >

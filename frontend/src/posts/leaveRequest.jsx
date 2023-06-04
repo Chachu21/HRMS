@@ -34,8 +34,8 @@ const LeaveRequest = () => {
   };
 
   return (
-    <div className="flex ml-[2%] flex-col mt-[10px]">
-      <div className="flex flex-col justify-center items-center mx-auto my-10 bg-gray-100 h-[100vh]">
+    <div className="flex ml-[26%] flex-col -mt-[20px] fixed">
+      <div className="flex flex-col justify-center items-center mx-auto my-10 bg-gray-100 ">
         <h1 className="text-3xl mb-4">Request For Leave</h1>
         <form
           onSubmit={handleSubmit}
@@ -59,18 +59,18 @@ const LeaveRequest = () => {
               className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
             ></textarea>
           </div>
-          <div className="flex items-center w-full mb-4">
-            <label for="clearance" className="w-1/4 mr-2">
+          <div className="flex items-center w-full mb-4 ">
+            <label htmlfor="file" className="w-1/4 mr-2">
               Upload your clearance
             </label>
             <input
               onChange={handleChande}
-              type="text"
+              type="file"
               value={state.clearance}
               name="clearance"
-              id="clearance"
+              id="file"
               // accept=".png, .jpeg, .jpg"
-              className="w-3/4 border border-gray-300 outline-none pl-5 rounded"
+              className=" h-9 w-3/4 border border-gray-300 outline-none pl-5 rounded"
             />
           </div>
           <div className="flex justify-center w-full gap-5 mt-10">

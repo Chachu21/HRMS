@@ -4,7 +4,7 @@ const leaveRouter = express.Router()
 leaveRouter.post("/", createLeaveRequest);
 leaveRouter.get("/", getAllLeaveRequests);
 leaveRouter.get("/:id", getLeaveRequestById);
-leaveRouter.put('/update', updateLeaveRequestById);
+leaveRouter.put('/:id', updateLeaveRequestById);
 leaveRouter.delete('/delete/:id', deleteLeaveRequestById);
 module.exports = leaveRouter
 

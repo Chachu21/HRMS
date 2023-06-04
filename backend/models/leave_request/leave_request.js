@@ -6,8 +6,8 @@ module.exports = function(sequelize, DataTypes) {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey:true,
-        autoIncrement:true,
+        primaryKey: true,
+        autoIncrement: true,
       },
       staff_id: {
         type: DataTypes.INTEGER,
@@ -24,6 +24,11 @@ module.exports = function(sequelize, DataTypes) {
       clearance: {
         type: DataTypes.STRING(255),
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM("Pending", "Approved", "Rejected"),
+        allowNull: false,
+        defaultValue: "Pending",
       },
     },
     {

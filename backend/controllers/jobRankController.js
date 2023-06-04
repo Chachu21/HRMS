@@ -22,6 +22,77 @@ const GetAllJobRank = async (req, res) => {
   }
 };
 
+const getJobRankById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const jobRank = await JobRank.findByPk(id);
+    if (!jobRank) {
+      res.status(404).json({ error: "Job rank not found" });
+      return;
+    }
+    res.status(200).json(jobRank);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching job rank by ID" });
+  }
+};
+
+const updateJobRank = async (req, res) => {
+  const id = req.params.id
+  const { buttonType } = req.body;
+  const jobRank = await JobRank.findByPk(id);
+ let status;
+console.log('job ranks list');
+  // Determine the status based on the button type
+
+  if (
+    buttonType === "forward" &&
+    jobRank.status === "Pending"&&
+    jobRank.status !== "Approved" &&
+    jobRank.status !== "Rejected"
+  ) {
+    status = "Forwarded";
+  } else if (
+    buttonType === "approve" &&
+    jobRank.status === "Forwarded"&&
+    jobRank.status !== "Pending"
+  ) {
+    status = "Approved";
+  } else if (
+    buttonType === "reject" &&
+    jobRank.status === "Forwarded" &&
+    jobRank.status !== "Pending"
+  ) {
+    status = "Rejected";
+  } else {
+    res.status(400).json({ error: "Invalid button type" });
+    return;
+  }
+
+  try {
+    const jobRank = await JobRank.findOne({ where: { id } });
+
+    if (!jobRank) {
+      res.status(404).json({ error: "Job rank not found" });
+      return;
+    }
+
+    jobRank.status = status;
+    await jobRank.save();
+
+    res
+      .status(200)
+      .json({ message: "Job rank status is successfully updated" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating job rank status" });
+  }
+};
+
+
+
 const deleteJobRank = async (req, res) => {
   const id = req.params.id;
   try {
@@ -40,5 +111,7 @@ const deleteJobRank = async (req, res) => {
 module.exports = {
   createJobRank,
   GetAllJobRank,
+  getJobRankById,
+  updateJobRank,
   deleteJobRank,
 };

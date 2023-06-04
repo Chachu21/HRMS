@@ -17,13 +17,9 @@ const ManagePermission = () => {
       });
   }, []);
 
-  // const handleForward = (id) => {
-  //   navigate(`/leave-request/${id}`); // Replace with your desired route
-  // };
-
   return (
-    <div className="flex w-full lg:ml-[18%] flex-col mt-20">
-      <h1 className="text-2xl font-bold mb-4">Permission requests</h1>
+    <div className="flex mr-[1%] lg:ml-[20%] flex-col mt-20">
+      <h1 className="text-2xl font-bold mb-4 ml-[30%] ">Permission requests</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
           <tr className="bg-gray-200">

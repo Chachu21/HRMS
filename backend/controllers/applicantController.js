@@ -129,6 +129,22 @@ const upload = multer({
   fileFilter: isImage,
 });
 
+const UpdateProfile = (req, res) => {
+  const id = req.params.id;
+  const image = req.file ? req.file.filename : null; // Get the uploaded image filename, or null if no file is uploaded
+  // Assuming you have defined the 'applicant' model in Sequelize
+  Applicant.update({ profile: image }, { where: { id: id } })
+    .then((result) => {
+      res.status(200).send("Farmer's profile image updated successfully");
+    })
+    .catch((error) => {
+      console.error(error);
+      res
+        .status(500)
+        .send("Server error: Could not update farmer's profile image");
+    });
+};
+
 module.exports = {
   createApplicant,
   getAllApplicants,
@@ -136,4 +152,5 @@ module.exports = {
   updateApplicant,
   deleteApplicant,
   upload,
+  UpdateProfile,
 };

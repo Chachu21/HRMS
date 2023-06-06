@@ -1,5 +1,5 @@
-const sequelize = require("../config/database.js");
 const initModels = require("../models/init-models.js");
+const sequelize = require("../config/database.js");
 const models = initModels(sequelize);
 const Permission = models.permission;
 
@@ -56,16 +56,84 @@ const getPermissionById = async (permissionId) => {
 };
 
 // Update a permission
-const updatePermission = async (permissionId, data) => {
+// const updatePermission = async (req, res) => {
+//   // try {
+//   //   const permission = await Permission.findByPk(permissionId);
+//   //   if (!permission) {
+//   //     throw new Error("Permission not found");
+//   //   }
+//   //   await permission.update(data);
+//   //   return permission;
+//   // } catch (error) {
+//   //   throw new Error("Failed to update permission: " + error.message);
+//   // }
+
+//   const id = req.params.id;
+//   const { buttonType } = req.body;
+//   const permission = await Permission.findByPk(id);
+//   let status;
+//   console.log("job ranks list");
+//   // Determine the status based on the button type
+//   if (buttonType === "approve" && permission.status === "Pending") {
+//     status = "Approved";
+//   } else if (buttonType === "reject" && permission.status === "Pending") {
+//     status = "Rejected";
+//   } else {
+//     res.status(400).json({ error: "Invalid button type" });
+//     return;
+//   }
+
+//   try {
+//     const permission = await Permission.findOne({ where: { id } });
+
+//     if (!permission) {
+//       res.status(404).json({ error: "Permission not found" });
+//       return;
+//     }
+
+//     permission.status = status;
+//     await permission.save();
+
+//     res
+//       .status(200)
+//       .json({ message: "Permission status is successfully updated" });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ error: "An error occurred while updating permission status" });
+//   }
+// };
+
+const updatePermission = async (req, res) => {
+  const id = req.params.id;
+  const { buttonType } = req.body;
+
   try {
-    const permission = await Permission.findByPk(permissionId);
+    const permission = await Permission.findByPk(id);
     if (!permission) {
-      throw new Error("Permission not found");
+      return res.status(404).json({ error: "Permission not found" });
     }
-    await permission.update(data);
-    return permission;
+
+    let status;
+
+    if (buttonType === "approve" && permission.status === "Pending") {
+      status = "Approved";
+    } else if (buttonType === "reject" && permission.status === "Pending") {
+      status = "Rejected";
+    } else {
+      return res.status(400).json({ error: "Invalid button type" });
+    }
+
+    permission.status = status;
+    await permission.save();
+
+    return res
+      .status(200)
+      .json({ message: "Permission status is successfully updated" });
   } catch (error) {
-    throw new Error("Failed to update permission: " + error.message);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while updating permission status" });
   }
 };
 

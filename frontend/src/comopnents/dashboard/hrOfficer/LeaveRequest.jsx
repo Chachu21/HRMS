@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { set } from "mongoose";
 
 const LeaveRequests = () => {
   const [leaveRequestData, setLeaveRequestData] = useState([]);
@@ -9,7 +8,6 @@ const LeaveRequests = () => {
     axios
       .get("http://localhost:5002/api/v1/leave_request")
       .then((response) => {
-        console.log(response.data);
         setLeaveRequestData(response.data);
       })
       .catch((error) => {
@@ -26,13 +24,11 @@ const LeaveRequests = () => {
     const buttonType = "approve"; // Set the buttonType to "approve"
 
     axios
-      .put(`http://localhost:5002/api/v1/leave_request/${id}`, buttonType)
+      .put(`http://localhost:5002/api/v1/leave_request/${id}`, { buttonType })
       .then((response) => {
         console.log(response.data);
-        console.log("muller sucess");
       })
       .catch((error) => {
-        console.log("natiniel error");
         console.error(error.message);
       });
   };
@@ -47,13 +43,12 @@ const LeaveRequests = () => {
     const buttonType = "reject"; // Set the buttonType to "reject"
 
     axios
-      .put(`http://localhost:5002/api/v1/leave_request/${id}`, buttonType)
+      .put(`http://localhost:5002/api/v1/leave_request/${id}`, { buttonType })
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
-        console.log(`id: ${id}, buttonType: ${buttonType}`);
       });
   };
   return (

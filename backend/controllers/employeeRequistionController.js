@@ -43,7 +43,62 @@ async function getAllEmployeeRequisitions(req, res) {
   }
 }
 
+const updateEmployeeRequistions = async (req, res) => {
+  const id = req.params.id;
+  const { buttonType } = req.body;
+  const employee_requisition = await EmployeeRequisition.findByPk(id);
+  let status;
+  // Determine the status based on the button type
+
+  if (
+    buttonType === "forward" &&
+    employee_requisition.status === "Pending" &&
+    employee_requisition.status !== "Approved" &&
+    employee_requisition.status !== "Rejected"
+  ) {
+    status = "Forwarded";
+  } else if (
+    buttonType === "approve" &&
+    employee_requisition.status === "Forwarded" &&
+    employee_requisition.status !== "Pending"
+  ) {
+    status = "Approved";
+  } else if (
+    buttonType === "reject" &&
+    employee_requisition.status === "Forwarded" &&
+    employee_requisition.status !== "Pending"
+  ) {
+    status = "Rejected";
+  } else {
+    res.status(400).json({ error: "Invalid button type" });
+    return;
+  }
+
+  try {
+    const employee_requisition = await EmployeeRequisition.findOne({
+      where: { id },
+    });
+
+    if (!employee_requisition) {
+      res.status(404).json({ error: "Job rank not found" });
+      return;
+    }
+
+    employee_requisition.status = status;
+    await employee_requisition.save();
+
+    res
+      .status(200)
+      .json({ message: "Job rank status is successfully updated" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while updating job rank status" });
+  }
+};
+
 module.exports = {
   createEmployeeRequisition,
   getAllEmployeeRequisitions,
+  updateEmployeeRequistions,
 };

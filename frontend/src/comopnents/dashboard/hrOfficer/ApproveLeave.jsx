@@ -6,7 +6,7 @@ const ApproveLeave = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5002/api/v1/leave")
+      .get("http://localhost:5002/api/v1/leave_request")
       .then((response) => {
         setLeaveData(response.data);
       })

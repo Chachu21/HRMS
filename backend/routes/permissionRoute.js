@@ -1,11 +1,17 @@
-const express = require("express")
-const { createPermission, getAllPermissions, updatePermission, deletePermission, getPermissionById } = require("../controllers/permissonController")
-const permissonRouter = express.Router()
+const express = require("express");
+const {
+  createPermission,
+  getAllPermissions,
+  updatePermission,
+  deletePermission,
+  getPermissionById,
+} = require("../controllers/permissonController");
+const permissonRouter = express.Router();
 
-permissonRouter.post('/', createPermission)
-permissonRouter.get('/', getAllPermissions)
+permissonRouter.post("/", createPermission);
+permissonRouter.get("/", getAllPermissions);
 permissonRouter.get("/:id", getPermissionById);
-permissonRouter.put('/update/:id', updatePermission)
-permissonRouter.delete('/delete', deletePermission)
+permissonRouter.put("/:id", updatePermission);
+permissonRouter.delete("/delete/:id", deletePermission);
 
-module.exports =permissonRouter
+module.exports = permissonRouter;

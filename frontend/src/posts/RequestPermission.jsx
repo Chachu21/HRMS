@@ -10,7 +10,6 @@ const RequestPermission = () => {
     reason: "",
     start_date: "",
     return_date: "",
-    status: "",
   });
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
@@ -123,7 +122,7 @@ const RequestPermission = () => {
           required
         />
       </div>
-      <div className="flex flex-col mb-4">
+      {/* <div className="flex flex-col mb-4">
         <label htmlFor="name" className="mb-1 font-semibold text-gray-600">
           status
         </label>
@@ -136,7 +135,7 @@ const RequestPermission = () => {
           className="px-3 h-12 py-2 focus:ring-2 focus:border-transparent focus:ring-blue-300  rounded-md border border-gray-300 focus:outline-none "
           required
         />
-      </div>
+      </div> */}
       <button
         type="submit"
         className="bg-blue-500 mt-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"

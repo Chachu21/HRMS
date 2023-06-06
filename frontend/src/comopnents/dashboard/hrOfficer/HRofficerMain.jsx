@@ -93,7 +93,7 @@ const HRofficerMain = () => {
               </p>
             </div>
           </Link>
-          <Link to="/hrofficer/dashboard/jobvacancy">
+          {/* <Link to="/hrofficer/dashboard/jobvacancy">
             <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300 hover:scale-105">
               <p className="text-2xl text-gray-700 dark:text-gray-700">
                 Announce Vacancy
@@ -106,7 +106,7 @@ const HRofficerMain = () => {
                 Post Exam Schedule
               </p>
             </div>
-          </Link>
+          </Link> */}
         </div>
         {/* Rest of your JSX code */}
       </div>

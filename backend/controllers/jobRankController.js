@@ -29,6 +29,25 @@ const GetAllJobRank = async (req, res) => {
   }
 };
 
+//get by staff id
+const getJobRankByStaffId = async (req, res) => {
+  const staffId = req.params.id;
+  try {
+    const jobRank = await JobRank.findAll({
+      where: { staff_id: staffId },
+    });
+    if (!jobRank) {
+      res.status(404).json({ error: "Job rank not found" });
+      return res.json(jobRank);
+    }
+    res.status(200).json(jobRank);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching job rank by ID" });
+  }
+};
+
 const getJobRankById = async (req, res) => {
   const id = req.params.id;
   try {
@@ -151,5 +170,6 @@ module.exports = {
   getJobRankById,
   updateJobRank,
   deleteJobRank,
+  getJobRankByStaffId,
   upload,
 };

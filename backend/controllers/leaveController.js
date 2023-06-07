@@ -24,7 +24,7 @@ const createLeaveRequest = async (req, res) => {
 const getAllLeaveRequests = async (req, res) => {
   try {
     const leaveRequests = await LeaveRequest.findAll();
-    console.log(leaveRequests);
+    // console.log(leaveRequests);
     return res.json(leaveRequests);
   } catch (error) {
     return res.status(500).json({ error: "Failed to retrieve leave requests" });
@@ -32,9 +32,10 @@ const getAllLeaveRequests = async (req, res) => {
 };
 
 const getLeaveRequestStaffId = async (req, res) => {
-  const staffId = req.params.staffId;
+  const staffId = req.params.id;
+
   try {
-    const leaveRequests = await LeaveRequest.find({ staff_id: staffId });
+    const leaveRequests = await LeaveRequest.findAll({where:{staff_id: staffId}});
     if (leaveRequests.length === 0) {
       return res.status(404).json({
         error: `No leave requests found for staff member with ID: ${staffId}`,
@@ -48,7 +49,7 @@ const getLeaveRequestStaffId = async (req, res) => {
   }
 };
 
-// Read a leave request by ID
+
 const getLeaveRequestById = async (req, res) => {
   const id = req.params.id;
   try {
@@ -178,6 +179,6 @@ module.exports = {
   getLeaveRequestById,
   updateLeaveRequestById,
   deleteLeaveRequestById,
-  getLeaveRequestStaffId,
+ getLeaveRequestStaffId,
   upload,
 };

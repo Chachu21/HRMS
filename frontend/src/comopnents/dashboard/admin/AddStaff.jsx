@@ -125,9 +125,9 @@ const AddStaff = () => {
                   className="w-[215px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
                 >
                   <option value="">select role</option>
-                  <option value={3}>Dep't Head</option>
+                  <option value={5}>Dep't Head</option>
                   <option value={4}>HR Officer</option>
-                  <option value={5}>Employee</option>
+                  <option value={3}>Employee</option>
                 </select>
               </div>
             </div>
@@ -137,7 +137,7 @@ const AddStaff = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 undefined"
                 >
-                  Eamil
+                  Email
                 </label>
                 <div className="flex flex-col items-start">
                   <input

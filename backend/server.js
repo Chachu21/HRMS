@@ -33,7 +33,7 @@ app.use("/api/v1/vacancy", vacancyRouter);
 app.use("/api/v1/schedule", scheduleRouter);
 app.use("/api/v1/job_rank", jobRankRouter);
 app.use("/api/v1/lists", applicantListRouter);
-app.use("/api/v1/data", manageEmployeAccountRoute);
+app.use("/api/v1/leave_request/staff_id", leaveRouter);
 
 
 app.listen(port, () => {

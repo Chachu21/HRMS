@@ -27,14 +27,14 @@ const Features = () => {
         </div>
       </section>
       <div className="container p-6 px-6 mx-auto bg-white">
-        <div className="mb-16 text-center">
+        {/* <div className="mb-16 text-center">
           <h2 className="text-base font-semibold tracking-wide text-black uppercase">
             Features
           </h2>
           <p className="mt-2 text-3xl font-extrabold leading-8 tracking-tight text-black  sm:text-4xl">
             A better way to live
           </p>
-        </div>
+        </div> */}
         <div className="flex flex-wrap my-1 text-white">
           <div className="w-full p-8 border-b md:w-1/2 md:border-r lg:w-1/3">
             <div className="flex items-center mb-6">

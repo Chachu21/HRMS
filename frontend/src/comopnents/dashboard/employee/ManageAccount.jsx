@@ -14,21 +14,21 @@ function ManageEmployeeAccount() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5002/api/v1/leave_request/staff/${staff_id}`)
+      .get(`http://localhost:5002/api/v1/leave_request/leave/${staff_id}`)
       .then((response) => {
         setLeaveRequests(response.data);
       })
       .catch((error) => console.error("Error:", error));
 
     axios
-      .get(`http://localhost:5002/api/v1/permission/staff/${staff_id}`)
+      .get(`http://localhost:5002/api/v1/permission/permission/${staff_id}`)
       .then((response) => {
         setPermissions(response.data);
       })
       .catch((error) => console.error("Error:", error));
 
     axios
-      .get(`http://localhost:5002/api/v1/job_rank/staff/${staff_id}`)
+      .get(`http://localhost:5002/api/v1/job_rank/job/${staff_id}`)
       .then((response) => {
         setJobRanks(response.data);
       })
@@ -48,8 +48,7 @@ function ManageEmployeeAccount() {
   let table = null;
   if (selectedTable === "leaveRequests") {
     table = (
-      <div className="overflow-x-auto lg:ml-[18%] ml-[0%] text-sm lg:text-2xl">
-        <table className="table-auto border-collapse border border-gray-400">
+      <div className="overflow-x-auto lg:ml-[18%] ml-[0%] text-md">        <table className="table-auto border-collapse border border-gray-400">
           <thead>
             <tr className="bg-gray-200">
               <th className="px-4 py-2">ID</th>
@@ -65,7 +64,38 @@ function ManageEmployeeAccount() {
                 <td className="border px-4 py-2">{item.id}</td>
                 <td className="border px-4 py-2">{item.staff_id}</td>
                 <td className="border px-4 py-2">{item.reason}</td>
-                <td className="border px-4 py-2">{item.clearance}</td>
+                <td className="border px-4 py-2">
+
+ {item.cv && item.cv.endsWith(".pdf") ? (
+                      <a
+                        href={`http://localhost:5002/uploads/${item.cv}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        Download PDF
+                      </a>
+                    ) : (
+                      item.cv && (
+                        <div>
+                          <a
+                            href={`http://localhost:5002/uploads/${item.cv}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View Image
+                          </a>
+                          <button
+                            className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
+                            onClick={() => handleDownload(item.clearance)}
+                          >
+                            Download
+                          </button>
+                        </div>
+                      )
+                    )}
+                  
+                </td>
                 <td
                   className={`border px-4 py-2 ${
                     item.status === "Pending"
@@ -120,7 +150,7 @@ function ManageEmployeeAccount() {
     );
   } else if (selectedTable === "jobRanks") {
     table = (
-      <div className="overflow-x-auto ml-[18%] ml-0 ">
+      <div className="overflow-x-auto lg:ml-[18%] ml-0 ">
         <table className="table-auto border-collapse border border-gray-400">
           <thead>
             <tr className="bg-gray-200">
@@ -137,7 +167,36 @@ function ManageEmployeeAccount() {
                 <td className="border px-4 py-2">{item.id}</td>
                 <td className="border px-4 py-2">{item.staff_id}</td>
                 <td className="border px-4 py-2">{item.level}</td>
-                <td className="border px-4 py-2">{item.cv}</td>
+                <td className="border px-4 py-2">
+                  {item.cv && item.cv.endsWith(".pdf") ? (
+                    <a
+                      href={`http://localhost:5002/uploads/${item.cv}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download
+                    >
+                      Download PDF
+                    </a>
+                  ) : (
+                    item.cv && (
+                      <div>
+                        <a
+                          href={`http://localhost:5002/uploads/${item.cv}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View Image
+                        </a>
+                        <button
+                          className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
+                          onClick={() => handleDownload(item.cv)}
+                        >
+                          Download
+                        </button>
+                      </div>
+                    )
+                  )}
+                </td>
                 <td className="border px-4 py-2">{item.status}</td>
               </tr>
             ))}
@@ -146,6 +205,19 @@ function ManageEmployeeAccount() {
       </div>
     );
   }
+
+
+const handleDownload = (clearance) => {
+  const downloadLink = `http://localhost:5002/uploads/${clearance}`;
+  const link = document.createElement("a");
+  link.href = downloadLink;
+  link.download = clearance;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+
 
   return (
     <div className="max-w-7xl mx-auto mt-10 px-4 sm:px-6 lg:px-8 ">

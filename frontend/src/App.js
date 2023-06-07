@@ -45,6 +45,7 @@ import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
 
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
 import ApplicantSchedule from "./comopnents/dashboard/applicant/ApplicantSchedule";
+import ManageEmployeeAccount from "./comopnents/dashboard/employee/ManageAccount";
 // import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
@@ -142,7 +143,7 @@ function App() {
           <Route index element={<EmployeeMain />} />
           <Route
             path="/employee/dashboard/manageaccount"
-            element={<LeaveRequest />}
+            element={<ManageEmployeeAccount />}
           />
           <Route
             path="/employee/dashboard/leaveRequest"

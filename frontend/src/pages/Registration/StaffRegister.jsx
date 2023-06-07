@@ -23,12 +23,11 @@ const StaffRegister = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-     await staffRegister(formData);
+      await staffRegister(formData);
       dispatch(setRegistrationStatus(true)); // Dispatch action to update registration status in Redux store
       // ... handle success case ...
-      toast.success("successfuly register staff")
-        dispatch(resetRegistration(formData));
-
+      toast.success("successfuly register staff");
+      dispatch(resetRegistration(formData));
     } catch (error) {
       dispatch(setError(error.message)); // Dispatch action to update error in Redux store
     }
@@ -36,7 +35,7 @@ const StaffRegister = () => {
 
   return (
     <div>
-      <div className="flex flex-col overflow-hidden justify-center items-center w-full h-[50%] pt-4 sm:justify-center sm:pt-0 bg-gray-100">
+      <div className="flex flex-col overflow-hidden justify-center items-center w-full  pt-4 sm:justify-center sm:pt-0 bg-gray-100">
         <div className="shadow-xl">
           <h3 className="text-xl font-bold text-blue-400">Register staffs</h3>
         </div>
@@ -45,7 +44,7 @@ const StaffRegister = () => {
             className="flex justify-start items-start gap-4 flex-col px-3"
             onSubmit={handleSubmit}
           >
-            <div className="flex justify-center items-center gap-10">
+            <div className="flex justify-center items-center gap-10 flex-col sm:flex-row">
               <div className="mt-4">
                 <label
                   htmlFor="id"
@@ -84,7 +83,7 @@ const StaffRegister = () => {
               </div>
             </div>
 
-            <div className="flex justify-center items center gap-10">
+            <div className="flex justify-center items center gap-10 flex-col sm:flex-row">
               <div className="mt-4">
                 <label
                   htmlFor="lname"
@@ -120,7 +119,7 @@ const StaffRegister = () => {
                 </select>
               </div>
             </div>
-            <div className="flex justify-center items-center gap-10">
+            <div className="flex justify-center items-center gap-10 flex-col sm:flex-row">
               <div className="mt-4">
                 <label
                   htmlFor="email"
@@ -177,8 +176,8 @@ const StaffRegister = () => {
                 />
               </div>
             </div>
-            <div className="flex items-end justify-end  mt-3 ml-[350px]">
-              <button className="w-[100px] px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+            <div className="flex items-end justify-end  mt-3 ml-[120px] lg:ml-[350px]">
+              <button className="w-[100px] px-2 py-1 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
                 Add
               </button>
             </div>

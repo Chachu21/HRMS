@@ -63,7 +63,7 @@ const ApproveJobRank = () => {
     <div className="flex flex-col w-full ml-[18%]">
       <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
       <div className="flex justify-center items-center px-5">
-        <table className="table-auto w-full">
+        <table className="">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2">staff ID</th>
@@ -78,7 +78,7 @@ const ApproveJobRank = () => {
           <tbody className="overflow-x-hidden">
             {emplyeeRequistionData.map((employeeRequistion, index) => {
               return (
-                <tr key={index} className="bg-gray-100/{0-4}">
+                <tr key={index} className="bg-gray-100/{0-4} ">
                   <td className="border px-4 py-2">
                     {employeeRequistion.staff_id}
                   </td>

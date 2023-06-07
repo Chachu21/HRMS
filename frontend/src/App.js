@@ -45,6 +45,7 @@ import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
 
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
 import ApplicantSchedule from "./comopnents/dashboard/applicant/ApplicantSchedule";
+// import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -53,11 +54,10 @@ function App() {
         {/* homepage  route*/}
         <Route exact path="/" element={<LandingPage />}>
           <Route index element={<Main />} />
-          <Route exact path="/about" element={<About />} />
           <Route path="/vacancy" element={<Vacancy />} />
-          <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/help" element={<Help />} />
         </Route>
+        {/* forgetpage */}
+        {/* <Route path="/forgot" element={<ForgotPassword />} /> */}
         {/* applicant page */}
         <Route
           exact
@@ -69,15 +69,7 @@ function App() {
           }
         />
         {/* login page */}
-        <Route
-          exact
-          path="/login"
-          element={
-            <LoginCustomizedDialogs>
-              <Login />
-            </LoginCustomizedDialogs>
-          }
-        />
+        <Route exact path="/login" element={<LoginCustomizedDialogs />} />
         {/* admin dashboard */}
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<ManageAccountInfo />} />
@@ -169,7 +161,7 @@ function App() {
         </Route>
         {/* department head dashboard */}
         <Route path="/depthead/dashboard" element={<DeptHeaderDashboard />}>
-          <Route index element={<DeptMain />} />
+          <Route index element={<ManageApplicant />} />
           <Route
             path="/depthead/dashboard/managepermission"
             element={<ManagePermission />}

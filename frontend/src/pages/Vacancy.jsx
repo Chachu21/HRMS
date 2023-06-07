@@ -23,13 +23,13 @@ const Vacancy = () => {
     dispatch(fetchVacancyType());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("user");
-  //   if (storedUser) {
-  //     const parsedUser = JSON.parse(storedUser);
-  //     dispatch(loginSuccess(parsedUser));
-  //   }
-  // }, [dispatch]);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      dispatch(loginSuccess(parsedUser));
+    }
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -138,45 +138,47 @@ const Vacancy = () => {
             return (
               <div
                 key={vacacny.id}
-                className="flex flex-col justify-center items-center gap-5 hover:scale-105  transition duration-300 ease-in-out rounded-lg bg-[#f7f7f7]"
+                className="flex flex-col justify-center items-center gap-5 hover:scale-95  transition duration-300 ease-in-out rounded-lg bg-[#f7f7f7]"
               >
                 <div className="flex flex-col justify-left items-left gap-5 py-5">
-                  <p className="text-lg">
-                    <span className="text-lg font-bold text-gray-700">
+                  <p className="text-md  text-gray-500">
+                    <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Title
                     </span>{" "}
                     :{vacacny.title}
                   </p>
-                  <p className="text-lg">
-                    <span className="text-lg font-bold text-gray-700">
+                  <p className="text-md  text-gray-500">
+                    <span className="text-lg font-bold text-gray-700 italic capitalize">
                       quantity
                     </span>{" "}
                     :{vacacny.quantity}
                   </p>
-                  <p className="text-lg">
-                    <span className="text-lg font-bold text-gray-700">
+                  <p className="text-md  text-gray-500">
+                    <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Department
                     </span>{" "}
                     :{vacacny.department}
                   </p>
-                  <p className="text-lg">
-                    <span className="text-lg font-bold text-gray-700">
+                  <p className="text-md  text-gray-500">
+                    <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Term Of Employment :
                     </span>{" "}
                     {vacacny.terms}
                   </p>
-                  <p className="text-lg">
-                    <span className="text-lg font-bold text-gray-700">Sex</span>{" "}
+                  <p className="text-md  text-gray-500">
+                    <span className="text-lg font-bold text-gray-700 italic capitalize">
+                      Sex
+                    </span>{" "}
                     : {vacacny.sex}
                   </p>
-                  <p className="text-lg">
-                    <span className="text-lg font-bold text-gray-700">
+                  <p className="text-md  text-gray-500">
+                    <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Designation
                     </span>{" "}
                     :{vacacny.designation}
                   </p>
-                  <p className="text-lg">
-                    <span className="text-lg font-bold text-gray-700">
+                  <p className="text-md  text-gray-500">
+                    <span className="text-lg font-bold text-gray-700 italic capitalize">
                       min-CGPA
                     </span>{" "}
                     :{vacacny.cgpa}

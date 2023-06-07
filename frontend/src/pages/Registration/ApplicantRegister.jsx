@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import LoginCustomizedDialogs from "../../comopnents/landingPage/LoginCustomizedDialogs";
 
 const ApplicantRegister = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const ApplicantRegister = () => {
     password: "",
     email: "",
   });
-const navigate=useNavigate();
+  const navigate = useNavigate();
   const [cv, setCv] = useState(null);
 
   const handleChange = (e) => {
@@ -51,14 +52,14 @@ const navigate=useNavigate();
 
   return (
     <div>
-      <div className="shadow-xl">
-        <h3 className="text-xl font-bold text-blue-400">
-          Register for accessing provided service
+      <div className="shadow-sm flex justify-center items-center w-auto h-auto">
+        <h3 className="lg:text-xl pt-10 text-sm font-bold text-blue-400">
+          Register for accessing service
         </h3>
       </div>
-      <div className="w-[100vw] flex flex-col px-3 py-4 mt-6 overflow-hidden bg-gray-100 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">
+      <div className="lg:w-[100vw]  flex flex-col px-1 gap-4  py-4 items-center justify-center lg:py-14 mt-1 lg:mt-8 overflow-hidden bg-gray-50 shadow-md border-t-gray-400 sm:max-w-md sm:rounded-lg">
         <form className="" onSubmit={handleSubmit}>
-          <div className="flex justify-center items-center gap-5">
+          <div className="flex justify-center items-center gap-5 flex-col sm:flex-row">
             <div className="mt-4">
               <label
                 htmlFor="fname"
@@ -73,7 +74,7 @@ const navigate=useNavigate();
                   id="fname"
                   type="text"
                   name="fname"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full h-8  text-sm mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
@@ -91,13 +92,13 @@ const navigate=useNavigate();
                   id="lname"
                   type="text"
                   name="lname"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full h-8  text-sm mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
           </div>
 
-          <div className="flex justify-center items-center gap-5">
+          <div className="flex justify-center items-center gap-5 flex-col sm:flex-row">
             <div className="mt-4">
               <label
                 htmlFor="email"
@@ -112,7 +113,7 @@ const navigate=useNavigate();
                   type="email"
                   required={true}
                   name="email"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block text-sm w-full h-8 mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
@@ -130,13 +131,13 @@ const navigate=useNavigate();
                   id="phone"
                   type="tel"
                   name="phone_number"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block text-sm w-full h-8 mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
           </div>
 
-          <div className="flex justify-center items-center gap-5">
+          <div className="flex justify-center items-center gap-5 flex-col sm:flex-row">
             <div className="mt-4">
               <label
                 htmlFor="password"
@@ -151,7 +152,7 @@ const navigate=useNavigate();
                   autoComplete="false"
                   type="password"
                   name="password"
-                  className="block w-full mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block text-sm w-full h-8 mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
@@ -169,14 +170,14 @@ const navigate=useNavigate();
                   type="file"
                   onChange={handleCvChange}
                   name="cv"
-                  className="block w-full mt-1 border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-[200px] h-8 mt-1 border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
           </div>
 
           <div className="flex justify-center items-center mt-12">
-            <button className="w-1/2 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+            <button className="w-[100%] px-4 lg:py-2 py-1 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
               Register
             </button>
           </div>

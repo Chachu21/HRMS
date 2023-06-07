@@ -26,7 +26,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLogin && user) {
-      // localStorage.setItem("token", user.token);
+      localStorage.setItem("token", user.token);
       const role_id = user.role_id;
       switch (role_id) {
         case 1:
@@ -91,12 +91,14 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-[40%] w-[500px] flex flex-col items-center justify-center gap-1">
+    <div className="bg-white h-[60%] w-[35%] ml-[100px] lg:ml-[175px] flex flex-col items-center justify-center gap-1">
       <div>
-        <span className="text-black text-[24px]">Sign in to your account</span>
+        <span className="text-black flex justify-start -ml-16 items-start text-[16px]  lg:justify-center lg:items-center lg:text-[24px]">
+          Welcome back
+        </span>
       </div>
 
-      <div className="flex justify-center items-center bg-white rounded-lg text-black shadow-xl p-14">
+      <div className="flex justify-center items-center bg-gray-50 rounded-lg text-black shadow-sm py-20">
         <form
           onSubmit={handleSubmit}
           action=""
@@ -110,7 +112,7 @@ const Login = () => {
               onChange={handleChange}
               type="email"
               placeholder="Enter your email address"
-              className="w-[350px] h-8  bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
+              className="w-[250px] lg:w-[350px] h-8 text-sm bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
             />
           </div>
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
@@ -123,10 +125,10 @@ const Login = () => {
               id="password"
               type="password"
               placeholder="Enter your password"
-              className="w-[350px] h-8 pl-[10px] bg-white border-2 rounded-md border-gray-300 outline-none  "
+              className="lg:w-[350px] w-[250px] h-8 pl-[10px] text-sm bg-white border-2 rounded-md border-gray-300 outline-none  "
             />
           </div>
-          <div className="flex justify-between items-center gap-[120px]">
+          <div className="flex justify-between items-center gap-[20px] lg:gap-[120px]">
             <div className="flex gap-1 items-center justify-start">
               <input
                 type="checkbox"
@@ -145,13 +147,13 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="w-[350px] bg-blue-700 h-8 text-center rounded-md text-white hover:bg-blue-500"
+              className="w-[250px]  lg:w-[350px] bg-blue-700 h-8 text-center rounded-md text-white hover:bg-blue-500"
             >
               Login
             </button>
           </div>
-          <div className="flex gap-2 justify-center items-center">
-            <span className="text-md">Don't have an account?</span>
+          <div className="flex gap-1 lg:gap-2 justify-center items-center">
+            <span className="text-sm">Don't have an account?</span>
             {/* <Link to="/signup" className="text-blue-500">
               Register
             </Link> */}

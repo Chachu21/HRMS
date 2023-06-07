@@ -12,6 +12,7 @@ const initialState = {
   approvedId: null,
   approvedItems: [],
   rejectedItems: [],
+  popClosed: false,
 };
 
 const authSlice = createSlice({
@@ -73,6 +74,9 @@ const authSlice = createSlice({
         state.rejectedItems.splice(index, 1);
       }
     },
+    popClose: (state, action) => {
+      state.popClosed = action.payload;
+    },
   },
 });
 
@@ -84,6 +88,7 @@ export const {
   humergerMenu,
   approved,
   rejected,
+  popClose,
 } = authSlice.actions;
 
 export default authSlice.reducer;

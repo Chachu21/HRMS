@@ -1,11 +1,19 @@
 const initModels = require("../models/init-models.js");
 const sequelize = require("../config/database.js");
+const multer = require("multer");
 const models = initModels(sequelize);
 const LeaveRequest = models.leave_request;
 
 const createLeaveRequest = async (req, res) => {
+
+  const {staff_id, reason, status} = req.body
+  const clearance = req.file
   try {
-    const leaveRequest = await LeaveRequest.create(req.body);
+    const leaveRequest = await LeaveRequest.create({
+      staff_id,
+      reason,
+      clearance: clearance ? clearance.filename : null,
+    });
     res.status(200).json(leaveRequest);
   } catch (error) {
     res.status(500).json({ error: "cannot create leave" });
@@ -116,10 +124,42 @@ const deleteLeaveRequestById = async (req, res) => {
   }
 };
 
+// img storage config
+const imgConfig = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+    const ext = file.originalname.split(".").pop();
+    callback(null, `cv-${Date.now()}.${ext}`);
+  },
+});
+
+// img filter
+const isImage = (req, file, callback) => {
+  const allowedMimeTypes = [
+    "application/pdf",
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+  ];
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    callback(null, true);
+  } else {
+    callback(new Error("Only PDF, JPEG, and PNG files are allowed"));
+  }
+};
+
+const upload = multer({
+  storage: imgConfig,
+  fileFilter: isImage,
+});
+
 module.exports = {
   createLeaveRequest,
   getAllLeaveRequests,
   getLeaveRequestById,
   updateLeaveRequestById,
   deleteLeaveRequestById,
+  upload,
 };

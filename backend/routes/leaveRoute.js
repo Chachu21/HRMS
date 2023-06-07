@@ -5,9 +5,10 @@ const {
   getLeaveRequestById,
   getAllLeaveRequests,
   createLeaveRequest,
+  upload,
 } = require("../controllers/leaveController");
 const leaveRouter = express.Router();
-leaveRouter.post("/", createLeaveRequest);
+leaveRouter.post("/",upload.single('cv'), createLeaveRequest);
 leaveRouter.get("/", getAllLeaveRequests);
 leaveRouter.get("/:id", getLeaveRequestById);
 leaveRouter.put("/:id", updateLeaveRequestById);

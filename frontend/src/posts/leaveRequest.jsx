@@ -4,27 +4,33 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LeaveRequest = () => {
-  const [state, setstate] = useState({
-    reason: "",
-    clearance: "",
-  });
+  const [reason, setReason] = useState("");
+  const [cv, setCv] = useState("");
+  const status ="Pending"
 
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
 
   const handleChande = (event) => {
-    const { name, value } = event.target;
-    setstate((prev) => ({ ...prev, [name]: value }));
+    setReason(event.target.value);
   };
-
+  const handleCv = (e) => {
+    const file = e.target.files[0];
+    setCv(file);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("reason", reason);
+    formData.append("staff_id", staff_id);
+    formData.append("status", status)
+    formData.append("cv", cv);
 
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/leave_request",
-        { ...state, staff_id }
+        formData
       );
 
       navigete("/");
@@ -34,7 +40,7 @@ const LeaveRequest = () => {
   };
 
   return (
-    <div className="flex ml-[26%] flex-col -mt-[20px] fixed">
+    <div className="flex ml-0 lg:ml-[18%] flex-col -mt-[20px] fixed items-center justify-center">
       <div className="flex flex-col justify-center items-center mx-auto my-10 bg-gray-100 ">
         <h1 className="text-3xl mb-4">Request For Leave</h1>
         <form
@@ -53,7 +59,7 @@ const LeaveRequest = () => {
               onChange={handleChande}
               name="reason"
               id="reason"
-              value={state.reason}
+              value={reason}
               cols="60"
               rows="7"
               className="w-3/4 border border-gray-300 outline-none pl-5 pt-5"
@@ -64,12 +70,10 @@ const LeaveRequest = () => {
               Upload your clearance
             </label>
             <input
-              onChange={handleChande}
+              onChange={handleCv}
               type="file"
-              value={state.clearance}
-              name="clearance"
+              name="cv"
               id="file"
-              // accept=".png, .jpeg, .jpg"
               className=" h-9 w-3/4 border border-gray-300 outline-none pl-5 rounded"
             />
           </div>
@@ -85,9 +89,9 @@ const LeaveRequest = () => {
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
               Clear
-            </button>{" "}
-          </div>{" "}
-        </form>{" "}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

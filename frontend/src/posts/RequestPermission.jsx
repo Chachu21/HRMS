@@ -37,7 +37,7 @@ const RequestPermission = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-100 rounded-lg p-4 h-1/2 ml-[28%] overflow-y-scroll w-[40%] mt-[7%] "
+      className="bg-gray-100 rounded-lg p-4 h-full ml-0 lg:ml-[18%] overflow-y-scroll px-2 lg:px-60  "
     >
       <h2 className=" font-semibold mb-4 ml-28 text-xl">Request Permission</h2>
       <div className="flex flex-col mb-4">
@@ -54,8 +54,6 @@ const RequestPermission = () => {
           rounded-md border border-gray-300 focus:outline-none "
           required
         />
-        {/* border border-gray-300 focus:outline-none
-        focus:ring-2 focus:border-transparent */}
       </div>
       <div className="flex flex-col mb-4">
         <label htmlFor="type" className="mb-1 font-semibold text-gray-600">
@@ -91,7 +89,7 @@ const RequestPermission = () => {
       <div className="flex flex-col mb-4">
         <label
           htmlFor="startDate"
-          className="px-3 h-12 py-2  rounded-md border border-gray-300 focus:outline-none "
+          className="mb-1 font-semibold text-gray-600 "
         >
           Start Date
         </label>
@@ -122,20 +120,6 @@ const RequestPermission = () => {
           required
         />
       </div>
-      {/* <div className="flex flex-col mb-4">
-        <label htmlFor="name" className="mb-1 font-semibold text-gray-600">
-          status
-        </label>
-        <input
-          type="text"
-          id="status"
-          name="status"
-          value={state.status}
-          onChange={handleChange}
-          className="px-3 h-12 py-2 focus:ring-2 focus:border-transparent focus:ring-blue-300  rounded-md border border-gray-300 focus:outline-none "
-          required
-        />
-      </div> */}
       <button
         type="submit"
         className="bg-blue-500 mt-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"

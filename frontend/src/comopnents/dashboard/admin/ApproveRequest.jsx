@@ -60,11 +60,9 @@ const ApproveJobRank = () => {
   };
 
   return (
-    <div className="flex flex-col w-full ml-[38%] lg:ml-[18%]">
-      <h1 className="text-2xl font-bold mb-4 py-3 ml-[16%]">
-        Approve Request of rank
-      </h1>
-      <div className="flex justify-center items-center px-5 w-full -ml-[16%]">
+    <div className="flex flex-col justify-start items-start ml-0 lg:ml-[18%]">
+      <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
+      <div className="flex justify-center items-center ">
         <table className="">
           <thead className="bg-gray-100">
             <tr>

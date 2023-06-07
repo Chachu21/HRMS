@@ -3,6 +3,7 @@ const sequelize = require("../config/database.js");
 const models = initModels(sequelize);
 const Permission = models.permission;
 
+
 // Create a new permission
 // const createPermission = async (req,res) => {
 //   const { name, type, reason, startDate, returnDate,status ,staffId} = req.body;
@@ -39,6 +40,21 @@ const getAllPermissions = async (req, res) => {
     res.status(200).json(permissions);
   } catch (error) {
     res.status(500).json({ error: "cannot fetch permission" });
+  }
+};
+const getPermissionByStaffId = async (req,res) => {
+  const staffId = req.params.id;
+  try {
+        const permission = await Permission.findAll({
+          where: { staff_id: staffId },
+        });
+    if (!permission) {
+      throw new Error("Permission not found");
+    }
+    return res.json(permission);
+   
+  } catch (error) {
+    throw new Error("Failed to retrieve permission: " + error.message);
   }
 };
 
@@ -150,10 +166,33 @@ const deletePermission = async (permissionId) => {
   }
 };
 
+const getPermissionStaffId = async (req, res) => {
+  const staffId = req.params.id;
+
+  console.log(staffId);
+  try {
+    const permissions = await Permission.findAll({
+      where: { staff_id: staffId },
+    });
+    if (permissions.length === 0) {
+      return res.status(404).json({
+        error: `Nopermission request found for staff member with ID: ${staffId}`,
+      });
+    }
+    return res.json(permissions);
+  } catch (error) {
+    return res.status(500).json({
+      error: `Failed to retrievepermission request for staff member with ID: ${staffId}`,
+    });
+  }
+};
+
 module.exports = {
   createPermission,
   getAllPermissions,
   getPermissionById,
   updatePermission,
+  getPermissionByStaffId,
   deletePermission,
+  getPermissionStaffId,
 };

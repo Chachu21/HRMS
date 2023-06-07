@@ -29,6 +29,25 @@ const GetAllJobRank = async (req, res) => {
   }
 };
 
+//get by staff id
+const getJobRankByStaffId = async (req, res) => {
+  const staffId = req.params.id;
+  try {
+    const jobRank = await JobRank.findAll({
+      where: { staff_id: staffId },
+    });
+    if (!jobRank) {
+      res.status(404).json({ error: "Job rank not found" });
+      return res.json(jobRank);
+    }
+    res.status(200).json(jobRank);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching job rank by ID" });
+  }
+};
+
 const getJobRankById = async (req, res) => {
   const id = req.params.id;
   try {
@@ -145,11 +164,33 @@ const upload = multer({
   fileFilter: isImage,
 });
 
+const getJobRanktStaffId = async (req, res) => {
+  const staffId = req.params.id;
+
+  console.log(staffId);
+  try {
+    const jobRanks = await JobRank.findAll({ where: { staff_id: staffId } });
+    if (jobRanks.length === 0) {
+      return res.status(404).json({
+        error: `No job rank request found for staff member with ID: ${staffId}`,
+      });
+    }
+    return res.json(jobRanks);
+  } catch (error) {
+    return res.status(500).json({
+      error: `Failed to retrieve job rank request for staff member with ID: ${staffId}`,
+    });
+  }
+};
+
+
 module.exports = {
   createJobRank,
   GetAllJobRank,
   getJobRankById,
   updateJobRank,
   deleteJobRank,
+  getJobRankByStaffId,
   upload,
+  getJobRanktStaffId,
 };

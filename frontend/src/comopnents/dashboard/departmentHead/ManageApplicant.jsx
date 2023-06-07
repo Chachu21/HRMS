@@ -36,9 +36,11 @@ const ManageApplicant = () => {
               vacancyTitle: item.vacancy_title,
             };
           }
+
+          return null; // Added to handle the case where no matching applicant is found
         });
 
-        setApplicantData(formattedData);
+        setApplicantData(formattedData.filter(Boolean)); // Remove null values from the array
       } catch (error) {
         console.error(error);
       }

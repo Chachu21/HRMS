@@ -37,8 +37,18 @@ const ManageJobRank = () => {
       });
   };
 
+  const handleDownload = (cv) => {
+    const downloadLink = `http://localhost:5002/uploads/${cv}`;
+    const link = document.createElement("a");
+    link.href = downloadLink;
+    link.download = cv;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
-    <div className="flex ml-[20%] mr-[1%] flex-col mt-20">
+    <div className="flex lg:ml-[18%] ml-0 flex-col">
       <h1 className="text-2xl font-bold mb-4">Job Rank Table</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
@@ -55,7 +65,34 @@ const ManageJobRank = () => {
             <tr key={rank.id} className="border border-gray-400">
               <td className="px-4 py-2">{rank.staff_id}</td>
               <td className="px-4 py-2">{rank.level}</td>
-              <td className="px-4 py-2">{rank.cv}</td>
+              {rank.cv && rank.cv.endsWith(".pdf") ? (
+                <a
+                  href={`http://localhost:5002/uploads/${rank.cv}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                >
+                  Download PDF
+                </a>
+              ) : (
+                rank.cv && (
+                  <div>
+                    <a
+                      href={`http://localhost:5002/uploads/${rank.cv}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Image
+                    </a>
+                    <button
+                      className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
+                      onClick={() => handleDownload(rank.cv)}
+                    >
+                      Download
+                    </button>
+                  </div>
+                )
+              )}
               <td className="px-4 py-2">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

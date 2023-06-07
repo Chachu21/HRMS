@@ -1,12 +1,19 @@
 const initModels = require("../models/init-models");
 const sequelize = require("../config/database");
-const job_rank = require("../models/job_rank/job_rank");
-const { where } = require("sequelize");
+const multer = require("multer");
 const models = initModels(sequelize);
 const JobRank = models.job_rank;
 const createJobRank = async (req, res) => {
   try {
-    const jobRank = await JobRank.create(req.body);
+
+    const {staff_id, level, status} =req.body
+    const cv = req.file;
+    const jobRank = await JobRank.create({
+      staff_id,
+      level,
+      cv: cv ? cv.filename : null,
+      status // Store the filename in the database
+    });
     res.status(200).json(jobRank);
   } catch (error) {
     res.status(500).json(error);
@@ -106,10 +113,43 @@ const deleteJobRank = async (req, res) => {
   }
 };
 
+
+// img storage config
+const imgConfig = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+    const ext = file.originalname.split(".").pop();
+    callback(null, `cv-${Date.now()}.${ext}`);
+  },
+});
+
+// img filter
+const isImage = (req, file, callback) => {
+  const allowedMimeTypes = [
+    "application/pdf",
+    "image/jpeg",
+    "image/png",
+    "image/jpg",
+  ];
+  if (allowedMimeTypes.includes(file.mimetype)) {
+    callback(null, true);
+  } else {
+    callback(new Error("Only PDF, JPEG, and PNG files are allowed"));
+  }
+};
+
+const upload = multer({
+  storage: imgConfig,
+  fileFilter: isImage,
+});
+
 module.exports = {
   createJobRank,
   GetAllJobRank,
   getJobRankById,
   updateJobRank,
   deleteJobRank,
+  upload,
 };

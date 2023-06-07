@@ -4,36 +4,39 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const RequestJobRank = () => {
-  const [state, setstate] = useState({
-    level: "",
-    cv: "",
-  });
+const [level, setLevel] = useState("");
+  const [cv, setCv] = useState("");
 
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
+  const status = "Pending";
 
-  const handleClick = () => {
-    setstate({
-      level: "",
-      cv: "",
-    });
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setCv(file);
   };
+ const handleClick = () => {
+   setCv("");
+   setLevel("");
+ };
 
-  const handleChande = (event) => {
-    const { name, value } = event.target;
-    setstate((prev) => ({ ...prev, [name]: value }));
-  };
+ const handleChande = (event) => {
+   const { value } = event.target;
+   setLevel(value);
+ };
   const handleSubmit = async (event) => {
     event.preventDefault();
+ const formData = new FormData()
 
+ formData.append("staff_id", staff_id)
+ formData.append("level", level)
+ formData.append("status", status)
+ formData.append("cv", cv)
     try {
-      await axios.post("http://localhost:5002/api/v1/job_rank", {
-        ...state,
-        staff_id,
-      });
+      await axios.post("http://localhost:5002/api/v1/job_rank", formData);
 
-      navigete('/')
+      navigete("/");
     } catch (err) {
       console.log(err.message);
     }
@@ -55,13 +58,13 @@ const RequestJobRank = () => {
             <select
               onChange={handleChande}
               name="level"
-              value={state.level}
               id="level"
               className="w-3/4 rounded outline-none h-8 focus:ring-2 focus:border-transparent focus:ring-blue-300"
+              value={level}
             >
-              <option value="rank 0"> rank 0</option>
-              <option value="rank 1"> rank 1</option>
-              <option value="rank 2"> rank 2</option>
+              <option value="rank 0">rank 0</option>
+              <option value="rank 1">rank 1</option>
+              <option value="rank 2">rank 2</option>
             </select>
           </div>
           <div className="flex items-center w-full mb-4 gap-3">
@@ -69,12 +72,10 @@ const RequestJobRank = () => {
               Attachment cv
             </label>
             <input
-              onChange={handleChande}
+              onChange={handleImageChange}
               type="file"
               name="cv"
               id="clearance"
-              value={state.cv}
-              // accept="image/png, image/jpeg, image/jpg"
               className="w-3/4 rounded outline-none h-8 bg-gray-100 focus:ring-2 focus:border-transparent focus:ring-blue-300"
             />
           </div>

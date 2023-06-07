@@ -52,7 +52,7 @@ const JobVacancyAnnouncement = () => {
   };
 
   return (
-    <div className="max-w-md  flex lg:ml-[35%]  flex-col container px-4 sm:px-6 sm:m-4 lg:px-8 mt-20 lg:mt-24 ">
+    <div className="max-w-md  flex lg:ml-[35%]  flex-col container px-4 sm:px-6 sm:mt-8 lg:px-8 mt-20 lg:mt-24 ">
       <h2 className="text-2xl font-bold mb-4">Job Vacancy Announcement</h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className=" grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -198,7 +198,6 @@ const JobVacancyAnnouncement = () => {
 };
 
 export default JobVacancyAnnouncement;
-
 
 //   return (
 //     <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-20">

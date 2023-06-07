@@ -41,45 +41,38 @@ const getLeaveRequestById = async (req, res) => {
   }
 };
 
-
 const updateLeaveRequestById = async (req, res) => {
+
+
   const id = req.params.id;
   const { buttonType } = req.body;
-  const leave_request = await LeaveRequest.findByPk(id);
-  let status;
-  console.log("job ranks list");
-  console.log(leave_request.status);
-  // Determine the status based on the button type
-  if (buttonType === "approve" && leave_request.status === "Pending") {
-    status = "Approved";
-  } else if (
-    buttonType === "reject" &&
-    jobRank.status === "Pending"
-  ) {
-    status = "Rejected";
-  } else {
-    res.status(400).json({ error: "Invalid button type" });
-    return;
-  }
 
   try {
-    const leaveRequest = await leave_request.findOne({ where: { id } });
-
-    if (!leaveRequest) {
-      res.status(404).json({ error: "leave request  not found" });
-      return;
+    const leave_request = await LeaveRequest.findByPk(id);
+    if (!leave_request) {
+      return res.status(404).json({ error: "Leaveleave_request not found" });
     }
 
-    leaveRequest.status = status;
-    await leaveRequest.save();
+    let status;
 
-    res
+    if (buttonType === "approve" && leave_request.status === "Pending") {
+      status = "Approved";
+    } else if (buttonType === "reject" && leave_request.status === "Pending") {
+      status = "Rejected";
+    } else {
+      return res.status(400).json({ error: "Invalid button type" });
+    }
+
+    leave_request.status = status;
+    await leave_request.save();
+
+    return res
       .status(200)
-      .json({ message: "leave Request status is successfully updated" });
+      .json({ message: "Leaveleave_request status is successfully updated" });
   } catch (error) {
-    res
+    return res
       .status(500)
-      .json({ error: "An error occurred while updating leaveRequest status" });
+      .json({ error: "An error occurred while updating leave_request status" });
   }
 };
 

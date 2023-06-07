@@ -8,7 +8,9 @@ const createApplicant = async (req, res) => {
   const role_id = 2;
   try {
     const { fname, lname, email, password, phone_number } = req.body;
-    const cv = req.file; // Access the uploaded CV file from req.file
+    const cv = req.file;
+    console.log("applicant controller");
+    console.log(cv); // Access the uploaded CV file from req.file
 
     // Check if the applicant already exists
     const existingApplicant = await Applicant.findOne({ where: { email } });
@@ -142,7 +144,6 @@ const UpdateProfile = (req, res) => {
         .send("Server error: Could not update farmer's profile image");
     });
 };
-
 
 module.exports = {
   createApplicant,

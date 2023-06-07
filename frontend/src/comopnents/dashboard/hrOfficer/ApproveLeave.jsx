@@ -6,7 +6,7 @@ const ApproveLeave = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5002/api/v1/leave")
+      .get("http://localhost:5002/api/v1/leave_request")
       .then((response) => {
         setLeaveData(response.data);
       })
@@ -17,8 +17,8 @@ const ApproveLeave = () => {
 
   const handleApprove = (index) => {
     const updatedData = [...leaveData];
-   updatedData[index].status = "Approved";
-    
+    updatedData[index].status = "Approved";
+
     setLeaveData(updatedData);
     const id = leaveData[index].id;
     const buttonType = "approve"; // Set the buttonType to "approve"

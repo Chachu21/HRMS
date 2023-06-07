@@ -6,7 +6,7 @@
 //   setConfirmPassword,
 //   resetPasswordRequest,
 //   setAcceptTerms,
-// } from "../redux/reducers/authReducer";
+// } from "../redux/reducers/loginReducer";
 // import { Link } from "react-router-dom";
 
 // const ForgotPassword = () => {
@@ -14,7 +14,7 @@
 //   const phoneNumber = useSelector((state) => state.auth.phoneNumber);
 //   const password = useSelector((state) => state.auth.password);
 //   const confirmPassword = useSelector((state) => state.auth.confirmPassword);
-//   const acceptTerms = useSelector((state)=>state.auth.acceptTerms)
+//   const acceptTerms = useSelector((state) => state.auth.acceptTerms);
 
 //   const handleFormSubmit = (e) => {
 //     e.preventDefault();

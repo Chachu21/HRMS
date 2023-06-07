@@ -39,23 +39,23 @@ const getJobRankById = async (req, res) => {
 };
 
 const updateJobRank = async (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   const { buttonType } = req.body;
   const jobRank = await JobRank.findByPk(id);
- let status;
-console.log('job ranks list');
+  let status;
+  console.log("job ranks list");
   // Determine the status based on the button type
 
   if (
     buttonType === "forward" &&
-    jobRank.status === "Pending"&&
+    jobRank.status === "Pending" &&
     jobRank.status !== "Approved" &&
     jobRank.status !== "Rejected"
   ) {
     status = "Forwarded";
   } else if (
     buttonType === "approve" &&
-    jobRank.status === "Forwarded"&&
+    jobRank.status === "Forwarded" &&
     jobRank.status !== "Pending"
   ) {
     status = "Approved";
@@ -90,8 +90,6 @@ console.log('job ranks list');
       .json({ error: "An error occurred while updating job rank status" });
   }
 };
-
-
 
 const deleteJobRank = async (req, res) => {
   const id = req.params.id;

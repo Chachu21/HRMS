@@ -1,6 +1,5 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import Button from "@mui/material/Button";//#endregion
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -72,7 +71,11 @@ export default function ApplyCustomizedDialogs({ children }) {
 
   return (
     <div>
-      <div className="text-white flex items-center justify-center" variant="outlined" onClick={handleClickOpen}>
+      <div
+        className="text-white flex items-center justify-center"
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
         <span className="text-white text-lg text-center"> Apply</span>
       </div>
       <BootstrapDialog

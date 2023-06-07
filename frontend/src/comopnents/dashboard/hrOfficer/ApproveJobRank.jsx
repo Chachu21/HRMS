@@ -20,7 +20,7 @@ const ApproveJobRank = () => {
     const updatedData = [...rankData];
     if (updatedData[index].status === "Forwarded") {
       updatedData[index].status = "Approved";
-    } 
+    }
     setRankData(updatedData);
     const id = rankData[index].id;
     const buttonType = "approve"; // Set the buttonType to "approve"
@@ -33,13 +33,13 @@ const ApproveJobRank = () => {
       .catch((error) => {
         console.error(error);
       });
-  };	
+  };
 
   const handleReject = (index) => {
     const updatedData = [...rankData];
-     if (updatedData[index].status === "Forwarded") {
-       updatedData[index].status = "Rejected";
-     } 
+    if (updatedData[index].status === "Forwarded") {
+      updatedData[index].status = "Rejected";
+    }
     setRankData(updatedData);
 
     const id = rankData[index].id;

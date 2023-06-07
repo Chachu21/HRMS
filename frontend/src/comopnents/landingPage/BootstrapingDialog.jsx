@@ -71,7 +71,7 @@ export default function CustomizedDialogs({ children }) {
   return (
     <div>
       <div
-        className="w-[80px] cursor-pointer h-[35px] flex justify-center items-center bg-blue-500  mx-2 rounded-md text-white"
+        className="w-[80px] text-sm lg:text-md cursor-pointer h-[25px] lg:h-[35px] flex justify-center items-center bg-blue-500  mx-2 rounded-md text-white"
         variant="outlined"
         onClick={handleClickOpen}
       >

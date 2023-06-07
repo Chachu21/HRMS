@@ -9,19 +9,19 @@ import LoginCustomizedDialogs from "./LoginCustomizedDialogs";
 const Header = () => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const location = useLocation();
-  const handleopenClose= () => { 
-    setNavbarOpen(!navbarOpen)
-   }
+  const handleopenClose = () => {
+    setNavbarOpen(!navbarOpen);
+  };
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-screen flex flex-wrap items-center lg:h-[70px] justify-between bg-[#f7f7f7] shadow-lg mb-1 z-[1]">
+      <nav className="fixed top-0 left-0 w-screen flex flex-wrap items-center lg:h-[70px] justify-between bg-[#f7f7f7] shadow-md mb-1 z-[1]">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between items-center lg:w-auto lg:static lg:block lg:justify-start">
             <NavLink
               exact
               to="/"
-              className={`text-lg font-bold flex justify-center items-center mr-4 py-2 whitespace-nowrap uppercase text-center text-blue-500 brand ${
+              className={`text-lg font-bold flex justify-center items-center mr-4 py-2 whitespace-nowrap uppercase text-center brand ${
                 location.pathname === "/" ? "text-gray-400" : ""
               }`}
             >
@@ -29,7 +29,7 @@ const Header = () => {
                 <img
                   className="w-[80px] h-[60px] object-cover rounded-xl p-2"
                   src={logo}
-                  alt="equb_logo"
+                  alt="hrms"
                 />
                 HRMS
               </div>
@@ -76,7 +76,7 @@ const Header = () => {
                   Vaccancy
                 </NavLink>
               </li>
-              <li className="flex items-center">
+              {/* <li className="flex items-center">
                 <NavLink
                   onClick={handleopenClose}
                   to="/about"
@@ -108,8 +108,11 @@ const Header = () => {
                 >
                   Help
                 </NavLink>
-              </li>
-              <li className="flex items-center m-[10px]">
+              </li> */}
+              <li
+                onClick={handleopenClose}
+                className="flex items-center m-[10px]"
+              >
                 {/* <NavLink
                   to="/signUpASapplicant"
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"
@@ -120,7 +123,10 @@ const Header = () => {
                 </NavLink> */}
                 <CustomizedDialogs />
               </li>
-              <li className="flex items-center m-[10px]">
+              <li
+                onClick={handleopenClose}
+                className="flex items-center m-[10px]"
+              >
                 {/* <NavLink
                   to="/login"
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"

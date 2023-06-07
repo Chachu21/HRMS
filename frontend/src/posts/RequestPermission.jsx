@@ -10,12 +10,10 @@ const RequestPermission = () => {
     reason: "",
     start_date: "",
     return_date: "",
-    status: "",
   });
-const navigete = useNavigate()
-  const user = useSelector((state) =>state.auth.user)
- const  staff_id =user.staff_id
-
+  const navigete = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const staff_id = user.staff_id;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,10 +25,10 @@ const navigete = useNavigate()
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/permission",
-        {...state, staff_id}
+        { ...state, staff_id }
       );
 
-navigete('/')
+      navigete("/");
     } catch (err) {
       console.log(err.message);
     }
@@ -124,7 +122,7 @@ navigete('/')
           required
         />
       </div>
-      <div className="flex flex-col mb-4">
+      {/* <div className="flex flex-col mb-4">
         <label htmlFor="name" className="mb-1 font-semibold text-gray-600">
           status
         </label>
@@ -137,7 +135,7 @@ navigete('/')
           className="px-3 h-12 py-2 focus:ring-2 focus:border-transparent focus:ring-blue-300  rounded-md border border-gray-300 focus:outline-none "
           required
         />
-      </div>
+      </div> */}
       <button
         type="submit"
         className="bg-blue-500 mt-4 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"

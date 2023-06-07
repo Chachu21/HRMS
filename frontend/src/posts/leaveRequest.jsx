@@ -27,7 +27,7 @@ const LeaveRequest = () => {
         { ...state, staff_id }
       );
 
-      navigete('/')
+      navigete("/");
     } catch (err) {
       console.log(err.message);
     }

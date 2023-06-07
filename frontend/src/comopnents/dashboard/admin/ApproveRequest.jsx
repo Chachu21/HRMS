@@ -1,155 +1,134 @@
-import React, { useEffect, useState } from "react";
-import { FaCheck, FaSearch, FaTimes } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { approved, rejected } from "../../../redux/reducers/loginReducer";
+import { Link } from "react-router-dom";
 
-const initialState = {
-  searchQuery: "",
-};
+const ApproveJobRank = () => {
+  const [emplyeeRequistionData, setEmplyeeRequistionData] = useState([]);
 
-const ApproveRequest = () => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:5002/api/v1/employee_requistion")
+      .then((response) => {
+        setEmplyeeRequistionData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
-  const [accountData, setAccountData] = useState([]);
-  const [formData, setFormData] = useState(initialState);
-  const dispatch = useDispatch();
-  const approvedItems = useSelector((state) => state.auth.approvedItems);
-  const rejectedItems = useSelector((state) => state.auth.rejectedItems);
+  const handleApprove = (index) => {
+    const updatedData = [...emplyeeRequistionData];
+    if (updatedData[index].status === "Forwarded") {
+      updatedData[index].status = "Approved";
+    }
+    setEmplyeeRequistionData(updatedData);
+    const id = emplyeeRequistionData[index].id;
+    const buttonType = "approve"; // Set the buttonType to "approve"
 
- useEffect(() => {
-   const fetchData = async () => {
-     try {
-       const response = await axios.get(
-         "http://localhost:5002/api/v1/employee_requistion"
-       );
-       setAccountData(response.data);
-       console.log(response.data);
-     } catch (error) {
-       // Handle error if the API request fails
-       console.error("Error fetching data:", error);
-     }
-   };
+    axios
+      .put(`http://localhost:5002/api/v1/employee_requistion/${id}`, {
+        buttonType,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-   fetchData();
- }, []);
-  
+  const handleReject = (index) => {
+    const updatedData = [...emplyeeRequistionData];
+    if (updatedData[index].status === "Forwarded") {
+      updatedData[index].status = "Rejected";
+    }
+    setEmplyeeRequistionData(updatedData);
 
-const handleApprove = (id) => {
-  if (!approvedItems.includes(id)) {
-    dispatch(approved(id)); // Dispatch the approved action with the item's ID
-  }
-};
+    const id = emplyeeRequistionData[index].id;
+    const buttonType = "reject"; // Set the buttonType to "reject"
 
-const handleReject = (id) => {
-  if (!rejectedItems.includes(id)) {
-    dispatch(rejected(id)); // Dispatch the rejected action with the item's ID
-  }
-};
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("search is done");
+    axios
+      .put(`http://localhost:5002/api/v1/employee_requistion/${id}`, {
+        buttonType,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
-    <div className="fixed flex w-full lg:ml-[1%] lg:mr-[1%] flex-col mt-12">
-      <div className="flex justify-center items-center rounded-[5px] mx-4 my-10">
-        <form
-          action=""
-          onSubmit={handleSubmit}
-          className="flex items-center justify-center"
-        >
-          <input
-            id="search"
-            name="search"
-            value={formData.searchQuery}
-            onChange={(e) => {
-              setFormData({ ...formData, searchQuery: e.target.value });
-            }}
-            type="text"
-            className="bg-gray-100 w-[250px] lg:w-[350px] outline-none border-2 border-gray-300 pl-3 h-10 rounded-[5px] placeholder:text-[18px] leading-4 font-normal"
-            placeholder="Search here..."
-          />
-          <button
-            type="submit"
-            className="bg-blue-400 h-10 flex px-[14px] justify-center items-center rounded-tr-[5px] rounded-br-[5px] cursor-pointer"
-          >
-            <FaSearch color="white" />
-          </button>
-        </form>
-      </div>
-      <div
-        className="flex ml-[20%] justify-center items-center px-5 overflow-x-auto"
-        style={{
-          overflowX: "auto",
-          "@media (min-width: 1024px)": { overflowX: "hidden" },
-        }}
-      >
-        <table className="table-auto w-full">
+    <div className="flex flex-col w-full ml-[18%]">
+      <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
+      <div className="flex justify-center items-center px-5">
+        <table className="">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-4 py-2">Approved</th>
               <th className="px-4 py-2">staff ID</th>
               <th className="px-4 py-2">job Title</th>
               <th className="px-4 py-2">Quantity</th>
               <th className="px-4 py-2">CGPA</th>
               <th className="px-4 py-2">Qualification</th>
               <th className="px-4 py-2 w-auto">Action</th>
+              <th className="px-4 py-2 w-auto">Status</th>
             </tr>
           </thead>
-          <tbody>
-            {accountData.map(
-              (
-                { staff_id, job_title, quantity, cgpa, qualification },
-                index
-              ) => {
-                const isApproved = approvedItems.includes(index);
-                const isRejected = rejectedItems.includes(index);
-                return (
-                  <tr key={index} className="bg-gray-100/{0-4}">
-                    <td className="border px-4 py-2">
-                      {isApproved ? (
-                        <FaCheck color="green" />
-                      ) : isRejected ? (
-                        <FaTimes color="red" />
-                      ) : null}
-                    </td>
-                    <td className="border px-4 py-2">{staff_id}</td>
-                    <td className="border px-4 py-2">{job_title}</td>
-                    <td className="border px-4 py-2">{quantity}</td>
-                    <td className="border px-4 py-2">{cgpa}</td>
-                    <td className="border px-4 py-2">
-                      {qualification ? "Qualified" : "Not Qualified"}
-                    </td>
-                    <td className="w-auto flex justify-center items-center gap-2 border py-2">
-                      <button
-                        className={`${
-                          isApproved ? "bg-gray-400" : "bg-green-500"
-                        } rounded-sm px-1`}
-                        onClick={() => {
-                          handleApprove(index);
-                        }}
-                      >
-                        {isApproved ? (
-                          <span>Approved</span>
-                        ) : (
-                          <span>Approve</span>
-                        )}
-                      </button>
-                      {!isApproved && !isRejected && (
+          <tbody className="overflow-x-hidden">
+            {emplyeeRequistionData.map((employeeRequistion, index) => {
+              return (
+                <tr key={index} className="bg-gray-100/{0-4} ">
+                  <td className="border px-4 py-2">
+                    {employeeRequistion.staff_id}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {employeeRequistion.job_title}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {employeeRequistion.quantity}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {employeeRequistion.cgpa}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {employeeRequistion.qualification}
+                  </td>
+
+                  <td className="w-auto flex justify-center items-center gap-2 py-2 px-4">
+                    {employeeRequistion.status !== "Approved" &&
+                      employeeRequistion.status !== "Rejected" && (
                         <button
-                          className="bg-red-400 rounded-sm px-1"
-                          onClick={() => {
-                            handleReject(index);
-                          }}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
+                          onClick={() => handleApprove(index)}
                         >
-                          <span>Reject</span>
+                          Approve
                         </button>
                       )}
-                    </td>
-                  </tr>
-                );
-              }
-            )}
+
+                    {employeeRequistion.status !== "Approved" &&
+                      employeeRequistion.status !== "Rejected" && (
+                        <button
+                          className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded"
+                          onClick={() => handleReject(index)}
+                        >
+                          Reject
+                        </button>
+                      )}
+
+                    {employeeRequistion.status === "Approved" && (
+                      <span className="text-green-500">Approved</span>
+                    )}
+                    {employeeRequistion.status === "Rejected" && (
+                      <span className="text-red-500">Rejected</span>
+                    )}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {employeeRequistion.status}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -157,4 +136,4 @@ const handleReject = (id) => {
   );
 };
 
-export default ApproveRequest;
+export default ApproveJobRank;

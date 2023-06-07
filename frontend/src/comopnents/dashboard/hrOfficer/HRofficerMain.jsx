@@ -64,7 +64,7 @@ const HRofficerMain = () => {
       <div className="flex flex-col justify-center items-center gap-10 border-gray-200 border-solid rounded-md dark:border-gray-300 mt-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-4 py-4 md:py-8 lg:py-12">
           <Link to="/hrofficer/dashboard/leaverequest">
-            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300">
+            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300 hover:scale-105">
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black">
                 {leaveRequestCount}
               </div>
@@ -74,7 +74,7 @@ const HRofficerMain = () => {
             </div>
           </Link>
           <Link to="/hrofficer/dashboard/approvejobrank">
-            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300">
+            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300 hover:scale-105">
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black">
                 {jobRankRequestCount}
               </div>
@@ -84,7 +84,7 @@ const HRofficerMain = () => {
             </div>
           </Link>
           <Link to="/hrofficer/dashboard/viewemployeerequistion">
-            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300">
+            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300 hover:scale-105">
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-black">
                 {employeeRequestCount}
               </div>
@@ -93,20 +93,20 @@ const HRofficerMain = () => {
               </p>
             </div>
           </Link>
-          <Link to="/hrofficer/dashboard/jobvacancy">
-            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300">
+          {/* <Link to="/hrofficer/dashboard/jobvacancy">
+            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300 hover:scale-105">
               <p className="text-2xl text-gray-700 dark:text-gray-700">
                 Announce Vacancy
               </p>
             </div>
           </Link>
           <Link to="/hrofficer/dashboard/schedul">
-            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300">
+            <div className="flex flex-col gap-2 items-center justify-center h-[120px] rounded bg-blue-200 dark:bg-blue-300 hover:scale-105">
               <p className="text-2xl text-gray-700 dark:text-gray-700">
                 Post Exam Schedule
               </p>
             </div>
-          </Link>
+          </Link> */}
         </div>
         {/* Rest of your JSX code */}
       </div>

@@ -7,7 +7,6 @@ const LeaveRequests = () => {
     axios
       .get("http://localhost:5002/api/v1/leave_request")
       .then((response) => {
-        console.log(response.data);
         setLeaveRequestData(response.data);
       })
       .catch((error) => {
@@ -16,31 +15,26 @@ const LeaveRequests = () => {
   }, []);
 
   const handleApprove = (index) => {
-
-
-
     const updatedData = [...leaveRequestData];
     updatedData[index].status = "Approved";
     setLeaveRequestData(updatedData);
     const id = leaveRequestData[index].id;
-    
+
     const buttonType = "approve"; // Set the buttonType to "approve"
 
     axios
-      .put(`http://localhost:5002/api/v1/leave_request/${id}`, buttonType)
+      .put(`http://localhost:5002/api/v1/leave_request/${id}`, { buttonType })
       .then((response) => {
         console.log(response.data);
-        console.log('muller sucess');
       })
       .catch((error) => {
-        console.log("natiniel error");
         console.error(error.message);
       });
   };
 
   const handleReject = (index) => {
     const updatedData = [...leaveRequestData];
-      updatedData[index].status = "Rejected";
+    updatedData[index].status = "Rejected";
 
     setLeaveRequestData(updatedData);
 
@@ -48,13 +42,12 @@ const LeaveRequests = () => {
     const buttonType = "reject"; // Set the buttonType to "reject"
 
     axios
-      .put(`http://localhost:5002/api/v1/leave_request/${id}`, buttonType )
+      .put(`http://localhost:5002/api/v1/leave_request/${id}`, { buttonType })
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
-        console.log(`id: ${id}, buttonType: ${buttonType}`);
       });
   };
   return (
@@ -77,23 +70,25 @@ const LeaveRequests = () => {
               <td className="px-4 py-2">{request.reason}</td>
               <td className="px-4 py-2">{request.clearance}</td>
               <td className="px-4 py-2">
-                {request.status !== "Approved" && request.status !== "Rejected" && (
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
-                    onClick={() => handleApprove(index)}
-                  >
-                    Approve
-                  </button>
-                )}
+                {request.status !== "Approved" &&
+                  request.status !== "Rejected" && (
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
+                      onClick={() => handleApprove(index)}
+                    >
+                      Approve
+                    </button>
+                  )}
 
-                {request.status !== "Approved" && request.status !== "Rejected" && (
-                  <button
-                    className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded"
-                    onClick={() => handleReject(index)}
-                  >
-                    Reject
-                  </button>
-                )}
+                {request.status !== "Approved" &&
+                  request.status !== "Rejected" && (
+                    <button
+                      className="bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded"
+                      onClick={() => handleReject(index)}
+                    >
+                      Reject
+                    </button>
+                  )}
 
                 {request.status === "Approved" && (
                   <span className="text-green-500">Approved</span>

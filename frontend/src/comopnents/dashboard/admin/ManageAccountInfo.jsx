@@ -176,8 +176,8 @@ const ManageAccountInfo = () => {
                   </td>
                   <td className="py-3 px-6 text-center">
                     <Link
-                      to={`/manage-account-info/edit/${data.id}`}
-                      className="mr-3 text-blue-600 hover:text-blue-700"
+                      to={`/admin/dashboard/manageaccount/update/${data.id}`}
+                      className=" mr-3 text-blue-600 hover:text-blue-700"
                     >
                       Edit
                     </Link>

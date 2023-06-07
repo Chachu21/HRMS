@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { set } from "mongoose";
-
 const LeaveRequests = () => {
   const [leaveRequestData, setLeaveRequestData] = useState([]);
 

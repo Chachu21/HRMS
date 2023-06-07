@@ -1,35 +1,73 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.jpg";
 import profile from "../../../assets/profile.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { humergerMenu, logout } from "../../../redux/reducers/loginReducer";
+import axios from "axios";
 
 const EmployeeHeader = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
-  const isClicked = useSelector((state) => state.auth.isClicked);
-  const dispatch = useDispatch()
-  const naviget = useNavigate()
-const user = useSelector((state)=>state.auth.user)
-const handleLogout =() => { 
-  dispatch(logout());
-  naviget('/')
+ const isClicked = useSelector((state) => state.auth.isClicked);
+ const [image, setImage] = useState(null);
+ const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+ const [isUploadDisabled, setUploadDisabled] = useState(true);
+ const [staff, setStaff] = useState([]);
 
+ const dispatch = useDispatch();
+ const navigate = useNavigate();
+ const location = useLocation();
+ const user = useSelector((state) => state.auth.user);
+ const isLogin = useSelector((state) => state.auth.isLogin);
+
+ //fetch staff details
+ useEffect(() => {
+   const fetchstaffData = async () => {
+     try {
+       const response = await axios.get(
+         `http://localhost:5002/api/v1/staff/${user.staff_id}`
+       );
+       setStaff(response.data);
+     } catch (error) {
+       console.error("Error fetching staff data:", error);
+     }
+   };
+
+   fetchstaffData();
+ }, [user.staff_id]);
+ console.log(`http://localhost:5002/backend/uploads/${staff.profile}`);
+
+ const handleImageSelect = (event) => {
+   const file = event.target.files[0];
+   setImage(file);
+   setUploadDisabled(false);
+ };
+
+ //for sending request to backend including image
+ const updateUserProfileImage = async () => {
+   try {
+     const formData = new FormData();
+     formData.append("image", image);
+
+     await axios.put(
+       `http://localhost:5002/api/v1/staff/profile/${user.staff_id}`,
+       formData
+     );
+   } catch (error) {
+     console.error("Error updating profile image:", error);
+   }
+ };
+
+ function toggleUserMenu() {
+   setUserMenuOpen((prevState) => !prevState);
  }
 
-  function toggleUserMenu() {
-    setUserMenuOpen((prevState) => !prevState);
-  }
-
-  const handleSidebarToggle = () => {
-    dispatch(humergerMenu());
-  };
-
+ const handleSidebarToggle = () => {
+   dispatch(humergerMenu());
+ };
   return (
     <div>
       <nav className="fixed top-0 z-50 w-full bg-white text-black border-gray-200 dark:bg-gray-100 dark:border-gray-200 shadow-xl">
-        <div className="px-3 py-3 lg:px-5 lg:pl-3">
+        <div className="px-3 py-1 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-center gap-2 ">
               <button
@@ -37,7 +75,7 @@ const handleLogout =() => {
                 data-drawer-target="logo-sidebar"
                 data-drawer-toggle="logo-sidebar"
                 aria-controls="logo-sidebar"
-                aria-expanded={isSidebarOpen}
+                aria-expanded={isClicked}
                 type="button"
                 class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               >
@@ -70,55 +108,65 @@ const handleLogout =() => {
 
             <div className="flex items-center">
               <div className="flex items-center ml-3">
-                <div>
-                  <button
-                    type="button"
-                    onClick={toggleUserMenu}
-                    className="flex text-sm bg-gray-100 rounded-full dark:bg-white focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                    aria-expanded={isUserMenuOpen}
-                    aria-controls="dropdown-user"
-                  >
+                <div
+                  className={`text-lg cursor-pointer font-bold flex justify-center items-center gap-2 mr-4 py-1 whitespace-nowrap capitalize text-center text-gray-500  ${
+                    location.pathname === "/profile" ? "text-gray-400" : ""
+                  }`}
+                >
+                  <span>{user && user.email}</span>
+                  <div className="flex justify-center items-center gap-[10px]">
                     <img
-                      className="w-[50px] h-[50px] rounded-full"
-                      src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                      alt="user"
+                      onClick={toggleUserMenu}
+                      className="w-[64px] h-[64px] object-cover rounded-full "
+                      src={
+                        staff.profile
+                          ? `http://localhost:5002/uploads/${staff.profile}`
+                          : profile
+                      }
+                      alt=""
                     />
-                  </button>
+                  </div>
                 </div>
                 {isUserMenuOpen && (
                   <div
-                    className="z-50 absolute right-0 mt-[350px] py-1 w-[200px]flex flex-col items-center justify-center gap-5 bg-gray-50  rounded shadow dark:bg-gray-100 "
+                    className="z-1 absolute right-0 top-[70px] py-1  flex flex-col items-center justify-center gap-5 bg-[#f7f7f6]  rounded shadow dark:bg-gray-200 "
                     id="dropdown-user"
                   >
                     <div
-                      className="px-4 py-3 flex items-center justify-center flex-col gap-2"
+                      className=" flex items-center justify-center flex-col gap-5 px-3 py-4"
                       role="none"
                     >
-                      <img
-                        src={profile}
-                        className="w-[80px] h-[80px] rounded-full"
-                        alt=""
-                      />
-                      <p
-                        className="text-sm font-medium text-gray-900 truncate dark:text-gray-700"
-                        role="none"
+                      <label
+                        htmlFor="image-input"
+                        className="bg-gray-200 text-gray-800  px-3 h-8 flex items-center  rounded-md cursor-pointer"
                       >
-                        {
-                          user && user.email
-                        }
-                      </p>
-                    </div>
-                    <hr className="h-1  bg-gray-300 w-full" />
-
-                    <div className="flex mt-2">
-                      <ul
-                        className="flex justify-center items-center gap-5 px-3"
-                        role="none"
+                        Choose photo
+                        <input
+                          type="file"
+                          id="image-input"
+                          name="image"
+                          className="hidden"
+                          onChange={handleImageSelect}
+                        />
+                      </label>
+                      <button
+                        className="bg-gray-200 rounded-md text-gray-800 px-3 h-8 cursor-pointer"
+                        onClick={() => {
+                          updateUserProfileImage();
+                          toggleUserMenu();
+                        }}
+                        disabled={isUploadDisabled}
                       >
-                      
-                      </ul>
+                        Change photo
+                      </button>
                     </div>
-                    <div onClick={handleLogout} className="text-center my-10 cursor-pointer">
+                    <div
+                      onClick={() => {
+                        dispatch(logout());
+                        navigate("/");
+                      }}
+                      className="text-center my-10 cursor-pointer"
+                    >
                       <span className="px-5 py-2 bg-red-300 rounded-md hover:bg-red-200">
                         Logout
                       </span>

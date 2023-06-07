@@ -85,7 +85,7 @@ function ManageEmployeeAccount() {
     );
   } else if (selectedTable === "permissions") {
     table = (
-      <div className="overflow-x-auto lg:ml-[18%] ml-0 ">
+      <div className="overflow-x-auto ml-[22%] ">
         <table className="table-auto border-collapse border border-gray-400">
           <thead>
             <tr className="bg-gray-200">
@@ -120,7 +120,7 @@ function ManageEmployeeAccount() {
     );
   } else if (selectedTable === "jobRanks") {
     table = (
-      <div className="overflow-x-auto lg:ml-[18%] ml-0 ">
+      <div className="overflow-x-auto ml-[18%] ml-0 ">
         <table className="table-auto border-collapse border border-gray-400">
           <thead>
             <tr className="bg-gray-200">

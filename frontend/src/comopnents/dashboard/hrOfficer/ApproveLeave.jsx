@@ -51,6 +51,16 @@ const ApproveLeave = () => {
       });
   };
 
+   const handleDownload = (clearance) => {
+     const downloadLink = `http://localhost:5002/uploads/${clearance}`;
+     const link = document.createElement("a");
+     link.href = downloadLink;
+     link.download = clearance;
+     document.body.appendChild(link);
+     link.click();
+     document.body.removeChild(link);
+   };
+
   return (
     <div className="flex flex-col ml-[20%] mr-[1%] ">
       <h1 className="text-2xl font-bold mb-4">Approve Request of leave</h1>
@@ -69,7 +79,36 @@ const ApproveLeave = () => {
             <tr key={leave.id} className="border border-gray-400">
               <td className="px-4 py-2">{leave.staffId}</td>
               <td className="px-4 py-2">{leave.reason}</td>
-              <td className="px-4 py-2">{leave.clearance}</td>
+              <td className="px-4 py-2">
+                {leave.clearance && leave.clearance.endsWith(".pdf") ? (
+                  <a
+                    href={`http://localhost:5002/uploads/${leave.clearance}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    Download PDF
+                  </a>
+                ) : (
+                  leave.clearance && (
+                    <div>
+                      <a
+                        href={`http://localhost:5002/uploads/${leave.clearance}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View Image
+                      </a>
+                      <button
+                        className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
+                        onClick={() => handleDownload(leave.clearance)}
+                      >
+                        Download
+                      </button>
+                    </div>
+                  )
+                )}
+              </td>
               <td className="px-4 py-2">
                 {leave.status !== "Approved" && leave.status !== "Rejected" && (
                   <button

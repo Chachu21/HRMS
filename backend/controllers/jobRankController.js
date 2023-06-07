@@ -164,6 +164,26 @@ const upload = multer({
   fileFilter: isImage,
 });
 
+const getJobRanktStaffId = async (req, res) => {
+  const staffId = req.params.id;
+
+  console.log(staffId);
+  try {
+    const jobRanks = await JobRank.findAll({ where: { staff_id: staffId } });
+    if (jobRanks.length === 0) {
+      return res.status(404).json({
+        error: `No job rank request found for staff member with ID: ${staffId}`,
+      });
+    }
+    return res.json(jobRanks);
+  } catch (error) {
+    return res.status(500).json({
+      error: `Failed to retrieve job rank request for staff member with ID: ${staffId}`,
+    });
+  }
+};
+
+
 module.exports = {
   createJobRank,
   GetAllJobRank,
@@ -172,4 +192,5 @@ module.exports = {
   deleteJobRank,
   getJobRankByStaffId,
   upload,
+  getJobRanktStaffId,
 };

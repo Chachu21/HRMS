@@ -13,7 +13,7 @@ leaveRouter.post("/",upload.single('cv'), createLeaveRequest);
 leaveRouter.get("/", getAllLeaveRequests);
 leaveRouter.get("/staff/:id", getLeaveRequestStaffId);
 leaveRouter.get("/:id", getLeaveRequestById);
-
+leaveRouter.get("/leave/:id", getLeaveRequestStaffId);
 
 leaveRouter.put("/:id", updateLeaveRequestById);
 leaveRouter.delete("/delete/:id", deleteLeaveRequestById);

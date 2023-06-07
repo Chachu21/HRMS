@@ -166,6 +166,27 @@ const deletePermission = async (permissionId) => {
   }
 };
 
+const getPermissionStaffId = async (req, res) => {
+  const staffId = req.params.id;
+
+  console.log(staffId);
+  try {
+    const permissions = await Permission.findAll({
+      where: { staff_id: staffId },
+    });
+    if (permissions.length === 0) {
+      return res.status(404).json({
+        error: `Nopermission request found for staff member with ID: ${staffId}`,
+      });
+    }
+    return res.json(permissions);
+  } catch (error) {
+    return res.status(500).json({
+      error: `Failed to retrievepermission request for staff member with ID: ${staffId}`,
+    });
+  }
+};
+
 module.exports = {
   createPermission,
   getAllPermissions,
@@ -173,4 +194,5 @@ module.exports = {
   updatePermission,
   getPermissionByStaffId,
   deletePermission,
+  getPermissionStaffId,
 };

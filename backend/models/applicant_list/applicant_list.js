@@ -1,6 +1,5 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define(
+module.exports = function (sequelize, DataTypes) {
+  const ApplicantList = sequelize.define(
     "applicant_list",
     {
       id: {
@@ -33,9 +32,16 @@ module.exports = function(sequelize, DataTypes) {
           key: "id",
         },
       },
+      department_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "department",
+          key: "id",
+        },
+      },
     },
     {
-      sequelize,
       tableName: "applicant_list",
       timestamps: false,
       indexes: [
@@ -55,8 +61,14 @@ module.exports = function(sequelize, DataTypes) {
           using: "BTREE",
           fields: [{ name: "vacancy_id" }],
         },
+        {
+          name: "ghghfg",
+          using: "BTREE",
+          fields: [{ name: "department_id" }],
+        },
       ],
     }
   );
-};
 
+  return ApplicantList;
+};

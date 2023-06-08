@@ -116,7 +116,7 @@ const StaffRegister = () => {
                   <option value={5}>Dep't Head</option>
                   <option value={4}>HR Officer</option>
                   <option value={3}>Employee</option>
-                  {/* <option value={6}>Dean</option> */}
+                  <option value={6}>Dean</option>
                 </select>
               </div>
             </div>

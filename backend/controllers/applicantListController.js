@@ -1,7 +1,7 @@
 const sequelize = require("../config/database.js");
 const initModels = require("../models/init-models.js");
 const models = initModels(sequelize);
-const ApplicantList = models.applicant_list
+const ApplicantList = models.applicant_list;
 
 // Get all applicant_list records
 const getAllApplicantList = async (req, res) => {
@@ -32,7 +32,7 @@ const getApplicantListById = async (req, res) => {
 
 // Create a new applicant_list record
 const createApplicantList = async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     const applicantList = await ApplicantList.create({
       // Remove the 'id' field from the data object
@@ -40,6 +40,7 @@ const createApplicantList = async (req, res) => {
       applicant_email: req.body.applicant_email,
       vacancy_title: req.body.vacancy_title,
       vacancy_id: req.body.vacancy_id,
+      department_id: req.body.department_id,
     });
 
     res.json(applicantList);
@@ -48,7 +49,6 @@ const createApplicantList = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 
 // Update an existing applicant_list record
 const updateApplicantList = async (req, res) => {

@@ -51,18 +51,18 @@ const LeaveRequests = () => {
       });
   };
 
-   const handleDownload = (clearance) => {
-     const downloadLink = `http://localhost:5002/uploads/${clearance}`;
-     const link = document.createElement("a");
-     link.href = downloadLink;
-     link.download = clearance;
-     document.body.appendChild(link);
-     link.click();
-     document.body.removeChild(link);
-   };
+  const handleDownload = (clearance) => {
+    const downloadLink = `http://localhost:5002/uploads/${clearance}`;
+    const link = document.createElement("a");
+    link.href = downloadLink;
+    link.download = clearance;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
-    <div className="flex flex-col w-full focus:ring-2 focus:border-transparent focus:ring-blue-300 lg:ml-[20%] mr-[1%] mt-[7%]">
+    <div className="flex flex-col focus:ring-2 focus:border-transparent focus:ring-blue-300 lg:ml-[20%] mr-[1%] mt-[7%]">
       <h1 className="text-2xl font-bold mb-4 ml-[30%]">Leave Request</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>

@@ -38,7 +38,7 @@ const EmployeeRequistion = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen w-full">
-      <section className="bg-gray-100 overflow-hidden w-full flex ">
+      <section className="bg-gray-100 overflow-hidden w-full flex -mt-[200px]">
         <div className="flex flex-col items-center justify-center px-1 py-8 mx-auto md:h-screen lg:py-0">
           <div className="lg:w-[650px] gap-5 p-6 bg-white rounded-lg shadow dark:border dark:bg-white dark:border-gray-700 sm:p-8">
             <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-700">

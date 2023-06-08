@@ -48,8 +48,8 @@ const ManageJobRank = () => {
   };
 
   return (
-    <div className="flex lg:ml-[18%] lg:mr-[1%] ml-0 flex-col">
-      <h1 className="text-2xl font-bold mb-4 py-3">Job Rank Table</h1>
+    <div className="flex lg:ml-[20%] lg:mr-[1%] ml-0 py-3 flex-col">
+      <h1 className="text-2xl font-bold mb-4 py-3">Job Rank Requests</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
           <tr className="bg-gray-200">

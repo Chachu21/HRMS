@@ -116,6 +116,7 @@ const StaffRegister = () => {
                   <option value={5}>Dep't Head</option>
                   <option value={4}>HR Officer</option>
                   <option value={3}>Employee</option>
+                  {/* <option value={6}>Dean</option> */}
                 </select>
               </div>
             </div>
@@ -158,24 +159,44 @@ const StaffRegister = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-4">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 undefined"
-              >
-                Password
-              </label>
-              <div className="flex flex-col items-start">
-                <input
-                  value={formData.password}
+
+            <div className="flex justify-center items-center gap-10 flex-col sm:flex-row">
+              <div className="flex justify-start items-left flex-col gap-[10px]">
+                <label htmlFor="department_id">Department</label>
+                <select
+                  value={formData.department_id}
+                  name="department_id"
+                  id="department_id"
                   onChange={handleChange}
-                  autoComplete="false"
-                  type="password"
-                  name="password"
-                  className="block w-[215px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                />
+                  className="w-[215px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
+                >
+                  <option value="">select department</option>
+                  <option value={5}>It</option>
+                  <option value={4}>mechanical</option>
+                  <option value={3}>Tourism</option>
+                  <option value={6}>Economics</option>
+                </select>
+              </div>
+              <div className="mt-4">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 undefined"
+                >
+                  Password
+                </label>
+                <div className="flex flex-col items-start">
+                  <input
+                    value={formData.password}
+                    onChange={handleChange}
+                    autoComplete="false"
+                    type="password"
+                    name="password"
+                    className="block w-[215px] mt-1 pl-2 outline-none border-gray-400 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  />
+                </div>
               </div>
             </div>
+
             <div className="flex items-end justify-end  mt-3 ml-[120px] lg:ml-[350px]">
               <button className="w-[100px] px-2 py-1 tracking-wide text-white transition-colors duration-200 transform bg-blue-400 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
                 Add

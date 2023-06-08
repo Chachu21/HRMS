@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { quantity } from "../../../redux/reducers/loginReducer";
 
 const ApproveEmployeeRequistion = () => {
   const [emplyeeRequistionData, setEmplyeeRequistionData] = useState([]);
 
+  const dispatch =useDispatch()
+  const count = emplyeeRequistionData.length
   useEffect(() => {
     axios
       .get("http://localhost:5002/api/v1/employee_requistion")
       .then((response) => {
         setEmplyeeRequistionData(response.data);
+        dispatch(quantity(count))
       })
       .catch((error) => {
         console.error(error);
@@ -92,7 +96,7 @@ const ApproveEmployeeRequistion = () => {
                     {employeeRequistion.cgpa}
                   </td>
                   <td className="border px-4 py-2">
-                    {employeeRequistion.qualification}
+                    {employeeRequistion.qualification ? "Qualified": "unQualified"}
                   </td>
 
                   <td className="w-auto flex justify-center items-center gap-2 py-2 px-4">

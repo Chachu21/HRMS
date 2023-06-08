@@ -17,6 +17,14 @@ module.exports = function (sequelize, DataTypes) {
           key: "id",
         },
       },
+      department_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "department",
+          key: "id",
+        },
+      },
       reason: {
         type: DataTypes.STRING(255),
         allowNull: false,
@@ -40,6 +48,11 @@ module.exports = function (sequelize, DataTypes) {
           name: "staff_id",
           using: "BTREE",
           fields: [{ name: "staff_id" }],
+        },
+        {
+          name: "dept_leave",
+          using: "BTREE",
+          fields: [{ name: "department_id" }],
         },
       ],
     }

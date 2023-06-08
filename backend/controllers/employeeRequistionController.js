@@ -2,7 +2,6 @@ const sequelize = require("../config/database.js");
 const initModels = require("../models/init-models.js");
 const models = initModels(sequelize);
 const EmployeeRequisition = models.employee_requisition;
-const employee_requisition = require("../models/employee_requisition/employee_requisition");
 
 // Controller function to handle creating a new employee requisition
 async function createEmployeeRequisition(req, res) {
@@ -97,8 +96,23 @@ const updateEmployeeRequistions = async (req, res) => {
   }
 };
 
+//get employee requisition by staffid
+const getAllEmployeeRequisitionsByStaffId =async (req, res) =>{
+const id = req.params.id
+try {
+  const employeeRequisition = await EmployeeRequisition.findAll({
+    where: { staff_id: id },
+  });
+res.json(employeeRequisition)
+} catch (error) {
+  console.log(error.message)
+}
+
+  }
+
 module.exports = {
   createEmployeeRequisition,
   getAllEmployeeRequisitions,
   updateEmployeeRequistions,
+  getAllEmployeeRequisitionsByStaffId,
 };

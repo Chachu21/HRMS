@@ -29,6 +29,21 @@ const getApplicantListById = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+// Get a specific applicant_list record by ID
+const getApplicantListByDepartmentId = async (req, res) => {
+  const department_id = req.params.id;
+  try {
+    const applicantList = await ApplicantList.findAll({where:{department_id:department_id}});
+    if (applicantList) {
+      res.json(applicantList);
+    } else {
+      res.status(404).json({ error: "Applicant List not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 // Create a new applicant_list record
 const createApplicantList = async (req, res) => {
@@ -95,4 +110,5 @@ module.exports = {
   createApplicantList,
   updateApplicantList,
   deleteApplicantList,
+  getApplicantListByDepartmentId,
 };

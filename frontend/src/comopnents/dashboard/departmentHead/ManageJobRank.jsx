@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ManageJobRank = () => {
   const [jobRankData, setJobRankData] = useState([]);
-  const navigate = useNavigate();
+  const [deptHeadData, setDeptHeadData] = useState([]);
 
+  const user = useSelector((state) => state.auth.user);
+  const department_id = deptHeadData.department_id;
+  console.log(department_id);
   useEffect(() => {
     axios
-      .get("http://localhost:5002/api/v1/job_rank")
+      .get(`http://localhost:5002/api/v1/staff/${user.staff_id}`)
+      .then((response) => {
+        setDeptHeadData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [user.staff_id]);
+
+  console.log(user);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5002/api/v1/job_rank/department/${department_id}`)
       .then((response) => {
         setJobRankData(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [department_id]);
 
   const handleForward = async (index) => {
     const updatedData = [...jobRankData];
@@ -29,9 +44,7 @@ const ManageJobRank = () => {
       .put(`http://localhost:5002/api/v1/job_rank/${id}`, {
         buttonType,
       })
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });

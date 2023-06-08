@@ -116,7 +116,7 @@ const StaffRegister = () => {
                   <option value={5}>Dep't Head</option>
                   <option value={4}>HR Officer</option>
                   <option value={3}>Employee</option>
-                  {/* <option value={6}>Dean</option> */}
+                  <option value={6}>Dean</option>
                 </select>
               </div>
             </div>
@@ -171,10 +171,10 @@ const StaffRegister = () => {
                   className="w-[215px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
                 >
                   <option value="">select department</option>
-                  <option value={5}>It</option>
-                  <option value={4}>mechanical</option>
+                  <option value={1}>It</option>
+                  <option value={2}>mechanical</option>
                   <option value={3}>Tourism</option>
-                  <option value={6}>Economics</option>
+                  <option value={4}>Economics</option>
                 </select>
               </div>
               <div className="mt-4">

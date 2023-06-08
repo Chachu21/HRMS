@@ -5,8 +5,16 @@ const Staff = models.staff;
 
 const createStaff = async (req, res) => {
   try {
-    const { id, fname, lname, email, password, phone_number, role_id } =
-      req.body;
+    const {
+      id,
+      fname,
+      lname,
+      email,
+      password,
+      phone_number,
+      role_id,
+      department_id,
+    } = req.body;
 
     // Check if staff with the same email already exists
     const existingStaff = await Staff.findOne({ where: { email } });
@@ -26,6 +34,7 @@ const createStaff = async (req, res) => {
       // password:hashedPassword,
       phone_number,
       role_id,
+      department_id,
     });
 
     res.status(201).json(newStaff);

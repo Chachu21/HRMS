@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
-//import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ManagePermission = () => {
   const [permissionData, setPermissionData] = useState([]);
-  //const navigate = useNavigate();
+  const [deptHeadData, setDeptHeadData] = useState([]);
+  const user = useSelector((state) => state.auth.user);
+  const department_id = deptHeadData.department_id;
+  console.log(department_id);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5002/api/v1/staff/${user.staff_id}`)
+      .then((response) => {
+        setDeptHeadData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [user.staff_id]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5002/api/v1/permission")
+      .get(
+        `http://localhost:5002/api/v1/permission/department/${department_id}`
+      )
       .then((response) => {
         setPermissionData(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [department_id]);
 
   const handleApprove = (index) => {
     const updatedData = [...permissionData];
@@ -26,9 +41,7 @@ const ManagePermission = () => {
 
     axios
       .put(`http://localhost:5002/api/v1/permission/${id}`, { buttonType })
-      .then((response) => {
-        console.log(response.data);
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });

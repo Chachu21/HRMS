@@ -66,9 +66,9 @@ function ManageEmployeeAccount() {
                 <td className="border px-4 py-2">{item.staff_id}</td>
                 <td className="border px-4 py-2">{item.reason}</td>
                 <td className="border px-4 py-2">
-                  {item.cv && item.cv.endsWith(".pdf") ? (
+                  {item.clearance && item.clearance.endsWith(".pdf") ? (
                     <a
-                      href={`http://localhost:5002/uploads/${item.cv}`}
+                      href={`http://localhost:5002/uploads/${item.clearance}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       download
@@ -76,10 +76,10 @@ function ManageEmployeeAccount() {
                       Download PDF
                     </a>
                   ) : (
-                    item.cv && (
+                    item.clearance && (
                       <div>
                         <a
-                          href={`http://localhost:5002/uploads/${item.cv}`}
+                          href={`http://localhost:5002/uploads/${item.clearance}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

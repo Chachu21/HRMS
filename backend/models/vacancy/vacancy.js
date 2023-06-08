@@ -1,4 +1,3 @@
-const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
     "vacancy",
@@ -17,9 +16,13 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      department: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
+      department_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: "department",
+          key: "id",
+        },
       },
       terms: {
         type: DataTypes.STRING(255),
@@ -52,6 +55,11 @@ module.exports = function(sequelize, DataTypes) {
           unique: true,
           using: "BTREE",
           fields: [{ name: "id" }],
+        },
+        {
+          name: "dethedcvac",
+          using: "BTREE",
+          fields: [{ name: "department_id" }],
         },
       ],
     }

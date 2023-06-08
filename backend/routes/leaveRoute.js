@@ -11,7 +11,7 @@ const leaveRouter = express.Router();
 leaveRouter.post("/",upload.single('cv'), createLeaveRequest);
 leaveRouter.get("/", getAllLeaveRequests);
 leaveRouter.get("/:id", getLeaveRequestById);
-leaveRouter.get("/:id", getLeaveRequestStaffId);
+leaveRouter.get("/leave/:id", getLeaveRequestStaffId);
 
 leaveRouter.put("/:id", updateLeaveRequestById);
 leaveRouter.delete("/delete/:id", deleteLeaveRequestById);

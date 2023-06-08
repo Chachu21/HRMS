@@ -9,6 +9,14 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true,
       },
+      staff_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "staff",
+          key: "id",
+        },
+      },
       name: {
         type: DataTypes.STRING(255),
         allowNull: false,
@@ -29,14 +37,7 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
-      staff_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "staff",
-          key: "id",
-        },
-      },
+
       status: {
         type: DataTypes.ENUM("Pending", "Approved", "Rejected"),
         allowNull: false,

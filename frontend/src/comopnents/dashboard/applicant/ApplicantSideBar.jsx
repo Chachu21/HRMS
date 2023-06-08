@@ -21,7 +21,7 @@ const ApplicantSidebar = () => {
           <ul className="space-y-5 font-medium text-blacks">
             <li>
               <Link
-                to="/applicant/dashboard/manageaccount"
+                to="/applicant/dashboard/result"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-200"
               >
                 <svg

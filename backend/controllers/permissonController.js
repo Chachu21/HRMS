@@ -3,6 +3,7 @@ const sequelize = require("../config/database.js");
 const models = initModels(sequelize);
 const Permission = models.permission;
 
+
 // Create a new permission
 // const createPermission = async (req,res) => {
 //   const { name, type, reason, startDate, returnDate,status ,staffId} = req.body;
@@ -39,6 +40,21 @@ const getAllPermissions = async (req, res) => {
     res.status(200).json(permissions);
   } catch (error) {
     res.status(500).json({ error: "cannot fetch permission" });
+  }
+};
+const getPermissionByStaffId = async (req,res) => {
+  const staffId = req.params.id;
+  try {
+        const permission = await Permission.findAll({
+          where: { staff_id: staffId },
+        });
+    if (!permission) {
+      throw new Error("Permission not found");
+    }
+    return res.json(permission);
+   
+  } catch (error) {
+    throw new Error("Failed to retrieve permission: " + error.message);
   }
 };
 
@@ -176,6 +192,7 @@ module.exports = {
   getAllPermissions,
   getPermissionById,
   updatePermission,
+  getPermissionByStaffId,
   deletePermission,
   getPermissionStaffId,
 };

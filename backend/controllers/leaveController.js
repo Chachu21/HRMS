@@ -24,7 +24,7 @@ const createLeaveRequest = async (req, res) => {
 const getAllLeaveRequests = async (req, res) => {
   try {
     const leaveRequests = await LeaveRequest.findAll();
-    console.log(leaveRequests);
+    // console.log(leaveRequests);
     return res.json(leaveRequests);
   } catch (error) {
     return res.status(500).json({ error: "Failed to retrieve leave requests" });
@@ -50,7 +50,6 @@ const getLeaveRequestStaffId = async (req, res) => {
 };
 
 
-// Read a leave request by ID
 const getLeaveRequestById = async (req, res) => {
   const id = req.params.id;
   try {
@@ -180,6 +179,6 @@ module.exports = {
   getLeaveRequestById,
   updateLeaveRequestById,
   deleteLeaveRequestById,
-  getLeaveRequestStaffId,
+ getLeaveRequestStaffId,
   upload,
 };

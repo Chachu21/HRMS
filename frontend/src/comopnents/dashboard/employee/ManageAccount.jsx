@@ -66,9 +66,9 @@ function ManageEmployeeAccount() {
                 <td className="border px-4 py-2">{item.reason}</td>
                 <td className="border px-4 py-2">
 
- {item.cv && item.cv.endsWith(".pdf") ? (
+ {item.clearance && item.clearance.endsWith(".pdf") ? (
                       <a
-                        href={`http://localhost:5002/uploads/${item.cv}`}
+                        href={`http://localhost:5002/uploads/${item.clearance}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         download
@@ -76,17 +76,17 @@ function ManageEmployeeAccount() {
                         Download PDF
                       </a>
                     ) : (
-                      item.cv && (
+                      item.clearance && (
                         <div>
                           <a
-                            href={`http://localhost:5002/uploads/${item.cv}`}
+                            href={`http://localhost:5002/uploads/${item.clearance}`}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
                             View Image
                           </a>
                           <button
-                            className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
+                          className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
                             onClick={() => handleDownload(item.clearance)}
                           >
                             Download

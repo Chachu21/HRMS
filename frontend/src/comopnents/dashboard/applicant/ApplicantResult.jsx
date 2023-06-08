@@ -1,19 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 
 const ApplicantResult = () => {
-  return (
-    <div>
+  const [applicants, setApplicants] = useState([]);
 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-         Vel, quas iure alias ut rem ad magnam fuga voluptate q
-         uam voluptatem distinctio unde quisquam perspiciatis esse at 
-         ab maiores ratione illo.
-         Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Sed ducimus mollitia pariatur nam ratione fugiat. Aut dolor 
-          expedita porro voluptate, distinctio 
-         temporibus eaque laudantium unde, enim sapiente possimus quasi magnam.
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/applicants");
+      const data = await response.json();
+      setApplicants(data);
+    };
+    fetchData();
+  }, []);
+
+  return (
+
+    <div class='ml-96 mt-12'>
+      this is the tables
     </div>
-  )
-}
+    // <table className="table-auto mt-96">
+    //   <thead>
+    //     <tr>
+    //       <th className="px-4 py-2 ml-48">Applicant ID</th>
+    //       <th className="px-4 py-2">Result</th>
+    //     </tr>
+    //   </thead>
+    //   <tbody>
+    //     {applicants.map((applicant) => (
+    //       <tr key={applicant.id}>
+    //         <td className="border px-4 py-2">{applicant.applicantId}</td>
+    //         <td className="border px-4 py-2">{applicant.result}</td>
+    //       </tr>
+    //     ))}
+    //   </tbody>
+    // </table>
+  );
+};
 
 export default ApplicantResult;

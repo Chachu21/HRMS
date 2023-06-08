@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Page404 from "./pages/404";
@@ -15,7 +14,6 @@ import LoginCustomizedDialogs from "./comopnents/landingPage/LoginCustomizedDial
 import UpdateStaff from "./comopnents/dashboard/admin/UPdateStaff";
 import ApplicantDashboard from "./pages/dashboard/ApplicantDashboard";
 import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
-import EmployeeMain from "./comopnents/dashboard/employee/EmployeeMain";
 import ManagePermission from "./comopnents/dashboard/departmentHead/ManagePermission";
 import DeptHeaderDashboard from "./pages/dashboard/DeptHeaderDashboard";
 import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
@@ -32,10 +30,6 @@ import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
 import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
 import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
 import ApproveJobRank from "./comopnents/dashboard/hrOfficer/ApproveJobRank";
-
-import ApplicantInfo from "./comopnents/dashboard/applicant/ApplicantInfo";
-import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
-
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
 import ApplicantSchedule from "./comopnents/dashboard/applicant/ApplicantSchedule";
 import ManageEmployeeAccount from "./comopnents/dashboard/employee/ManageAccount";
@@ -43,6 +37,7 @@ import ApplicantResult from "./comopnents/dashboard/applicant/ApplicantResult";
 import ApplicantResultForm from "./comopnents/dashboard/departmentHead/ApplicantResultForm";
 import DeanDashboard from "./pages/dashboard/DeanDashboard";
 import ApproveEmployeeRequistion from "./comopnents/dashboard/Dean/ApproveEmployeeRequestion";
+import ManageEmployeeRequisition from "./comopnents/dashboard/departmentHead/ManageEmployeeRequisition";
 // import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
@@ -101,7 +96,7 @@ function App() {
 
         {/* applicant dashboard */}
         <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
-          <Route index element={<ApplicantMain />} />
+          <Route index element={<ApplicantResult />} />
 
           <Route
             path="/applicant/dashboard/result"
@@ -142,7 +137,7 @@ function App() {
         </Route>
         {/* employee dashboard */}
         <Route path="/employee/dashboard" element={<EmployeeDashboard />}>
-          <Route index element={<EmployeeMain />} />
+          <Route index element={<ManageEmployeeAccount />} />
           <Route
             path="/employee/dashboard/manageaccount"
             element={<ManageEmployeeAccount />}
@@ -170,6 +165,10 @@ function App() {
             element={<ManagePermission />}
           />
           <Route
+            path="/depthead/dashboard/manageemployeerequisition"
+            element={<ManageEmployeeRequisition />}
+          />
+          <Route
             path="/depthead/dashboard/employeerequistion"
             element={<EmployeeRequistion />}
           />
@@ -192,7 +191,6 @@ function App() {
           />
 
           {/* /> */}
-
         </Route>
         {/* error page */}
         <Route path="*" element={<Page404 />} />

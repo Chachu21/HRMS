@@ -1,53 +1,70 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ManageApplicant = () => {
   const [applicantData, setApplicantData] = useState([]);
+  const [deptHeadData, setDeptHeadData] = useState([]);
+  const user = useSelector((state) => state.auth.user);
+  const department_id = deptHeadData.department_id;
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5002/api/v1/staff/${user.staff_id}`)
+      .then((response) => {
+        setDeptHeadData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [user.staff_id]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5002/api/v1/lists");
-        const applicantList = response.data;
-
-        const applicantIds = applicantList.map((item) => item.applicant_id);
-
-        const applicantsResponse = await axios.get(
-          `http://localhost:5002/api/v1/applicant?applicant_ids=${applicantIds.join(
-            ","
-          )}`
-        );
-
-        const applicants = applicantsResponse.data;
-
-        const formattedData = applicantList.map((item) => {
-          const applicant = applicants.find(
-            (app) => app.id === item.applicant_id
+        if (department_id) {
+          // Check if department_id is available
+          const response = await axios.get(
+            `http://localhost:5002/api/v1/lists/department/${department_id}`
           );
+          const applicantList = response.data;
+          const applicantIds = applicantList.map((item) => item.applicant_id);
+          const applicantsResponse = await axios.get(
+            `http://localhost:5002/api/v1/applicant?applicant_ids=${applicantIds.join(
+              ","
+            )}`
+          );
+          const applicants = applicantsResponse.data;
 
-          if (applicant) {
-            return {
-              id: applicant.id,
-              fname: applicant.fname,
-              lname: applicant.lname,
-              email: applicant.email,
-              cv: applicant.cv,
-              vacancyId: item.vacancy_id,
-              vacancyTitle: item.vacancy_title,
-            };
-          }
+          const formattedData = applicantList.map((item) => {
+            const applicant = applicants.find(
+              (app) => app.id === item.applicant_id
+            );
 
-          return null; // Added to handle the case where no matching applicant is found
-        });
+            if (applicant) {
+              return {
+                id: applicant.id,
+                fname: applicant.fname,
+                lname: applicant.lname,
+                email: applicant.email,
+                cv: applicant.cv,
+                vacancyId: item.vacancy_id,
+                vacancyTitle: item.vacancy_title,
+              };
+            }
 
-        setApplicantData(formattedData.filter(Boolean)); // Remove null values from the array
+            return null;
+          });
+
+          setApplicantData(formattedData.filter(Boolean));
+        }
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [department_id]);
 
   const handleDownload = (cv) => {
     const downloadLink = `http://localhost:5002/uploads/${cv}`;

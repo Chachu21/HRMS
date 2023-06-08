@@ -22,7 +22,7 @@ const createJobRank = async (req, res) => {
 const GetAllJobRank = async (req, res) => {
   try {
     const allJobRank = await JobRank.findAll();
-    console.log(allJobRank);
+   
     res.status(200).json(allJobRank);
   } catch (error) {
     res.status(500).json(error);
@@ -35,6 +35,23 @@ const getJobRankByStaffId = async (req, res) => {
   try {
     const jobRank = await JobRank.findAll({
       where: { staff_id: staffId },
+    });
+    if (!jobRank) {
+      res.status(404).json({ error: "Job rank not found" });
+      return res.json(jobRank);
+    }
+    res.status(200).json(jobRank);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching job rank by ID" });
+  }
+};
+const getJobRankByDepartmentId = async (req, res) => {
+  const staffId = req.params.id;
+  try {
+    const jobRank = await JobRank.findAll({
+      where: { department_id: staffId },
     });
     if (!jobRank) {
       res.status(404).json({ error: "Job rank not found" });
@@ -69,7 +86,7 @@ const updateJobRank = async (req, res) => {
   const { buttonType } = req.body;
   const jobRank = await JobRank.findByPk(id);
   let status;
-  console.log("job ranks list");
+  
   // Determine the status based on the button type
 
   if (
@@ -166,8 +183,6 @@ const upload = multer({
 
 const getJobRanktStaffId = async (req, res) => {
   const staffId = req.params.id;
-
-  console.log(staffId);
   try {
     const jobRanks = await JobRank.findAll({ where: { staff_id: staffId } });
     if (jobRanks.length === 0) {
@@ -193,4 +208,5 @@ module.exports = {
   getJobRankByStaffId,
   upload,
   getJobRanktStaffId,
+  getJobRankByDepartmentId,
 };

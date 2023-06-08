@@ -12,7 +12,7 @@ const initialState = {
   approvedId: null,
   approvedItems: [],
   rejectedItems: [],
-  popClosed: false,
+  count :0,
 };
 
 const authSlice = createSlice({
@@ -47,6 +47,7 @@ const authSlice = createSlice({
       state.approvedId = null;
       state.approvedItems = [];
       state.rejectedItems = [];
+      state.count=0;
     },
     humergerMenu: (state) => {
       state.isClicked = !state.isClicked;
@@ -74,8 +75,8 @@ const authSlice = createSlice({
         state.rejectedItems.splice(index, 1);
       }
     },
-    popClose: (state, action) => {
-      state.popClosed = action.payload;
+    quantity: (state, action) => {
+      state.count = action.payload;
     },
   },
 });
@@ -88,7 +89,7 @@ export const {
   humergerMenu,
   approved,
   rejected,
-  popClose,
+  quantity,
 } = authSlice.actions;
 
 export default authSlice.reducer;

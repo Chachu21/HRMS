@@ -7,6 +7,7 @@ const DeanSideBar = () => {
   // const [isOpenSublink, setIsOpenSublink] = useState(false)
   const isClicked = useSelector((state) => state.auth.isClicked);
   const dispatch = useDispatch();
+  const count =useSelector((state)=>state.auth.count)
   const handleClick = () => {
     dispatch(humergerMenu());
   };
@@ -31,7 +32,7 @@ const DeanSideBar = () => {
               >
                 <div className="relative inline-flex w-fit">
                   <div className="absolute bottom-auto left-auto right-0 top-0 z-10 inline-flex -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
-                    99+
+                    {count}
                   </div>
                   <button
                     type="button"

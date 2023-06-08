@@ -16,7 +16,6 @@ if (!email || !password) {
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
-    console.log(user)
 // let reDirectUrl = '/'
 // switch (user.role_id) {
 //   case 1:

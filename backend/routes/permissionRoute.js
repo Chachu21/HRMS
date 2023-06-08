@@ -6,7 +6,7 @@ const {
   deletePermission,
   getPermissionById,
   getPermissionByStaffId,
-  getPermissionStaffId,
+  getpermissionByDepartmentId,
 } = require("../controllers/permissonController");
 const permissonRouter = express.Router();
 
@@ -15,7 +15,8 @@ permissonRouter.get("/", getAllPermissions);
  permissonRouter.get("/permission/:id",getPermissionByStaffId);
 
 permissonRouter.get("/:id", getPermissionById);
-// permissonRouter.get("/permission/:id", getPermissionStaffId);
+//well
+permissonRouter.get("/department/:id", getpermissionByDepartmentId);
 permissonRouter.put("/:id", updatePermission);
 permissonRouter.delete("/delete/:id", deletePermission);
 

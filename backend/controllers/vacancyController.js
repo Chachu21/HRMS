@@ -2,18 +2,26 @@ const sequelize = require("../config/database.js");
 const initModels = require("../models/init-models.js");
 const models = initModels(sequelize);
 const Vacancy = models.vacancy;
+const Department =models.department
 
 // Create a vacancy
 const createVacancy = async (req, res) => {
-  
   try {
-    console.log(req.body)
+    console.log(req.body);
+    // const { department_id, ...vacancyData } = req.body; // Extract departmentId from req.body
+    // const department = await Department.findById(department_id); // Find the department by ID
+    
+    // if (!department) {
+    //   return res.status(404).json({ error: 'Department not found' });
+    // }
+    
     const vacancy = await Vacancy.create(req.body);
     res.status(201).json(vacancy);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.log(error)
   }
 };
+
 
 // Read all vacancies
 const getAllVacancies = async (req, res) => {

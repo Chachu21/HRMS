@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const RequestJobRank = () => {
-const [level, setLevel] = useState("");
+  const [level, setLevel] = useState("");
   const [cv, setCv] = useState("");
 
-  const navigete = useNavigate();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
   const status = "Pending";
@@ -16,27 +16,29 @@ const [level, setLevel] = useState("");
     const file = event.target.files[0];
     setCv(file);
   };
- const handleClick = () => {
-   setCv("");
-   setLevel("");
- };
 
- const handleChande = (event) => {
-   const { value } = event.target;
-   setLevel(value);
- };
+  const handleClick = () => {
+    setCv("");
+    setLevel("");
+  };
+
+  const handleChande = (event) => {
+    const { value } = event.target;
+    setLevel(value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
- const formData = new FormData()
+    const formData = new FormData();
 
- formData.append("staff_id", staff_id)
- formData.append("level", level)
- formData.append("status", status)
- formData.append("cv", cv)
+    formData.append("staff_id", staff_id);
+    formData.append("level", level);
+    formData.append("status", status);
+    formData.append("cv", cv);
+
     try {
       await axios.post("http://localhost:5002/api/v1/job_rank", formData);
-
-      navigete("/");
+      navigate("/");
     } catch (err) {
       console.log(err.message);
     }
@@ -44,14 +46,13 @@ const [level, setLevel] = useState("");
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mx-auto my-10 gap-5 bg-gray-100 h-[100vh]">
+      <div className="flex flex-col justify-center items-center mx-auto mt-10 lg:my-10 gap-5 bg-gray-100 h-[100vh]">
         <h1 className="text-3xl mb-4">Request Job Rank</h1>
         <form
           onSubmit={handleSubmit}
-          action=""
-          className="flex flex-col items-center bg-white m-3 p-10 pt-10 gap-5 "
+          className="flex flex-col items-center bg-white m-3 p-10 pt-10 gap-5"
         >
-          <div className="flex items-center w-full mb-4 ">
+          <div className="flex items-center w-full mb-4">
             <label htmlFor="level" className="w-1/4 mr-4">
               level
             </label>
@@ -68,7 +69,7 @@ const [level, setLevel] = useState("");
             </select>
           </div>
           <div className="flex items-center w-full mb-4 gap-3">
-            <label htmlfor="clearance" className="w-1/4 mr-2">
+            <label htmlFor="clearance" className="w-1/4 mr-2">
               Attachment cv
             </label>
             <input
@@ -92,9 +93,9 @@ const [level, setLevel] = useState("");
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
               Clear
-            </button>{" "}
-          </div>{" "}
-        </form>{" "}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

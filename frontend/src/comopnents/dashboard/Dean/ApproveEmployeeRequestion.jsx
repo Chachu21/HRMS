@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const ApproveJobRank = () => {
+const ApproveEmployeeRequistion = () => {
   const [emplyeeRequistionData, setEmplyeeRequistionData] = useState([]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const ApproveJobRank = () => {
 
   return (
     <div className="flex flex-col justify-start items-start ml-0 lg:ml-[18%]">
-      <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
+      <h1 className="text-2xl font-bold mb-4">Approve Employee Requistion</h1>
       <div className="flex justify-center items-center ">
         <table className="">
           <thead className="bg-gray-100">
@@ -136,4 +136,4 @@ const ApproveJobRank = () => {
   );
 };
 
-export default ApproveJobRank;
+export default ApproveEmployeeRequistion;

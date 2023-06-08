@@ -17,10 +17,8 @@ const ApplicantSchedule = () => {
       });
   }, []);
 
- 
-
   return (
-    <div className="flex ml-[20%] mr-[1%] flex-col mt-20">
+    <div className="flex ml-[3%] lg:ml-[20%] mr-[1%] flex-col mt-20">
       <h1 className="text-2xl font-bold mb-4">Exam Schedule Table</h1>
       <table className="table-auto border-collapse border border-gray-400">
         <thead>
@@ -47,4 +45,3 @@ const ApplicantSchedule = () => {
 };
 
 export default ApplicantSchedule;
-

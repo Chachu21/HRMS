@@ -7,24 +7,17 @@ import Page404 from "./pages/404";
 import LeaveRequest from "./posts/leaveRequest";
 import Main from "./comopnents/landingPage/Main";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
-import AdminMain from "./comopnents/dashboard/admin/AdminMain";
-import About from "./pages/About";
 import Vacancy from "./pages/Vacancy";
 import ApplicantRegister from "./pages/Registration/ApplicantRegister";
 import ManageAccountInfo from "./comopnents/dashboard/admin/ManageAccountInfo";
-import AddStaff from "./comopnents/dashboard/admin/AddStaff";
-import ApproveRequest from "./comopnents/dashboard/admin/ApproveRequest";
 import CustomizedDialogs from "./comopnents/landingPage/BootstrapingDialog";
 import LoginCustomizedDialogs from "./comopnents/landingPage/LoginCustomizedDialogs";
 import UpdateStaff from "./comopnents/dashboard/admin/UPdateStaff";
-import Contact from "./pages/Contact";
-import Help from "./pages/Help";
 import ApplicantDashboard from "./pages/dashboard/ApplicantDashboard";
 import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
 import EmployeeMain from "./comopnents/dashboard/employee/EmployeeMain";
 import ManagePermission from "./comopnents/dashboard/departmentHead/ManagePermission";
 import DeptHeaderDashboard from "./pages/dashboard/DeptHeaderDashboard";
-import DeptMain from "./comopnents/dashboard/departmentHead/DeptMain";
 import HRofficerDashboard from "./pages/dashboard/HRofficerDashboard";
 import HRofficerMain from "./comopnents/dashboard/hrOfficer/HRofficerMain";
 import AddStaffCustomizedDialogs from "./pages/Registration/AddStaffCustomizedDiaogs";
@@ -47,6 +40,8 @@ import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplica
 import ApplicantSchedule from "./comopnents/dashboard/applicant/ApplicantSchedule";
 import ManageEmployeeAccount from "./comopnents/dashboard/employee/ManageAccount";
 import ApplicantResult from "./comopnents/dashboard/applicant/ApplicantResult";
+import DeanDashboard from "./pages/dashboard/DeanDashboard";
+import ApproveEmployeeRequistion from "./comopnents/dashboard/Dean/ApproveEmployeeRequestion";
 // import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
@@ -92,9 +87,14 @@ function App() {
               </AddStaffCustomizedDialogs>
             }
           />
+        </Route>
+
+        {/* dean dashboard */}
+        <Route path="/dean/dashboard" element={<DeanDashboard />}>
+          <Route index element={<ApproveEmployeeRequistion />} />
           <Route
-            path="/admin/dashboard/approverequest"
-            element={<ApproveRequest />}
+            path="/dean/dashboard/approverequest"
+            element={<ApproveEmployeeRequistion />}
           />
         </Route>
 
@@ -180,10 +180,10 @@ function App() {
             path="/depthead/dashboard/manageApplicant"
             element={<ManageApplicant />}
           />
-          <Route
+          {/* <Route
             path="/depthead/dashboard/approverequest"
             element={<ApproveRequest />}
-          />
+          /> */}
         </Route>
         {/* error page */}
         <Route path="*" element={<Page404 />} />

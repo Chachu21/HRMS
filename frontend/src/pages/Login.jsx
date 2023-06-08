@@ -44,6 +44,9 @@ const Login = () => {
         case 5:
           navigate("/depthead/dashboard");
           break;
+        case 6:
+          navigate("/dean/dashboard");
+          break;
         default:
           navigate("/");
           break;

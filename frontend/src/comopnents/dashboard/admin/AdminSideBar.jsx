@@ -7,17 +7,16 @@ import { humergerMenu } from "../../../redux/reducers/loginReducer";
 const AdminSidebar = () => {
   // const [isOpenSublink, setIsOpenSublink] = useState(false)
   const isClicked = useSelector((state) => state.auth.isClicked);
-  const dispatch =useDispatch()
-  const handleClick =() => { 
-    dispatch(humergerMenu())
-   }
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(humergerMenu());
+  };
   return (
     <div
       className={`flex sm:flex transition-transform ${
         isClicked ? "flex z-[1]" : "hidden"
       } `}
     >
-      
       <aside
         id="logo-sidebar"
         // transition-transform -translate-x-full
@@ -63,26 +62,6 @@ const AdminSidebar = () => {
                 ></path>
               </svg>
               <AddStaffCustomizedDialogs />
-            </li>
-            <li onClick={handleClick} className="flex items-center">
-              <Link
-                to="/admin/dashboard/approverequest"
-                className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75`}
-              >
-                <div className="relative inline-flex w-fit">
-                  <div className="absolute bottom-auto left-auto right-0 top-0 z-10 inline-flex -translate-y-1/2 translate-x-2/4 rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 whitespace-nowrap rounded-full bg-indigo-700 px-2.5 py-1 text-center align-baseline text-xs font-bold leading-none text-white">
-                    99+
-                  </div>
-                  <button
-                    type="button"
-                    className="inline-flex rounded bg-blue-400 w-40 px-5 pb-1.5 pt-2 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                    data-te-ripple-init
-                    data-te-ripple-color="light"
-                  >
-                    approve
-                  </button>
-                </div>
-              </Link>
             </li>
           </ul>
         </div>

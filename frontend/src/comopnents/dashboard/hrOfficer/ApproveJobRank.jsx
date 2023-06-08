@@ -55,10 +55,20 @@ const ApproveJobRank = () => {
       });
   };
 
+   const handleDownload = (cv) => {
+     const downloadLink = `http://localhost:5002/uploads/${cv}`;
+     const link = document.createElement("a");
+     link.href = downloadLink;
+     link.download = cv;
+     document.body.appendChild(link);
+     link.click();
+     document.body.removeChild(link);
+   };
+
   return (
-    <div className="flex flex-col justify-center items-center ml-0 lg:ml-[18%]">
+    <div className="flex flex-col justify-center ranks-center ml-0 lg:ml-[18%]">
       <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
-      <div className="flex justify-center items-center px-5">
+      <div className="flex justify-center ranks-center px-5">
         <table className="table-auto w-full">
           <thead className="bg-gray-100">
             <tr>
@@ -74,9 +84,38 @@ const ApproveJobRank = () => {
                 <tr key={index} className="bg-gray-100/{0-4}">
                   <td className="border px-4 py-2">{rank.staff_id}</td>
                   <td className="border px-4 py-2">{rank.level}</td>
-                  <td className="border px-4 py-2">{rank.cv}</td>
+                  <td className="border px-4 py-2">
+                    {rank.cv && rank.cv.endsWith(".pdf") ? (
+                      <a
+                        href={`http://localhost:5002/uploads/${rank.cv}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                      >
+                        Download PDF
+                      </a>
+                    ) : (
+                      rank.cv && (
+                        <div>
+                          <a
+                            href={`http://localhost:5002/uploads/${rank.cv}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View Image
+                          </a>
+                          <button
+                            className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
+                            onClick={() => handleDownload(rank.cv)}
+                          >
+                            Download
+                          </button>
+                        </div>
+                      )
+                    )}
+                  </td>
 
-                  <td className="w-auto flex justify-center items-center gap-2 py-2 px-4">
+                  <td className="w-auto flex justify-center ranks-center gap-2 py-2 px-4">
                     {rank.status !== "Approved" &&
                       rank.status !== "Rejected" && (
                         <button

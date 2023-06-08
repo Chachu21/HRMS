@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
     result: {
       type: DataTypes.FLOAT,
       allowNull: true
+    },
+    vacancy_title: {
+      type: DataTypes.STRING(255),
+      allowNull: false
     }
   }, {
     sequelize,

@@ -3,20 +3,33 @@ import axios from "axios";
 
 const ApplicantResultForm = () => {
   const [applicantId, setApplicantId] = useState("");
+   const [vacancyTitle, setVacancyTitle] = useState("");
   const [result, setResult] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Code to handle form submission goes here
-    axios.post("");
-  };
+ const handleSubmit = async (event) => {
+   event.preventDefault();
+   console.log("applicant id payload is :", applicantId);
 
+   try {
+     const response = await axios.post("http://localhost:5002/api/v1/result", {
+       applicantId,
+       result,
+       vacancyTitle,
+     });
+
+   } catch (err) {
+     console.log(err.message);
+   }
+ };
+
+
+ //we have to create Vacancyt_title column on result database
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto ">
-      <div className="mb-4">
+    <form onSubmit={handleSubmit} className="  w-[28%] ml-[30%] mt-[10%] ">
+      <div className="mb-4  ">
         <label
           htmlFor="applicantId"
-          className="block text-gray-700 font-bold mb-2 mt-8"
+          className="block text-gray-700 font-bold mb-2 mt-9 "
         >
           Applicant ID:
         </label>
@@ -38,6 +51,22 @@ const ApplicantResultForm = () => {
           type="number"
           value={result}
           onChange={(event) => setResult(event.target.value)}
+          required
+          className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="vacancyTitile"
+          className="block text-gray-700 font-bold mb-2 mt-8"
+        >
+          vacancy Title :
+        </label>
+        <input
+          id="vacancyTitile"
+          type="text"
+          value={vacancyTitle}
+          onChange={(event) => setVacancyTitle(event.target.value)}
           required
           className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />

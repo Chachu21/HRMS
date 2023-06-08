@@ -50,6 +50,17 @@ const LeaveRequests = () => {
         console.error(error);
       });
   };
+
+   const handleDownload = (clearance) => {
+     const downloadLink = `http://localhost:5002/uploads/${clearance}`;
+     const link = document.createElement("a");
+     link.href = downloadLink;
+     link.download = clearance;
+     document.body.appendChild(link);
+     link.click();
+     document.body.removeChild(link);
+   };
+
   return (
     <div className="flex flex-col w-full focus:ring-2 focus:border-transparent focus:ring-blue-300 lg:ml-[20%] mr-[1%] mt-[7%]">
       <h1 className="text-2xl font-bold mb-4 ml-[30%]">Leave Request</h1>
@@ -68,7 +79,37 @@ const LeaveRequests = () => {
             <tr key={request.id} className="border border-gray-400">
               <td className="px-4 py-2">{request.staff_id}</td>
               <td className="px-4 py-2">{request.reason}</td>
-              <td className="px-4 py-2">{request.clearance}</td>
+              <td className="px-4 py-2">
+                {" "}
+                {request.clearance && request.clearance.endsWith(".pdf") ? (
+                  <a
+                    href={`http://localhost:5002/uploads/${request.clearance}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    Download PDF
+                  </a>
+                ) : (
+                  request.clearance && (
+                    <div>
+                      <a
+                        href={`http://localhost:5002/uploads/${request.clearance}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View Image
+                      </a>
+                      <button
+                        className="ml-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded lg:ml-2"
+                        onClick={() => handleDownload(request.clearance)}
+                      >
+                        Download
+                      </button>
+                    </div>
+                  )
+                )}
+              </td>
               <td className="px-4 py-2">
                 {request.status !== "Approved" &&
                   request.status !== "Rejected" && (

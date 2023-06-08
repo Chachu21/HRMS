@@ -8,6 +8,7 @@ const ApproveLeave = () => {
     axios
       .get("http://localhost:5002/api/v1/leave_request")
       .then((response) => {
+        console.log(response.data)
         setLeaveData(response.data);
       })
       .catch((error) => {
@@ -26,7 +27,6 @@ const ApproveLeave = () => {
     axios
       .put(`http://localhost:5002/api/v1/leave_request/${id}`, { buttonType })
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -44,32 +44,31 @@ const ApproveLeave = () => {
     axios
       .put(`http://localhost:5002/api/v1/leave_request/${id}`, { buttonType })
       .then((response) => {
-        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-   const handleDownload = (clearance) => {
-     const downloadLink = `http://localhost:5002/uploads/${clearance}`;
-     const link = document.createElement("a");
-     link.href = downloadLink;
-     link.download = clearance;
-     document.body.appendChild(link);
-     link.click();
-     document.body.removeChild(link);
-   };
+  const handleDownload = (clearance) => {
+    const downloadLink = `http://localhost:5002/uploads/${clearance}`;
+    const link = document.createElement("a");
+    link.href = downloadLink;
+    link.download = clearance;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="flex flex-col ml-[20%] mr-[1%] ">
       <h1 className="text-2xl font-bold mb-4">Approve Request of leave</h1>
-      <table className="table-auto border-collapse border border-gray-400">
+      <table className="border-collapse border border-gray-400">
         <thead>
           <tr className="bg-gray-200">
             <th className="px-4 py-2 text-left">StaffId</th>
             <th className="px-4 py-2 text-left">Reason</th>
-            <th className="px-4 py-2 text-left">clearance</th>
+            <th className="px-4 py-2 text-left">Clearance</th>
             <th className="px-4 py-2 text-left">Action</th>
             <th className="px-4 py-2 text-left">Status</th>
           </tr>

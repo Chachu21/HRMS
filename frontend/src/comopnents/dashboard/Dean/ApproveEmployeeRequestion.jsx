@@ -8,9 +8,10 @@ const ApproveEmployeeRequistion = () => {
 
   const dispatch =useDispatch()
   const count = emplyeeRequistionData.length
+  const status = "Forwarded"
   useEffect(() => {
     axios
-      .get("http://localhost:5002/api/v1/employee_requistion")
+      .get(`http://localhost:5002/api/v1/employee_requistion/status/${status}`)
       .then((response) => {
         setEmplyeeRequistionData(response.data);
         dispatch(quantity(count))

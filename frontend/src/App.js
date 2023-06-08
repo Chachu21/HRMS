@@ -30,7 +30,6 @@ import LeaveRequests from "./comopnents/dashboard/hrOfficer/LeaveRequest";
 import ViewEmployeeRequistion from "./comopnents/dashboard/hrOfficer/ViewEmployeeRequistion";
 import ApproveLeave from "./comopnents/dashboard/hrOfficer/ApproveLeave";
 import ApproveJobRank from "./comopnents/dashboard/hrOfficer/ApproveJobRank";
-import ApplicantMain from "./comopnents/dashboard/applicant/ApplicantMain";
 import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplicant";
 import ApplicantSchedule from "./comopnents/dashboard/applicant/ApplicantSchedule";
 import ManageEmployeeAccount from "./comopnents/dashboard/employee/ManageAccount";
@@ -97,7 +96,7 @@ function App() {
 
         {/* applicant dashboard */}
         <Route path="/applicant/dashboard" element={<ApplicantDashboard />}>
-          <Route index element={<ApplicantMain />} />
+          <Route index element={<ApplicantResult />} />
 
           <Route
             path="/applicant/dashboard/result"
@@ -192,7 +191,6 @@ function App() {
           />
 
           {/* /> */}
-
         </Route>
         {/* error page */}
         <Route path="*" element={<Page404 />} />

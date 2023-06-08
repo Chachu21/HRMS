@@ -47,6 +47,7 @@ const authSlice = createSlice({
       state.approvedId = null;
       state.approvedItems = [];
       state.rejectedItems = [];
+      state.count=0;
     },
     humergerMenu: (state) => {
       state.isClicked = !state.isClicked;

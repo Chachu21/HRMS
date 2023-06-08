@@ -109,10 +109,24 @@ res.json(employeeRequisition)
 }
 
   }
+//get employee requisition by staffid
+const getAllEmployeeRequisitionsByStatus =async (req, res) =>{
+const id = req.params.id
+try {
+  const employeeRequisition = await EmployeeRequisition.findAll({
+    where: { status: id },
+  });
+res.json(employeeRequisition)
+} catch (error) {
+  console.log(error.message)
+}
+
+  }
 
 module.exports = {
   createEmployeeRequisition,
   getAllEmployeeRequisitions,
   updateEmployeeRequistions,
   getAllEmployeeRequisitionsByStaffId,
+  getAllEmployeeRequisitionsByStatus,
 };

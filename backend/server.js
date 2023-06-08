@@ -16,6 +16,7 @@ const scheduleRouter = require("./routes/scheduleRoute");
 const jobRankRouter = require("./routes/jobRankRoute");
 const applicantListRouter = require("./routes/applicantListRoute");
 const manageEmployeAccountRoute = require("./routes/manageEmployeAccountRoute");// const manageEmployeAccountRoute = require("./routes/manageEmployeAccountRoute");
+const resultRouter = require("./routes/resultRoute");
 const app = express();
 const port = process.env.PORT || 5002;
 app.use(express.json());
@@ -34,7 +35,7 @@ app.use("/api/v1/schedule", scheduleRouter);
 app.use("/api/v1/job_rank", jobRankRouter);
 app.use("/api/v1/lists", applicantListRouter);
 app.use("/api/v1/leave_request/staff_id", leaveRouter);
-
+app.use("/api/v1/result", resultRouter);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);

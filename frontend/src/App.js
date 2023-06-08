@@ -35,6 +35,7 @@ import ManageApplicant from "./comopnents/dashboard/departmentHead/ManageApplica
 import ApplicantSchedule from "./comopnents/dashboard/applicant/ApplicantSchedule";
 import ManageEmployeeAccount from "./comopnents/dashboard/employee/ManageAccount";
 import ApplicantResult from "./comopnents/dashboard/applicant/ApplicantResult";
+import ApplicantResultForm from "./comopnents/dashboard/departmentHead/ApplicantResultForm";
 import DeanDashboard from "./pages/dashboard/DeanDashboard";
 import ApproveEmployeeRequistion from "./comopnents/dashboard/Dean/ApproveEmployeeRequestion";
 import ManageEmployeeRequisition from "./comopnents/dashboard/departmentHead/ManageEmployeeRequisition";
@@ -182,8 +183,16 @@ function App() {
           />
           {/* <Route
             path="/depthead/dashboard/approverequest"
-            element={<ApproveRequest />}
+            element={<ApproveRequest />} 
+
           /> */}
+          <Route
+            path="/depthead/dashboard/applicantresult"
+            element={<ApplicantResultForm />}
+          />
+
+          {/* /> */}
+
         </Route>
         {/* error page */}
         <Route path="*" element={<Page404 />} />

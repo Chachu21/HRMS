@@ -47,14 +47,27 @@ const getApplicantListByDepartmentId = async (req, res) => {
 
 // Create a new applicant_list record
 const createApplicantList = async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
+    const {
+      applicant_id,
+      applicant_email,
+      vacancy_title,
+      vacancy_id,
+      department_id,
+    } = req.body;
+
+    // Check if department_id is provided
+    if (!department_id) {
+      return res.status(400).json({ error: "department_id is required" });
+    }
+
     const applicantList = await ApplicantList.create({
-      // Remove the 'id' field from the data object
-      applicant_id: req.body.applicant_id,
-      applicant_email: req.body.applicant_email,
-      vacancy_title: req.body.vacancy_title,
-      vacancy_id: req.body.vacancy_id,
+      applicant_id,
+      applicant_email,
+      vacancy_title,
+      vacancy_id,
+      department_id,
     });
 
     res.json(applicantList);
@@ -63,6 +76,7 @@ const createApplicantList = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 
 // Update an existing applicant_list record

@@ -57,7 +57,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function LoginCustomizedDialogs({ children }) {
+export default function LoginCustomizedDialogs({ children, text }) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -73,7 +73,7 @@ export default function LoginCustomizedDialogs({ children }) {
         variant="outlined"
         onClick={handleClickOpen}
       >
-        Log in
+        {text}
       </div>
       <BootstrapDialog
         onClose={handleClose}

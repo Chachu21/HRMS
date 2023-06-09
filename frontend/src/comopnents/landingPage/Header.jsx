@@ -76,66 +76,17 @@ const Header = () => {
                   Vaccancy
                 </NavLink>
               </li>
-              {/* <li className="flex items-center">
-                <NavLink
-                  onClick={handleopenClose}
-                  to="/about"
-                  className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
-                    location.pathname === "/about" ? "text-gray-400" : ""
-                  }`}
-                >
-                  About
-                </NavLink>
-              </li>
-              <li className="flex items-center">
-                <NavLink
-                  onClick={handleopenClose}
-                  to="/contact"
-                  className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
-                    location.pathname === "/contact" ? "text-gray-400" : ""
-                  }`}
-                >
-                  Contact
-                </NavLink>
-              </li>
-              <li className="flex items-center">
-                <NavLink
-                  onClick={handleopenClose}
-                  to="/help"
-                  className={`px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:text-gray-400 hover:opacity-75 ${
-                    location.pathname === "/help" ? "text-gray-400" : ""
-                  }`}
-                >
-                  Help
-                </NavLink>
-              </li> */}
               <li
                 onClick={handleopenClose}
                 className="flex items-center m-[10px]"
               >
-                {/* <NavLink
-                  to="/signUpASapplicant"
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"
-                >
-                  <button className="w-[100px] h-[35px] text-white bg-blue-500 items-center hover:bg-blue-300 hover:text-black">
-                    SignUp
-                  </button>
-                </NavLink> */}
-                <CustomizedDialogs />
+                <CustomizedDialogs text="Sign Up" />
               </li>
               <li
                 onClick={handleopenClose}
                 className="flex items-center m-[10px]"
               >
-                {/* <NavLink
-                  to="/login"
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"
-                >
-                  <button className="w-[100px] h-[35px] text-white bg-blue-500 items-center hover:bg-blue-300 hover:text-black">
-                    Login
-                  </button>
-                </NavLink> */}
-                <LoginCustomizedDialogs />
+                <LoginCustomizedDialogs text="Log In" />
               </li>
             </ul>
           </div>

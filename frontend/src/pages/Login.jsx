@@ -7,16 +7,23 @@ import {
   loginFailure,
   loginStart,
 } from "../redux/reducers/loginReducer";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomizedDialogs from "../comopnents/landingPage/BootstrapingDialog";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+  const [formData, setFormData] = useState(() => {
+    const rememberMe = localStorage.getItem("rememberMe") === "true";
+    const storedEmail = rememberMe ? localStorage.getItem("email") : "";
+    const storedPassword = rememberMe ? localStorage.getItem("password") : "";
+    return {
+      email: storedEmail,
+      password: storedPassword,
+      rememberMe,
+    };
   });
-  const { email, password } = formData;
+
+  const { email, password, rememberMe } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,10 +62,11 @@ const Login = () => {
   }, [isLogin, user, navigate]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: inputValue,
     }));
   };
 
@@ -73,6 +81,17 @@ const Login = () => {
       dispatch(loginStart());
       dispatch(loginSuccess(response.data));
       toast.success("Login successful!");
+
+      // Check if the user has selected "Remember Me"
+      if (rememberMe) {
+        localStorage.setItem("rememberMe", "true");
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
+      } else {
+        localStorage.removeItem("rememberMe");
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+      }
 
       // Check if there is state data indicating the user came from the Vacancy page
       if (location.state && location.state.from === "/vacancy") {
@@ -94,10 +113,10 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white h-[60%] w-[35%] ml-[100px] lg:ml-[175px] flex flex-col items-center justify-center gap-1">
+    <div className="bg-white w-[50%] ml-[100px] lg:ml-[120px] flex flex-col items-center justify-center gap-1">
       <div>
         <span className="text-black flex justify-start -ml-16 items-start text-[16px]  lg:justify-center lg:items-center lg:text-[24px]">
-          Welcome back
+          Welcome back !
         </span>
       </div>
 
@@ -115,7 +134,7 @@ const Login = () => {
               onChange={handleChange}
               type="email"
               placeholder="Enter your email address"
-              className="w-[250px] lg:w-[350px] h-8 text-sm bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
+              className="w-[250px] lg:w-[300px] h-8 text-sm bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
             />
           </div>
           <div className="flex justify-start items-left flex-col gap-[10px]  ">
@@ -128,10 +147,10 @@ const Login = () => {
               id="password"
               type="password"
               placeholder="Enter your password"
-              className="lg:w-[350px] w-[250px] h-8 pl-[10px] text-sm bg-white border-2 rounded-md border-gray-300 outline-none  "
+              className="lg:w-[300px] w-[250px] h-8 pl-[10px] text-sm bg-white border-2 rounded-md border-gray-300 outline-none  "
             />
           </div>
-          <div className="flex justify-between items-center gap-[20px] lg:gap-[120px]">
+          <div className="flex justify-between items-center gap-[20px] lg:gap-[70px]">
             <div className="flex gap-1 items-center justify-start">
               <input
                 type="checkbox"
@@ -150,20 +169,18 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="w-[250px]  lg:w-[350px] bg-blue-700 h-8 text-center rounded-md text-white hover:bg-blue-500"
+              className="w-[250px]  lg:w-[300px] bg-blue-700 h-8 text-center rounded-md text-white hover:bg-blue-500"
             >
               Login
             </button>
           </div>
           <div className="flex gap-1 lg:gap-2 justify-center items-center">
             <span className="text-sm">Don't have an account?</span>
-            {/* <Link to="/signup" className="text-blue-500">
-              Register
-            </Link> */}
-            <CustomizedDialogs />
+            <CustomizedDialogs text="Sign Up" />
           </div>
         </form>
       </div>
+      <ToastContainer autoClose={100} />
     </div>
   );
 };

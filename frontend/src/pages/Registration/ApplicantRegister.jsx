@@ -57,9 +57,9 @@ const ApplicantRegister = () => {
           Register for accessing service
         </h3>
       </div>
-      <div className="lg:w-[100vw]  flex flex-col px-1 gap-4  py-4 items-center justify-center lg:py-14 mt-1 lg:mt-8 overflow-hidden bg-gray-50 shadow-md border-t-gray-400 sm:max-w-md sm:rounded-lg">
+      <div className="lg:w-[100vw]  flex flex-col px-1 gap-5  py-4 items-center justify-center lg:py-10 mt-1 lg:mt-2 overflow-hidden bg-gray-50 shadow-md border-t-gray-400 sm:max-w-md sm:rounded-lg">
         <form className="" onSubmit={handleSubmit}>
-          <div className="flex justify-center items-center gap-5 flex-col sm:flex-row">
+          <div className="flex justify-center items-center gap-8 flex-col sm:flex-row">
             <div className="mt-4">
               <label
                 htmlFor="fname"
@@ -98,7 +98,7 @@ const ApplicantRegister = () => {
             </div>
           </div>
 
-          <div className="flex justify-center items-center gap-5 flex-col sm:flex-row">
+          <div className="flex justify-center items-center gap-8 flex-col sm:flex-row">
             <div className="mt-4">
               <label
                 htmlFor="email"
@@ -137,7 +137,7 @@ const ApplicantRegister = () => {
             </div>
           </div>
 
-          <div className="flex justify-center items-center gap-5 flex-col sm:flex-row">
+          <div className="flex justify-center items-center gap-8 flex-col sm:flex-row">
             <div className="mt-4">
               <label
                 htmlFor="password"

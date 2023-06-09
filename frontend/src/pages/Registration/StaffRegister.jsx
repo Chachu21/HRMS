@@ -36,7 +36,7 @@ const StaffRegister = () => {
   return (
     <div>
       <div className="flex flex-col overflow-hidden justify-center items-center w-full  pt-4 sm:justify-center sm:pt-0 bg-gray-100">
-        <div className="shadow-xl">
+        <div className="shadow-sm">
           <h3 className="text-xl font-bold text-blue-400">Register staffs</h3>
         </div>
         <div className="w-[100%] flex flex-col px-2 py-4 mt-5 overflow-hidden bg-gray-50 shadow-md border-t-gray-400 sm:max-w-lg sm:rounded-lg">

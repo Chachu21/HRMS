@@ -18,11 +18,29 @@ const Vacancy = () => {
   const error = useSelector((state) => state.vacancy.error);
   const [queries, setQueries] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [departmentName, setDepartmentName] = useState(""); // Added departmentName state
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(fetchVacancyType());
   }, [dispatch]);
+
+  useEffect(() => {
+    const fetchDepartment = async () => {
+      try {
+        const departmentData = await axios.get(
+          `http://localhost:5002/api/v1/department` // Fix department_id here
+        );
+        const department = departmentData.data;
+        const departmentName = department.name;
+        setDepartmentName(departmentName);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchDepartment();
+  }, [vacancyType]);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -45,7 +63,7 @@ const Vacancy = () => {
     setFilteredData(filteredData);
   };
 
-  const handleApply = async (id, title) => {
+  const handleApply = async (id, title, department_id) => {
     if (!user) {
       navigate("/login");
     } else {
@@ -55,7 +73,6 @@ const Vacancy = () => {
           `http://localhost:5002/api/v1/lists?applicant_id=${user.applicant_id}&vacancy_id=${id}`
         );
         const existingApplications = response.data;
-        console.log(existingApplications);
 
         if (existingApplications.length > 0) {
           // Check if the existing applications contain the current job
@@ -68,29 +85,25 @@ const Vacancy = () => {
             toast.error("You have already applied for this job");
           } else {
             // Insert the application into the table
-            const response = await axios.post(
-              "http://localhost:5002/api/v1/lists",
-              {
-                applicant_id: user.applicant_id,
-                applicant_email: user.email,
-                vacancy_title: title,
-                vacancy_id: id,
-              }
-            );
-            console.log(response.data);
-          }
-        } else {
-          // Insert the application into the table
-          const response = await axios.post(
-            "http://localhost:5002/api/v1/lists",
-            {
+            await axios.post("http://localhost:5002/api/v1/lists", {
               applicant_id: user.applicant_id,
               applicant_email: user.email,
               vacancy_title: title,
               vacancy_id: id,
-            }
-          );
-          console.log(response.data);
+              department_id: department_id,
+            });
+            toast.success(`Successfully applied in ${title}`);
+          }
+        } else {
+          // Insert the application into the table
+          await axios.post("http://localhost:5002/api/v1/lists", {
+            applicant_id: user.applicant_id,
+            applicant_email: user.email,
+            vacancy_title: title,
+            vacancy_id: id,
+            department_id: department_id,
+          });
+          toast.success(`Successfully applied in ${title}`);
         }
       } catch (error) {
         // Display an error message if the request fails
@@ -135,10 +148,10 @@ const Vacancy = () => {
       </div>
       <div className="grid lg:grid-cols-3 gap-5 md:grid-cols-2 px-5 lg:gap-10  max-h-96 w-full ">
         {(filteredData.length > 0 ? filteredData : vacancyType).map(
-          (vacacny) => {
+          (vacancy) => {
             return (
               <div
-                key={vacacny.id}
+                key={vacancy.id}
                 className="flex flex-col justify-center items-center gap-5 hover:scale-95  transition duration-300 ease-in-out rounded-lg bg-[#f7f7f7]"
               >
                 <div className="flex flex-col justify-left items-left gap-5 py-5">
@@ -146,49 +159,69 @@ const Vacancy = () => {
                     <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Title
                     </span>{" "}
-                    :{vacacny.title}
+                    :{vacancy.title}
                   </p>
                   <p className="text-md  text-gray-500">
                     <span className="text-lg font-bold text-gray-700 italic capitalize">
                       quantity
                     </span>{" "}
-                    :{vacacny.quantity}
+                    :{vacancy.quantity}
                   </p>
-                  <p className="text-md  text-gray-500">
+                  <p className="text-md text-gray-500">
                     <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Department
                     </span>{" "}
-                    :{vacacny.department}
+                    :{" "}
+                    {(() => {
+                      switch (vacancy.department_id) {
+                        case 1:
+                          return "IT";
+                        case 2:
+                          return "Mechanica";
+                        case 3:
+                          return "Tourism";
+                        case 4:
+                          return "Economics";
+                        default:
+                          return "";
+                      }
+                    })()}
                   </p>
                   <p className="text-md  text-gray-500">
                     <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Term Of Employment :
                     </span>{" "}
-                    {vacacny.terms}
+                    {vacancy.terms}
                   </p>
                   <p className="text-md  text-gray-500">
                     <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Sex
                     </span>{" "}
-                    : {vacacny.sex}
+                    : {vacancy.sex}
                   </p>
                   <p className="text-md  text-gray-500">
                     <span className="text-lg font-bold text-gray-700 italic capitalize">
                       Designation
                     </span>{" "}
-                    :{vacacny.designation}
+                    :{vacancy.designation}
                   </p>
                   <p className="text-md  text-gray-500">
                     <span className="text-lg font-bold text-gray-700 italic capitalize">
                       min-CGPA
                     </span>{" "}
-                    :{vacacny.cgpa}
+                    :{vacancy.cgpa}
                   </p>
                 </div>
                 {user ? (
                   <div className="text-center text-white bg-blue-500 w-[120px] p-2 rounded-md mb-3">
                     <button
-                      onClick={() => handleApply(vacacny.id, vacacny.title)}
+                      onClick={() =>
+                        handleApply(
+                          vacancy.id,
+                          vacancy.title,
+                          vacancy.department_id
+                        )
+                      }
                     >
                       Apply
                     </button>

@@ -33,7 +33,9 @@ const getApplicantListById = async (req, res) => {
 const getApplicantListByDepartmentId = async (req, res) => {
   const department_id = req.params.id;
   try {
-    const applicantList = await ApplicantList.findAll({where:{department_id:department_id}});
+    const applicantList = await ApplicantList.findAll({
+      where: { department_id: department_id },
+    });
     if (applicantList) {
       res.json(applicantList);
     } else {
@@ -49,13 +51,25 @@ const getApplicantListByDepartmentId = async (req, res) => {
 const createApplicantList = async (req, res) => {
   console.log(req.body);
   try {
+    const {
+      applicant_id,
+      applicant_email,
+      vacancy_title,
+      vacancy_id,
+      department_id,
+    } = req.body;
+
+    // Check if department_id is provided
+    if (!department_id) {
+      return res.status(400).json({ error: "department_id is required" });
+    }
+
     const applicantList = await ApplicantList.create({
-      // Remove the 'id' field from the data object
-      applicant_id: req.body.applicant_id,
-      applicant_email: req.body.applicant_email,
-      vacancy_title: req.body.vacancy_title,
-      vacancy_id: req.body.vacancy_id,
-      department_id: req.body.department_id,
+      applicant_id,
+      applicant_email,
+      vacancy_title,
+      vacancy_id,
+      department_id,
     });
 
     res.json(applicantList);

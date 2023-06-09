@@ -8,6 +8,7 @@ import ApplyCustomizedDialogs from "../comopnents/card/ApplyCustomizedDialogs";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { loginSuccess } from "../redux/reducers/loginReducer";
+import LoginCustomizedDialogs from "../comopnents/landingPage/LoginCustomizedDialogs";
 
 const Vacancy = () => {
   const dispatch = useDispatch();
@@ -194,7 +195,7 @@ const Vacancy = () => {
                   </div>
                 ) : (
                   <div className="text-center text-white bg-blue-500 w-[120px] p-2 rounded-md mb-3 opacity-50 cursor-not-allowed">
-                    <ApplyCustomizedDialogs />
+                    <LoginCustomizedDialogs text="Apply" />
                   </div>
                 )}
               </div>

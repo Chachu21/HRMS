@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import background from "../../assets/background.jpg";
+import CustomizedDialogs from "./BootstrapingDialog";
 const Features = () => {
   return (
     <div>
@@ -21,14 +22,17 @@ const Features = () => {
               <h2 className="text-[32px] text-white bg-green-500 text-center  font-bold sm:text-4xl sticky top-[70px] left-auto">
                 Bahir Dar Polytechnic Human Resource Management System
               </h2>
-              <Link
+              {/* <Link
                 to="/signUpASapplicant"
                 className="lg:mt-80 mt-52 inline-block text-center rounded sm:px-20 lg:px-52 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring focus:ring-yellow-400"
               >
                 <span class="bg-blue-500 rounded-md text-center px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 lg:px-10 lg:py-3 xl:px-12 xl:py-4 2xl:px-16 2xl:py-5">
                   Join Us
                 </span>
-              </Link>
+              </Link> */}
+              <div className="lg:mt-80 mt-52 inline-block text-center rounded sm:px-20 lg:px-52 py-3 text-sm font-medium text-white transition focus:outline-none focus:ring focus:ring-yellow-400">
+                <CustomizedDialogs text="Join Us" />
+              </div>
             </div>
           </div>
         </div>

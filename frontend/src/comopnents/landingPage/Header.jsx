@@ -121,7 +121,7 @@ const Header = () => {
                     SignUp
                   </button>
                 </NavLink> */}
-                <CustomizedDialogs />
+                <CustomizedDialogs text="SignUp" />
               </li>
               <li
                 onClick={handleopenClose}
@@ -135,7 +135,7 @@ const Header = () => {
                     Login
                   </button>
                 </NavLink> */}
-                <LoginCustomizedDialogs />
+                <LoginCustomizedDialogs text="Log In" />
               </li>
             </ul>
           </div>

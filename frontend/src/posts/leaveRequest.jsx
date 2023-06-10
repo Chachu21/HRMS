@@ -1,17 +1,28 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LeaveRequest = () => {
   const [reason, setReason] = useState("");
   const [cv, setCv] = useState("");
-  const status ="Pending"
+  const status = "Pending";
 
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
+  const [employeeData, setEmployeeData] = useState([]);
+  useEffect(() => {
+    const employee = async () => {
+      const response =  await axios.get(
+        `http://localhost:5002/api/v1/staff/${staff_id}`
+      );
+      setEmployeeData(response.data);
+    };
+    employee();
+  }, [staff_id]);
 
+  const department_id = employeeData.department_id;
   const handleChande = (event) => {
     setReason(event.target.value);
   };
@@ -24,8 +35,9 @@ const LeaveRequest = () => {
     const formData = new FormData();
     formData.append("reason", reason);
     formData.append("staff_id", staff_id);
-    formData.append("status", status)
+    formData.append("status", status);
     formData.append("cv", cv);
+    formData.append("department_id", department_id);
 
     try {
       const response = await axios.post(

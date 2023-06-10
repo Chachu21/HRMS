@@ -47,7 +47,7 @@ function App() {
         {/* homepage  route*/}
         <Route exact path="/" element={<LandingPage />}>
           <Route index element={<Main />} />
-          <Route path="/vacancy" element={<Vacancy />} />
+          <Route path="/vacancy" element={<Vacancy /> } />
           {/* <Route path="/forgot" element={<ForgotPassword />} /> */}
         </Route>
         {/* forgetpage */}

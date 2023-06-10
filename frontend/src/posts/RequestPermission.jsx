@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,20 @@ const RequestPermission = () => {
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
 
+ const [employeeData, setEmployeeData] = useState([]);
+ useEffect(() => {
+   const employee = async () => {
+     const response = await axios.get(
+       `http://localhost:5002/api/v1/staff/${staff_id}`
+     );
+     setEmployeeData(response.data);
+   };
+   employee();
+ }, [staff_id]);
+
+ const department_id = employeeData.department_id;
+ console.log(department_id);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setstate((prev) => ({ ...prev, [name]: value }));
@@ -25,7 +39,7 @@ const RequestPermission = () => {
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/permission",
-        { ...state, staff_id }
+        { ...state, staff_id, department_id }
       );
 
       navigete("/");

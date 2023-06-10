@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import LoginCustomizedDialogs from "../../comopnents/landingPage/LoginCustomizedDialogs";
 
 const ApplicantRegister = () => {
   const [formData, setFormData] = useState({
@@ -38,14 +37,13 @@ const ApplicantRegister = () => {
       newFormData.append("cv", cv);
     }
     try {
-      const response = await axios.post(
+       await axios.post(
         "http://localhost:5002/api/v1/applicant/register",
         newFormData
       );
-      console.log(response);
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      navigate('/')
       // Handle error case...
     }
   };

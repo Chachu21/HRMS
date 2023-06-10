@@ -6,11 +6,12 @@ import { useNavigate } from "react-router-dom";
 const LeaveRequest = () => {
   const [reason, setReason] = useState("");
   const [cv, setCv] = useState("");
-  const status ="Pending"
+  const status = "Pending";
 
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
+  //const department_id = user.department_id;
 
   const handleChande = (event) => {
     setReason(event.target.value);
@@ -24,7 +25,8 @@ const LeaveRequest = () => {
     const formData = new FormData();
     formData.append("reason", reason);
     formData.append("staff_id", staff_id);
-    formData.append("status", status)
+    //formData.append("department_id", department_id);
+    formData.append("status", status);
     formData.append("cv", cv);
 
     try {

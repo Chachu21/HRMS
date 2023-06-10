@@ -5,14 +5,13 @@ const models = initModels(sequelize);
 const JobRank = models.job_rank;
 const createJobRank = async (req, res) => {
   try {
-
-    const {staff_id, level, status} =req.body
+    const { staff_id, level, status } = req.body;
     const cv = req.file;
     const jobRank = await JobRank.create({
       staff_id,
       level,
       cv: cv ? cv.filename : null,
-      status // Store the filename in the database
+      status, // Store the filename in the database
     });
     res.status(200).json(jobRank);
   } catch (error) {
@@ -22,7 +21,7 @@ const createJobRank = async (req, res) => {
 const GetAllJobRank = async (req, res) => {
   try {
     const allJobRank = await JobRank.findAll();
-   
+
     res.status(200).json(allJobRank);
   } catch (error) {
     res.status(500).json(error);
@@ -86,7 +85,7 @@ const updateJobRank = async (req, res) => {
   const { buttonType } = req.body;
   const jobRank = await JobRank.findByPk(id);
   let status;
-  
+
   // Determine the status based on the button type
 
   if (
@@ -149,7 +148,6 @@ const deleteJobRank = async (req, res) => {
   }
 };
 
-
 // img storage config
 const imgConfig = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -197,7 +195,6 @@ const getJobRanktStaffId = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   createJobRank,

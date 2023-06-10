@@ -14,6 +14,7 @@ const RequestPermission = () => {
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
+  const department_id = user.department_id;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,7 +26,7 @@ const RequestPermission = () => {
     try {
       const response = await axios.post(
         "http://localhost:5002/api/v1/permission",
-        { ...state, staff_id }
+        { ...state, staff_id, department_id }
       );
 
       navigete("/");

@@ -7,12 +7,13 @@ const initialState = {
   isClicked: false,
   isLoading: false,
   isLogin: false,
+  isRegistered: false,
   isApproved: false,
   isRejecte: false,
   approvedId: null,
   approvedItems: [],
   rejectedItems: [],
-  count :0,
+  count: 0,
 };
 
 const authSlice = createSlice({
@@ -28,6 +29,9 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.error = null;
       state.isLogin = true;
+    },
+    registerSuccess: (state) => {
+      state.isRegistered = true;
     },
     loginFailure: (state, action) => {
       state.isLoading = false;
@@ -47,7 +51,7 @@ const authSlice = createSlice({
       state.approvedId = null;
       state.approvedItems = [];
       state.rejectedItems = [];
-      state.count=0;
+      state.count = 0;
     },
     humergerMenu: (state) => {
       state.isClicked = !state.isClicked;
@@ -90,6 +94,7 @@ export const {
   approved,
   rejected,
   quantity,
+  registerSuccess,
 } = authSlice.actions;
 
 export default authSlice.reducer;

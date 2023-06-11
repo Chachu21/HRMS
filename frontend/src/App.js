@@ -38,6 +38,7 @@ import ApplicantResultForm from "./comopnents/dashboard/departmentHead/Applicant
 import DeanDashboard from "./pages/dashboard/DeanDashboard";
 import ApproveEmployeeRequistion from "./comopnents/dashboard/Dean/ApproveEmployeeRequestion";
 import ManageEmployeeRequisition from "./comopnents/dashboard/departmentHead/ManageEmployeeRequisition";
+import Login from "./pages/Login";
 // import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
         {/* homepage  route*/}
         <Route exact path="/" element={<LandingPage />}>
           <Route index element={<Main />} />
-          <Route path="/vacancy" element={<Vacancy /> } />
+          <Route path="/vacancy" element={<Vacancy />} />
           {/* <Route path="/forgot" element={<ForgotPassword />} /> */}
         </Route>
         {/* forgetpage */}
@@ -63,7 +64,12 @@ function App() {
           }
         />
         {/* login page */}
-        <Route exact path="/login" element={<LoginCustomizedDialogs />} />
+        <Route
+          exact
+          path="/login"
+          // element={<LoginCustomizedDialogs text="login" />
+          element={<Login />}
+        />
         {/* admin dashboard */}
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<ManageAccountInfo />} />

@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+const Sequelize = require("sequelize");
+module.exports = function (sequelize, DataTypes) {
   return sequelize.define(
     "staff",
     {
@@ -32,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       role_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        default: null,
         references: {
           model: "role",
           key: "id",
@@ -43,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       department_id: {
         type: DataTypes.INTEGER,
-        allowNull:true,
+        allowNull: true,
         references: {
           model: "department",
           key: "id",

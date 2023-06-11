@@ -14,21 +14,21 @@ const RequestPermission = () => {
   const navigete = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const staff_id = user.staff_id;
-  const department_id = user.department_id;
+  //const department_id = user.department_id;
 
- const [employeeData, setEmployeeData] = useState([]);
- useEffect(() => {
-   const employee = async () => {
-     const response = await axios.get(
-       `http://localhost:5002/api/v1/staff/${staff_id}`
-     );
-     setEmployeeData(response.data);
-   };
-   employee();
- }, [staff_id]);
+  const [employeeData, setEmployeeData] = useState([]);
+  useEffect(() => {
+    const employee = async () => {
+      const response = await axios.get(
+        `http://localhost:5002/api/v1/staff/${staff_id}`
+      );
+      setEmployeeData(response.data);
+    };
+    employee();
+  }, [staff_id]);
 
- const department_id = employeeData.department_id;
- console.log(department_id);
+  const department_id = employeeData.department_id;
+  console.log(department_id);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

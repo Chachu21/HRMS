@@ -1,10 +1,9 @@
 import React from 'react'
 import ApplicantHeader from '../../comopnents/dashboard/applicant/ApplicantHeader'
 import ApplicantSidebar from '../../comopnents/dashboard/applicant/ApplicantSideBar'
-import { useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 const ApplicantDashboard = () => {
-  const isLogin = useSelector((state) => state.auth.isLogin);
+  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
    return (
      <>
        {isLogin && (

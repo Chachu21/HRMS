@@ -43,7 +43,8 @@ module.exports = function(sequelize, DataTypes) {
       },
       department_id: {
         type: DataTypes.INTEGER,
-        allowNull:true,
+        allowNull: true,
+        defaultValue: null, // Set a default value of null for department_id
         references: {
           model: "department",
           key: "id",
@@ -51,7 +52,6 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
     {
-      sequelize,
       tableName: "staff",
       hasTrigger: true,
       timestamps: false,

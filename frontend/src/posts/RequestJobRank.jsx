@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const RequestJobRank = () => {
@@ -9,7 +8,7 @@ const RequestJobRank = () => {
   const [cv, setCv] = useState("");
 
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const staff_id = user.staff_id;
   const status = "Pending";
 

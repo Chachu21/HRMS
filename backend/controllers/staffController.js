@@ -16,6 +16,7 @@ const createStaff = async (req, res) => {
       department_id,
     } = req.body;
 
+    console.log(department_id, "== department_id")
     // Check if staff with the same email already exists
     const existingStaff = await Staff.findOne({ where: { email } });
     if (existingStaff) {
@@ -31,7 +32,6 @@ const createStaff = async (req, res) => {
       lname,
       email,
       password,
-      // password:hashedPassword,
       phone_number,
       role_id,
       department_id,
@@ -39,7 +39,7 @@ const createStaff = async (req, res) => {
 
     res.status(201).json(newStaff);
   } catch (error) {
-    console.error("Error creating staff:", error);
+    console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

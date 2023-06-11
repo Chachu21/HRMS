@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
-import { useSelector } from "react-redux";
 
 function ManageEmployeeAccount() {
   const [selectedTable, setSelectedTable] = useState(null);
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [permissions, setPermissions] = useState([]);
   const [jobRanks, setJobRanks] = useState([]);
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const staff_id = user.staff_id;
 
   useEffect(() => {

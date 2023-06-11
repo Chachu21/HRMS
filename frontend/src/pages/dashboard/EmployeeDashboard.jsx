@@ -2,11 +2,10 @@ import React from 'react'
 import EmployeeHeader from '../../comopnents/dashboard/employee/EmployeeHeader'
 import EmployeeSidebar from '../../comopnents/dashboard/employee/EmployeeSidebar'
 import { Outlet } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 const EmployeeDashboard = () => {
 
-    const isLogin = useSelector((state) => state.auth.isLogin);
+    const isLogin = JSON.parse(localStorage.getItem("isLogin"));
 
   return (
     <>

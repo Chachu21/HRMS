@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 const ManageJobRank = () => {
   const [jobRankData, setJobRankData] = useState([]);
   const [deptHeadData, setDeptHeadData] = useState([]);
 
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const department_id = deptHeadData.department_id;
   console.log(department_id);
   useEffect(() => {

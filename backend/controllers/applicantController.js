@@ -6,6 +6,7 @@ const Applicant = models.applicant;
 
 const createApplicant = async (req, res) => {
   const role_id = 2;
+ 
   try {
     const { fname, lname, email, password, phone_number } = req.body;
     const cv = req.file;

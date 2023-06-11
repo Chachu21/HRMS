@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LeaveRequest = () => {
@@ -9,7 +8,7 @@ const LeaveRequest = () => {
   const status = "Pending";
 
   const navigete = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const staff_id = user.staff_id;
   const [employeeData, setEmployeeData] = useState([]);
   useEffect(() => {

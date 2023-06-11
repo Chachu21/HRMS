@@ -170,7 +170,7 @@ const StaffRegister = () => {
                   onChange={handleChange}
                   className="w-[215px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
                 >
-                  <option value="">select department</option>
+                  <option value=" ">select department</option>
                   <option value={1}>It</option>
                   <option value={2}>mechanical</option>
                   <option value={3}>Tourism</option>

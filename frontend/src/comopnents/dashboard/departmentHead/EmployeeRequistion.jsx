@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 const EmployeeRequistion = () => {
   const [formData, setFormData] = useState({
     job_title: "",
@@ -11,7 +10,7 @@ const EmployeeRequistion = () => {
     cgpa: null,
   });
   const navigete = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const staff_id = user.staff_id;
 
   const handleChange = (e) => {

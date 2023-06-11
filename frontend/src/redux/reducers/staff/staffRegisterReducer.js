@@ -10,7 +10,7 @@ const initialState = {
     phone_number: "",
     password: "",
     role_id: "",
-    department_id: "",
+    department_id: null,
   },
   registrationStatus: false,
   error: null,

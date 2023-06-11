@@ -33,7 +33,8 @@ const Login = () => {
 
   useEffect(() => {
     if (isLogin && user) {
-      localStorage.setItem("token", user.token);
+      localStorage.setItem("user",JSON.stringify(user));
+      localStorage.setItem("isLogin", JSON.stringify(isLogin))
       const role_id = user.role_id;
       switch (role_id) {
         case 1:
@@ -113,9 +114,9 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white w-[50%] ml-[100px] lg:ml-[120px] flex flex-col items-center justify-center gap-1">
+    <div className="bg-[#00008B] w-[100%] h-screen flex flex-col items-center justify-center gap-1">
       <div>
-        <span className="text-black flex justify-start -ml-16 items-start text-[16px]  lg:justify-center lg:items-center lg:text-[24px]">
+        <span className="text-white flex justify-start -ml-16 items-start text-[16px]  lg:justify-center lg:items-center lg:text-[24px]">
           Welcome back !
         </span>
       </div>

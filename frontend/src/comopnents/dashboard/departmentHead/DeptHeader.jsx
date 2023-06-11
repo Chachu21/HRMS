@@ -8,7 +8,7 @@ import axios from "axios";
 
 const DeptHeader = () => {
   const isClicked = useSelector((state) => state.auth.isClicked);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [image, setImage] = useState(null);
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isUploadDisabled, setUploadDisabled] = useState(true);
@@ -17,8 +17,8 @@ const DeptHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const user = useSelector((state) => state.auth.user);
-  const isLogin = useSelector((state) => state.auth.isLogin);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
 
   //fetch staff details
   useEffect(() => {

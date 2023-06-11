@@ -52,9 +52,9 @@ const JobVacancyAnnouncement = () => {
   };
 
   return (
-    <div className="ml-0 flex lg:ml-[18%]  flex-col items-center justify-center  ">
+    <div className="ml-0 flex lg:ml-[18%] pt-[100px] overflow-x-hidden bg-gray-200 w-screen h-screen flex-col items-center justify-center ">
       <h2 className="text-2xl font-bold mb-4">Job Vacancy Announcement</h2>
-      <form onSubmit={handleSubmit} className="space-y-6  flex gap-5 flex-col">
+      <form onSubmit={handleSubmit} className="space-y-6 bg-white px-4 py-5  flex gap-5 flex-col">
         <div className=" grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div className="flex flex-col">
             <label htmlFor="jobTitle" className="text-gray-700 font-bold mb-2">
@@ -66,7 +66,7 @@ const JobVacancyAnnouncement = () => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[215px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[350px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
@@ -79,7 +79,7 @@ const JobVacancyAnnouncement = () => {
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
-              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[215px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[350px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
@@ -96,7 +96,7 @@ const JobVacancyAnnouncement = () => {
               name="department_id"
               id="department_id"
               onChange={handleChange}
-              className="w-[215px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
+              className="w-[350px] h-8 bg-white border-2 pl-[10px] rounded-md border-gray-300 outline-none"
             >
               <option value="">select department</option>
               <option value={1}>It</option>
@@ -115,7 +115,7 @@ const JobVacancyAnnouncement = () => {
               name="terms"
               value={formData.terms}
               onChange={handleChange}
-              className=" focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[215px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[350px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
@@ -133,7 +133,7 @@ const JobVacancyAnnouncement = () => {
               name="qualification"
               value={formData.qualification}
               onChange={handleChange}
-              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[215px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[350px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
@@ -146,7 +146,7 @@ const JobVacancyAnnouncement = () => {
               name="sex"
               value={formData.sex}
               onChange={handleChange}
-              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[215px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[350px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
@@ -164,7 +164,7 @@ const JobVacancyAnnouncement = () => {
               name="designation"
               value={formData.designation}
               onChange={handleChange}
-              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[215px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[350px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="flex flex-col">
@@ -177,7 +177,7 @@ const JobVacancyAnnouncement = () => {
               name="cgpa"
               value={formData.cgpa}
               onChange={handleChange}
-              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[215px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:ring-2 focus:border-transparent focus:ring-blue-300  shadow appearance-none border rounded w-[350px]  py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>

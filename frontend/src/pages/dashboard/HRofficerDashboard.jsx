@@ -2,10 +2,9 @@ import React from "react";
 import HRofficerHeader from "../../comopnents/dashboard/hrOfficer/HRofficerHeader";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../comopnents/dashboard/hrOfficer/SideBar";
-import { useSelector } from "react-redux";
 
 const HRofficerDashboard = () => {
-      const isLogin = useSelector((state) => state.auth.isLogin);
+      const isLogin = JSON.parse(localStorage.getItem("user"));
 
   return (
    <>

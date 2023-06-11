@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 const ManageEmployeeRequisition = () => {
   const [emplyeeRequistionData, setEmplyeeRequistionData] = useState([]);
-  const user = useSelector((state) =>state.auth.user)
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     axios
       .get(`http://localhost:5002/api/v1/employee_requistion/staff/${user.staff_id}`)
       .then((response) => {
         setEmplyeeRequistionData(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);

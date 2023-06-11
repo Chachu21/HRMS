@@ -10,7 +10,6 @@ import Vacancy from "./pages/Vacancy";
 import ApplicantRegister from "./pages/Registration/ApplicantRegister";
 import ManageAccountInfo from "./comopnents/dashboard/admin/ManageAccountInfo";
 import CustomizedDialogs from "./comopnents/landingPage/BootstrapingDialog";
-import LoginCustomizedDialogs from "./comopnents/landingPage/LoginCustomizedDialogs";
 import UpdateStaff from "./comopnents/dashboard/admin/UPdateStaff";
 import ApplicantDashboard from "./pages/dashboard/ApplicantDashboard";
 import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
@@ -64,12 +63,7 @@ function App() {
           }
         />
         {/* login page */}
-        <Route
-          exact
-          path="/login"
-          // element={<LoginCustomizedDialogs text="login" />
-          element={<Login />}
-        />
+        <Route exact path="/login" element={<Login />} />
         {/* admin dashboard */}
         <Route path="/admin/dashboard" element={<AdminDashboard />}>
           <Route index element={<ManageAccountInfo />} />
@@ -187,11 +181,6 @@ function App() {
             path="/depthead/dashboard/manageApplicant"
             element={<ManageApplicant />}
           />
-          {/* <Route
-            path="/depthead/dashboard/approverequest"
-            element={<ApproveRequest />} 
-
-          /> */}
           <Route
             path="/depthead/dashboard/applicantresult"
             element={<ApplicantResultForm />}

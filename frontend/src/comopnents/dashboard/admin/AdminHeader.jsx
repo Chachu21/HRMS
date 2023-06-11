@@ -18,8 +18,8 @@ const AdminHeader = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
    const location = useLocation();
-   const user = useSelector((state) => state.auth.user);
-   const isLogin = useSelector((state) => state.auth.isLogin);
+   const user = JSON.parse(localStorage.getItem("user"));
+   const isLogin = JSON.parse(localStorage.getItem("isLogin"));
 
    //fetch staff details
    useEffect(() => {

@@ -16,8 +16,7 @@ const EmployeeHeader = () => {
  const dispatch = useDispatch();
  const navigate = useNavigate();
  const location = useLocation();
- const user = useSelector((state) => state.auth.user);
- const isLogin = useSelector((state) => state.auth.isLogin);
+ const user = JSON.parse(localStorage.getItem("user"));
 
  //fetch staff details
  useEffect(() => {

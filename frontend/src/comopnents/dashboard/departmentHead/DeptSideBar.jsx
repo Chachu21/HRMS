@@ -8,13 +8,13 @@ import { humergerMenu } from "../../../redux/reducers/loginReducer";
 
 const DeptSideBar = () => {
    const isClicked = useSelector((state) => state.auth.isClicked);
-  const [isOpenSublink, setIsOpenSublink] = useState(false);
+  // const [isOpenSublink, setIsOpenSublink] = useState(false);
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const location = useLocation();
 
-  const handleToggle = () => {
-    setIsOpenSublink(!isOpenSublink);
-  };
+  // const handleToggle = () => {
+  //   setIsOpenSublink(!isOpenSublink);
+  // };
  const dispatch = useDispatch();
  const handleClick = () => {
    dispatch(humergerMenu());

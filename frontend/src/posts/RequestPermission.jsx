@@ -12,7 +12,7 @@ const RequestPermission = () => {
     return_date: "",
   });
   const navigete = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const staff_id = user.staff_id;
   //const department_id = user.department_id;
 

@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-//import JobRankDetails from "../hrOfficer/JobRankDetails"; // Import the JobRankDetails component from the hrOfficer folder
-
 const ApplicantSchedule = () => {
   const [schedule, setSchedule] = useState([]);
-  //const [forwardedData, setForwardedData] = useState(null);
 
   useEffect(() => {
     axios

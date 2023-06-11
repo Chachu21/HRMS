@@ -6,16 +6,18 @@ const LeaveRequest = models.leave_request;
 
 const createLeaveRequest = async (req, res) => {
 
-  const {staff_id, reason, status} = req.body
+  const { staff_id, department_id, reason,  } = req.body;
   const clearance = req.file
   try {
     const leaveRequest = await LeaveRequest.create({
       staff_id,
+      department_id,
       reason,
       clearance: clearance ? clearance.filename : null,
     });
     res.status(200).json(leaveRequest);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "cannot create leave" });
   }
 };

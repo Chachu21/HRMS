@@ -4,17 +4,20 @@ const multer = require("multer");
 const models = initModels(sequelize);
 const JobRank = models.job_rank;
 const createJobRank = async (req, res) => {
+  const { staff_id, department_id, level, status } = req.body;
   try {
-    const { staff_id, level, status } = req.body;
+    console.log(department_id);
     const cv = req.file;
     const jobRank = await JobRank.create({
       staff_id,
+      department_id,
       level,
       cv: cv ? cv.filename : null,
       status, // Store the filename in the database
     });
     res.status(200).json(jobRank);
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 };

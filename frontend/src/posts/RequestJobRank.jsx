@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +13,20 @@ const RequestJobRank = () => {
   const staff_id = user.staff_id;
   const status = "Pending";
 
+
+    const [employeeData, setEmployeeData] = useState([]);
+    useEffect(() => {
+      const employee = async () => {
+        const response =  await axios.get(
+          `http://localhost:5002/api/v1/staff/${staff_id}`
+        );
+        setEmployeeData(response.data);
+      };
+      employee();
+    }, [staff_id]);
+
+    const department_id = employeeData.department_id;
+console.log(department_id)
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setCv(file);
@@ -35,6 +50,7 @@ const RequestJobRank = () => {
     formData.append("level", level);
     formData.append("status", status);
     formData.append("cv", cv);
+    formData.append("department_id", department_id);
 
     try {
       await axios.post("http://localhost:5002/api/v1/job_rank", formData);

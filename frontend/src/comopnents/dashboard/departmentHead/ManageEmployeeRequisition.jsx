@@ -7,7 +7,9 @@ const ManageEmployeeRequisition = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5002/api/v1/employee_requistion/staff/${user.staff_id}`)
+      .get(
+        `http://localhost:5002/api/v1/employee_requistion/staff/${user.staff_id}`
+      )
       .then((response) => {
         setEmplyeeRequistionData(response.data);
       })
@@ -18,7 +20,7 @@ const ManageEmployeeRequisition = () => {
 
   return (
     <div className="flex flex-col justify-start px-2 items-start ml-0 lg:ml-[18%]">
-      <h1 className="text-2xl font-bold mb-4">Approve Employee Requistion</h1>
+      <h1 className="text-2xl font-bold my-4">Manage Employee Requistion</h1>
       <div className="flex justify-center items-center ">
         <table className="">
           <thead className="bg-gray-100">

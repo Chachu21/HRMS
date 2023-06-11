@@ -12,7 +12,7 @@ const permissonRouter = express.Router();
 
 permissonRouter.post("/", createPermission);
 permissonRouter.get("/", getAllPermissions);
- permissonRouter.get("/permission/:id",getPermissionByStaffId);
+permissonRouter.get("/permission/:id", getPermissionByStaffId);
 
 permissonRouter.get("/:id", getPermissionById);
 //well

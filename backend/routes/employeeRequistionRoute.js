@@ -12,10 +12,10 @@ const {
 employeeRequisitionRoute.post("/", createEmployeeRequisition);
 
 // Route to get all employee requisitions
-employeeRequisitionRoute.get("/", getAllEmployeeRequisitions);
-employeeRequisitionRoute.get("status/:id", getAllEmployeeRequisitionsByStatus);
-
-employeeRequisitionRoute.put("/:id", updateEmployeeRequistions);
+employeeRequisitionRoute.get("/status/:id", getAllEmployeeRequisitionsByStatus);
 employeeRequisitionRoute.get("/staff/:id", getAllEmployeeRequisitionsByStaffId);
+
+employeeRequisitionRoute.get("/", getAllEmployeeRequisitions);
+employeeRequisitionRoute.put("/:id", updateEmployeeRequistions);
 
 module.exports = employeeRequisitionRoute;

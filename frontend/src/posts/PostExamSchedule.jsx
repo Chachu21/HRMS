@@ -1,6 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const PostExamSchedule = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -24,6 +27,7 @@ const PostExamSchedule = () => {
         "http://localhost:5002/api/v1/schedule",
         formData
       );
+      toast.success("You have Successfully post schedule");
     } catch (error) {
       console.log(error);
     }
@@ -121,6 +125,7 @@ const PostExamSchedule = () => {
             </form>
           </div>
         </div>
+        <ToastContainer />
       </section>
     </div>
   );

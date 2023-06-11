@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../../assets/logo.jpg";
@@ -9,69 +8,69 @@ import { logout, humergerMenu } from "../../../redux/reducers/loginReducer";
 import axios from "axios";
 
 const AdminHeader = () => {
-   const isClicked = useSelector((state) => state.auth.isClicked);
-   const [image, setImage] = useState(null);
-   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
-   const [isUploadDisabled, setUploadDisabled] = useState(true);
-   const [staff, setStaff] = useState([]);
+  const isClicked = useSelector((state) => state.auth.isClicked);
+  const [image, setImage] = useState(null);
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const [isUploadDisabled, setUploadDisabled] = useState(true);
+  const [staff, setStaff] = useState([]);
 
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
-   const location = useLocation();
-   const user = JSON.parse(localStorage.getItem("user"));
-   const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isLogin = JSON.parse(localStorage.getItem("isLogin"));
 
-   //fetch staff details
-   useEffect(() => {
-     const fetchstaffData = async () => {
-       try {
-         const response = await axios.get(
-           `http://localhost:5002/api/v1/staff/${user.staff_id}`
-         );
-         setStaff(response.data);
-       } catch (error) {
-         console.error("Error fetching staff data:", error);
-       }
-     };
+  //fetch staff details
+  useEffect(() => {
+    const fetchstaffData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5002/api/v1/staff/${user.staff_id}`
+        );
+        setStaff(response.data);
+      } catch (error) {
+        console.error("Error fetching staff data:", error);
+      }
+    };
 
-     fetchstaffData();
-   }, [user.staff_id]);
-   console.log(`http://localhost:5002/backend/uploads/${staff.profile}`);
+    fetchstaffData();
+  }, [user.staff_id]);
+  console.log(`http://localhost:5002/backend/uploads/${staff.profile}`);
 
-   const handleImageSelect = (event) => {
-     const file = event.target.files[0];
-     setImage(file);
-     setUploadDisabled(false);
-   };
+  const handleImageSelect = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+    setUploadDisabled(false);
+  };
 
-   //for sending request to backend including image
-   const updateUserProfileImage = async () => {
-     try {
-       const formData = new FormData();
-       formData.append("image", image);
+  //for sending request to backend including image
+  const updateUserProfileImage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("image", image);
 
-       await axios.put(
-         `http://localhost:5002/api/v1/staff/profile/${user.staff_id}`,
-         formData
-       );
-     } catch (error) {
-       console.error("Error updating profile image:", error);
-     }
-   };
+      await axios.put(
+        `http://localhost:5002/api/v1/staff/profile/${user.staff_id}`,
+        formData
+      );
+    } catch (error) {
+      console.error("Error updating profile image:", error);
+    }
+  };
 
-   function toggleUserMenu() {
-     setUserMenuOpen((prevState) => !prevState);
-   }
+  function toggleUserMenu() {
+    setUserMenuOpen((prevState) => !prevState);
+  }
 
-   const handleSidebarToggle = () => {
-     dispatch(humergerMenu());
-   };
- 
+  const handleSidebarToggle = () => {
+    dispatch(humergerMenu());
+  };
+
   return (
     <>
       {isLogin && (
         <div>
-          <nav className="fixed top-0 z-50 w-full bg-white text-black border-gray-200 dark:bg-gray-100 dark:border-gray-200 shadow-xl">
+          <nav className="fixed top-0 z-50 w-full bg-[white] text-black border-gray-200 dark:bg-gray-100 dark:border-gray-200 shadow-xl">
             <div className="px-3 py-1 lg:px-5 lg:pl-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center justify-center gap-2 ">

@@ -55,19 +55,19 @@ const ApproveJobRank = () => {
       });
   };
 
-   const handleDownload = (cv) => {
-     const downloadLink = `http://localhost:5002/uploads/${cv}`;
-     const link = document.createElement("a");
-     link.href = downloadLink;
-     link.download = cv;
-     document.body.appendChild(link);
-     link.click();
-     document.body.removeChild(link);
-   };
+  const handleDownload = (cv) => {
+    const downloadLink = `http://localhost:5002/uploads/${cv}`;
+    const link = document.createElement("a");
+    link.href = downloadLink;
+    link.download = cv;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="flex flex-col justify-center ranks-center ml-0 lg:ml-[18%]">
-      <h1 className="text-2xl font-bold mb-4">Approve Request of rank</h1>
+      <h1 className="text-2xl font-bold my-4">Approve Request of rank</h1>
       <div className="flex justify-center ranks-center px-5">
         <table className="table-auto w-full">
           <thead className="bg-gray-100">

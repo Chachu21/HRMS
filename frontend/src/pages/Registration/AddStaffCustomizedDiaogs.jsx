@@ -70,7 +70,7 @@ export default function AddStaffCustomizedDialogs({ children }) {
   return (
     <div>
       <div
-        className="w-[80px] h-[35px] flex cursor-pointer justify-center items-center  mx-2 rounded-md text-black"
+        className="w-[80px] h-[35px] flex cursor-pointer justify-center items-center  mx-2 rounded-md text-white"
         variant="outlined"
         onClick={handleClickOpen}
       >

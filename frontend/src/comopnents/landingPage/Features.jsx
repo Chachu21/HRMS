@@ -19,7 +19,7 @@ const Features = () => {
         <div className="mx-auto max-w-screen-xl px-4 py-2 sm:py-12 sm:px-6 lg:py-1 lg:px-8">
           <div className="">
             <div className="lg:py-16  h-full flex flex-col gap-32">
-              <h2 className="text-[32px] text-white bg-green-500 text-center  font-bold sm:text-4xl sticky top-[70px] left-auto">
+              <h2 className="text-[32px] text-black bg-gray-300 text-center  font-bold sm:text-4xl sticky top-[70px] left-auto">
                 Bahir Dar Polytechnic Human Resource Management System
               </h2>
 

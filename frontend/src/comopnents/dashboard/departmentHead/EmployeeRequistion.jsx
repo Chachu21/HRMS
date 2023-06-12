@@ -29,7 +29,7 @@ const EmployeeRequistion = () => {
         { ...formData, staff_id }
       );
 
-      navigete("/");
+      navigete("/depthead/dashboard/");
     } catch (error) {
       console.log(error);
     }

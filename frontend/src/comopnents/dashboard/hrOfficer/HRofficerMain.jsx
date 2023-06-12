@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import background from '../../../assets/hr.jpg'
+import background from "../../../assets/hr.jpg";
 
 const HRofficerMain = () => {
   const [leaveRequestCount, setLeaveRequestCount] = useState(0);
@@ -9,56 +9,43 @@ const HRofficerMain = () => {
   const [employeeRequestCount, setEmployeeRequestCount] = useState(0);
 
   useEffect(() => {
-    const fetchCounts = async () => {
+    const fetchLeaveRequestCount = async () => {
       try {
-        const leaveRequestCountResponse = await fetchLeaveRequestCount();
-        const jobRankRequestCountResponse = await fetchJobRankRequestCount();
-        const employeeRequestCountResponse = await fetchEmployeeRequestCount();
-
-        setLeaveRequestCount(leaveRequestCountResponse);
-        setJobRankRequestCount(jobRankRequestCountResponse);
-        setEmployeeRequestCount(employeeRequestCountResponse);
+        const response = await axios.get(
+          "http://localhost:5002/api/v1/leave_request/status/Pending"
+        );
+        setLeaveRequestCount(response.data.length);
       } catch (error) {
-        console.log("Error fetching request counts:", error);
+        console.log("Error fetching leave request count:", error);
       }
     };
 
-    fetchCounts();
+    const fetchJobRankRequestCount = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5002/api/v1/job_rank/status/Forwarded"
+        );
+        setJobRankRequestCount(response.data.length);
+      } catch (error) {
+        console.log("Error fetching job rank request count:", error);
+      }
+    };
+
+    const fetchEmployeeRequestCount = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5002/api/v1/employee_requistion/status/Pending"
+        );
+        setEmployeeRequestCount(response.data.length);
+      } catch (error) {
+        console.log("Error fetching employee request count:", error);
+      }
+    };
+
+    fetchLeaveRequestCount();
+    fetchJobRankRequestCount();
+    fetchEmployeeRequestCount();
   }, []);
-
-  const fetchLeaveRequestCount = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5002/api/v1/leave_request"
-      );
-      return response.data.length;
-    } catch (error) {
-      console.log("Error fetching leave request count:", error);
-      return 0;
-    }
-  };
-
-  const fetchJobRankRequestCount = async () => {
-    try {
-      const response = await axios.get("http://localhost:5002/api/v1/job_rank");
-      return response.data.length;
-    } catch (error) {
-      console.log("Error fetching job rank request count:", error);
-      return 0;
-    }
-  };
-
-  const fetchEmployeeRequestCount = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5002/api/v1/employee_requistion"
-      );
-      return response.data.length;
-    } catch (error) {
-      console.log("Error fetching employee request count:", error);
-      return 0;
-    }
-  };
 
   return (
     <div

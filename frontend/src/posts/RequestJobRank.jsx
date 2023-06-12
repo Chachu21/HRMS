@@ -12,20 +12,19 @@ const RequestJobRank = () => {
   const staff_id = user.staff_id;
   const status = "Pending";
 
+  const [employeeData, setEmployeeData] = useState([]);
+  useEffect(() => {
+    const employee = async () => {
+      const response = await axios.get(
+        `http://localhost:5002/api/v1/staff/${staff_id}`
+      );
+      setEmployeeData(response.data);
+    };
+    employee();
+  }, [staff_id]);
 
-    const [employeeData, setEmployeeData] = useState([]);
-    useEffect(() => {
-      const employee = async () => {
-        const response =  await axios.get(
-          `http://localhost:5002/api/v1/staff/${staff_id}`
-        );
-        setEmployeeData(response.data);
-      };
-      employee();
-    }, [staff_id]);
-
-    const department_id = employeeData.department_id;
-console.log(department_id)
+  const department_id = employeeData.department_id;
+  console.log(department_id);
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setCv(file);
@@ -53,7 +52,7 @@ console.log(department_id)
 
     try {
       await axios.post("http://localhost:5002/api/v1/job_rank", formData);
-      navigate("/");
+      navigate("/employee/dashboard/manageaccount");
     } catch (err) {
       console.log(err.message);
     }

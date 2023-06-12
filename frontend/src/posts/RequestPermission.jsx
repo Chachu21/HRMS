@@ -43,7 +43,7 @@ const RequestPermission = () => {
         { ...state, staff_id, department_id }
       );
 
-      navigete("/");
+      navigete("/employee/dashboard/manageaccount");
     } catch (err) {
       console.log(err.message);
     }

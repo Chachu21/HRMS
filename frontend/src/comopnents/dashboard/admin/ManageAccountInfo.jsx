@@ -10,11 +10,17 @@ const ManageAccountInfo = () => {
   const [accountData, setAccountData] = useState([]);
   const [formData, setFormData] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [employeeCount, setEmployeeCount] = useState(0);
+  const [deptHeadCount, setDeptHeadCount] = useState(0);
 
   useEffect(() => {
     loadAccountData();
     loadRoleName();
   }, []);
+
+  useEffect(() => {
+    countEmployeesAndDeptHeads();
+  }, [accountData]);
 
   const loadAccountData = async () => {
     try {
@@ -39,6 +45,17 @@ const ManageAccountInfo = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const countEmployeesAndDeptHeads = () => {
+    const employeeCount = accountData.filter(
+      (data) => data.role === "Employee"
+    ).length;
+    const deptHeadCount = accountData.filter(
+      (data) => data.role === "DepartmentHead"
+    ).length;
+    setEmployeeCount(employeeCount);
+    setDeptHeadCount(deptHeadCount);
   };
 
   const handleDelete = (id) => {
@@ -138,6 +155,20 @@ const ManageAccountInfo = () => {
           <TfiReload color="white" fontSize="[20px]" />
         </button>
       </div>
+      <div className="flex justify-between gap-3 mb-4">
+        <div className="flex justify-normal gap-4">
+          <span>Number of employee: </span>
+          <div className="flex items-center justify-center w-10 h-10 bg-blue-950 rounded-full text-white text-lg font-semibold">
+            {employeeCount}
+          </div>
+        </div>
+        <div className="flex justify-normal gap-4">
+          <span>Number of department head: </span>
+          <div className="flex items-center justify-center w-10 h-10 bg-blue-950 rounded-full text-white text-lg font-semibold">
+            {deptHeadCount}
+          </div>
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
@@ -194,6 +225,7 @@ const ManageAccountInfo = () => {
           </tbody>
         </table>
       </div>
+
       <ToastContainer />
     </div>
   );

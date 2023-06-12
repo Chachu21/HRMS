@@ -44,7 +44,7 @@ const LeaveRequest = () => {
         formData
       );
 
-      navigete("/");
+      navigete("/employee/dashboard/manageaccount");
     } catch (err) {
       console.log(err.message);
     }

@@ -77,15 +77,6 @@ const Footer = () => {
                 Login
               </RouterLink>
             </li>
-
-            <li>
-              <RouterLink
-                to="/signUpASapplicant"
-                className="text-gray-400 transition cursor-pointer hover:text-gray-700/75"
-              >
-                Signup
-              </RouterLink>
-            </li>
           </ul>
         </nav>
 

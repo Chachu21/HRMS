@@ -16,7 +16,6 @@ const createStaff = async (req, res) => {
       department_id,
     } = req.body;
 
-    console.log(department_id, "== department_id")
     // Check if staff with the same email already exists
     const existingStaff = await Staff.findOne({ where: { email } });
     if (existingStaff) {

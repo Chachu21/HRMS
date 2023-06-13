@@ -136,6 +136,18 @@ const updateJobRank = async (req, res) => {
   }
 };
 
+const getAllJobRankRequestsByStatus = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const job_rank = await JobRank.findAll({
+      where: { status: id },
+    });
+    res.json(job_rank);
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const deleteJobRank = async (req, res) => {
   const id = req.params.id;
   try {
@@ -201,6 +213,7 @@ const getJobRanktStaffId = async (req, res) => {
 
 module.exports = {
   createJobRank,
+  getAllJobRankRequestsByStatus,
   GetAllJobRank,
   getJobRankById,
   updateJobRank,

@@ -5,9 +5,8 @@ const models = initModels(sequelize);
 const LeaveRequest = models.leave_request;
 
 const createLeaveRequest = async (req, res) => {
-
-  const { staff_id, department_id, reason,  } = req.body;
-  const clearance = req.file
+  const { staff_id, department_id, reason } = req.body;
+  const clearance = req.file;
   try {
     const leaveRequest = await LeaveRequest.create({
       staff_id,
@@ -17,7 +16,7 @@ const createLeaveRequest = async (req, res) => {
     });
     res.status(200).json(leaveRequest);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ error: "cannot create leave" });
   }
 };
@@ -35,9 +34,11 @@ const getAllLeaveRequests = async (req, res) => {
 const getLeaveRequestStaffId = async (req, res) => {
   const staffId = req.params.id;
 
-  console.log(staffId)
+  console.log(staffId);
   try {
-    const leaveRequests = await LeaveRequest.findAll({where:{ staff_id: staffId }});
+    const leaveRequests = await LeaveRequest.findAll({
+      where: { staff_id: staffId },
+    });
     if (leaveRequests.length === 0) {
       return res.status(404).json({
         error: `No leave requests found for staff member with ID: ${staffId}`,
@@ -50,7 +51,6 @@ const getLeaveRequestStaffId = async (req, res) => {
     });
   }
 };
-
 
 const getLeaveRequestById = async (req, res) => {
   const id = req.params.id;
@@ -70,8 +70,6 @@ const getLeaveRequestById = async (req, res) => {
 };
 
 const updateLeaveRequestById = async (req, res) => {
-
-
   const id = req.params.id;
   const { buttonType } = req.body;
 
@@ -101,6 +99,18 @@ const updateLeaveRequestById = async (req, res) => {
     return res
       .status(500)
       .json({ error: "An error occurred while updating leave_request status" });
+  }
+};
+
+const getAllLeaveRequestsByStatus = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const leaveRequest = await LeaveRequest.findAll({
+      where: { status: id },
+    });
+    res.json(leaveRequest);
+  } catch (error) {
+    console.log(error.message);
   }
 };
 
@@ -180,7 +190,8 @@ module.exports = {
   getAllLeaveRequests,
   getLeaveRequestById,
   updateLeaveRequestById,
+  getAllLeaveRequestsByStatus,
   deleteLeaveRequestById,
- getLeaveRequestStaffId,
+  getLeaveRequestStaffId,
   upload,
 };

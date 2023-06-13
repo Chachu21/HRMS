@@ -2,10 +2,10 @@ const express = require("express");
 const employeeRequisitionRoute = express.Router();
 const {
   createEmployeeRequisition,
+  getAllEmployeeRequisitionsByStatus,
   getAllEmployeeRequisitions,
   updateEmployeeRequistions,
   getAllEmployeeRequisitionsByStaffId,
-  getAllEmployeeRequisitionsByStatus,
 } = require("../controllers/employeeRequistionController");
 
 // Route to create a new employee requisition
